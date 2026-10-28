@@ -11,7 +11,7 @@ JSON: `--json` emits uncolored machine data where listed. Invocation success is 
 JADIS // SECRIPTS 0.5.0 — Personal Developer Operations Arsenal & Android Recovery Laboratory
 
 ```text
-usage: js [-h] [--version] <command> ...
+js [COMMAND] [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -26,7 +26,7 @@ Topic orientation and links to the manual
 Aliases: none.
 
 ```text
-usage: js help [-h] [--json] [{image,recovery,device,evidence,ai}]
+js help [TOPIC] [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -42,7 +42,7 @@ Guided entry; safe orientation without a TTY
 Aliases: none.
 
 ```text
-usage: js guide [-h] [--json]
+js guide [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -57,7 +57,7 @@ Optional provider-neutral advice; preview before external transmission
 Aliases: none.
 
 ```text
-usage: js ai [-h] [--json] {setup,prov,providers,models,context,ask,tools} ...
+js ai [COMMAND] [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -72,7 +72,7 @@ Setup
 Aliases: none.
 
 ```text
-usage: js ai setup [-h] [--json]
+js ai setup [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -87,7 +87,7 @@ Providers
 Aliases: providers.
 
 ```text
-usage: js ai prov [-h] [--json]
+js ai prov [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -102,8 +102,7 @@ Models
 Aliases: none.
 
 ```text
-usage: js ai models [-h] [--json] --provider {openai,claude,deepseek}
-                    [--network]
+js ai models [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -120,7 +119,7 @@ Context
 Aliases: none.
 
 ```text
-usage: js ai context [-h] [--json] [--context CONTEXT]
+js ai context [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -136,10 +135,7 @@ Ask
 Aliases: none.
 
 ```text
-usage: js ai ask [-h] [--json] --provider {openai,claude,deepseek}
-                 [--context CONTEXT] [--model MODEL] [--send]
-                 [--approve APPROVE]
-                 question
+js ai ask QUESTION [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -160,8 +156,7 @@ Tools
 Aliases: none.
 
 ```text
-usage: js ai tools [-h] [--json]
-                   {registry.search,registry.show,receipt.summary} [argument]
+js ai tools TOOL [ARGUMENT] [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -178,8 +173,7 @@ Offline artifact engineering with explicit evidence states
 Aliases: image.
 
 ```text
-usage: js img [-h] [--json]
-              {insp,inspect,model,upk,unpack,ws,workspace,rb,rebuild,cmp,compare,rt,roundtrip,prov,providers,diff,differential} ...
+js img COMMAND [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -194,7 +188,7 @@ Inspect
 Aliases: inspect.
 
 ```text
-usage: js img insp [-h] [--json] [--dry-run] [--providers] artifact
+js img insp ARTIFACT [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -212,7 +206,7 @@ Model
 Aliases: none.
 
 ```text
-usage: js img model [-h] [--json] [--dry-run] artifact
+js img model ARTIFACT [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -229,7 +223,7 @@ Unpack
 Aliases: unpack.
 
 ```text
-usage: js img upk [-h] [--json] [--dry-run] --output OUTPUT artifact
+js img upk ARTIFACT [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -247,7 +241,7 @@ Workspace
 Aliases: workspace.
 
 ```text
-usage: js img ws [-h] [--json] [--dry-run] workspace
+js img ws WORKSPACE [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -264,7 +258,7 @@ Rebuild
 Aliases: rebuild.
 
 ```text
-usage: js img rb [-h] [--json] [--dry-run] --output OUTPUT workspace
+js img rb WORKSPACE [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -282,7 +276,7 @@ Compare
 Aliases: compare.
 
 ```text
-usage: js img cmp [-h] [--json] [--dry-run] artifact other
+js img cmp ARTIFACT OTHER [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -300,7 +294,7 @@ Roundtrip
 Aliases: roundtrip.
 
 ```text
-usage: js img rt [-h] [--json] [--dry-run] [--output OUTPUT] artifact
+js img rt ARTIFACT [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -318,7 +312,7 @@ Providers
 Aliases: providers.
 
 ```text
-usage: js img prov [-h] [--json] [--dry-run] [--probe]
+js img prov [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -335,7 +329,7 @@ Differential
 Aliases: differential.
 
 ```text
-usage: js img diff [-h] [--json] [--dry-run] --tools TOOLS artifact
+js img diff ARTIFACT [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -353,7 +347,7 @@ Offline artifact engineering with explicit evidence states
 Aliases: ramdisk.
 
 ```text
-usage: js ram [-h] [--json] {insp,inspect,ext,extract,pack,cmp,compare} ...
+js ram COMMAND [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -368,7 +362,7 @@ Inspect
 Aliases: inspect.
 
 ```text
-usage: js ram insp [-h] [--json] [--dry-run] artifact
+js ram insp ARTIFACT [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -385,7 +379,7 @@ Extract
 Aliases: extract.
 
 ```text
-usage: js ram ext [-h] [--json] [--dry-run] --output OUTPUT artifact
+js ram ext ARTIFACT [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -403,9 +397,7 @@ Pack
 Aliases: none.
 
 ```text
-usage: js ram pack [-h] [--json] [--dry-run] --output OUTPUT
-                   [--compression {none,gzip,zlib,raw-deflate,xz,lzma-alone,bzip2,lz4}]
-                   workspace
+js ram pack WORKSPACE [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -424,7 +416,7 @@ Compare
 Aliases: compare.
 
 ```text
-usage: js ram cmp [-h] [--json] [--dry-run] artifact other
+js ram cmp ARTIFACT OTHER [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -442,8 +434,7 @@ Offline artifact engineering with explicit evidence states
 Aliases: none.
 
 ```text
-usage: js dtbo [-h] [--json]
-               {insp,inspect,ext,extract,rb,rebuild,cmp,compare} ...
+js dtbo COMMAND [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -458,7 +449,7 @@ Inspect
 Aliases: inspect.
 
 ```text
-usage: js dtbo insp [-h] [--json] [--dry-run] artifact
+js dtbo insp ARTIFACT [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -475,7 +466,7 @@ Extract
 Aliases: extract.
 
 ```text
-usage: js dtbo ext [-h] [--json] [--dry-run] --output OUTPUT artifact
+js dtbo ext ARTIFACT [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -493,7 +484,7 @@ Rebuild
 Aliases: rebuild.
 
 ```text
-usage: js dtbo rb [-h] [--json] [--dry-run] --output OUTPUT workspace
+js dtbo rb WORKSPACE [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -511,7 +502,7 @@ Compare
 Aliases: compare.
 
 ```text
-usage: js dtbo cmp [-h] [--json] [--dry-run] artifact other
+js dtbo cmp ARTIFACT OTHER [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -529,7 +520,7 @@ Offline artifact engineering with explicit evidence states
 Aliases: none.
 
 ```text
-usage: js avb [-h] [--json] {insp,inspect,vfy,verify} ...
+js avb COMMAND [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -544,7 +535,7 @@ Inspect
 Aliases: inspect.
 
 ```text
-usage: js avb insp [-h] [--json] [--dry-run] artifact
+js avb insp ARTIFACT [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -561,9 +552,7 @@ Verify
 Aliases: verify.
 
 ```text
-usage: js avb vfy [-h] [--json] [--dry-run] [--key KEY]
-                  [--partition PARTITION]
-                  artifact
+js avb vfy ARTIFACT [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -582,7 +571,7 @@ Content-first Image Intelligence; no payload execution
 Aliases: inspect.
 
 ```text
-usage: js insp [-h] [--json] [--dry-run] [--providers] path
+js insp PATH [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -600,7 +589,7 @@ Inspect optional Image Lab providers; explicit version probes only
 Aliases: providers.
 
 ```text
-usage: js prov [-h] [--json] [--probe] [--dry-run]
+js prov [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -617,7 +606,7 @@ Bounded recursive corpus inventory; never executes members
 Aliases: research.
 
 ```text
-usage: js res [-h] [--json] archives [archives ...]
+js res ARCHIVES [ARCHIVES ...] [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -633,7 +622,7 @@ List registered operations
 Aliases: list.
 
 ```text
-usage: js ls [-h] [--json]
+js ls [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -648,9 +637,7 @@ Ranked operation and recipe search
 Aliases: find.
 
 ```text
-usage: js fd [-h] [--json] [--category CATEGORY]
-             [--risk {READ_ONLY,MUTATING,PRIVILEGED,DESTRUCTIVE}]
-             [query]
+js fd [QUERY] [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -668,7 +655,7 @@ Collect cohesive local developer evidence; no network probes
 Aliases: dossier.
 
 ```text
-usage: js dos [-h] [--json] [--devices]
+js dos [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -684,7 +671,7 @@ Generate Bash completion or list safe candidates
 Aliases: completion.
 
 ```text
-usage: js comp [-h] [--json] {bash,candidates} ...
+js comp SHELL [WORDS ...] [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -701,7 +688,7 @@ Explicit read-only device inspection; identifiers omitted
 Aliases: device.
 
 ```text
-usage: js dce [-h] [--json] [--device DEVICE] {insp,transports,fastboot}
+js dce ACTION [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -718,7 +705,7 @@ Inspect an operation contract and provenance
 Aliases: show.
 
 ```text
-usage: js sh [-h] [--json] operation
+js sh OPERATION [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -734,7 +721,7 @@ Inspect an operation contract and provenance
 Aliases: explain.
 
 ```text
-usage: js exp [-h] [--json] operation
+js exp OPERATION [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -750,7 +737,7 @@ Inspect host tools without changing configuration
 Aliases: doctor.
 
 ```text
-usage: js doc [-h] [--json]
+js doc [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -765,12 +752,7 @@ Execute a registered operation with a local receipt
 Aliases: none.
 
 ```text
-usage: js run [-h] [--json] [--dry-run] [--tree TREE] [--artifact ARTIFACT]
-              [--device DEVICE] [--model MODEL] [--output OUTPUT]
-              [--other OTHER] [--workspace WORKSPACE]
-              [--compression COMPRESSION] [--key KEY] [--tools TOOLS]
-              [--have HAVE]
-              operation
+js run OPERATION [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -798,7 +780,7 @@ List guided workflows
 Aliases: recipes.
 
 ```text
-usage: js rcps [-h] [--json]
+js rcps [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -813,12 +795,7 @@ Inspect or execute a recipe
 Aliases: recipe.
 
 ```text
-usage: js rcp [-h] [--json] [--dry-run] [--network] [--tree TREE]
-              [--artifact ARTIFACT] [--device DEVICE] [--model MODEL]
-              [--output OUTPUT] [--other OTHER] [--workspace WORKSPACE]
-              [--compression COMPRESSION] [--key KEY] [--tools TOOLS]
-              [--have HAVE]
-              {sh,run} name
+js rcp ACTION NAME [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -848,9 +825,7 @@ Filter local receipts; no replay
 Aliases: history.
 
 ```text
-usage: js hist [-h] [--json] [--operation OPERATION] [--failed]
-               [--result RESULT] [--since SINCE] [--limit LIMIT]
-               [--artifact ARTIFACT] [--summary]
+js hist [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -872,7 +847,7 @@ Read latest/ID or compare two sanitized receipts
 Aliases: receipt, receipts.
 
 ```text
-usage: js rcpt [-h] [--json] [--failed] [--summary] id [other ...]
+js rcpt ID [OTHER ...] [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -891,7 +866,7 @@ Open the master operator console (preview without a TTY)
 Aliases: none.
 
 ```text
-usage: js 1337 [-h] [--json]
+js 1337 [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -906,7 +881,7 @@ Inspect sanitized legacy lineage
 Aliases: archaeology.
 
 ```text
-usage: js arch [-h] [--json]
+js arch [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -921,7 +896,7 @@ Scan explicit files for secret classes; prints paths only
 Aliases: none.
 
 ```text
-usage: js scan [-h] [--json] paths [paths ...]
+js scan PATHS [PATHS ...] [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -937,7 +912,7 @@ Inventory an untrusted ZIP without extracting contents
 Aliases: ingest.
 
 ```text
-usage: js ing [-h] [--json] --output OUTPUT archive
+js ing ARCHIVE [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -954,8 +929,7 @@ Android Recovery Laboratory (TWRP backend)
 Aliases: recovery.
 
 ```text
-usage: js ry [-h] [--json]
-             {acquire,source,failure,doc,doctor,insp,inspect,tree,plan,dce,device,init,cfg,configure,sync,build,vfy,verify,boot,test,report,clean} ...
+js ry [COMMAND] [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -970,9 +944,7 @@ Plan evidence acquisition; no firmware download or device extraction
 Aliases: none.
 
 ```text
-usage: js ry acquire [-h] [--json]
-                     [--have {firmware,images,device,tree,recovery,kernel,identity}]
-                     [--artifact ARTIFACT] [--tree TREE] [--model MODEL]
+js ry acquire [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -991,7 +963,7 @@ Inspect manifest/toolchain declarations and researched generation options
 Aliases: none.
 
 ```text
-usage: js ry source [-h] [--json] [--workspace WORKSPACE]
+js ry source [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -1007,7 +979,7 @@ Conservative bounded build-log diagnosis; no automatic fixes
 Aliases: none.
 
 ```text
-usage: js ry failure [-h] [--json] [--tree TREE] artifact
+js ry failure ARTIFACT [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -1024,7 +996,7 @@ Check tools, workspace and unresolved hardware requirements
 Aliases: doctor.
 
 ```text
-usage: js ry doc [-h] [--json]
+js ry doc [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -1039,7 +1011,7 @@ Inspect image headers or one authorized ADB device
 Aliases: inspect.
 
 ```text
-usage: js ry insp [-h] [--json] [--device] [image]
+js ry insp [IMAGE] [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -1056,8 +1028,7 @@ Static device-tree evidence; never executes makefiles
 Aliases: none.
 
 ```text
-usage: js ry tree [-h] [--json] [--device MODEL] [--output OUTPUT] [--dry-run]
-                  {audit,insp,diag,derive} [path]
+js ry tree ACTION [PATH] [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -1077,7 +1048,7 @@ Build plan from model evidence; no source acquisition/build
 Aliases: none.
 
 ```text
-usage: js ry plan [-h] [--json] model
+js ry plan MODEL [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -1093,9 +1064,7 @@ Manage local evidence-backed recovery models
 Aliases: device.
 
 ```text
-usage: js ry dce [-h] [--json]
-                 {create,ls,add-image,add-tree,add-metadata,insp,report}
-                 [name] [inputs ...]
+js ry dce ACTION [NAME] [INPUTS ...] [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -1113,10 +1082,7 @@ Configure one isolated workspace; no source download
 Aliases: none.
 
 ```text
-usage: js ry init [-h] [--json] --root ROOT --tree TREE --manifest MANIFEST
-                  --revision REVISION --lunch LUNCH
-                  --target {recoveryimage,bootimage,vendorbootimage}
-                  device
+js ry init DEVICE [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -1138,7 +1104,7 @@ Show the explicit workspace configuration
 Aliases: configure.
 
 ```text
-usage: js ry cfg [-h] [--json]
+js ry cfg [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -1153,7 +1119,7 @@ Explicit source synchronization
 Aliases: none.
 
 ```text
-usage: js ry sync [-h] [--json] [--dry-run]
+js ry sync [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -1169,7 +1135,7 @@ Compile trusted source; hardware remains untested
 Aliases: none.
 
 ```text
-usage: js ry build [-h] [--json] [--dry-run]
+js ry build [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -1185,7 +1151,7 @@ Hash and statically inspect an artifact; no AVB qualification
 Aliases: verify.
 
 ```text
-usage: js ry vfy [-h] [--json] artifact
+js ry vfy ARTIFACT [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -1201,7 +1167,7 @@ Check temporary boot request; refuse unresolved support
 Aliases: none.
 
 ```text
-usage: js ry boot [-h] [--json] artifact
+js ry boot ARTIFACT [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -1217,9 +1183,7 @@ Record manual qualification evidence
 Aliases: none.
 
 ```text
-usage: js ry test [-h] [--json] --device DEVICE [--area AREA]
-                  [--state {PASS,FAIL,SKIPPED,BLOCKED,UNTESTED}] [--note NOTE]
-                  artifact
+js ry test ARTIFACT [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -1239,9 +1203,7 @@ Render artifact-bound qualification
 Aliases: none.
 
 ```text
-usage: js ry report [-h] [--json] [--device DEVICE] [--markdown] [--tree TREE]
-                    [--device-evidence DEVICE_EVIDENCE]
-                    artifact
+js ry report ARTIFACT [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -1261,7 +1223,7 @@ Explain deliberate cleanup boundaries (no automatic deletion)
 Aliases: none.
 
 ```text
-usage: js ry clean [-h] [--json]
+js ry clean [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |

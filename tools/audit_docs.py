@@ -1,6 +1,7 @@
 """Check current documentation links, CLI examples, catalog and attribution references locally."""
 
 import json
+import difflib
 from manual import reference, recipes_reference
 from doc_contract import audit_examples
 from pathlib import Path
@@ -48,7 +49,17 @@ for contracts in scopes.values():
     collision_audit(contracts)
 
 if (root / "docs/COMMAND-REFERENCE.md").read_text() != reference():
-    errors.append("Command reference drift")
+    errors.append(
+        "Command reference drift\n"
+        + "".join(
+            difflib.unified_diff(
+                (root / "docs/COMMAND-REFERENCE.md").read_text().splitlines(True),
+                reference().splitlines(True),
+                fromfile="committed",
+                tofile="current",
+            )
+        )[:3000]
+    )
 if (root / "docs/RECIPES.md").read_text() != recipes_reference():
     errors.append("Recipe manual drift")
 examples = audit_examples(root)

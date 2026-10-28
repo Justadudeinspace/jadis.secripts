@@ -8,6 +8,7 @@ from pathlib import Path
 from secripts.safety import SecError
 from secripts.secrets import sanitize_evidence
 from secripts.receipts import bounded_evidence
+from secripts.images.artifacts import read
 
 LIMIT = 12000
 
@@ -45,7 +46,7 @@ def preview(path=None, question="", value=None):
         if p.is_symlink() or not p.is_file() or p.stat().st_size > 256 * 1024:
             raise SecError("Context must be an explicit regular JSON file below 256 KiB", 2)
         try:
-            value = json.loads(p.read_text())
+            value = json.loads(read(p, 256 * 1024).decode("utf-8"))
         except (ValueError, RecursionError) as exc:
             raise SecError("Malformed or excessively nested JSON context", 2) from exc
     try:

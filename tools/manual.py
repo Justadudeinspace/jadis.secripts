@@ -7,6 +7,26 @@ from secripts.cli import parser
 from secripts import __version__
 
 
+def syntax(p, route):
+    """Canonical syntax from contracts, independent of argparse terminal layout/version."""
+    tokens = [*route]
+    for action in p._actions:
+        if isinstance(action, argparse._SubParsersAction):
+            tokens.append("COMMAND" if action.required else "[COMMAND]")
+        elif not action.option_strings:
+            operand = action.dest.upper()
+            if action.nargs in ("*", argparse.REMAINDER):
+                operand = "[" + operand + " ...]"
+            elif action.nargs == "?":
+                operand = "[" + operand + "]"
+            elif action.nargs == "+":
+                operand += " [" + operand + " ...]"
+            tokens.append(operand)
+    if any(action.option_strings for action in p._actions):
+        tokens.append("[options]")
+    return " ".join(tokens)
+
+
 def reference():
     lines = [
         f"# Complete command reference — {__version__}",
@@ -29,7 +49,7 @@ def reference():
         lines.extend(
             [
                 "```text",
-                p.format_usage().strip(),
+                syntax(p, route),
                 "```",
                 "",
                 "| Argument / option | Purpose | Default | Required / choices |",

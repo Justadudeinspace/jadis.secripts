@@ -501,3 +501,36 @@ def test_guide_json_is_one_document(capsys):
     assert main(["guide", "--json"]) == 0
     result = json.loads(capsys.readouterr().out)
     assert result["title"] == "JADIS // SECRIPTS"
+
+
+def test_context_refuses_growth_past_checked_size(tmp_path, monkeypatch):
+    import os
+
+    p = tmp_path / "context.json"
+    p.write_text(json.dumps({"log": "x" * (256 * 1024)}))
+    original = Path.stat
+
+    def changed_size(self, *args, **kwargs):
+        result = original(self, *args, **kwargs)
+        if self == p:
+            fields = list(result)
+            fields[6] = 2  # Model a file growing after initial size validation.
+            return os.stat_result(fields)
+        return result
+
+    monkeypatch.setattr(Path, "stat", changed_size)
+    with pytest.raises(SecError, match="grew beyond"):
+        context.preview(p)
+
+
+def test_generated_reference_independent_of_terminal_width(monkeypatch):
+    import importlib.util
+
+    root = Path(__file__).resolve().parents[2]
+    spec = importlib.util.spec_from_file_location("manual", root / "tools/manual.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    monkeypatch.setenv("COLUMNS", "40")
+    narrow = module.reference()
+    monkeypatch.setenv("COLUMNS", "180")
+    assert module.reference() == narrow
