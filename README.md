@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://github.com/Justadudeinspace/jadis.secripts/blob/7fed2ef895eef12f606912e867835094fb813e58/docs/assets/js_logo.png" alt="BLUX Logo" width="600">
+</p>
+
 # JADIS // SECRIPTS
 
 **Personal Developer Operations Arsenal & Android Recovery/Image Laboratory**
