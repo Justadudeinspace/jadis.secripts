@@ -1,0 +1,1300 @@
+{
+  "schema": 1,
+  "commit": "bc943ec1c124b12235763df379bbf37883a371bd",
+  "version": "0.4.0",
+  "operations": 87,
+  "categories": [
+    "adb",
+    "android",
+    "avb",
+    "debian",
+    "diagnostics",
+    "dtbo",
+    "environment",
+    "fastboot",
+    "filesystem",
+    "git",
+    "github",
+    "image",
+    "java",
+    "linux",
+    "models",
+    "network",
+    "python",
+    "ramdisk",
+    "recovery",
+    "repo",
+    "ssh",
+    "termux"
+  ],
+  "recipes": [
+    "android-dev",
+    "git-review",
+    "termux-check",
+    "debian-check",
+    "device-diagnostic",
+    "developer-environment",
+    "repository-health",
+    "repository-release-readiness",
+    "github-readiness",
+    "python-dev",
+    "android-sdk-health",
+    "adb-diagnostics",
+    "fastboot-diagnostics",
+    "android-device-dossier",
+    "proot-dev",
+    "recovery-readiness",
+    "twrp-tree-review",
+    "twrp-build-readiness",
+    "post-build-verification",
+    "image-analysis",
+    "recovery-tree-diagnosis",
+    "recovery-build-plan",
+    "recovery-tree-derivation",
+    "artifact-roundtrip",
+    "ramdisk-review",
+    "avb-evidence"
+  ],
+  "inventory": [
+    {
+      "path": ".editorconfig",
+      "bytes": 153,
+      "sha256": "d73b2529555d351c2933270e507ded503bc843d32226b95a41113299357753b7"
+    },
+    {
+      "path": ".github/workflows/quality.yml",
+      "bytes": 1134,
+      "sha256": "5cadd478cd7d2367e348e68357bee19917aa881f54f5dc8c8e31f522c232428f"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 608,
+      "sha256": "c3a80541cf0893975f2c172196b7bcfac0075611e6498f991ff98ce64c852e77"
+    },
+    {
+      "path": ".pre-commit-config.yaml",
+      "bytes": 239,
+      "sha256": "cb538f6beb417bbcf56a6208c2ddbb047e76ef9b9193426e8f5fb9a71770b531"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "bytes": 3571,
+      "sha256": "6cf88dc75ea1b560fed826ab10961b5af2581525f47e15eb89eb8663a0610540"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "bytes": 2928,
+      "sha256": "24ed6dde79201e62885f024c7171e3811e568300410ef662ddba0e149de549a6"
+    },
+    {
+      "path": "CREDITS.md",
+      "bytes": 13760,
+      "sha256": "db0e3b2cfc563e6f2ea98272b6341b584bee9f4621de6f225169c0e271b2fc1f"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "MANIFEST.in",
+      "bytes": 292,
+      "sha256": "57cfa369fa780a44c8385c11f8bb2f63cfa19fee53928ff76978ff041cb3fb34"
+    },
+    {
+      "path": "README.md",
+      "bytes": 10989,
+      "sha256": "ec17c592412e8fe4de4f06b51ba91f3312086c80c327363a83cf6f935caaecd3"
+    },
+    {
+      "path": "SECURITY.md",
+      "bytes": 1847,
+      "sha256": "e990aaad5817692801698d8640c635be9a53bec5c4a8ac0c6fb2fe359483eb9e"
+    },
+    {
+      "path": "docs/archaeology.md",
+      "bytes": 1497,
+      "sha256": "9c0d3320f4e77c9532d003e7eb024e8528ce982241f49a6f9f7e54d10713e722"
+    },
+    {
+      "path": "docs/architecture.md",
+      "bytes": 5021,
+      "sha256": "a3a2e612c9262aa2c7a4ce372eac9492f53d28dfdbcc1d70ce4012ee0bf38f6f"
+    },
+    {
+      "path": "docs/avb.md",
+      "bytes": 2507,
+      "sha256": "ad0a06a760f1ac67d24ecd58a8fc2a47ede4616ad6bc27160be649625f802a46"
+    },
+    {
+      "path": "docs/catalog.md",
+      "bytes": 9000,
+      "sha256": "d95a76bc343d71badbb9b1ebd57578155aa1872912a1922773b48218bb6de1d8"
+    },
+    {
+      "path": "docs/cli-before-streamlining.json",
+      "bytes": 20887,
+      "sha256": "794c61d739d16692ecbab515657852eea34ea28316c47de7e2cf0a33577635ae"
+    },
+    {
+      "path": "docs/cli-collision-audit.json",
+      "bytes": 12945,
+      "sha256": "79265a2eaae3fb0cfe90cd872d8db000c11b6c707450de52ec6666c66eda41f1"
+    },
+    {
+      "path": "docs/cli-map.json",
+      "bytes": 15234,
+      "sha256": "d40988fb71a7fc551f5a7d53c7ccca041f8b2cad65b14cf5bb21f6c7cf9c5e04"
+    },
+    {
+      "path": "docs/cli.md",
+      "bytes": 5317,
+      "sha256": "fec633f45ed0b3f27fb0a3d24af76d71f157b0a4f156583610617bbb4144e37a"
+    },
+    {
+      "path": "docs/device-model.md",
+      "bytes": 5143,
+      "sha256": "f90b9b72c8244d1ee78a31bddce54e4a313b14595b5c1895be630cd4773915ae"
+    },
+    {
+      "path": "docs/image-intelligence.md",
+      "bytes": 4610,
+      "sha256": "9975cde7a655f32a5931a1eb39e8fd7696ff44bfd2d69b255fccb42fa1c11ce3"
+    },
+    {
+      "path": "docs/image-workspaces.md",
+      "bytes": 2449,
+      "sha256": "84fccf78c1057e2ef984a1b1c74dabf591520e7e5955b7655e1c04ddb330fec5"
+    },
+    {
+      "path": "docs/provenance.md",
+      "bytes": 3069,
+      "sha256": "7558b9d0123d308aa2d8de8b1b2978dfcd3ee03139ac61e0fef7a1dbdc82aac1"
+    },
+    {
+      "path": "docs/ramdisk.md",
+      "bytes": 2787,
+      "sha256": "6d51288cd7b3a35acd9888679f7f24950f41e991a21561b01009559e07e6951f"
+    },
+    {
+      "path": "docs/recovery-lab.md",
+      "bytes": 7948,
+      "sha256": "1d2ea1b535926371fc21e26f7a4d8ef581c3be1a42d002e6aa78bfb3bee73379"
+    },
+    {
+      "path": "docs/research.md",
+      "bytes": 8488,
+      "sha256": "ed4fdc1c04d154dbd9311227d5f93e299342b8ef42e9bfd0a1ce8af38c1b1706"
+    },
+    {
+      "path": "docs/roundtrip.md",
+      "bytes": 2797,
+      "sha256": "577cc97186fc5a5ae010eeead2cc14cc2fd54c148c883cd73c2d3e7fc4436362"
+    },
+    {
+      "path": "docs/safety-model.md",
+      "bytes": 4451,
+      "sha256": "61f2437e027424b4898259b42e0f224302b9fa7d43dd94abdacdfa7f6cafca6e"
+    },
+    {
+      "path": "docs/verification.md",
+      "bytes": 4826,
+      "sha256": "178b65baf68f55d7e6e0edf3c54472191115589a48bfbd023f1b27bef85e80cd"
+    },
+    {
+      "path": "legacy/provenance/recovery-corpus.json",
+      "bytes": 3550,
+      "sha256": "89c94e86fe3fdbbd6b0d9cf4511d7a3f4cd35ac4d378dc7734c1420999253fe4"
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 774,
+      "sha256": "28922cd6de4094a2ab29d5e0b1438513a875bd8f2694f67e0d01cdb24a5f223d"
+    },
+    {
+      "path": "src/secripts/__init__.py",
+      "bytes": 91,
+      "sha256": "3d5da54cbad69a49c107299f813e40cadecd5b0e2fe5178bf57a205c0e46729f",
+      "definitions": []
+    },
+    {
+      "path": "src/secripts/arsenal.py",
+      "bytes": 11892,
+      "sha256": "85a1ae7a1c5403e6abcbcc89d2f99528020c2f3c6bfd143d228c6e54f48ff5e1",
+      "definitions": [
+        "additional",
+        "command",
+        "inspect"
+      ]
+    },
+    {
+      "path": "src/secripts/cli.py",
+      "bytes": 26160,
+      "sha256": "434be5a059a56ae86db98d1bcfea94f0d49aafa887616d2c03c24d8be05164d7",
+      "definitions": [
+        "emit",
+        "parser",
+        "recovery_dispatch",
+        "dispatch",
+        "main",
+        "add",
+        "rec"
+      ]
+    },
+    {
+      "path": "src/secripts/commands.py",
+      "bytes": 6324,
+      "sha256": "5f8934c2fbb2b9a6370bbc281ad71c08ffcb599f35d6f9c9cf31799d7fd3c73b",
+      "definitions": [
+        "CommandName",
+        "name",
+        "collision_audit",
+        "resolve",
+        "named",
+        "action_argument",
+        "Parser",
+        "inventory",
+        "normalize",
+        "tokens",
+        "error",
+        "walk"
+      ]
+    },
+    {
+      "path": "src/secripts/completion.py",
+      "bytes": 3703,
+      "sha256": "69b0ca8d71a4ea2f24eb0a3f88e40ef8e30b54f984b45af155169c1f763a9893",
+      "definitions": [
+        "candidates",
+        "bash"
+      ]
+    },
+    {
+      "path": "src/secripts/context.py",
+      "bytes": 1060,
+      "sha256": "34665b2faff287511a9bfd8f95b8ca4f5e8c03a0b41f9255b51f234ef2494441",
+      "definitions": [
+        "data_dir",
+        "host"
+      ]
+    },
+    {
+      "path": "src/secripts/corpus.py",
+      "bytes": 13633,
+      "sha256": "34c90d540bb7066d9be843671015dbdc52f440dbc08a5097a87d301938b159fb",
+      "definitions": [
+        "CorpusLimits",
+        "sha256",
+        "unsafe_path",
+        "inventory",
+        "inspect_member",
+        "walk_zip",
+        "walk_tar"
+      ]
+    },
+    {
+      "path": "src/secripts/data/legacy.json",
+      "bytes": 87216,
+      "sha256": "ebe4bb3bccef88576721315da88681ba8edf88bea85aac392fdecc6a00b06e1e"
+    },
+    {
+      "path": "src/secripts/data/operations.json",
+      "bytes": 60496,
+      "sha256": "39d3cfcbe84e84d26d6f75f77bd73ba34f653fe998b3f98833169de7764fb4f0"
+    },
+    {
+      "path": "src/secripts/data/phase4-evidence.json",
+      "bytes": 8771,
+      "sha256": "a81988d12764e1bdb65ca24888ab4d7812c5a175ed4ea7deab35a138166c97eb"
+    },
+    {
+      "path": "src/secripts/data/research.json",
+      "bytes": 16057,
+      "sha256": "39e4b2ac6347478668b12b70e7574207bd7e03791a7876db4c063cddc9884809"
+    },
+    {
+      "path": "src/secripts/devices.py",
+      "bytes": 7941,
+      "sha256": "cd91dea181b36ce9c8e2872012e411f783acdad54f6db5af6105ebbe4634eb32",
+      "definitions": [
+        "transports",
+        "transport_summary",
+        "select",
+        "adb_inspect",
+        "fastboot_inspect",
+        "command"
+      ]
+    },
+    {
+      "path": "src/secripts/doctor.py",
+      "bytes": 3082,
+      "sha256": "656241601604998687ef60333f13a885ff4cea1d078ad83fa7bad22e07f84fa8",
+      "definitions": [
+        "sdk",
+        "path_analysis",
+        "doctor"
+      ]
+    },
+    {
+      "path": "src/secripts/dossier.py",
+      "bytes": 5730,
+      "sha256": "ba3abe50329b3ccff5a11ff90324bb8c19cfd7575ad237695ca092a9b920d2ab",
+      "definitions": [
+        "state",
+        "recovery_state",
+        "dossier",
+        "laboratory_state"
+      ]
+    },
+    {
+      "path": "src/secripts/engineering.py",
+      "bytes": 8449,
+      "sha256": "b9426dc2c0d757a64ec15eaf5f3bba29b1cfe16bc2aad6dbca2e2d1925298b8e",
+      "definitions": [
+        "handle",
+        "operations"
+      ]
+    },
+    {
+      "path": "src/secripts/evidence.py",
+      "bytes": 2177,
+      "sha256": "42919620b9f25a3156e8e049e1243f6b242ac9ad6c346ba770b1c150dc500d3f",
+      "definitions": [
+        "observation",
+        "overall",
+        "Collector",
+        "command",
+        "text"
+      ]
+    },
+    {
+      "path": "src/secripts/images/__init__.py",
+      "bytes": 109,
+      "sha256": "655c10ded614714d6fdd69056ba934da10454a747649c376536380f3fab698c4",
+      "definitions": []
+    },
+    {
+      "path": "src/secripts/images/android.py",
+      "bytes": 10487,
+      "sha256": "ae07a4003b769b4437c750e82bcff51ac32994439d2339bdd9f4dc0e3b896bc1",
+      "definitions": [
+        "inspect_image",
+        "u32",
+        "section",
+        "align",
+        "ramdisk"
+      ]
+    },
+    {
+      "path": "src/secripts/images/artifacts.py",
+      "bytes": 4664,
+      "sha256": "4687979b7407f85f1d2ad7de767deebd2eefc17bb1061a5a67a78e854adc4880",
+      "definitions": [
+        "read",
+        "digest",
+        "canonical",
+        "exclusive",
+        "json_model",
+        "child",
+        "NewWorkspace",
+        "evidence",
+        "__init__",
+        "__enter__",
+        "__exit__"
+      ]
+    },
+    {
+      "path": "src/secripts/images/avb.py",
+      "bytes": 6362,
+      "sha256": "c5cd9b630b24f40058d490c99a64491e24a18d756fbd725e032dffaca2290ae1",
+      "definitions": [
+        "inspect_avb"
+      ]
+    },
+    {
+      "path": "src/secripts/images/avbmodel.py",
+      "bytes": 17574,
+      "sha256": "1d1af55a61ecee6bcbab2fb48872b980fecd4db9ec74833baee9d9c160dd8854",
+      "definitions": [
+        "metadata",
+        "verify"
+      ]
+    },
+    {
+      "path": "src/secripts/images/bootmodel.py",
+      "bytes": 18593,
+      "sha256": "2ff1cc4a28e35dec19f0eef7c131d158c2db7bb20270a69bf64d3dee6bbd288a",
+      "definitions": [
+        "model",
+        "unpack",
+        "load_workspace",
+        "rebuild",
+        "compare",
+        "roundtrip",
+        "u32",
+        "aligned"
+      ]
+    },
+    {
+      "path": "src/secripts/images/codecs.py",
+      "bytes": 5687,
+      "sha256": "6fa7c23430d59ecf1a7caa6c0c69c482a8258ade5a69e4538f2746f052af9c24",
+      "definitions": [
+        "detect",
+        "gzip_header",
+        "_decode",
+        "encode",
+        "decode"
+      ]
+    },
+    {
+      "path": "src/secripts/images/common.py",
+      "bytes": 1452,
+      "sha256": "d7bbe38b373ef20e42a2e93dd519e7f943d7ef30eb4fe6355302688bfe6bfbf0",
+      "definitions": [
+        "Limits",
+        "artifact_hash",
+        "Reader",
+        "__init__",
+        "region",
+        "unpack",
+        "string"
+      ]
+    },
+    {
+      "path": "src/secripts/images/comparison.py",
+      "bytes": 5964,
+      "sha256": "89a9bf931efa13542d48bbc116810e986e0ad6ac7172490ca88f3af83d1c679c",
+      "definitions": [
+        "DifferenceClass",
+        "Difference",
+        "Comparison",
+        "ramdisks",
+        "__init__",
+        "add",
+        "finish",
+        "keyed"
+      ]
+    },
+    {
+      "path": "src/secripts/images/compression.py",
+      "bytes": 4241,
+      "sha256": "0308b2b3a04bd267dd84064f35667f486012f3f8b971e99d44fe951f9d6fa5b5",
+      "definitions": [
+        "identify",
+        "lz4"
+      ]
+    },
+    {
+      "path": "src/secripts/images/containers.py",
+      "bytes": 5444,
+      "sha256": "ef0737edf464083d98cc86c87062ddadace444f8162dfb0f83797e4c13bea802",
+      "definitions": [
+        "elf",
+        "uimage",
+        "vendor"
+      ]
+    },
+    {
+      "path": "src/secripts/images/cpio.py",
+      "bytes": 7212,
+      "sha256": "344c5fd0f5457f5e638426523ffc3a80861d6a0a3248b02c1ed6459b7cf81e03",
+      "definitions": [
+        "path_state",
+        "parse",
+        "metadata",
+        "pack",
+        "emit",
+        "trailer"
+      ]
+    },
+    {
+      "path": "src/secripts/images/devicetree.py",
+      "bytes": 13182,
+      "sha256": "998d00ed2f91ff6a21709ea3ec5169589d1f6e879b79f903ffba44702cbf3d36",
+      "definitions": [
+        "fdt",
+        "dtbo",
+        "fit_evidence",
+        "code_supported"
+      ]
+    },
+    {
+      "path": "src/secripts/images/dtbo_model.py",
+      "bytes": 7690,
+      "sha256": "33952b61dc3943e847cdab34eb92ff2e13dfd2775f8337622749a7d3bd6d4198",
+      "definitions": [
+        "model",
+        "pack",
+        "extract",
+        "rebuild",
+        "compare",
+        "semantic"
+      ]
+    },
+    {
+      "path": "src/secripts/images/engine.py",
+      "bytes": 10783,
+      "sha256": "2cbd2ab94ca6e24586f4f34c852da3f4cdbc28b49edddb0aab5ef1fc53f89c73",
+      "definitions": [
+        "inspect",
+        "_parse",
+        "inspection_failed"
+      ]
+    },
+    {
+      "path": "src/secripts/images/lz4codec.py",
+      "bytes": 8727,
+      "sha256": "1956ed5b828d18b8b16e4231028e55b80bc0dbecf21a521a3f6ae957b115964e",
+      "definitions": [
+        "rot",
+        "xxh32",
+        "DictionaryRequired",
+        "block_decode",
+        "decode",
+        "encode",
+        "extended"
+      ]
+    },
+    {
+      "path": "src/secripts/images/oracles.py",
+      "bytes": 7672,
+      "sha256": "36e9717b772fd22d3a69d77d1f84a909e5a1c7e0799ef6b8eb9589432972e08f",
+      "definitions": [
+        "aosp",
+        "compression",
+        "output_limit"
+      ]
+    },
+    {
+      "path": "src/secripts/images/providers.py",
+      "bytes": 3290,
+      "sha256": "5abb840d05ba995fe3660cb43434313636da9da8eb922bf8f1e28596edfb25e6",
+      "definitions": [
+        "availability",
+        "evidence",
+        "trusted_tool",
+        "inventory"
+      ]
+    },
+    {
+      "path": "src/secripts/images/ramdisk.py",
+      "bytes": 5769,
+      "sha256": "f9349a4a9e8b63dee91222a5a66710c4081c221c30d6ae13afbbc6a90c1093f7",
+      "definitions": [
+        "compression",
+        "cpio_metadata",
+        "inspect_ramdisk"
+      ]
+    },
+    {
+      "path": "src/secripts/images/ramdisk_model.py",
+      "bytes": 6830,
+      "sha256": "2b7530bc6027c0b775197edae219a14b42ae8811bb17670d1e0cdb9d7f4597e6",
+      "definitions": [
+        "parse",
+        "inspect",
+        "extract",
+        "load_workspace",
+        "directory_model",
+        "pack"
+      ]
+    },
+    {
+      "path": "src/secripts/images/workflows.py",
+      "bytes": 6970,
+      "sha256": "2c1a4eebe4cdbc0cb3910e808f697c1838a68fe93279b0246651e409c1bf735b",
+      "definitions": [
+        "family",
+        "model",
+        "unpack",
+        "workspace",
+        "rebuild",
+        "compare",
+        "roundtrip",
+        "semantic"
+      ]
+    },
+    {
+      "path": "src/secripts/inspectors.py",
+      "bytes": 14994,
+      "sha256": "fcdb01342fa89af4f39aa12d46c0fc2d2b0031d85bf6ceef431ac5c7e00ebe49",
+      "definitions": [
+        "read_text",
+        "tools",
+        "host_detail",
+        "filesystem",
+        "python_environment",
+        "python_project",
+        "python_editables",
+        "java",
+        "sdk",
+        "termux",
+        "linux",
+        "network",
+        "ssh",
+        "models",
+        "xdg",
+        "git_health",
+        "git_largest",
+        "recovery_doctor",
+        "recovery_tree",
+        "recovery_image",
+        "git_signatures"
+      ]
+    },
+    {
+      "path": "src/secripts/laboratory.py",
+      "bytes": 4294,
+      "sha256": "ad586ad3f98be838ed2b4cf8cd471d7456f0e4a36e2778bc09f01f3a225503c4",
+      "definitions": [
+        "image",
+        "providers",
+        "device_model",
+        "tree_diagnose",
+        "build_plan",
+        "host",
+        "derive",
+        "operations"
+      ]
+    },
+    {
+      "path": "src/secripts/operations.py",
+      "bytes": 4302,
+      "sha256": "f8fa3b1f7f3ac28b65d20161d28924eec3b0f510b723909b008d63ceb23ae524",
+      "definitions": [
+        "execute"
+      ]
+    },
+    {
+      "path": "src/secripts/provenance.py",
+      "bytes": 5607,
+      "sha256": "09403d8340dc875239c36a1b031b6a4c243e4f2b034827c14644f14f83a124df",
+      "definitions": [
+        "inventory",
+        "validate",
+        "packaged",
+        "ingest"
+      ]
+    },
+    {
+      "path": "src/secripts/receipts.py",
+      "bytes": 8541,
+      "sha256": "faab1b082d66b8fee811da65e60ee13055d1ea90fd536dc3774eac45347eeced",
+      "definitions": [
+        "write_json",
+        "save",
+        "load",
+        "history",
+        "latest",
+        "summary",
+        "compare",
+        "bounded_evidence",
+        "walk",
+        "visit"
+      ]
+    },
+    {
+      "path": "src/secripts/recipes.py",
+      "bytes": 9605,
+      "sha256": "860d7c1f55e2d59b42e9819f63d391e6e96ff7ca795b2197028adaadc923e877",
+      "definitions": [
+        "_recipe",
+        "get",
+        "run"
+      ]
+    },
+    {
+      "path": "src/secripts/recovery/__init__.py",
+      "bytes": 61,
+      "sha256": "decd99371466933e439a4eaa3b29f1f9cc1231fa0b169abd6ee2b7bfde52cfe4",
+      "definitions": []
+    },
+    {
+      "path": "src/secripts/recovery/avb.py",
+      "bytes": 146,
+      "sha256": "cb0cc5feb0f75892a2614e7af795719cd19bbc63cf4d12cdd992d1899edc01cc",
+      "definitions": []
+    },
+    {
+      "path": "src/secripts/recovery/backend.py",
+      "bytes": 873,
+      "sha256": "c0f5f9aa9661c9475717b46664d9cc0ff21733e38c01b585d886da215afaf8b8",
+      "definitions": [
+        "Backend",
+        "TWRP",
+        "build_command",
+        "build_command"
+      ]
+    },
+    {
+      "path": "src/secripts/recovery/device.py",
+      "bytes": 376,
+      "sha256": "134d9a3d43feaf0ba34ff82a845b6cb1afd012d13d73730ec0378f4c44135ed7",
+      "definitions": [
+        "inspect_device"
+      ]
+    },
+    {
+      "path": "src/secripts/recovery/images.py",
+      "bytes": 168,
+      "sha256": "2fa1d1d4698c6e140ef5b08266ef096826c4c562161557ab4e59baaf484e9a46",
+      "definitions": []
+    },
+    {
+      "path": "src/secripts/recovery/inspection.py",
+      "bytes": 7491,
+      "sha256": "de6a40a283f55af122d4bc8a02464c4a505b956e4095b0b19170ab9a0a5049c9",
+      "definitions": [
+        "artifact_hash",
+        "inspect_image",
+        "audit_tree",
+        "finding"
+      ]
+    },
+    {
+      "path": "src/secripts/recovery/model.py",
+      "bytes": 16440,
+      "sha256": "2b35910ef3d9bfb905cb611fb32b6a846591a2feed7c8361c07643be796b0f1e",
+      "definitions": [
+        "name_valid",
+        "model_path",
+        "load",
+        "create",
+        "fact",
+        "source_record",
+        "fstab_facts",
+        "add_image",
+        "add_tree",
+        "add_metadata",
+        "summarize",
+        "report",
+        "catalog"
+      ]
+    },
+    {
+      "path": "src/secripts/recovery/planner.py",
+      "bytes": 14347,
+      "sha256": "4f27c0a89a13899116c77b5603e49a01668109c3053861cdd4c7223523839b3a",
+      "definitions": [
+        "target_for",
+        "diagnose",
+        "derive",
+        "host_qualification",
+        "plan",
+        "source_intelligence",
+        "generated"
+      ]
+    },
+    {
+      "path": "src/secripts/recovery/qualification.py",
+      "bytes": 9567,
+      "sha256": "182ecb09b2f88d01c466cb078b773c2baa8c56c91c7f1cf771fcf0376bdc679a",
+      "definitions": [
+        "record",
+        "report",
+        "markdown"
+      ]
+    },
+    {
+      "path": "src/secripts/recovery/ramdisk.py",
+      "bytes": 508,
+      "sha256": "5b39bdc9f1db095459f8a90fc7f4f16f78db3ca99a5677f7e50cb25cfcc552f9",
+      "definitions": [
+        "inspect_ramdisk"
+      ]
+    },
+    {
+      "path": "src/secripts/recovery/tree.py",
+      "bytes": 11870,
+      "sha256": "53dd1e2b234ea748b58c8f4628ef97d92f8c61059ab0fb09b79bd3b8af6a9c84",
+      "definitions": [
+        "graph",
+        "logical_lines",
+        "edge"
+      ]
+    },
+    {
+      "path": "src/secripts/recovery/workspace.py",
+      "bytes": 11741,
+      "sha256": "1fb6b0f777914b432f2068f4b22be2513b828e2389d4894b9e675993bd5d5634",
+      "definitions": [
+        "exclusive_workspace",
+        "config_path",
+        "load_workspace",
+        "validate_workspace",
+        "initialize",
+        "recovery_doctor",
+        "disk_check",
+        "sync",
+        "build",
+        "locked"
+      ]
+    },
+    {
+      "path": "src/secripts/registry.py",
+      "bytes": 10639,
+      "sha256": "7bcbc17c61687e8bf78968a1674bf4cc2a10e8da4df4a73b41a006455214a6d4",
+      "definitions": [
+        "lineage_terms",
+        "Parameter",
+        "Operation",
+        "Registry",
+        "registry",
+        "__post_init__",
+        "__post_init__",
+        "metadata",
+        "__init__",
+        "get",
+        "search",
+        "cmd"
+      ]
+    },
+    {
+      "path": "src/secripts/runner.py",
+      "bytes": 3003,
+      "sha256": "08a2a6db02850c7bfa9d93a0f974c0dd18f5dda9b29befbdd47b67675bb37dc2",
+      "definitions": [
+        "run_command"
+      ]
+    },
+    {
+      "path": "src/secripts/safety.py",
+      "bytes": 1073,
+      "sha256": "02f14f05d498e50d94c7cbf8ef6eddcd1a09567f595888268126ec020dce7e2b",
+      "definitions": [
+        "Risk",
+        "SecError",
+        "authorize",
+        "__init__"
+      ]
+    },
+    {
+      "path": "src/secripts/secrets.py",
+      "bytes": 4268,
+      "sha256": "c289ae30f6fdbac4840f9e5abc092aeb6e79139c99bc505f8807a4d0e5a638bc",
+      "definitions": [
+        "contains_secret",
+        "redact",
+        "scan_paths",
+        "mask_identifiers",
+        "sanitize_evidence",
+        "collect"
+      ]
+    },
+    {
+      "path": "src/secripts/ui/__init__.py",
+      "bytes": 76,
+      "sha256": "81f4fbc720eab97b4c1044cfad9a07aba28012a77ad4fb2f96f6210434820c65",
+      "definitions": []
+    },
+    {
+      "path": "src/secripts/ui/console.py",
+      "bytes": 15101,
+      "sha256": "e4d4cfdc06110cd83962d9c8d1e81441839d89be7c5d9507d2dbbcb2ddcdd29d",
+      "definitions": [
+        "dashboard",
+        "parameters_for",
+        "recovery_console",
+        "_console",
+        "attempt",
+        "console"
+      ]
+    },
+    {
+      "path": "src/secripts/ui/render.py",
+      "bytes": 2703,
+      "sha256": "561e3591fd482a266958cac423ef89e3120718d2e433f47d3a0b170f3f7f4d36",
+      "definitions": [
+        "safe_text",
+        "render",
+        "render_doctor"
+      ]
+    },
+    {
+      "path": "tests/__init__.py",
+      "bytes": 89,
+      "sha256": "dead67de2996773e453e3c55b5308afba734d1bf942fb24dfb0282dc9ede31bb",
+      "definitions": []
+    },
+    {
+      "path": "tests/conftest.py",
+      "bytes": 159,
+      "sha256": "cce16d9557777f4a734e63517bfd116be3768314e3f5e40b4acbbb7f5e3337a6",
+      "definitions": [
+        "isolated_state"
+      ]
+    },
+    {
+      "path": "tests/fixtures/__init__.py",
+      "bytes": 62,
+      "sha256": "f1c3b96dd597b1f37bdf0eeb74c8611a4316beb85b4dd2a3d84ba14cef53b8f7",
+      "definitions": []
+    },
+    {
+      "path": "tests/fixtures/images.py",
+      "bytes": 3210,
+      "sha256": "587d58c257cff8b218d412983bd8a2a3a702067d0a0b598a0ac5fa8d538a4b91",
+      "definitions": [
+        "fdt",
+        "dtbo",
+        "elf",
+        "uimage",
+        "lz4",
+        "boot",
+        "begin",
+        "prop",
+        "end"
+      ]
+    },
+    {
+      "path": "tests/integration/test_cli.py",
+      "bytes": 2570,
+      "sha256": "3a7151d3bd3f178363c0e0353f80fab8100727cb90354fe5775d6ef068e5f833",
+      "definitions": [
+        "test_cli_safe_surfaces",
+        "test_cli_failure_surfaces",
+        "test_console_degraded_descriptions",
+        "test_console_interactive_paths",
+        "test_temporary_boot_refused_with_receipt"
+      ]
+    },
+    {
+      "path": "tests/integration/test_phase2_cli.py",
+      "bytes": 4238,
+      "sha256": "631eee8652a32120bf254992dcf3326a840d593c2c8428f0d45c225c2e55a3a7",
+      "definitions": [
+        "test_phase2_cli_json",
+        "test_latest_receipt_and_diff_cli",
+        "test_no_color_and_dashboard_noninteractive",
+        "test_cli_device_absence_and_failure_receipt",
+        "test_failure_receipt_storage_error_is_clear",
+        "test_network_recipe_requires_explicit_permission",
+        "test_search_legacy_source_filename",
+        "test_canonical_js_entry_point_and_no_old_alias",
+        "unavailable"
+      ]
+    },
+    {
+      "path": "tests/safety/test_safety.py",
+      "bytes": 3106,
+      "sha256": "58f43f5fc21b0d686f17fea0df3819888984199ce4ab2e937cad120a1e24b2b6",
+      "definitions": [
+        "test_secret_redaction_and_refusal",
+        "test_destructive_noninteractive_and_deliberate_confirmation",
+        "test_privilege_does_not_elevate",
+        "test_metadata_secret_flag_is_preserved",
+        "test_sensitive_containers_and_numeric_values",
+        "test_output_truncation_does_not_leak_partial_credential",
+        "test_json_generic_credential_detection"
+      ]
+    },
+    {
+      "path": "tests/unit/test_aliases.py",
+      "bytes": 5267,
+      "sha256": "689b5c185f892084784d4653a6b7a237080a6505c574eacc165c1b4a13307cb4",
+      "definitions": [
+        "test_root_aliases_same_parser_help_and_identity",
+        "test_alias_argument_parity",
+        "test_scoped_collision_contract_and_map",
+        "test_alias_json_equivalence_and_receipt_identity",
+        "test_mutating_alias_guards_and_failure_receipts",
+        "test_alias_dry_run_no_writes",
+        "test_alias_completion_and_error_suggestion"
+      ]
+    },
+    {
+      "path": "tests/unit/test_core.py",
+      "bytes": 5035,
+      "sha256": "642c1f4aacbb3142b2b3ee515f925d1634306a19d93784969998b4acb1861558",
+      "definitions": [
+        "test_registry_contract",
+        "test_registry_search_and_invalid",
+        "test_runner_success_failure_missing_timeout",
+        "test_runner_literal_arguments",
+        "test_receipts_corruption_failure_artifacts",
+        "test_failed_operation_receipt",
+        "test_doctor_no_fake_green",
+        "test_provenance_packaged",
+        "test_catalog_consistency",
+        "test_host_android_runtime_and_unknown_environment"
+      ]
+    },
+    {
+      "path": "tests/unit/test_image_phase2.py",
+      "bytes": 8099,
+      "sha256": "cacba5f99bd532f44eb2ae9b4074a23a1555875ae3be46307c71d3135b2c2bf4",
+      "definitions": [
+        "newc",
+        "boot",
+        "test_ramdisk_metadata_and_init_boot_candidate",
+        "test_ramdisk_bomb_truncation_and_cpio_traversal",
+        "test_boot_payload_and_header_bounds",
+        "test_vendor_fragments_and_overlap",
+        "vbmeta",
+        "test_avb_footer_and_vbmeta_are_not_verification",
+        "test_avb_hash_descriptor_and_bad_bounds",
+        "test_tree_dependency_graph_and_conditional_evidence",
+        "test_tree_symlink_huge_file_and_xml_entities",
+        "test_combined_report_separates_evidence",
+        "entry"
+      ]
+    },
+    {
+      "path": "tests/unit/test_ingestion.py",
+      "bytes": 1313,
+      "sha256": "d36938e22725170622a5e8711f84a44cb1e9986671997a7f89911e612110d7da",
+      "definitions": [
+        "test_ingestion_duplicates_secret_safe_and_rejected",
+        "test_zip_bomb_limit"
+      ]
+    },
+    {
+      "path": "tests/unit/test_phase2.py",
+      "bytes": 9851,
+      "sha256": "e065472d188caadf5e84e8b7b2eade589810b1f0069168addec61f7f1a99df82",
+      "definitions": [
+        "response",
+        "test_parameter_contract_and_all_dry_runs",
+        "test_ranked_search_and_filters",
+        "test_receipt_filters_latest_diff_and_artifact",
+        "test_legacy_receipt_identifier_sanitization",
+        "test_adb_selection_refusals",
+        "test_device_dossier_private_identifier_and_package_names",
+        "test_fastboot_no_device_and_variable_evidence",
+        "test_collector_deadline_and_unknown_status",
+        "test_sdk_components_conflict_and_license_state",
+        "test_python_metadata_invalid_and_allowlist",
+        "test_dossier_no_implicit_network_or_devices",
+        "test_recipes_contract_network_refusal_and_parent_receipt",
+        "test_bash_completion_and_candidates",
+        "test_receipt_missing_latest",
+        "forbidden",
+        "command",
+        "command"
+      ]
+    },
+    {
+      "path": "tests/unit/test_phase3.py",
+      "bytes": 15129,
+      "sha256": "7c42a9b1e6164e722f6bceecb499d76fb92a63183186b3b89172c077c3e7160d",
+      "definitions": [
+        "test_generic_dispatch",
+        "test_all_boot_generations",
+        "test_lz4_flags_skippable_and_boundaries",
+        "test_dtb_dtbo_and_elf_adversarial_bounds",
+        "test_vendor_markers_and_mtk_bounds",
+        "test_cache_context_and_optional_provider_disagreement",
+        "test_nested_corpus_duplicates_secrets_and_no_extraction",
+        "test_corpus_byte_limits",
+        "make_tree",
+        "test_model_conflicts_and_unknown_not_promoted",
+        "test_candidate_provenance_plan_and_no_overwrite",
+        "test_model_input_guards_and_metadata",
+        "test_static_resolution_append_conditional_and_locations",
+        "test_deterministic_small_fuzz_no_parser_crash",
+        "test_corrupt_cache_and_header_lineage",
+        "test_corpus_duplicate_members_and_symlink",
+        "test_model_malformed_and_standalone_ramdisk",
+        "test_source_manifest_bounds_and_generation",
+        "test_phase3_cli_and_registry",
+        "test_credits_and_public_research_references",
+        "test_corpus_classification_redaction_contract",
+        "test_skippable_frame_bomb_and_empty_lz4",
+        "test_conditional_override_invalidates_static_variable",
+        "test_registry_image_failure_records_failure",
+        "test_generic_inspection_missing_file_receipt",
+        "test_model_preserves_unresolved_conditional_override"
+      ]
+    },
+    {
+      "path": "tests/unit/test_phase4_adversarial.py",
+      "bytes": 9897,
+      "sha256": "737a9b6aca4b091ab983c596b7a7e4c5f7e37052ccf6fc352dcba5271bec6bee",
+      "definitions": [
+        "test_dtbo_v1_compressed_roundtrip",
+        "test_unknown_dtbo_compression_and_extended_model_refusal",
+        "test_shared_dtbo_blob_no_extraction_amplification",
+        "test_lz4_dependent_blocks_and_long_matches",
+        "test_deterministic_malformed_cli_no_traceback",
+        "test_corrupt_lz4_reports_failure_not_verified",
+        "test_workspace_creation_is_exclusive_and_cleanup",
+        "test_ramdisk_owner_mode_symlink_order_comparison",
+        "test_aosp_oracle_refuses_unreviewed_source",
+        "test_fit_embedded_hash_and_signature_metadata",
+        "test_bounded_receipt_evidence_preserves_identity",
+        "test_fdt_path_budget_and_uimage_crc_failure",
+        "test_image_compressed_representation_can_be_semantically_equal",
+        "node",
+        "prop",
+        "node"
+      ]
+    },
+    {
+      "path": "tests/unit/test_phase4_avb.py",
+      "bytes": 7583,
+      "sha256": "249f16e7171362e57907f190af25f0b1c8dc151b3fef9b3e34904e8f9fd6753a",
+      "definitions": [
+        "unsigned",
+        "test_avb_native_layout_and_provider_absent",
+        "test_avb_hash_descriptor_native_verification_and_bounds",
+        "test_avb_private_expected_key_refused",
+        "real_avb_keys",
+        "test_real_avb_signature_expected_key_and_tampering",
+        "test_real_avb_wrong_key",
+        "test_real_hashtree_valid_and_corrupt",
+        "cleanup"
+      ]
+    },
+    {
+      "path": "tests/unit/test_phase4_codecs.py",
+      "bytes": 8829,
+      "sha256": "34578131675891eb1046d8293a6290c938af046ad9d075a0fad0ba4b67015289",
+      "definitions": [
+        "test_xxh32_reference_vectors",
+        "test_lz4_deterministic_frame_roundtrip",
+        "compressed_frame",
+        "test_lz4_compressed_match_overlap_and_checksums",
+        "test_lz4_concatenation_skippable_legacy_and_limits",
+        "test_codec_roundtrip",
+        "test_gzip_concat_headers_crc_and_bombs",
+        "cpio_model",
+        "test_cpio_model_pack_invariant",
+        "test_cpio_unsafe_pack_refused",
+        "test_cpio_concatenation_symlinks_and_special_metadata",
+        "test_ramdisk_workspace_source_immutability_and_symlink_attack",
+        "test_ramdisk_directory_pack_compare_changes",
+        "test_cpio_expected_failure_shapes",
+        "test_ramdisk_metadata_is_payload_free"
+      ]
+    },
+    {
+      "path": "tests/unit/test_phase4_images.py",
+      "bytes": 7955,
+      "sha256": "fb76196b207554c9c7db63518d3555811b98e9d87fed5a9c7f18e457c4fea94c",
+      "definitions": [
+        "vendor",
+        "test_boot_exact_layout_roundtrip",
+        "test_vendor_boot_preserves_fragments_and_order",
+        "test_modern_boot_component_resize",
+        "test_vendor_fragment_resize_and_ambiguous_edits",
+        "test_workspace_source_output_and_manifest_guards",
+        "test_signed_container_modification_refused",
+        "test_unknown_tail_resizing_refused",
+        "test_dtbo_shared_blob_canonical_pack_and_roundtrip",
+        "test_dtb_canonical_model_and_comparison",
+        "test_roundtrip_temporary_workspace_discarded"
+      ]
+    },
+    {
+      "path": "tests/unit/test_recovery.py",
+      "bytes": 8959,
+      "sha256": "ddac89f224ed9b471d930bacf282a6acfac1a7ae22f8eed3fb86b341003838a8",
+      "definitions": [
+        "workspace",
+        "test_workspace_validation",
+        "test_tree_audit_and_missing_fields",
+        "test_image_metadata",
+        "test_qualification_no_auto_pass",
+        "test_device_disconnected_or_missing",
+        "test_sync_network_failure_and_low_disk",
+        "test_build_failure_recorded",
+        "test_recovery_doctor_hardware_unknown",
+        "test_workspace_concurrency_refused",
+        "test_build_collects_real_artifact_fixture",
+        "test_vendor_boot_bounds",
+        "test_tree_fstab_and_dependencies",
+        "command"
+      ]
+    },
+    {
+      "path": "tools/audit_docs.py",
+      "bytes": 2159,
+      "sha256": "b8ebb69f619a6342b93a8dbf7e75d1ac8e5b60e063e86a5da1b41fe626521dd6",
+      "definitions": []
+    },
+    {
+      "path": "tools/catalog.py",
+      "bytes": 439,
+      "sha256": "fa6d932537499cfdaa7089b177b9bcaecefea8c457bd4e92b2491ef53244c41c",
+      "definitions": []
+    },
+    {
+      "path": "tools/cli_map.py",
+      "bytes": 3596,
+      "sha256": "5f39c2bdc346f0bcbaa990196b0f7d79ca9873a2dc275a060e45b3970ac6418d",
+      "definitions": []
+    },
+    {
+      "path": "tools/corpus_inventory.py",
+      "bytes": 753,
+      "sha256": "13fa83bcd44407afc4d7af86fc9694622b8dbf67eb6cfc4040ecca29d8a356d1",
+      "definitions": []
+    },
+    {
+      "path": "tools/prepare_avb_provider.py",
+      "bytes": 1369,
+      "sha256": "6fc8b237fcf78d3b896aa249a8e763094ac8a114cd317305d9172036aa0c3803",
+      "definitions": []
+    },
+    {
+      "path": "tools/provenance.py",
+      "bytes": 2874,
+      "sha256": "d46887e547c2905d8ad835de3dfbe6113acc9f8b7ec2034a2ade247449b7a4b9",
+      "definitions": []
+    },
+    {
+      "path": "tools/provider_sources.py",
+      "bytes": 1386,
+      "sha256": "8e623f1a581078a38abf9228e0317527ea94961841ce9321f92336670e6d36f7",
+      "definitions": [
+        "fetch"
+      ]
+    },
+    {
+      "path": "tools/qualify.py",
+      "bytes": 1382,
+      "sha256": "98f8807c2ffb704ba243cfe5942a9c7ff7efa43acb19f753ff3bece237fa8ffb",
+      "definitions": []
+    },
+    {
+      "path": "tools/review_legacy.py",
+      "bytes": 1967,
+      "sha256": "c9cb6b615bd133dc13254e9ebc21bb98c0d34bd30aa78928713ad31391b4d963",
+      "definitions": []
+    },
+    {
+      "path": "tools/secret_scan.py",
+      "bytes": 573,
+      "sha256": "75bacb1b3bb1bac1e0e136cce7483238fcb99bae0379552b79ef6945ed26ce8d",
+      "definitions": []
+    },
+    {
+      "path": "tools/validate.py",
+      "bytes": 4698,
+      "sha256": "04605160c9c2d69037d3702f19c6f4f22cbf2475cc1ea34c5b8bf12f07af6134",
+      "definitions": []
+    },
+    {
+      "path": "tools/validate_images.py",
+      "bytes": 3063,
+      "sha256": "3f5c377f814b98ad798ecd68c08fe07e99269826780d10099eeb770dc22966a1",
+      "definitions": []
+    },
+    {
+      "path": "tools/validate_oracles.py",
+      "bytes": 6184,
+      "sha256": "315d82c461daed0401e4efabbac6b39a92aa4937286015fc10822f37443515a7",
+      "definitions": []
+    },
+    {
+      "path": "tools/validate_phase4.py",
+      "bytes": 7262,
+      "sha256": "5dc84c2267d4128e7977462c0d05c2f6f2dbaff37fb67d7f8e77e3f5de5d3d28",
+      "definitions": [
+        "check"
+      ]
+    }
+  ],
+  "inventory_source": "Immutable starting Git commit; includes root metadata/docs/licenses, not working-tree research additions"
+}

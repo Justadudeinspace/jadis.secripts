@@ -78,3 +78,30 @@ Seven pinned-AOSP-generated boot/vendor_boot cases agree with native reconstruct
 The two hash-identified corpus samples round-trip byte-identically; neither represents
 modern-device qualification. Library oracles agree on 27 xxHash32 and five LZ4 block
 cases. Final-commit GitHub Actions results are separate external evidence.
+
+## Phase 5 product qualification
+
+Starting main was bc943ec1c124b12235763df379bbf37883a371bd, installed 0.4.0,
+87 operations / 22 categories / 26 recipes. The full 265-test baseline and all
+quality gates passed before implementation. Research/gap gate preceded product code.
+
+Phase 5 has 92 operations / 23 categories / 28 recipes and 361 tests. Coverage adds
+guided/no-argument behavior, topic help, acquisition choices, source declarations,
+conservative log classes, AI consent/context/redaction, per-provider request/response
+contracts, missing/offline/oversized/malformed response refusal and typed tool limits.
+No test performs paid AI inference. Mocked transport success is not live provider success.
+
+The documentation gate checks internal links recursively, generated parser/recipe
+references, alias coverage and 115 shell examples by parsing them without execution.
+The final wheel must also pass tools/validate_phase5.py from outside the checkout,
+plus retained Phase 4 image/alias smoke and optional pinned AOSP differential tests.
+Normal TTY, non-TTY, JSON and NO_COLOR remain explicit validation modes.
+
+Research metadata includes 69 records (63 hashed direct accesses, two browser-only
+official accesses and four unavailable retrieval attempts) and six pinned device
+trees. No full stock-firmware-to-known-good-local-recovery chain is established.
+Source generation suggestions, tree candidates and build-failure classifications
+remain review-only; no new recovery backend, compiler qualification or hardware claim.
+
+Real-host compilation stays BLOCKED. Hardware qualification stays UNTESTED. AI live
+inference and subscription authorization stay UNTESTED/BLOCKED respectively.

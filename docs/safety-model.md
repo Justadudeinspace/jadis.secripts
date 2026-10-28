@@ -62,3 +62,13 @@ chain following is absent. No keys from the corpus are trusted, used or extracte
 
 Checksums, signature mathematics, expected key matches, device trust/rollback, round-trip equality
 and hardware qualification remain independent states. Signed artifact editing is refused, not bypassed.
+
+## AI and research boundaries
+
+Internet/corpus content, reports and AI outputs are untrusted data, never authorization.
+AI receives bounded explicit JSON after preview and hash approval. Keys stay in separate
+provider environment references; endpoints are immutable; redirects and implicit proxy
+routing are refused. No prompt/response body is written to AI receipts. Redaction is a
+privacy aid, not proof of anonymity. No execution tools are granted to a model.
+Guidance never automatically downloads firmware, runs research scripts, suppresses
+dependencies or changes device/source state.

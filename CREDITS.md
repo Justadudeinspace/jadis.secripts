@@ -230,3 +230,47 @@ alongside the authoritative machine-readable research/capability provenance.
 
 - TWRP2.zip SHA-256: `709b6ab48d0af5791e52fb87e2562580a26aed154abac3416c4e11a4ba3bf7a9`
 - TWRP3.zip SHA-256: `6de8c08236365cf18cceb4ed4a47972e5db2089cb4f093b1a8215bb513349d2e`
+
+## Phase 5 guided engineering and provider references
+
+The [Phase 5 ledger](docs/research/phase5-sources.json) records exact URLs, retrieval
+outcomes, hashes and six pinned device-tree revisions. AOSP partition/GKI/encryption
+and build documentation informs acquisition and host/source guidance. TeamWin and
+minimal-manifest-twrp branch READMEs inform generation options; their recommendations
+are not automatically adopted. No external implementation is copied or adapted.
+
+### LineageOS and OrangeFox
+
+**Role:** Recovery ecosystem and common/device/vendor relationship research.
+**Upstream:** [LineageOS](https://github.com/LineageOS),
+[OrangeFox build documentation](https://wiki.orangefox.tech/dev/building).
+**Usage:** Reference only; no new backend or bundled tree. OrangeFox's build page
+states GPLv3-or-later for its sources/trees. Individual LineageOS file notices apply;
+no blanket tree license is asserted.
+
+### Representative tree maintainers and build-failure research
+
+**Role:** Static patterns from TeamWin, LineageOS and
+[rtyutechstudio's HVAHW P30 tree](https://github.com/rtyutechstudio/android_device-HVAHW-P30-twrp).
+The community tree's claims are not independent working-device evidence.
+[twrpdtgen issue 209](https://github.com/twrpdtgen/twrpdtgen/issues/209) informs
+conservative Soong-panic diagnosis, not a proven repair. AOSP Soong documentation
+informs namespace/dependency review. **License:** See original per-file/source terms;
+full-tree redistribution rights were not established and no trees/log bodies are bundled.
+Names not established by upstream evidence are not guessed.
+
+### OpenAI, Anthropic and DeepSeek
+
+**Role:** Optional external AI providers; official authentication/request schemas
+inform independent stdlib HTTP adapters, not evidence generation.
+**Upstream:** [OpenAI API](https://developers.openai.com/api/reference/overview),
+[Sign in with ChatGPT](https://developers.openai.com/siwc/quickstart),
+[Anthropic authentication](https://platform.claude.com/docs/en/manage-claude/authentication),
+[DeepSeek API](https://api-docs.deepseek.com/).
+**Usage:** API/reference influence only; no SDK code incorporated, no subscription
+credentials imported, no model-generated implementation credited as upstream authority.
+**License:** Hosted API services are subject to provider terms; documentation access
+is not a source license grant. Subscription login remains unqualified.
+
+These credits do not replace license notices. The independent implementation adds
+no copied third-party source requiring a new bundled-code notice.

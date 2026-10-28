@@ -282,6 +282,9 @@ def build(dry_run=False) -> dict:
         )
         (output / "sha256sums.txt").write_text(f"{artifacts[0]['sha256']}  {dest.name}\n")
     success = command["result"] == "PASS" and bool(artifacts)
+    from secripts.recovery.diagnostics import classify
+
+    diagnosis = classify(command["stdout"] + "\n" + command["stderr"]) if not success else None
     receipt = save(
         "recovery.build",
         Risk.MUTATING,
@@ -291,6 +294,7 @@ def build(dry_run=False) -> dict:
         artifacts=artifacts,
         tree_revision=commands[1]["stdout"].strip(),
         device_qualification="UNTESTED",
+        diagnosis=diagnosis,
         warnings=["Log is bounded to 128 KiB per output stream; hardware untested."],
     )
     write_json(output / "build.json", receipt)

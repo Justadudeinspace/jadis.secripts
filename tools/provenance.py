@@ -57,6 +57,31 @@ for op in registry().search():
                 if op.category == "avb"
                 else []
             ),
+            "phase5_research": {
+                "ledger": "docs/research/phase5-sources.json",
+                "source_ids": {
+                    "recovery.acquire": ["generic", "vendor-boot", "partitions"],
+                    "recovery.source": [
+                        "manifest",
+                        "manifest-projects",
+                        "twrp-12",
+                        "twrp-11",
+                        "twrp-omni",
+                    ],
+                    "recovery.build.diagnose": [
+                        "failure209",
+                        "twrp-failure-79",
+                        "twrp-failure-312",
+                        "soong",
+                        "host",
+                    ],
+                    "ai.context": ["openai", "claude", "deepseek"],
+                    "ai.providers": ["openai", "claude", "deepseek", "siwc"],
+                }.get(op.id, []),
+                "relationship": "Independent implementation; research is not qualification",
+            }
+            if op.handler == "product"
+            else None,
             "implementation": "Independent rewrite of safe intent"
             if op.legacy
             else "New engineering",

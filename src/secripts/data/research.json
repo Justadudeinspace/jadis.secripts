@@ -365,5 +365,13 @@
   },
   "phase4_retrieval_notes": [
     "Some Gitiles pages were unavailable through the page reader; bounded official ?format=TEXT retrieval succeeded. No corpus executable was used."
-  ]
+  ],
+  "phase5": {
+    "ledger": "docs/research/phase5-sources.json",
+    "gap_gate": "docs/research/phase5-gap-matrix.md",
+    "relationship": "Research/specification; no code adapted",
+    "retrieved": "2026-10-28",
+    "tree_samples": 6,
+    "records": 69
+  }
 }

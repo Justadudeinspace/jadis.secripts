@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.5.0 — Guided recovery engineering
+
+- Added passive beginner entry, topic help, compact cockpit navigation and AI access.
+- Added acquisition plans, source-toolchain evidence and bounded build-failure diagnosis.
+- Added fixed-origin OpenAI/Claude/DeepSeek BYOK advice with context preview/hash consent.
+- Rebuilt README/manual; generated full parser reference and documentation example gate.
+- Recorded current research, six pinned representative trees, gaps and attribution.
+- Retained Phase 4 image/safety contracts; no new flashing, source download or hardware qualification.
+- Subscription login, actual TWRP compilation and hardware evidence remain explicitly blocked/untested.
+
+
 ## 0.4.0 — 2026-10-28
 
 - Added first-class CLI naming contracts: short canonical names, preserved descriptive aliases,

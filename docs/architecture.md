@@ -25,7 +25,7 @@ filters, latest/failed, artifact lookup and comparison. Cwd/interpreter/architec
 comparison without promising replay. History currently scans JSON files linearly; no database/index.
 
 Recovery keeps its backend protocol and TWRP implementation. Static tree graphs are bounded and do not
-evaluate Make. Image/AVB parsing is native and bounded; decoded CPIO metadata is never extracted.
+evaluate Make. Image/AVB parsing is native and bounded; CPIO extraction uses numbered virtual payload files rather than archive paths.
 Reports separate current workspace/tree observations from recorded build inputs and manual hardware
 attestations. Only the existing fixed trusted-checkout Bash adapter executes upstream shell functions.
 
@@ -67,3 +67,16 @@ AOSP source for differential validation. No payload executes and no artifact fea
 New nested receipt evidence is sanitized and budgeted while historical receipts remain readable.
 Source hashes and provenance are not substitutes for trusted-key or hardware qualification.
 See [CLI map](cli.md), [roundtrip](roundtrip.md), [ramdisk](ramdisk.md) and [AVB](avb.md).
+
+## Phase 5 product layer
+
+Topic help and guided entry are views over the same parser/registry. Recovery acquisition
+plans collect explicit image/tree/model evidence without downloads or device mutation.
+Source intelligence distinguishes declared toolchains from active selection and researched
+options from compatibility. Build diagnosis classifies bounded symptoms without root-cause
+assertions. New operation adapters use the existing dispatcher/receipt contracts.
+
+AI context, providers, tools and consent-bound service remain separate modules. Fixed
+official HTTPS endpoints, no redirects/proxy indirection, no autonomous model tools,
+preview-hash consent and metadata-only receipts constrain the external advice path.
+No AI result changes native evidence. [AI policy](AI.md) and [research gate](research/phase5-gap-matrix.md).

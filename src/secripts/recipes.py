@@ -164,6 +164,22 @@ RECIPES.update(
 )
 
 
+RECIPES.update(
+    {
+        "recovery-onramp": _recipe(
+            "Recovery evidence onramp",
+            "Plan acquisition, inspect source declarations and qualify host constraints without a source download.",
+            ["recovery.acquire", "recovery.source", "recovery.host"],
+        ),
+        "build-failure-review": _recipe(
+            "Build failure review",
+            "Correlate a bounded build log with current source intelligence; symptoms remain hypotheses.",
+            ["recovery.build.diagnose", "recovery.source"],
+        ),
+    }
+)
+
+
 def get(name: str) -> dict:
     from secripts.registry import registry
 

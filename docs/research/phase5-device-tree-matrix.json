@@ -1,0 +1,351 @@
+{
+  "schema": 1,
+  "samples": [
+    {
+      "repository": "TeamWin/android_device_samsung_a51",
+      "branch": "android-12.1",
+      "commit": "d6d2a9d69f2b77bd63161618f859ef0d65e23a31",
+      "license": "NOT_ESTABLISHED",
+      "files": [
+        "tree-android_device_samsung_a51-AndroidProducts.mk",
+        "tree-android_device_samsung_a51-BoardConfig.mk",
+        "tree-android_device_samsung_a51-device.mk",
+        "tree-android_device_samsung_a51-twrp_a51.mk"
+      ],
+      "known_working": "UPSTREAM_DECLARATION_ONLY; no local build or hardware test",
+      "manufacturer": "Samsung",
+      "platform_family": "Exynos",
+      "android_device_generation": "UNKNOWN; source branch is not launch/installed generation",
+      "stock_firmware_link": "UNRESOLVED",
+      "local_build": "UNTESTED",
+      "hardware": "UNTESTED",
+      "configuration_evidence": [
+        {
+          "source": "tree-android_device_samsung_a51-BoardConfig.mk",
+          "sha256": "9d62ebe1185b94ee537d523bf946b3c302764aea6bfb2cdc09d96f00857afef7",
+          "line": 16,
+          "declaration": "TARGET_ARCH := arm64",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        },
+        {
+          "source": "tree-android_device_samsung_a51-BoardConfig.mk",
+          "sha256": "9d62ebe1185b94ee537d523bf946b3c302764aea6bfb2cdc09d96f00857afef7",
+          "line": 52,
+          "declaration": "BOARD_INCLUDE_DTB_IN_BOOTIMG := true",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        },
+        {
+          "source": "tree-android_device_samsung_a51-BoardConfig.mk",
+          "sha256": "9d62ebe1185b94ee537d523bf946b3c302764aea6bfb2cdc09d96f00857afef7",
+          "line": 54,
+          "declaration": "TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        },
+        {
+          "source": "tree-android_device_samsung_a51-BoardConfig.mk",
+          "sha256": "9d62ebe1185b94ee537d523bf946b3c302764aea6bfb2cdc09d96f00857afef7",
+          "line": 70,
+          "declaration": "BOARD_RECOVERYIMAGE_PARTITION_SIZE := 71102464",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        },
+        {
+          "source": "tree-android_device_samsung_a51-BoardConfig.mk",
+          "sha256": "9d62ebe1185b94ee537d523bf946b3c302764aea6bfb2cdc09d96f00857afef7",
+          "line": 103,
+          "declaration": "BOARD_SUPER_PARTITION_SIZE := 8011120640",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        }
+      ]
+    },
+    {
+      "repository": "TeamWin/android_device_samsung_dm1q",
+      "branch": "android-12.1",
+      "commit": "a9d0f3b0c03ed97f589ea1ac493969074deaa67d",
+      "license": "NOT_ESTABLISHED",
+      "files": [
+        "tree-android_device_samsung_dm1q-AndroidProducts.mk",
+        "tree-android_device_samsung_dm1q-BoardConfig.mk",
+        "tree-android_device_samsung_dm1q-README.md",
+        "tree-android_device_samsung_dm1q-device.mk",
+        "tree-android_device_samsung_dm1q-twrp.dependencies",
+        "tree-android_device_samsung_dm1q-twrp_dm1q.mk"
+      ],
+      "known_working": "UPSTREAM_DECLARATION_ONLY; no local build or hardware test",
+      "manufacturer": "Samsung",
+      "platform_family": "Qualcomm",
+      "android_device_generation": "UNKNOWN; source branch is not launch/installed generation",
+      "stock_firmware_link": "UNRESOLVED",
+      "local_build": "UNTESTED",
+      "hardware": "UNTESTED",
+      "configuration_evidence": [
+        {
+          "source": "tree-android_device_samsung_dm1q-BoardConfig.mk",
+          "sha256": "31a963c3086f281794b530eb109de947227086ae19f096bb040249386d9c065a",
+          "line": 18,
+          "declaration": "TARGET_ARCH := arm64",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        },
+        {
+          "source": "tree-android_device_samsung_dm1q-BoardConfig.mk",
+          "sha256": "31a963c3086f281794b530eb109de947227086ae19f096bb040249386d9c065a",
+          "line": 50,
+          "declaration": "TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/zImage",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        },
+        {
+          "source": "tree-android_device_samsung_dm1q-BoardConfig.mk",
+          "sha256": "31a963c3086f281794b530eb109de947227086ae19f096bb040249386d9c065a",
+          "line": 58,
+          "declaration": "BOARD_BOOT_HEADER_VERSION := 2",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        },
+        {
+          "source": "tree-android_device_samsung_dm1q-BoardConfig.mk",
+          "sha256": "31a963c3086f281794b530eb109de947227086ae19f096bb040249386d9c065a",
+          "line": 84,
+          "declaration": "BOARD_RECOVERYIMAGE_PARTITION_SIZE := 109051904",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        },
+        {
+          "source": "tree-android_device_samsung_dm1q-BoardConfig.mk",
+          "sha256": "31a963c3086f281794b530eb109de947227086ae19f096bb040249386d9c065a",
+          "line": 87,
+          "declaration": "BOARD_SUPER_PARTITION_SIZE := 9126805504",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        },
+        {
+          "source": "tree-android_device_samsung_dm1q-BoardConfig.mk",
+          "sha256": "31a963c3086f281794b530eb109de947227086ae19f096bb040249386d9c065a",
+          "line": 133,
+          "declaration": "TW_INCLUDE_CRYPTO_FBE := false",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        }
+      ]
+    },
+    {
+      "repository": "TeamWin/android_device_realme_RMX1941",
+      "branch": "android-11",
+      "commit": "762800731744db0438b9e1d998baf31863f4681f",
+      "license": "NOT_ESTABLISHED",
+      "files": [
+        "tree-android_device_realme_RMX1941-AndroidProducts.mk",
+        "tree-android_device_realme_RMX1941-BoardConfig.mk",
+        "tree-android_device_realme_RMX1941-README.md",
+        "tree-android_device_realme_RMX1941-twrp_RMX1941.mk"
+      ],
+      "known_working": "UPSTREAM_DECLARATION_ONLY; no local build or hardware test",
+      "manufacturer": "realme",
+      "platform_family": "MediaTek",
+      "android_device_generation": "UNKNOWN; source branch is not launch/installed generation",
+      "stock_firmware_link": "UNRESOLVED",
+      "local_build": "UNTESTED",
+      "hardware": "UNTESTED",
+      "configuration_evidence": [
+        {
+          "source": "tree-android_device_realme_RMX1941-BoardConfig.mk",
+          "sha256": "ed3bd6f3ac999888b7c647a25fcb5a6b05fd1137d5df4203e75ef2ce7155e6e6",
+          "line": 29,
+          "declaration": "TARGET_ARCH := arm64",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        },
+        {
+          "source": "tree-android_device_realme_RMX1941-BoardConfig.mk",
+          "sha256": "ed3bd6f3ac999888b7c647a25fcb5a6b05fd1137d5df4203e75ef2ce7155e6e6",
+          "line": 60,
+          "declaration": "TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        },
+        {
+          "source": "tree-android_device_realme_RMX1941-BoardConfig.mk",
+          "sha256": "ed3bd6f3ac999888b7c647a25fcb5a6b05fd1137d5df4203e75ef2ce7155e6e6",
+          "line": 86,
+          "declaration": "TW_INCLUDE_CRYPTO_FBE := true",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        },
+        {
+          "source": "tree-android_device_realme_RMX1941-BoardConfig.mk",
+          "sha256": "ed3bd6f3ac999888b7c647a25fcb5a6b05fd1137d5df4203e75ef2ce7155e6e6",
+          "line": 95,
+          "declaration": "BOARD_RECOVERYIMAGE_PARTITION_SIZE := 33554432",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        }
+      ]
+    },
+    {
+      "repository": "LineageOS/android_device_google_gs201",
+      "branch": "lineage-24.0",
+      "commit": "f75ebcf4ce727966f026f89b5c28721caa15bb61",
+      "license": "NOT_ESTABLISHED",
+      "files": [
+        "tree-android_device_google_gs201-BoardConfig-common.mk",
+        "tree-android_device_google_gs201-NOTICE"
+      ],
+      "known_working": "UPSTREAM_DECLARATION_ONLY; no local build or hardware test",
+      "manufacturer": "Google",
+      "platform_family": "Tensor",
+      "android_device_generation": "UNKNOWN; source branch is not launch/installed generation",
+      "stock_firmware_link": "UNRESOLVED",
+      "local_build": "UNTESTED",
+      "hardware": "UNTESTED",
+      "configuration_evidence": [
+        {
+          "source": "tree-android_device_google_gs201-BoardConfig-common.mk",
+          "sha256": "d673c7d17641b3c1fcbdca3f8c4fdd88e38f3908757cef83a2cc3050543c4fbd",
+          "line": 11,
+          "declaration": "TARGET_ARCH := arm64",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        },
+        {
+          "source": "tree-android_device_google_gs201-BoardConfig-common.mk",
+          "sha256": "d673c7d17641b3c1fcbdca3f8c4fdd88e38f3908757cef83a2cc3050543c4fbd",
+          "line": 58,
+          "declaration": "BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := true",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        },
+        {
+          "source": "tree-android_device_google_gs201-BoardConfig-common.mk",
+          "sha256": "d673c7d17641b3c1fcbdca3f8c4fdd88e38f3908757cef83a2cc3050543c4fbd",
+          "line": 172,
+          "declaration": "BOARD_SUPER_PARTITION_SIZE := 8531214336",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        },
+        {
+          "source": "tree-android_device_google_gs201-BoardConfig-common.mk",
+          "sha256": "d673c7d17641b3c1fcbdca3f8c4fdd88e38f3908757cef83a2cc3050543c4fbd",
+          "line": 196,
+          "declaration": "BOARD_INCLUDE_DTB_IN_BOOTIMG := true",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        },
+        {
+          "source": "tree-android_device_google_gs201-BoardConfig-common.mk",
+          "sha256": "d673c7d17641b3c1fcbdca3f8c4fdd88e38f3908757cef83a2cc3050543c4fbd",
+          "line": 207,
+          "declaration": "BOARD_BOOT_HEADER_VERSION := 4",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        }
+      ]
+    },
+    {
+      "repository": "LineageOS/android_device_google_pantah",
+      "branch": "lineage-24.0",
+      "commit": "2d15f5f2d9a6938c0a8fc0f59d5951632fd40804",
+      "license": "NOT_ESTABLISHED",
+      "files": [
+        "tree-android_device_google_pantah-AndroidProducts.mk",
+        "tree-android_device_google_pantah-NOTICE",
+        "tree-android_device_google_pantah-lineage.dependencies"
+      ],
+      "known_working": "UPSTREAM_DECLARATION_ONLY; no local build or hardware test",
+      "manufacturer": "Google",
+      "platform_family": "Tensor",
+      "android_device_generation": "UNKNOWN; source branch is not launch/installed generation",
+      "stock_firmware_link": "UNRESOLVED",
+      "local_build": "UNTESTED",
+      "hardware": "UNTESTED",
+      "configuration_evidence": []
+    },
+    {
+      "repository": "rtyutechstudio/android_device-HVAHW-P30-twrp",
+      "branch": "main",
+      "commit": "3eb14aa1eefe967d44758ee9907baf81e1ae8e92",
+      "license": "NOT_ESTABLISHED",
+      "files": [
+        "tree-android_device-HVAHW-P30-twrp-AndroidProducts.mk",
+        "tree-android_device-HVAHW-P30-twrp-BoardConfig.mk",
+        "tree-android_device-HVAHW-P30-twrp-README.md",
+        "tree-android_device-HVAHW-P30-twrp-device.mk",
+        "tree-android_device-HVAHW-P30-twrp-twrp_P30.mk"
+      ],
+      "known_working": "UPSTREAM_DECLARATION_ONLY; no local build or hardware test",
+      "manufacturer": "HVAHW",
+      "platform_family": "Unisoc",
+      "android_device_generation": "UNKNOWN; source branch is not launch/installed generation",
+      "stock_firmware_link": "UNRESOLVED",
+      "local_build": "UNTESTED",
+      "hardware": "UNTESTED",
+      "configuration_evidence": [
+        {
+          "source": "tree-android_device-HVAHW-P30-twrp-BoardConfig.mk",
+          "sha256": "f4a3aab70ce01cd7c9874751ce8d68bbaa91607f29aee78255c7637f3e9c3c25",
+          "line": 20,
+          "declaration": "TARGET_ARCH := arm64",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        },
+        {
+          "source": "tree-android_device-HVAHW-P30-twrp-BoardConfig.mk",
+          "sha256": "f4a3aab70ce01cd7c9874751ce8d68bbaa91607f29aee78255c7637f3e9c3c25",
+          "line": 51,
+          "declaration": "BOARD_BOOT_HEADER_VERSION := 4",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        },
+        {
+          "source": "tree-android_device-HVAHW-P30-twrp-BoardConfig.mk",
+          "sha256": "f4a3aab70ce01cd7c9874751ce8d68bbaa91607f29aee78255c7637f3e9c3c25",
+          "line": 53,
+          "declaration": "BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := true",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        },
+        {
+          "source": "tree-android_device-HVAHW-P30-twrp-BoardConfig.mk",
+          "sha256": "f4a3aab70ce01cd7c9874751ce8d68bbaa91607f29aee78255c7637f3e9c3c25",
+          "line": 96,
+          "declaration": "TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        },
+        {
+          "source": "tree-android_device-HVAHW-P30-twrp-BoardConfig.mk",
+          "sha256": "f4a3aab70ce01cd7c9874751ce8d68bbaa91607f29aee78255c7637f3e9c3c25",
+          "line": 100,
+          "declaration": "BOARD_KERNEL_SEPARATED_DTBO := true",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        },
+        {
+          "source": "tree-android_device-HVAHW-P30-twrp-BoardConfig.mk",
+          "sha256": "f4a3aab70ce01cd7c9874751ce8d68bbaa91607f29aee78255c7637f3e9c3c25",
+          "line": 158,
+          "declaration": "BOARD_SUPER_PARTITION_SIZE := 5872025600",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        },
+        {
+          "source": "tree-android_device-HVAHW-P30-twrp-BoardConfig.mk",
+          "sha256": "f4a3aab70ce01cd7c9874751ce8d68bbaa91607f29aee78255c7637f3e9c3c25",
+          "line": 176,
+          "declaration": "TW_INCLUDE_CRYPTO_FBE      := true",
+          "state": "DECLARED",
+          "evaluation": "STATIC_ONLY"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "No stock-firmware-to-local-successful-build chain established",
+    "No external source copied or adapted",
+    "Platform labels use repository/README context; configuration is not hardware qualification"
+  ]
+}

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "jadis-secripts"
-version = "0.4.0"
+version = "0.5.0"
 description = "JADIS personal developer operations arsenal and Android Recovery Laboratory"
 readme = "README.md"
 requires-python = ">=3.11"

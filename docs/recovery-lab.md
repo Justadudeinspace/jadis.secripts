@@ -18,23 +18,11 @@ The graph is explicitly incomplete. A declaration is never a hardware PASS.
 
 ## Images and AVB
 
-`js recovery inspect IMAGE --json` and `verify IMAGE` hash and statically parse, not certify, an image.
-Android boot v0–v4 and vendor_boot v3/v4 layouts have bounded header/kernel/ramdisk/DTB/DTBO/signature/
-bootconfig/table sections. Vendor fragment ranges are checked for overflow and overlap. A v4 ramdisk-only
-image is an INFERRED init_boot candidate. Boot versus recovery partition role remains unresolved.
-
-Gzip, bzip2 and XZ ramdisks can be decoded in memory; raw newc/CRC CPIO metadata is inspected without
-extracting files or exposing payloads. LZ4 and Zstd magic is recognized; decompression remains optional
-future tooling. Compressed regions over 16 MiB are not decoded; output is capped at 16 MiB per decode,
-32 MiB per image, with a 64 MiB XZ decoder memory limit. CPIO names/entries are bounded. Only counts and
-allowlisted boot/recovery marker names are returned. CRC checks and concatenated compression streams
-are not validated; trailing data is reported.
-
-Native AVB inspection recognizes end footers and standalone vbmeta, validates declared block and
-descriptor ranges, and reports untrusted algorithm/rollback/flags and hash-descriptor partition names.
-Other descriptor types remain tagged metadata. Signature validity, signer trust, rollback enforcement,
-full descriptor semantics and compatibility are UNTESTED. A footer is never a VERIFIED image.
-`avbtool` and `unpack_bootimg` are optional detected capabilities, not automatically invoked/installed.
+Recovery consumes the shared [Image Lab](IMAGE-LAB.md), [ramdisk engine](ramdisk.md),
+[round-trip contracts](roundtrip.md) and [AVB trust model](avb.md). These are the current
+support authorities; earlier header-only/decompression limitations were superseded in
+Phase 4. Native LZ4/CRC/concatenated codecs and optional AVB crypto are available within
+the documented bounds. Init_boot role remains contextual; reconstruction is not bootability.
 
 ## Devices and reports
 

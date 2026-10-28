@@ -1,4 +1,4 @@
-# Streamlined CLI — 0.4.0
+# Streamlined CLI — 0.5.0
 
 Frequently typed namespaces/actions normally use 2–4 character shorthand. Full descriptive
 names remain accepted aliases. Never shorten a command when ambiguous or misleading.
@@ -15,6 +15,9 @@ No shell aliases, duplicate registry operations or compatibility executables are
 
 | Working form | Accepted aliases | Stable identity |
 |---|---|---|
+| `js help` | — | `help` |
+| `js guide` | — | `guide` |
+| `js ai` | — | `ai` |
 | `js img` | `image` | `image` |
 | `js ram` | `ramdisk` | `ramdisk` |
 | `js dtbo` | — | `dtbo` |
@@ -48,6 +51,20 @@ and `js image roundtrip`; `js ry dce ls` and `js recovery device list`.
 
 | Working namespace | Action | Accepted aliases |
 |---|---|---|
+| `js help` | `img` | `image` |
+| `js help` | `ry` | `recovery` |
+| `js help` | `dce` | `device` |
+| `js help` | `evidence` | — |
+| `js help` | `ai` | — |
+| `js ai` | `setup` | — |
+| `js ai` | `prov` | `providers` |
+| `js ai` | `models` | — |
+| `js ai` | `context` | — |
+| `js ai` | `ask` | — |
+| `js ai` | `tools` | — |
+| `js ai tools` | `registry.search` | — |
+| `js ai tools` | `registry.show` | — |
+| `js ai tools` | `receipt.summary` | — |
 | `js img` | `insp` | `inspect` |
 | `js img` | `model` | — |
 | `js img` | `upk` | `unpack` |
@@ -74,6 +91,9 @@ and `js image roundtrip`; `js ry dce ls` and `js recovery device list`.
 | `js dce` | `fastboot` | — |
 | `js rcp` | `sh` | `show` |
 | `js rcp` | `run` | — |
+| `js ry` | `acquire` | — |
+| `js ry` | `source` | — |
+| `js ry` | `failure` | — |
 | `js ry` | `doc` | `doctor` |
 | `js ry` | `insp` | `inspect` |
 | `js ry` | `tree` | — |

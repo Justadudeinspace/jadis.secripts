@@ -87,6 +87,11 @@ def dossier(*, devices=False):
         "secripts": state(),
         "recovery": recovery_state(),
         "image_lab": laboratory_state(),
+        "ai": {
+            "mode": "BYOK; explicit consent",
+            "network": "UNTESTED",
+            "advice_is_evidence": False,
+        },
     }
     if devices:
         from secripts.devices import transport_summary

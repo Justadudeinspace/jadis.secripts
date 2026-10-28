@@ -3,6 +3,181 @@
   "commands": [
     {
       "scope": [],
+      "identity": "help",
+      "canonical": "help",
+      "aliases": [],
+      "display_name": "Help",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "help"
+      ],
+      "identity": "image",
+      "canonical": "img",
+      "aliases": [
+        "image"
+      ],
+      "display_name": "Image",
+      "kind": "enumeration"
+    },
+    {
+      "scope": [
+        "help"
+      ],
+      "identity": "recovery",
+      "canonical": "ry",
+      "aliases": [
+        "recovery"
+      ],
+      "display_name": "Recovery",
+      "kind": "enumeration"
+    },
+    {
+      "scope": [
+        "help"
+      ],
+      "identity": "device",
+      "canonical": "dce",
+      "aliases": [
+        "device"
+      ],
+      "display_name": "Device",
+      "kind": "enumeration"
+    },
+    {
+      "scope": [
+        "help"
+      ],
+      "identity": "evidence",
+      "canonical": "evidence",
+      "aliases": [],
+      "display_name": "Evidence",
+      "kind": "enumeration"
+    },
+    {
+      "scope": [
+        "help"
+      ],
+      "identity": "ai",
+      "canonical": "ai",
+      "aliases": [],
+      "display_name": "Ai",
+      "kind": "enumeration"
+    },
+    {
+      "scope": [],
+      "identity": "guide",
+      "canonical": "guide",
+      "aliases": [],
+      "display_name": "Guide",
+      "kind": "command"
+    },
+    {
+      "scope": [],
+      "identity": "ai",
+      "canonical": "ai",
+      "aliases": [],
+      "display_name": "Ai",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "ai"
+      ],
+      "identity": "setup",
+      "canonical": "setup",
+      "aliases": [],
+      "display_name": "Setup",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "ai"
+      ],
+      "identity": "providers",
+      "canonical": "prov",
+      "aliases": [
+        "providers"
+      ],
+      "display_name": "Providers",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "ai"
+      ],
+      "identity": "models",
+      "canonical": "models",
+      "aliases": [],
+      "display_name": "Models",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "ai"
+      ],
+      "identity": "context",
+      "canonical": "context",
+      "aliases": [],
+      "display_name": "Context",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "ai"
+      ],
+      "identity": "ask",
+      "canonical": "ask",
+      "aliases": [],
+      "display_name": "Ask",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "ai"
+      ],
+      "identity": "tools",
+      "canonical": "tools",
+      "aliases": [],
+      "display_name": "Tools",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "ai",
+        "tools"
+      ],
+      "identity": "registry.search",
+      "canonical": "registry.search",
+      "aliases": [],
+      "display_name": "Registry.Search",
+      "kind": "enumeration"
+    },
+    {
+      "scope": [
+        "ai",
+        "tools"
+      ],
+      "identity": "registry.show",
+      "canonical": "registry.show",
+      "aliases": [],
+      "display_name": "Registry.Show",
+      "kind": "enumeration"
+    },
+    {
+      "scope": [
+        "ai",
+        "tools"
+      ],
+      "identity": "receipt.summary",
+      "canonical": "receipt.summary",
+      "aliases": [],
+      "display_name": "Receipt.Summary",
+      "kind": "enumeration"
+    },
+    {
+      "scope": [],
       "identity": "image",
       "canonical": "img",
       "aliases": [
@@ -538,6 +713,36 @@
         "recovery"
       ],
       "display_name": "Recovery",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "acquire",
+      "canonical": "acquire",
+      "aliases": [],
+      "display_name": "Acquire",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "source",
+      "canonical": "source",
+      "aliases": [],
+      "display_name": "Source",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "failure",
+      "canonical": "failure",
+      "aliases": [],
+      "display_name": "Failure",
       "kind": "command"
     },
     {

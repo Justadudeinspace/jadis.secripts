@@ -212,13 +212,13 @@ def test_dossier_no_implicit_network_or_devices(monkeypatch):
     assert value["network_probes"] == "NOT_RUN"
     assert value["sections"]["devices"]["adb"]["status"] == "UNTESTED"
     assert value["sections"]["recovery"]["hardware"] == "UNTESTED"
-    assert value["sections"]["secripts"]["operations"] == 87
+    assert value["sections"]["secripts"]["operations"] == 92
 
 
 def test_recipes_contract_network_refusal_and_parent_receipt():
     from secripts.recipes import RECIPES, get, run
 
-    assert len(RECIPES) == 26
+    assert len(RECIPES) == 28
     for recipe in RECIPES:
         value = get(recipe)
         assert len(value["operations"]) >= 2

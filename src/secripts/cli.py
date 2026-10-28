@@ -34,6 +34,40 @@ def parser() -> argparse.ArgumentParser:
         item.add_argument("--json", action="store_true", help="Machine-readable output")
         return item
 
+    help_command = add("help", "Topic orientation and links to the manual")
+    help_command.add_argument(
+        "topic", nargs="?", choices=["image", "recovery", "device", "evidence", "ai"]
+    )
+    add("guide", "Guided entry; safe orientation without a TTY")
+    ai = add("ai", "Optional provider-neutral advice; preview before external transmission")
+    ais = ai.add_subparsers(dest="ai_action")
+    for action in ("setup", "providers", "models", "context", "ask", "tools"):
+        item = named(ais, action, dest="ai_action")
+        item.add_argument("--json", action="store_true")
+        if action in {"models", "ask"}:
+            item.add_argument("--provider", choices=["openai", "claude", "deepseek"], required=True)
+        if action == "models":
+            item.add_argument(
+                "--network",
+                action="store_true",
+                help="Explicit catalog request to the selected provider",
+            )
+        if action in {"context", "ask"}:
+            item.add_argument("--context", type=Path, help="Explicit bounded saved JSON report")
+        if action == "ask":
+            item.add_argument("question")
+            item.add_argument("--model", help="Explicit provider model ID; no default guessed")
+            item.add_argument(
+                "--send",
+                action="store_true",
+                help="Transmit only after preview review and hash approval",
+            )
+            item.add_argument("--approve", help="Exact SHA256 from context preview")
+        if action == "tools":
+            item.add_argument(
+                "tool", choices=["registry.search", "registry.show", "receipt.summary"]
+            )
+            item.add_argument("argument", nargs="?", default="")
     engineering_commands = {
         "image": {
             "inspect": ("artifact",),
@@ -150,6 +184,7 @@ def parser() -> argparse.ArgumentParser:
         "compression",
         "key",
         "tools",
+        "have",
     ):
         r.add_argument("--" + name)
     add("recipes", "List guided workflows")
@@ -169,6 +204,7 @@ def parser() -> argparse.ArgumentParser:
         "compression",
         "key",
         "tools",
+        "have",
     ):
         recipe.add_argument("--" + name)
     hist = add("history", "Filter local receipts; no replay")
@@ -199,6 +235,22 @@ def parser() -> argparse.ArgumentParser:
         item.add_argument("--json", action="store_true")
         return item
 
+    acquire = rec("acquire", "Plan evidence acquisition; no firmware download or device extraction")
+    acquire.add_argument(
+        "--have",
+        choices=["firmware", "images", "device", "tree", "recovery", "kernel", "identity"],
+        default="identity",
+    )
+    acquire.add_argument("--artifact", type=Path)
+    acquire.add_argument("--tree", type=Path)
+    acquire.add_argument("--model")
+    source = rec(
+        "source", "Inspect manifest/toolchain declarations and researched generation options"
+    )
+    source.add_argument("--workspace", type=Path)
+    failure = rec("failure", "Conservative bounded build-log diagnosis; no automatic fixes")
+    failure.add_argument("artifact", type=Path)
+    failure.add_argument("--tree", type=Path)
     rec("doctor", "Check tools, workspace and unresolved hardware requirements")
     inspect = rec("inspect", "Inspect image headers or one authorized ADB device")
     inspect.add_argument("image", nargs="?", type=Path)
@@ -280,6 +332,38 @@ def recovery_dispatch(a):
     from secripts.safety import Risk
 
     cmd = a.recovery_command
+    if cmd in {"acquire", "failure", "source"}:
+        from secripts.operations import execute
+
+        if (
+            cmd == "acquire"
+            and a.have == "identity"
+            and not a.json
+            and sys.stdin.isatty()
+            and sys.stdout.isatty()
+        ):
+            from secripts.recovery.guidance import INPUTS
+
+            for i, (_key, (title, why)) in enumerate(INPUTS.items(), 1):
+                print(f"[{i}] {title}\n    {why}")
+            choice = input("Evidence number (blank for identity guidance) > ").strip()
+            if choice:
+                if not choice.isdecimal() or not 1 <= int(choice) <= len(INPUTS):
+                    raise SecError("Choose a displayed evidence number", 2)
+                a.have = list(INPUTS)[int(choice) - 1]
+        keys = {
+            "acquire": ("have", "artifact", "tree", "model"),
+            "failure": ("artifact", "tree"),
+            "source": ("workspace",),
+        }[cmd]
+        return execute(
+            {
+                "acquire": "recovery.acquire",
+                "failure": "recovery.build.diagnose",
+                "source": "recovery.source",
+            }[cmd],
+            parameters={k: str(getattr(a, k)) for k in keys if getattr(a, k, None) is not None},
+        )
     if cmd in (None, "doctor"):
         return w.recovery_doctor()
     if cmd == "device":
@@ -381,6 +465,34 @@ def dispatch(a):
     from secripts.registry import registry
 
     cmd = a.command
+    if cmd in {"help", "guide"}:
+        from secripts.ui.guide import topic
+
+        return topic(a.topic) if cmd == "help" else topic()
+    if cmd == "ai":
+        from secripts.ai import providers, context, tools, service
+
+        if a.ai_action in {None, "setup", "providers"}:
+            return providers.catalog()
+        if a.ai_action == "context":
+            return context.preview(a.context)
+        if a.ai_action == "models":
+            if not a.network:
+                return {
+                    "status": "UNTESTED",
+                    "guidance": "Use --network for an explicit authenticated model catalog request; no inference occurs",
+                }
+            return context.clean(providers.transport(providers.provider(a.provider), listing=True))
+        if a.ai_action == "tools":
+            return context.preview(value=tools.invoke(a.tool, a.argument))
+        return service.ask(
+            a.question,
+            provider=a.provider,
+            model=a.model,
+            path=a.context,
+            send=a.send,
+            expected=a.approve,
+        )
     if cmd == "providers":
         from secripts.images.providers import inventory
 
@@ -528,6 +640,7 @@ def dispatch(a):
                     "compression",
                     "key",
                     "tools",
+                    "have",
                 )
             },
         )
@@ -555,6 +668,7 @@ def dispatch(a):
                         "compression",
                         "key",
                         "tools",
+                        "have",
                     )
                 },
                 network=a.network,
@@ -603,11 +717,28 @@ def dispatch(a):
 
 def main(argv=None) -> int:
     p = parser()
-    a = normalize(p.parse_args(argv))
+    arguments = list(sys.argv[1:] if argv is None else argv)
+    # Namespace entry is useful without weakening required arguments for its actual actions.
+    if len(arguments) == 1 and arguments[0] in {"img", "image", "ram", "ramdisk", "avb", "dtbo"}:
+        try:
+            p.parse_args([*arguments, "--help"])
+        except SystemExit as exc:
+            return int(exc.code)
+    if arguments in (["ry"], ["recovery"]) and sys.stdin.isatty() and sys.stdout.isatty():
+        return main(["ry", "acquire"])
+    a = normalize(p.parse_args(arguments))
     if a.command is None:
+        if sys.stdin.isatty() and sys.stdout.isatty():
+            from secripts.ui.guide import guide
+
+            return guide(emit)
         p.print_help()
         return 0
     try:
+        if a.command == "guide" and not a.json:
+            from secripts.ui.guide import guide
+
+            return guide(emit)
         if a.command == "1337":
             from secripts.ui.console import console, dashboard
 

@@ -173,10 +173,31 @@ def _console(emit) -> int:
     ):
         banner = "\033[1;36m" + banner + "\033[0m"
     print(banner + "\n")
-    interactive = sys.stdin.isatty() and sys.stdout.isatty()
-    emit(dashboard(devices=interactive))
-    for key, title, _, description in CATEGORIES:
-        print(f"[{key}] {title}\n    {description}")
+    snapshot = dashboard(devices=False)
+    compact = {}
+    for section, values in snapshot.items():
+        if isinstance(values, dict):
+            fields = {}
+            for key, value in list(values.items())[:4]:
+                if isinstance(value, dict):
+                    status = value.get("status", value.get("state"))
+                    fields[key] = (
+                        str(status) + (" / " + str(value["count"]) if "count" in value else "")
+                        if status is not None
+                        else f"{len(value)} evidence fields; DOS for detail"
+                    )
+                elif isinstance(value, list):
+                    fields[key] = f"{len(value)} entries; DOS for detail"
+                else:
+                    fields[key] = value
+            compact[section] = fields
+        else:
+            compact[section] = values
+    emit(compact)
+    print("Snapshot is bounded and passive; V refreshes with explicit transport enumeration.")
+    print("[1] Android — Inspect SDK configuration and installed tools.")
+    print("[4] Developer Arsenal — Review Git / GitHub and registered operations.")
+    print("[E] Advanced categories — Drill into all developer domains.")
     for key, title, desc in [
         ("R", "Recipes", "Guided workflows with normal operation safety."),
         ("A", "Archaeology", "Sanitized lineage, classifications and modern replacements."),
@@ -199,6 +220,7 @@ def _console(emit) -> int:
         ("dossier", "Dossier"),
         ("recipe", "Recipes"),
         ("history", "History"),
+        ("ai", "AI advice: configuration, context preview and explicit consent"),
     ]
     for identity, description in shortcuts:
         print(f"[{cli_name(identity).canonical.upper()}] {description} [{identity}]")
@@ -217,7 +239,7 @@ def _console(emit) -> int:
             identity = shortcut[choice]
             from secripts.cli import main as cli_main
 
-            if identity in {"image", "ramdisk", "recovery", "recipe"}:
+            if identity in {"image", "ramdisk", "recovery", "recipe", "ai"}:
                 try:
                     cli_main([cli_name(identity).canonical, "--help"])
                 except SystemExit:
@@ -241,7 +263,10 @@ def _console(emit) -> int:
             continue
         if choice in ("Q", "QUIT"):
             return 0
-        if choice == "V":
+        if choice == "E":
+            for key, title, _, description in CATEGORIES:
+                print(f"[{key}] {title}\n    {description}")
+        elif choice == "V":
             emit(dashboard(devices=True))
         elif choice == "T":
             from secripts.receipts import history, summary, load, latest, compare

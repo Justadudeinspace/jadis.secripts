@@ -1,6 +1,8 @@
 """Check current documentation links, CLI examples, catalog and attribution references locally."""
 
 import json
+from manual import reference, recipes_reference
+from doc_contract import audit_examples
 from pathlib import Path
 import re
 from urllib.parse import urlparse
@@ -10,7 +12,7 @@ from secripts.cli import parser
 
 root = Path(__file__).resolve().parents[1]
 errors = []
-for path in [root / "README.md", root / "CREDITS.md", *sorted((root / "docs").glob("*.md"))]:
+for path in [root / "README.md", root / "CREDITS.md", *sorted((root / "docs").rglob("*.md"))]:
     text = path.read_text()
     for target in re.findall(r"\]\(([^)\s]+)\)", text):
         if target.startswith("https://"):
@@ -44,5 +46,13 @@ for row in current:
     )
 for contracts in scopes.values():
     collision_audit(contracts)
+
+if (root / "docs/COMMAND-REFERENCE.md").read_text() != reference():
+    errors.append("Command reference drift")
+if (root / "docs/RECIPES.md").read_text() != recipes_reference():
+    errors.append("Recipe manual drift")
+examples = audit_examples(root)
+errors.extend(examples["errors"])
+print(f"Parsed {examples['checked']} documented JS examples without execution")
 print("\n".join(errors) if errors else "Documentation/reference audit: PASS")
 raise SystemExit(bool(errors))

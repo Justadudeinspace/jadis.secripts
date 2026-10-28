@@ -91,3 +91,8 @@ Generated from `js ls --json`; update with `python tools/catalog.py`.
 | `dtbo.compare` | Separate table layout from entry metadata and blob content. | READ_ONLY |
 | `avb.inspect` | Inspect authentication, auxiliary regions, descriptor types and public-key identity. | READ_ONLY |
 | `avb.verify` | Explicit optional avbtool signature/key verification plus native descriptor hash checks; no device trust claim. | READ_ONLY |
+| `recovery.acquire` | Explain required artifacts and inspect explicitly supplied local evidence; never download, extract or modify a device. | READ_ONLY |
+| `recovery.build.diagnose` | Classify observed log symptoms conservatively and correlate optional static tree context; root cause remains unresolved. | READ_ONLY |
+| `recovery.source` | Inspect configured manifest/toolchain declarations and research-backed source options without synchronizing sources. | READ_ONLY |
+| `ai.context` | Inspect exactly the bounded redacted JSON payload that can be approved for external transmission; no network. | READ_ONLY |
+| `ai.providers` | Show provider-specific environment indirection and authentication boundaries without exposing credentials or calling APIs. | READ_ONLY |

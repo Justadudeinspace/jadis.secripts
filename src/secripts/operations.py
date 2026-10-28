@@ -50,6 +50,9 @@ def execute(name: str, dry_run: bool = False, parameters: dict | None = None) ->
                 **HANDLERS,
                 **LAB_HANDLERS,
                 "engineering": lambda c, **kw: engineering_handle(op.id, kw),
+                "product": lambda c, **kw: __import__(
+                    "secripts.product", fromlist=["handle"]
+                ).handle(op.id, kw),
                 "adb_inspect": adb_inspect,
                 "fastboot_inspect": fastboot_inspect,
                 "adb_transports": lambda c, **kw: transport_summary(c, "adb"),

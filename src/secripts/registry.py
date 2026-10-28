@@ -36,6 +36,7 @@ class Parameter:
                 "compression",
                 "key",
                 "tools",
+                "have",
             }
             or self.kind not in {"text", "path"}
             or not self.description
@@ -306,5 +307,6 @@ def registry() -> Registry:
             *additional(),
             *lab_operations(),
             *__import__("secripts.engineering", fromlist=["operations"]).operations(),
+            *__import__("secripts.product", fromlist=["operations"]).operations(),
         ]
     )

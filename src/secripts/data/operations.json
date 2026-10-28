@@ -1,11 +1,11 @@
 {
   "schema": 1,
-  "release": "0.4.0",
+  "release": "0.5.0",
   "operations": [
     {
       "operation": "git.status",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [
         {
@@ -19,6 +19,7 @@
         }
       ],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
@@ -28,8 +29,7 @@
       "verification": {
         "registry_and_shared_tests": "PASS",
         "environment": {
-          "invocation": "PASS",
-          "exit_code": 0
+          "invocation": "UNTESTED"
         },
         "hardware": "UNTESTED"
       }
@@ -37,7 +37,7 @@
     {
       "operation": "git.branches",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [
         {
@@ -51,6 +51,7 @@
         }
       ],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
@@ -68,7 +69,7 @@
     {
       "operation": "git.remotes",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [
         {
@@ -82,6 +83,7 @@
         }
       ],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
@@ -99,7 +101,7 @@
     {
       "operation": "git.log",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [
         {
@@ -113,6 +115,7 @@
         }
       ],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
@@ -130,7 +133,7 @@
     {
       "operation": "git.integrity",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [
         {
@@ -144,6 +147,7 @@
         }
       ],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
@@ -161,10 +165,11 @@
     {
       "operation": "github.auth",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -182,7 +187,7 @@
     {
       "operation": "adb.devices",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [
         {
@@ -196,6 +201,7 @@
         }
       ],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
@@ -213,7 +219,7 @@
     {
       "operation": "adb.version",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [
         {
@@ -227,6 +233,7 @@
         }
       ],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
@@ -236,8 +243,7 @@
       "verification": {
         "registry_and_shared_tests": "PASS",
         "environment": {
-          "invocation": "PASS",
-          "exit_code": 0
+          "invocation": "UNTESTED"
         },
         "hardware": "UNTESTED"
       }
@@ -245,7 +251,7 @@
     {
       "operation": "fastboot.devices",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [
         {
@@ -259,6 +265,7 @@
         }
       ],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
@@ -276,7 +283,7 @@
     {
       "operation": "fastboot.version",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [
         {
@@ -290,6 +297,7 @@
         }
       ],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
@@ -299,8 +307,7 @@
       "verification": {
         "registry_and_shared_tests": "PASS",
         "environment": {
-          "invocation": "PASS",
-          "exit_code": 0
+          "invocation": "UNTESTED"
         },
         "hardware": "UNTESTED"
       }
@@ -308,7 +315,7 @@
     {
       "operation": "android.sdk.validate",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [
         {
@@ -331,6 +338,7 @@
         }
       ],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
@@ -340,8 +348,7 @@
       "verification": {
         "registry_and_shared_tests": "PASS",
         "environment": {
-          "invocation": "PASS",
-          "exit_code": 0
+          "invocation": "UNTESTED"
         },
         "hardware": "UNTESTED"
       }
@@ -349,10 +356,11 @@
     {
       "operation": "environment.path",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -362,8 +370,7 @@
       "verification": {
         "registry_and_shared_tests": "PASS",
         "environment": {
-          "invocation": "PASS",
-          "exit_code": 0
+          "invocation": "UNTESTED"
         },
         "hardware": "UNTESTED"
       }
@@ -371,7 +378,7 @@
     {
       "operation": "environment.runtimes",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [
         {
@@ -385,6 +392,7 @@
         }
       ],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
@@ -402,7 +410,7 @@
     {
       "operation": "termux.inspect",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [
         {
@@ -416,6 +424,7 @@
         }
       ],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
@@ -433,7 +442,7 @@
     {
       "operation": "debian.packages",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [
         {
@@ -447,6 +456,7 @@
         }
       ],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
@@ -464,10 +474,11 @@
     {
       "operation": "ssh.version",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -485,10 +496,11 @@
     {
       "operation": "models.ollama",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -506,10 +518,11 @@
     {
       "operation": "network.interfaces",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -527,10 +540,11 @@
     {
       "operation": "repo.disk",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -548,10 +562,11 @@
     {
       "operation": "diagnostics.host",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -569,10 +584,11 @@
     {
       "operation": "git.root",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -590,10 +606,11 @@
     {
       "operation": "git.branch",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -611,10 +628,11 @@
     {
       "operation": "git.health",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -624,8 +642,7 @@
       "verification": {
         "registry_and_shared_tests": "PASS",
         "environment": {
-          "invocation": "PASS",
-          "exit_code": 0
+          "invocation": "UNTESTED"
         },
         "hardware": "UNTESTED"
       }
@@ -633,10 +650,11 @@
     {
       "operation": "git.tags",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -654,10 +672,11 @@
     {
       "operation": "git.worktrees",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -675,10 +694,11 @@
     {
       "operation": "git.submodules",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -696,10 +716,11 @@
     {
       "operation": "git.stashes",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -717,10 +738,11 @@
     {
       "operation": "git.ignored",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -738,10 +760,11 @@
     {
       "operation": "git.untracked",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -759,10 +782,11 @@
     {
       "operation": "git.changed",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -780,10 +804,11 @@
     {
       "operation": "git.largest",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -801,10 +826,11 @@
     {
       "operation": "git.objects",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -822,10 +848,11 @@
     {
       "operation": "git.contributors",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -843,10 +870,11 @@
     {
       "operation": "git.cleanup",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -864,10 +892,11 @@
     {
       "operation": "git.signatures",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -885,10 +914,11 @@
     {
       "operation": "git.remote",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -906,10 +936,11 @@
     {
       "operation": "github.repository",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -927,10 +958,11 @@
     {
       "operation": "github.pulls",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -948,10 +980,11 @@
     {
       "operation": "github.workflows",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -969,10 +1002,11 @@
     {
       "operation": "github.releases",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -990,10 +1024,11 @@
     {
       "operation": "github.issues",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1011,10 +1046,11 @@
     {
       "operation": "python.environment",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1024,8 +1060,7 @@
       "verification": {
         "registry_and_shared_tests": "PASS",
         "environment": {
-          "invocation": "PASS",
-          "exit_code": 0
+          "invocation": "UNTESTED"
         },
         "hardware": "UNTESTED"
       }
@@ -1033,10 +1068,11 @@
     {
       "operation": "python.project",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1046,8 +1082,7 @@
       "verification": {
         "registry_and_shared_tests": "PASS",
         "environment": {
-          "invocation": "PASS",
-          "exit_code": 0
+          "invocation": "UNTESTED"
         },
         "hardware": "UNTESTED"
       }
@@ -1055,10 +1090,11 @@
     {
       "operation": "python.editables",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1076,10 +1112,11 @@
     {
       "operation": "python.dependencies",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1097,10 +1134,11 @@
     {
       "operation": "java.environment",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1110,8 +1148,7 @@
       "verification": {
         "registry_and_shared_tests": "PASS",
         "environment": {
-          "invocation": "PASS",
-          "exit_code": 0
+          "invocation": "UNTESTED"
         },
         "hardware": "UNTESTED"
       }
@@ -1119,10 +1156,11 @@
     {
       "operation": "adb.inspect",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1140,10 +1178,11 @@
     {
       "operation": "fastboot.inspect",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1161,10 +1200,11 @@
     {
       "operation": "linux.environment",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1182,10 +1222,11 @@
     {
       "operation": "linux.packages",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1203,10 +1244,11 @@
     {
       "operation": "network.configuration",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1224,10 +1266,11 @@
     {
       "operation": "network.routes",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1245,10 +1288,11 @@
     {
       "operation": "network.sockets",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1266,10 +1310,11 @@
     {
       "operation": "ssh.environment",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1287,10 +1332,11 @@
     {
       "operation": "ssh.agent",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1308,10 +1354,11 @@
     {
       "operation": "ssh.github",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1329,10 +1376,11 @@
     {
       "operation": "filesystem.capacity",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1350,10 +1398,11 @@
     {
       "operation": "environment.xdg",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1371,10 +1420,11 @@
     {
       "operation": "models.environment",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1392,10 +1442,11 @@
     {
       "operation": "diagnostics.system",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1413,10 +1464,11 @@
     {
       "operation": "recovery.doctor",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1434,10 +1486,11 @@
     {
       "operation": "recovery.tree",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1455,10 +1508,11 @@
     {
       "operation": "recovery.image",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1476,7 +1530,7 @@
     {
       "operation": "image.inspect",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [
@@ -1484,6 +1538,7 @@
         "vendor-boot",
         "generic-boot"
       ],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1501,7 +1556,7 @@
     {
       "operation": "image.providers",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [
@@ -1509,6 +1564,7 @@
         "avb-provider",
         "lz4"
       ],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1526,10 +1582,11 @@
     {
       "operation": "recovery.model",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1547,10 +1604,11 @@
     {
       "operation": "recovery.diagnose",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1568,10 +1626,11 @@
     {
       "operation": "recovery.plan",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1589,10 +1648,11 @@
     {
       "operation": "recovery.host",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1610,10 +1670,11 @@
     {
       "operation": "recovery.derive",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1631,7 +1692,7 @@
     {
       "operation": "image.differential",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [
@@ -1639,6 +1700,7 @@
         "vendor-boot",
         "generic-boot"
       ],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1656,7 +1718,7 @@
     {
       "operation": "image.model",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [
@@ -1664,6 +1726,7 @@
         "vendor-boot",
         "generic-boot"
       ],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1681,7 +1744,7 @@
     {
       "operation": "image.unpack",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [
@@ -1689,6 +1752,7 @@
         "vendor-boot",
         "generic-boot"
       ],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1706,7 +1770,7 @@
     {
       "operation": "image.workspace",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [
@@ -1714,6 +1778,7 @@
         "vendor-boot",
         "generic-boot"
       ],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1731,7 +1796,7 @@
     {
       "operation": "image.rebuild",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [
@@ -1739,6 +1804,7 @@
         "vendor-boot",
         "generic-boot"
       ],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1756,7 +1822,7 @@
     {
       "operation": "image.compare",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [
@@ -1764,6 +1830,7 @@
         "vendor-boot",
         "generic-boot"
       ],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1781,7 +1848,7 @@
     {
       "operation": "image.roundtrip",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [
@@ -1789,6 +1856,7 @@
         "vendor-boot",
         "generic-boot"
       ],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1806,7 +1874,7 @@
     {
       "operation": "ramdisk.inspect",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [
@@ -1815,6 +1883,7 @@
         "xxhash",
         "zlib"
       ],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1832,7 +1901,7 @@
     {
       "operation": "ramdisk.extract",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [
@@ -1841,6 +1910,7 @@
         "xxhash",
         "zlib"
       ],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1858,7 +1928,7 @@
     {
       "operation": "ramdisk.pack",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [
@@ -1867,6 +1937,7 @@
         "xxhash",
         "zlib"
       ],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1884,7 +1955,7 @@
     {
       "operation": "ramdisk.compare",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [
@@ -1893,6 +1964,7 @@
         "xxhash",
         "zlib"
       ],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1910,7 +1982,7 @@
     {
       "operation": "dtbo.inspect",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [
@@ -1918,6 +1990,7 @@
         "dtbo-v1",
         "dt-spec"
       ],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1935,7 +2008,7 @@
     {
       "operation": "dtbo.extract",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [
@@ -1943,6 +2016,7 @@
         "dtbo-v1",
         "dt-spec"
       ],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1960,7 +2034,7 @@
     {
       "operation": "dtbo.rebuild",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [
@@ -1968,6 +2042,7 @@
         "dtbo-v1",
         "dt-spec"
       ],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -1985,7 +2060,7 @@
     {
       "operation": "dtbo.compare",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [
@@ -1993,6 +2068,7 @@
         "dtbo-v1",
         "dt-spec"
       ],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -2010,13 +2086,14 @@
     {
       "operation": "avb.inspect",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [
         "avb",
         "avb-provider"
       ],
+      "phase5_research": null,
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
@@ -2034,13 +2111,169 @@
     {
       "operation": "avb.verify",
       "created": "2026-10-28",
-      "release": "0.4.0",
+      "release": "0.5.0",
       "version": 1,
       "legacy": [],
       "research_sources": [
         "avb",
         "avb-provider"
       ],
+      "phase5_research": null,
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "recovery.acquire",
+      "created": "2026-10-28",
+      "release": "0.5.0",
+      "version": 1,
+      "legacy": [],
+      "research_sources": [],
+      "phase5_research": {
+        "ledger": "docs/research/phase5-sources.json",
+        "source_ids": [
+          "generic",
+          "vendor-boot",
+          "partitions"
+        ],
+        "relationship": "Independent implementation; research is not qualification"
+      },
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "recovery.build.diagnose",
+      "created": "2026-10-28",
+      "release": "0.5.0",
+      "version": 1,
+      "legacy": [],
+      "research_sources": [],
+      "phase5_research": {
+        "ledger": "docs/research/phase5-sources.json",
+        "source_ids": [
+          "failure209",
+          "twrp-failure-79",
+          "twrp-failure-312",
+          "soong",
+          "host"
+        ],
+        "relationship": "Independent implementation; research is not qualification"
+      },
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "recovery.source",
+      "created": "2026-10-28",
+      "release": "0.5.0",
+      "version": 1,
+      "legacy": [],
+      "research_sources": [],
+      "phase5_research": {
+        "ledger": "docs/research/phase5-sources.json",
+        "source_ids": [
+          "manifest",
+          "manifest-projects",
+          "twrp-12",
+          "twrp-11",
+          "twrp-omni"
+        ],
+        "relationship": "Independent implementation; research is not qualification"
+      },
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "ai.context",
+      "created": "2026-10-28",
+      "release": "0.5.0",
+      "version": 1,
+      "legacy": [],
+      "research_sources": [],
+      "phase5_research": {
+        "ledger": "docs/research/phase5-sources.json",
+        "source_ids": [
+          "openai",
+          "claude",
+          "deepseek"
+        ],
+        "relationship": "Independent implementation; research is not qualification"
+      },
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "ai.providers",
+      "created": "2026-10-28",
+      "release": "0.5.0",
+      "version": 1,
+      "legacy": [],
+      "research_sources": [],
+      "phase5_research": {
+        "ledger": "docs/research/phase5-sources.json",
+        "source_ids": [
+          "openai",
+          "claude",
+          "deepseek",
+          "siwc"
+        ],
+        "relationship": "Independent implementation; research is not qualification"
+      },
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,

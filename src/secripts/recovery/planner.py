@@ -211,6 +211,14 @@ def derive(name, output, dry_run=False):
             "Hardware qualification",
         ],
         "conflicts": device["conflicts"],
+        "review_states": {
+            "RESOLVED": ["Generated local file relationships"],
+            "INFERRED": ["Candidate product naming; source generation requires review"],
+            "CONFLICT": device["conflicts"],
+            "UNKNOWN": ["Kernel, fstab, vendor and source compatibility"],
+            "BLOCKED": ["Build readiness not established"],
+            "REQUIRES_REVIEW": ["Every generated configuration line"],
+        },
         "review_required": True,
     }
     if dry_run:
@@ -283,6 +291,22 @@ def host_qualification():
         "filesystem_semantics": "UNKNOWN: no implicit write probe",
         "proot": host()["proot"],
         "note": "Presence of prerequisites is not host build qualification",
+        "external_host_reference": {
+            "source": "host",
+            "platform": "x86_64 glibc Linux",
+            "full_aosp_disk_gb": 400,
+            "full_aosp_ram_gb": 64,
+            "scope": "Current full AOSP guidance; reduced recovery requirements must be measured per checkout",
+            "tools": [
+                "git",
+                "repo",
+                "Python",
+                "branch-selected JDK",
+                "make",
+                "C/C++ build packages",
+            ],
+            "early_rejection_floor_only": "40 GiB disk / 8 GiB RAM are not readiness qualification",
+        },
     }
 
 
@@ -318,7 +342,7 @@ def plan(name):
         "host": host_state,
         "source": workspace,
         "source_generation": source_intelligence(workspace),
-        "expected_java": "UNKNOWN: branch-specific, never selected from Android version alone",
+        "expected_java": "See source_generation.toolchains; declared prebuilts do not prove active selection",
         "device": device,
         "tree": tree,
         "build_target": target,
@@ -357,12 +381,15 @@ def source_intelligence(workspace):
         "state": "UNKNOWN",
         "evidence": [],
     }
+    manifest = None
     root = Path(workspace.get("root", "/nonexistent"))
     path = root / ".repo/manifests/default.xml"
     if not path.is_file():
         path = root / "default.xml"
     if path.is_file() and not path.is_symlink() and path.stat().st_size <= 1024 * 1024:
-        text = path.read_text(errors="replace")
+        from secripts.images.artifacts import read
+
+        text = read(path, 1024 * 1024).decode("utf-8", errors="replace")
         if any(marker in text for marker in ("<!DOCTYPE", "<!ENTITY", "\0")):
             return {**result, "state": "BLOCKED", "reason": "Unsafe XML constructs"}
         try:
@@ -396,4 +423,46 @@ def source_intelligence(workspace):
             "state": "INFERRED",
             "reason": "Historical manifest family; review actual product definitions",
         }
+    result["toolchains"] = []
+    result["requirements_state"] = "UNKNOWN"
+    if manifest is not None:
+        for project in manifest.findall("project")[:4096]:
+            location = project.get("path", "")
+            if re.fullmatch(r"prebuilts/(?:jdk/[A-Za-z0-9_-]+|python/[A-Za-z0-9_/-]+)", location):
+                result["toolchains"].append(
+                    {
+                        "path": location,
+                        "revision": project.get("revision"),
+                        "state": "DECLARED",
+                        "source": str(path),
+                        "active_selection": "UNKNOWN",
+                    }
+                )
+    result["research_options"] = [
+        {
+            "family": "TWRP AOSP",
+            "branch": "twrp-12.1",
+            "source": "twrp-12",
+            "product_hint": "twrp_",
+            "target": "Arrangement-dependent: recoveryimage/bootimage/vendorbootimage",
+            "encryption": "Branch README excludes FDE; FBE requires device evidence",
+            "compatibility": "UNTESTED",
+        },
+        {
+            "family": "TWRP AOSP",
+            "branch": "twrp-11",
+            "source": "twrp-11",
+            "compatibility": "UNTESTED",
+        },
+        {
+            "family": "TWRP Omni",
+            "branch": "twrp-9.0",
+            "source": "twrp-omni",
+            "product_hint": "omni_",
+            "compatibility": "UNTESTED",
+        },
+    ]
+    result["selection_policy"] = (
+        "Research options are review candidates, never automatic source selection from Android version. Check local build configuration for active JDK/Python."
+    )
     return result

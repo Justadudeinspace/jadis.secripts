@@ -26,9 +26,11 @@ jobs:
       - run: pytest -q
       - run: python tools/secret_scan.py
       - run: python tools/audit_docs.py
+      - run: python tools/manual.py --check
       - run: python -m build
       - run: js --help && js --version && js ls --json && js doc --json && js dos --json && js 1337
       - run: python tools/validate_images.py
       - run: python tools/validate_phase4.py
+      - run: python tools/validate_phase5.py
       - run: python tools/validate_oracles.py --fetch-upstream
       - run: js comp bash > /tmp/js.bash && bash -n /tmp/js.bash

@@ -7,7 +7,7 @@ from secripts.commands import inventory, name
 
 rows = inventory(parser())
 Path("docs/cli-map.json").write_text(json.dumps({"schema": 1, "commands": rows}, indent=2) + "\n")
-text = """# Streamlined CLI — 0.4.0
+text = """# Streamlined CLI — 0.5.0
 
 Frequently typed namespaces/actions normally use 2–4 character shorthand. Full descriptive
 names remain accepted aliases. Never shorten a command when ambiguous or misleading.
