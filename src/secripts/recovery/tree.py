@@ -2,6 +2,7 @@
 
 from pathlib import Path
 import re
+import json
 import xml.etree.ElementTree as ET
 
 GROUPS = {
@@ -61,6 +62,9 @@ def graph(root: Path, files: dict) -> dict:
     declarations = []
     warnings = []
 
+    current_line = 0
+    current_conditional = False
+
     def edge(source, reference, kind):
         target = None
         state = "UNRESOLVED"
@@ -99,24 +103,65 @@ def graph(root: Path, files: dict) -> dict:
                 "kind": kind,
                 "state": state,
                 "reason": reason,
+                "line": current_line,
+                "conditional": current_conditional,
             }
         )
 
     for filename, text in sorted(files.items()):
-        conditional = bool(re.search(r"(?m)^\s*(?:ifeq|ifneq|ifdef|ifndef)\b", text))
-        for number, line in enumerate(text.splitlines(), 1):
+        environment = {"LOCAL_DIR": str((root / filename).parent)}
+        depth = 0
+        for number, line in logical_lines(text):
+            stripped = line.strip()
+            if re.match(r"^(?:ifeq|ifneq|ifdef|ifndef)\b", stripped):
+                depth += 1
+            elif re.match(r"^endif\b", stripped):
+                depth = max(0, depth - 1)
+            conditional = depth > 0
+            current_line = number
+            current_conditional = conditional
             match = re.match(r"\s*([A-Z][A-Z0-9_]+)\s*([:+?]?=)\s*([^#]*)", line)
             if match:
                 key, operator, value = match.groups()
+                if conditional:
+                    environment.pop(key, None)
+                uncertain_default = operator == "?=" and key not in environment
+                resolved = value.strip()
+                for _ in range(8):
+                    expanded = re.sub(
+                        r"\$\(([A-Za-z_][A-Za-z0-9_]*)\)",
+                        lambda m, environment=environment: environment.get(m.group(1), m.group(0)),
+                        resolved,
+                    )
+                    if expanded == resolved:
+                        break
+                    resolved = expanded
+                if not conditional and not uncertain_default and "$" not in resolved:
+                    if operator == "+=":
+                        resolved = (
+                            (environment[key] + " " + resolved).strip()
+                            if key in environment
+                            else "$(UNKNOWN_APPEND_BASE) " + resolved
+                        )
+                    elif operator == "?=" and key in environment:
+                        resolved = environment[key]
+                    if "$" not in resolved:
+                        environment[key] = resolved
                 declarations.append(
                     {
                         "name": key,
                         "value": value.strip(),
+                        "resolved_value": None
+                        if conditional or uncertain_default or "$" in resolved
+                        else resolved,
+                        "variable_references": re.findall(r"\$\(([^)]+)\)", value),
                         "operator": operator,
                         "file": filename,
                         "line": number,
                         "state": "UNRESOLVED"
-                        if conditional or "$" in value
+                        if conditional or uncertain_default or "$" in resolved
+                        else "STATICALLY_RESOLVED"
+                        if resolved != value.strip()
                         else "DIRECTLY_DECLARED",
                         "conditional": conditional,
                     }
@@ -133,7 +178,12 @@ def graph(root: Path, files: dict) -> dict:
                     for reference in value.split():
                         edge(filename, reference, "product")
             clean = line.split("#", 1)[0].strip()
-            # Do not attempt arbitrary call/function evaluation. LOCAL_DIR is the only supported expansion.
+            clean = re.sub(
+                r"\$\(([A-Za-z_][A-Za-z0-9_]*)\)",
+                lambda m, environment=environment: environment.get(m.group(1), m.group(0)),
+                clean,
+            )
+            # Only simple, locally resolved variables; no arbitrary call/function evaluation.
             match = re.match(r"(?:-?include)\s+(.+)", clean)
             inherited = re.search(
                 r"\$\(call\s+inherit-product(?:-if-exists)?\s*,\s*(.+)\)\s*$", clean
@@ -143,6 +193,26 @@ def graph(root: Path, files: dict) -> dict:
                     edge(filename, reference, "include")
             elif inherited:
                 edge(filename, inherited.group(1).strip(), "inherit-product")
+        if "dependenc" in filename:
+            try:
+                dependencies = json.loads(text)
+            except ValueError:
+                dependencies = []
+            if isinstance(dependencies, list):
+                for dependency in dependencies[:1000]:
+                    if isinstance(dependency, dict):
+                        edges.append(
+                            {
+                                "source": filename,
+                                "line": None,
+                                "reference": dependency.get("target_path"),
+                                "repository": dependency.get("repository"),
+                                "revision": dependency.get("branch"),
+                                "kind": "dependency",
+                                "target": None,
+                                "state": "EXTERNALLY_DEPENDENT",
+                            }
+                        )
         if filename.endswith(".xml"):
             # Reject DTD/entity input; standard parser does not access network, and the size is bounded.
             if "<!DOCTYPE" in text or "<!ENTITY" in text or "\x00" in text:
@@ -164,6 +234,17 @@ def graph(root: Path, files: dict) -> dict:
                             "state": "EXTERNALLY_DEPENDENT",
                         }
                     )
+    duplicates = []
+    seen_edges = set()
+    for item in edges:
+        key = (item["source"], item["reference"], item["kind"])
+        if key in seen_edges:
+            duplicates.append(item)
+        seen_edges.add(key)
+        if item.get("conditional"):
+            item["potential_target"] = item["target"]
+            item["target"] = None
+            item["state"] = "UNRESOLVED"
     # Iterative DFS: graph cycles are evidence, not evaluated or recursively expanded.
     adjacency = {name: [] for name in nodes}
     for item in edges:
@@ -189,6 +270,7 @@ def graph(root: Path, files: dict) -> dict:
         "nodes": sorted(nodes),
         "edges": edges,
         "cycles": cycles,
+        "duplicate_dependencies": duplicates,
         "declarations": declarations,
         "groups": groups,
         "warnings": warnings,
@@ -196,3 +278,17 @@ def graph(root: Path, files: dict) -> dict:
         "state": "STATICALLY_INFERRED",
         "limits": "Bounded local inventory; no conditional evaluation, arbitrary Make expansion or external traversal",
     }
+
+
+def logical_lines(text):
+    buffer = ""
+    start = 1
+    for number, line in enumerate(text.splitlines(), 1):
+        if not buffer:
+            start = number
+        buffer += line.rstrip()[:-1] + " " if line.rstrip().endswith("\\") else line
+        if not line.rstrip().endswith("\\"):
+            yield start, buffer
+            buffer = ""
+    if buffer:
+        yield start, buffer

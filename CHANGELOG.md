@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0 — 2026-10-28
+
+- Added reusable content-first Image Intelligence: bounded Android, FDT/DTBO, ELF, uImage/FIT, compression/CPIO and AVB metadata inspection; explicit optional evidence providers.
+- Added source-linked Recovery Device Models, conflicts, static tree diagnosis, candidate-only derivation with generated-line provenance, and conservative build planning.
+- Added bounded recursive read-only corpus archaeology and public research lineage; no corpus code, keys or binaries incorporated.
+- Added formal permanent CREDITS.md attribution/licensing review, linked from the README.
+- Integrated Image Lab/model/planning discovery into the registry, recipes, cockpit and dossier.
+- Hardware qualification and real TWRP compilation remain unproven; parsing is not verification.
+
 ## 0.2.0 — 2026-10-28
 
 - Renamed the canonical CLI executable from `sec` to `js`; no permanent compatibility alias.

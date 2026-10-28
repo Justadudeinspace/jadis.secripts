@@ -28,14 +28,31 @@ def redact(value):
             key = str(key)
             # Classification counts are public metadata, not credential-bearing fields.
             if (
-                key == "counts"
+                key in {"counts", "classifications"}
                 and isinstance(child, dict)
-                and set(child) <= {"PROMOTE", "EXTRACT", "ARCHIVE", "REJECT", "SECRET"}
-                and all(type(n) is int and 0 <= n <= 10000 for n in child.values())
+                and set(child)
+                <= {
+                    "PROMOTE",
+                    "EXTRACT",
+                    "ARCHIVE",
+                    "REJECT",
+                    "SECRET",
+                    "REFERENCE",
+                    "EXTRACT_KNOWLEDGE",
+                    "REIMPLEMENT",
+                    "OPTIONAL_PROVIDER",
+                    "FIXTURE_CANDIDATE",
+                    "ARCHIVE_ONLY",
+                    "OBSOLETE",
+                    "UNSAFE",
+                    "UNKNOWN",
+                }
+                and all(type(n) is int and 0 <= n <= 100000 for n in child.values())
             ):
                 result[key] = child.copy()
             elif SENSITIVE.search(key) and not (
-                key == "contained_secrets" and isinstance(child, bool)
+                key in {"contained_secrets", "possible_secrets", "possible_key_material"}
+                and isinstance(child, bool)
             ):
                 result[key] = "[REDACTED]"
             else:

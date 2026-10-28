@@ -21,6 +21,8 @@ jobs:
       - run: ruff format --check .
       - run: pytest -q
       - run: python tools/secret_scan.py
+      - run: python tools/audit_docs.py
       - run: python -m build
       - run: js --help && js --version && js list --json && js doctor --json && js dossier --json && js 1337
+      - run: python tools/validate_images.py
       - run: js completion bash > /tmp/js.bash && bash -n /tmp/js.bash

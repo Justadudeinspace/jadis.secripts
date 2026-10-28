@@ -1,0 +1,120 @@
+{
+  "schema": 1,
+  "archives": [
+    {
+      "source": "TWRP2.zip",
+      "bytes": 394210432,
+      "sha256": "709b6ab48d0af5791e52fb87e2562580a26aed154abac3416c4e11a4ba3bf7a9",
+      "zip_metadata": {
+        "entries": 21,
+        "files": 20,
+        "compressed_bytes": 394207210,
+        "uncompressed_bytes": 394589495,
+        "maximum_entry_bytes": 289436271,
+        "unsafe_paths": 0,
+        "symlinks": 0,
+        "duplicate_member_names": 0
+      }
+    },
+    {
+      "source": "TWRP3.zip",
+      "bytes": 309299696,
+      "sha256": "6de8c08236365cf18cceb4ed4a47972e5db2089cb4f093b1a8215bb513349d2e",
+      "zip_metadata": {
+        "entries": 41,
+        "files": 40,
+        "compressed_bytes": 309293990,
+        "uncompressed_bytes": 309293990,
+        "maximum_entry_bytes": 138552446,
+        "unsafe_paths": 0,
+        "symlinks": 0,
+        "duplicate_member_names": 0
+      }
+    }
+  ],
+  "members": 67194,
+  "bytes_streamed": 4294967170,
+  "classifications": {
+    "REFERENCE": 39182,
+    "EXTRACT_KNOWLEDGE": 1268,
+    "SECRET": 1122,
+    "OPTIONAL_PROVIDER": 516,
+    "REIMPLEMENT": 1703,
+    "ARCHIVE_ONLY": 23290,
+    "UNSAFE": 94,
+    "UNKNOWN": 19,
+    "FIXTURE_CANDIDATE": 0,
+    "OBSOLETE": 0
+  },
+  "families": {
+    "android-image-kitchen": 134,
+    "twrp": 6809,
+    "boot-tools": 89,
+    "other": 59637,
+    "avb": 41,
+    "compression": 71,
+    "legacy-signing": 201,
+    "sony": 63,
+    "uboot": 5,
+    "mediatek": 10,
+    "rockchip": 25,
+    "device-tree": 109
+  },
+  "duplicates": 23468,
+  "nested_containers": 188,
+  "complete_within_supported_formats": false,
+  "limits": {
+    "members": 100000,
+    "depth": 6,
+    "member_bytes": 536870912,
+    "total_bytes": 4294967296
+  },
+  "security": "No extraction paths or payload execution; secret/key paths opaque; all source archives read-only",
+  "blockers_by_reason": {
+    "RAR/7z unsupported; no external corpus tool executed": 1,
+    "Read/container error: BadZipFile": 3,
+    "Compression/container is not supported tar; metadata only": 2,
+    "Byte budget exceeded; not read": 19
+  },
+  "coverage_by_archive": {
+    "TWRP2.zip": {
+      "members": 40443,
+      "hashed_members": 40443
+    },
+    "TWRP3.zip": {
+      "members": 26751,
+      "hashed_members": 26732
+    }
+  },
+  "qualification": "PARTIAL: heuristic bounded inventory, not full content or license review",
+  "attribution_review": [
+    {
+      "archive": "TWRP2.zip",
+      "project": "Android-Image-Kitchen-master.zip",
+      "path": "Android-Image-Kitchen-master/authors.txt",
+      "sha256": "b9f60ff768655da07806d3ab82bc02711633caf1f748ce6973125115d4270b08",
+      "review": "Static attribution/format review; content not imported"
+    },
+    {
+      "archive": "TWRP3.zip",
+      "project": "mkmtkhdr-master.zip",
+      "path": "mkmtkhdr-master/mkmtkhdr.c",
+      "sha256": "f1ec11862ee3d97ae52ab9a5106c889d2b5c2687832d3e1b8328344aa944a9d8",
+      "review": "Static attribution/format review; content not imported"
+    },
+    {
+      "archive": "TWRP3.zip",
+      "project": "loki-master.zip",
+      "path": "loki-master/loki.h",
+      "sha256": "d796d5cffe935133f4152996db9f9cc6dd0a5dfd29e74f3e5246bb6d7d6d4369",
+      "review": "Static attribution/format review; content not imported"
+    },
+    {
+      "archive": "TWRP3.zip",
+      "project": "rkflashtool-master.zip",
+      "path": "rkflashtool-master/README",
+      "sha256": "5d23ec0c5f3e8db107d046a51424bbc8ca14736e304f28849a68d19f389df4c5",
+      "review": "Static attribution/format review; content not imported"
+    }
+  ]
+}

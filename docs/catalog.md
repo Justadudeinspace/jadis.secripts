@@ -67,3 +67,10 @@ Generated from `js list --json`; update with `python tools/catalog.py`.
 | `recovery.doctor` | Inspect tools, host suitability, workspace and unresolved dependencies. | READ_ONLY |
 | `recovery.tree` | Audit static device-tree declarations and a bounded local dependency graph. | READ_ONLY |
 | `recovery.image` | Inspect image boundaries, ramdisk metadata and unverified AVB declarations. | READ_ONLY |
+| `image.inspect` | Identify and inspect bounded image structures without executing payloads. | READ_ONLY |
+| `image.providers` | Inspect optional installed tooling and native formats without invoking providers. | READ_ONLY |
+| `recovery.model` | Inspect source-linked facts, conflicts and unresolved device evidence. | READ_ONLY |
+| `recovery.diagnose` | Explain generation hints, dependencies and reasons a tree needs review. | READ_ONLY |
+| `recovery.plan` | Correlate device/source/tree/host evidence; never sync, build or qualify hardware. | READ_ONLY |
+| `recovery.host` | Inspect architecture, memory, disk, prerequisites and unqualified boundaries. | READ_ONLY |
+| `recovery.derive` | Generate a new candidate tree with per-line evidence; never overwrite or claim build readiness. | MUTATING |

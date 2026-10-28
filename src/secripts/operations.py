@@ -13,6 +13,7 @@ def execute(name: str, dry_run: bool = False, parameters: dict | None = None) ->
     op = registry().get(name)
     from secripts.evidence import Collector
     from secripts.inspectors import HANDLERS
+    from secripts.laboratory import HANDLERS as LAB_HANDLERS
     from secripts.devices import adb_inspect, fastboot_inspect, transport_summary
 
     parameters = {k: v for k, v in (parameters or {}).items() if v is not None}
@@ -46,6 +47,7 @@ def execute(name: str, dry_run: bool = False, parameters: dict | None = None) ->
                 "doctor": lambda c, **kw: doctor(),
                 "path": lambda c, **kw: path_analysis(),
                 **HANDLERS,
+                **LAB_HANDLERS,
                 "adb_inspect": adb_inspect,
                 "fastboot_inspect": fastboot_inspect,
                 "adb_transports": lambda c, **kw: transport_summary(c, "adb"),

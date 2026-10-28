@@ -14,3 +14,9 @@ separate project plans. Pattern classification alone does not authorize promotio
 Reproduce with `js ingest /path/to/archive.zip --output /private/inventory.json`, then review decisions.
 `tools/review_legacy.py` records this release's curated decisions; it is not a generic automatic
 promotion engine. Never commit the archive, extraction directories or historical credential values.
+
+## Recovery research corpus
+
+Phase 3 adds a separate read-only recovery corpus workflow and taxonomy. It does not change
+the original historical archive counts or opaque credential exclusions. See [research](research.md)
+and [credits](../CREDITS.md) for bounded coverage and technical attribution.

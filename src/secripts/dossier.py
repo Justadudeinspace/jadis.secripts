@@ -86,6 +86,7 @@ def dossier(*, devices=False):
         "network": inspectors.network(),
         "secripts": state(),
         "recovery": recovery_state(),
+        "image_lab": laboratory_state(),
     }
     if devices:
         from secripts.devices import transport_summary
@@ -102,5 +103,22 @@ def dossier(*, devices=False):
         "status": "EVIDENCE_COLLECTED",
         "sections": sections,
         "network_probes": "NOT_RUN",
+        "hardware_qualification": "UNTESTED",
+    }
+
+
+def laboratory_state():
+    from secripts.images.engine import FORMATS
+    from secripts.images.providers import availability
+    from secripts.recovery.model import catalog
+    from secripts.receipts import history
+
+    return {
+        "formats": list(FORMATS),
+        "providers": availability(),
+        "device_models": catalog(),
+        "recent_inspections": len(history(operation="image.inspect", limit=10)),
+        "candidate_trees": len(history(operation="recovery.tree.derive")),
+        "build_plans": len(history(operation="recovery.plan")),
         "hardware_qualification": "UNTESTED",
     }

@@ -16,9 +16,14 @@ def artifact_hash(path: Path) -> str:
 
 
 def inspect_image(path: Path) -> dict:
-    from secripts.recovery.images import inspect_image as inspect
+    from secripts.images.engine import inspect
 
-    return inspect(path)
+    value = inspect(path)
+    if value["structure_status"] == "FAIL" and any(
+        w.startswith("Parser refusal:") for w in value["warnings"]
+    ):
+        raise SecError("; ".join(value["warnings"]) or "Malformed recovery image", 1)
+    return value
 
 
 def audit_tree(root: Path) -> dict:
@@ -45,7 +50,7 @@ def audit_tree(root: Path) -> dict:
         if path.stat().st_size > 1024 * 1024:
             finding("WARN", "oversize file", str(path.relative_to(root)))
             continue
-        text = path.read_text(errors="replace").replace("\\\n", " ")
+        text = path.read_text(errors="replace")
         files[str(path.relative_to(root))] = text
         for key, value in re.findall(r"(?m)^\s*([A-Z][A-Z0-9_]+)\s*:?=\s*([^\n#]+)", text):
             variables[key] = value.strip()

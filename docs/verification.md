@@ -1,32 +1,24 @@
-# Verification evidence — 0.2.0, 2026-10-28
+# Verification evidence — 0.3.0, 2026-10-28
 
 ## Baseline
 
-Started on clean `main` at `e7a6ec0521062d68e167b3e8c88c35ae30bff9b9`. Local HEAD,
-origin/main and an independent SSH remote query matched. The full v0.1 gate passed before edits:
-57 tests, Ruff lint/format, secret scan (52 files, zero findings), source distribution and wheel.
-The repository inventory and complete source/tests/docs were inspected before extension.
+Started on clean main at `219b68cb3b894c644d3f6dc45e1a565c1d1e2030` (0.2.0).
+Local HEAD, origin/main and independent SSH remote query matched. The complete existing
+validation gate passed before edits: 104 tests, Ruff lint/format, secret scan and package build.
+Canonical installed js was 0.2.0, stale JADIS sec absent, unrelated /usr/bin/js (Node) preserved.
+Repository source/tests/docs and existing architecture were inspected before extension.
+Repository visibility remains private; authenticated GitHub evidence is queried without changing it.
 
-After the owner authenticated gh in a side terminal, this process immediately gained API access;
-no Termux restart was needed. GitHub confirmed `private: true`, visibility private, default branch main.
-No visibility setting was changed. Baseline workflow
-[40624253253](https://github.com/Justadudeinspace/jadis.secripts/actions/runs/40624253253)
-completed successfully: both Python 3.11 and 3.13 jobs passed install/lint/format/tests/scan/build/smoke.
-A separate baseline run was queued when queried. No billing/infrastructure cause was inferred.
+## Phase 3 validation
 
-## Local Phase 2 evidence
+The source suite expands to **138 tests**. New cases cover content dispatch, boot generations,
+LZ4 frame/legacy/skippable bounds, FDT/DTBO/ELF/uImage/FIT, historical vendor markers, cache context,
+provider disagreement, nested ZIP duplicates/secrets/unsafe paths and byte caps, models/conflicts,
+Make declarations/line locations, candidate provenance/no overwrite, manifest hazards, CLI paths,
+credits/reference integrity and deterministic adversarial bytes. Existing safety tests remain intact.
+Fixtures are synthetic; test results are not real hardware or firmware qualification.
 
-Linux aarch64; Debian Python 3.13.5 and the Termux Python 3.14.8 interpreter. The expanded suite passes
-**104 tests on each interpreter**. This does not establish a complete native Termux/PRoot or hardware
-qualification matrix. Tests never contact devices/services or download Android sources.
-
-The canonical installed launcher is `js`; Python distribution/package remain jadis-secripts/secripts.
-Regression tests check source and installed console-script metadata expose only js, deterministic
-`usage: js`, help/error examples and Bash completion. Existing operation IDs and runtime receipts remain
-valid. The previous pipx `sec` symlink was positively associated with jadis-secripts 0.1.0; migration uses
-a normal uninstall/install of that distribution. The unrelated `/usr/bin/js` Node launcher is preserved.
-
-Validation commands:
+Required gate:
 
 ```sh
 python -m pip install -e '.[dev]'
@@ -34,99 +26,77 @@ ruff check .
 ruff format --check .
 pytest -q
 python tools/secret_scan.py
+python tools/audit_docs.py
 python -m build
-python tools/qualify.py
-python tools/validate.py --devices --network
 ```
 
-`tools/qualify.py` captures actual local gate outcomes outside Git.
-`tools/validate.py` exercises an installed entry point, not a module invocation:
+`tools/qualify.py` captures this gate locally outside Git, tagged with the actual release.
+`tools/validate.py --devices --network` exercises the installed launcher, local inspections,
+read-only transport enumeration and explicit GitHub queries. `tools/validate_images.py`
+exercises installed js on temporary **SYNTHETIC_FIXTURE** evidence in isolated state: generic
+inspection/providers, discovery, model create/import/report, tree diagnosis/derivation,
+planning, image recipe, artifact report and cockpit JSON. No fake models persist in normal state.
 
-```sh
-js --help
-js --version
-js list --json
-js find android --json
-js show android.sdk.validate --json
-js explain python.environment --json
-js doctor --json
-js dossier --json
-js 1337
-js 1337 --json
-js recovery doctor --json
-js run git.health --json
-js run python.environment --json
-js run python.project --json
-js run java.environment --json
-js run android.sdk.validate --json
-js recipe run git-review --dry-run --json
-js history --operation git.status --limit 2 --summary --json
-js receipt latest --json
-js receipt latest --failed --json
-js completion bash
-js run adb.devices --json
-js run fastboot.devices --json
-js run github.repository --json
-js run github.workflows --json
-```
+The installed wheel is also tested outside the checkout. Bash syntax, local YAML parsing,
+source/wheel metadata, sole js entry point, documentation references, stale CLI examples,
+repository size and accidental corpus inclusion are audited. CLI --help/list remain lazy;
+ordinary inspection never downloads anything or probes hardware.
 
-The harness also checks tree/image/report commands against explicitly synthetic, temporary fixtures.
-It deliberately requests a nonexistent image and checks failed-receipt retrieval. An earlier empty
-failure history correctly returned prerequisite code 3; no PASS was manufactured for that absence.
-Raw tool output stays in sanitized local execution evidence; device identifiers do not enter Git.
+## Evidence categories
 
-Real local Git/Python/Java/SDK observations and authenticated read-only GitHub metadata were collected.
-ADB and Fastboot versions/enumerations executed, both reporting zero transports. ADB daemons started
-by our enumeration were stopped afterward. No device shell/getvar interrogation or modification was
-performed against real hardware. Synthetic device responses only prove parser/control behavior.
+- REAL HOST: Linux aarch64, Python/Java/Git/tool state, disk/memory and source/tree configuration.
+- CORPUS: read-only archive hashes and bounded recursive inventory; selected small attribution
+  files reviewed statically. No corpus executable ran; no payload became a committed fixture.
+- SYNTHETIC FIXTURE: image formats, malformed data, device responses, model conflicts,
+  candidate generation and planner paths. Never described as real stock firmware or build evidence.
+- REAL DEVICE: safe enumeration only when requested. Zero transports means NO DEVICE;
+  passive detection cannot establish qualification.
 
-A real NO_COLOR PTY session displayed the live dashboard, opened history, previewed a Python operation,
-entered Recovery Lab, ran doctor, returned and quit through `js://1337 >`. Non-TTY and JSON snapshots
-were separately checked without device probes. Installed-wheel checks run from outside the checkout;
-editable installation alone is not counted as wheel proof.
+## Honest limits
 
-## Tests and static validation
+All new native formats have synthetic structure tests, not a comprehensive real-device corpus
+qualification. Tree analysis is partial static resolution, not GNU Make evaluation. CPIO parsing
+is bounded metadata inspection, not complete initramfs evaluation. LZ4 is structural only; native
+decode/checksum validation is absent. FIT external data/signature evaluation and complete vendor
+formats are absent. AVB metadata is not cryptographic, trusted-key or rollback verification.
 
-Coverage includes original safety/failure paths plus all-operation dry-run contracts, typed parameters,
-ranked/filter/provenance discovery, dossier/network boundaries, doctor uncertainty, cockpit preview/
-NO_COLOR, recipe receipts/network refusal, receipt filters/diffs, old identifier sanitation, ADB absent/
-multiple/unauthorized/offline/malformed responses, Fastboot absence/getvar evidence, deadlines, SDK
-conflicts, malformed pyproject, image bounds, init_boot inference, vendor fragments, decompression bombs,
-CPIO traversal, AVB footer/header/descriptor ranges, dependency cycles, symlinks, huge files, XML entities,
-combined reports, and launcher metadata. Build/source success tests remain fixtures, not real TWRP builds.
+Candidates deliberately retain TODOs. Models retain unknown/conflicting facts. Plans can be BLOCKED
+while invocation succeeds. Actual TWRP compilation remains BLOCKED by the unqualified ARM64 path,
+limited disk, missing prerequisites and incomplete source/device checkout. Hardware qualification
+is UNTESTED. No huge sync, boot, flash, unlock, wipe, root or partition operation was performed.
 
-Ruff lint and format checks pass. The repository secret scanner reports zero findings. Native parsing
-is tested without external image dependencies. Generated catalog is compared against registry metadata.
-Ruby's installed YAML parser validates workflow syntax and the serial matrix setting. Bash `-n` validates
-completion syntax. CI now targets Python 3.11/3.13/3.14 with max-parallel 1, plus CLI/dossier/non-TTY and
-completion smoke. Final-commit external status is queried after push and reported separately; baseline
-CI success is not proof of the new commit.
+CI uses a serial Python 3.11/3.13/3.14 matrix with no supplied archives. Local success is not external
+CI proof; exact final-commit GitHub status is reported separately after push. No infrastructure
+cause is inferred from missing workflow evidence.
 
-## Capability limits
+Attribution auditing checks links/known names/provenance structure locally. Upstream retrieval
+and explicit unavailable sources are recorded in research.json. Unestablished licenses remain
+unestablished; no third-party source is incorporated, and credits never replace required notices.
 
-| Area | Evidence status |
-|---|---|
-| CLI, registry, discovery, receipts, recipes, dossier, doctor | PASS locally |
-| Cockpit | PASS local PTY/non-TTY/JSON checks |
-| Bash completion | PASS syntax/candidate tests; other shell-specific completion NOT IMPLEMENTED |
-| SDK/JVM/Python | PASS inspection paths; build compatibility UNKNOWN/UNTESTED |
-| ADB/Fastboot/device dossier | PARTIAL: fixture-tested plus real zero-device enumeration |
-| Tree intelligence | PARTIAL: bounded static graph, no full Android Make evaluation |
-| Boot/vendor_boot/init_boot inspection | PARTIAL: structure and bounded ramdisk metadata, not bootability |
-| AVB | PARTIAL: untrusted metadata only; crypto/trust/rollback verification UNTESTED |
-| TWRP orchestration | PARTIAL: existing fixture-tested adapter; no real sync/build |
-| Actual TWRP compilation | BLOCKED on this host |
-| Hardware qualification | UNTESTED |
-| Private visibility | PASS authenticated API evidence |
-| Baseline external CI | PASS authenticated run/job evidence |
-| New commit external CI | Reported separately after push |
+## Completed local evidence
 
-Real TWRP builds remain blocked by ARM64 host architecture, roughly 15 GiB free (below the 40 GiB
-floor), missing repo/build prerequisites and no selected complete source/device-tree checkout. No
-large download was attempted. No temporary boot, flash, unlock, wipe, repartition, automatic root or
-ownership/security bypass was performed or added.
+The final gate passed all seven commands, with **138 tests on Python 3.13.5**. The Termux Python 3.14.8 interpreter also exercises the full suite. This is interpreter evidence,
+not complete PRoot/hardware platform qualification. The pipx installation was upgraded
+from the built wheel to js 0.3.0; its sole console script is js. /usr/bin/js still resolves
+to Node and no stale JADIS sec executable remains. All 15 isolated Image Lab installed-wheel
+smoke invocations passed from /tmp, including model import, candidate derivation and a BLOCKED
+plan. Source distribution includes CREDITS.md; wheel includes research metadata/native parsers
+and no corpus payloads. Local YAML parsing confirms a serial CI matrix.
 
-Remaining priorities: qualify a pinned real build on suitable x86_64 hardware; resolve complete Android
-checkout dependencies; integrate explicit trusted upstream unpacking/AVB verification; then record
-owner-authorized real device observations and manual qualification. Multiple workspaces, Zsh/Fish
-completion and unsupported ramdisk decompressors remain future work.
+A 12,796-byte AIK-bundled ELF sample was read under a controlled temporary filename,
+hash-checked against the inventory, structurally inspected and deleted without execution.
+ELF structure passed; bootability/device compatibility remain UNTESTED. This CORPUS_SAMPLE
+is separate from synthetic firmware fixtures and real host observations.
+
+Before staging, 93 candidate source/documentation files total approximately 0.56 MiB,
+with no .img/.zip/.pem/.pk8/.exe/.so/.jar payloads. Corpus archives remain outside Git.
+
+The final 138-test suite also passed on Termux Python 3.14.8. A real NO_COLOR PTY
+session displayed Image Lab/provider state, zero ADB/Fastboot transports and Recovery
+Lab blockers, opened the Image Intelligence category, inspected operation context,
+ran the read-only provider-availability operation and exited normally. Bash completion
+syntax passed. The general installed-launcher harness completed 35 checks, including
+the deliberate missing-image exit 3; all other invocations exited 0. Both transport
+enumerations returned zero devices. The local ADB server started by probes was stopped.
+Host planning is blocked by unqualified aarch64, free disk below 40 GiB, RAM below
+the conservative 8 GiB floor, missing repo and no configured complete checkout/tree.

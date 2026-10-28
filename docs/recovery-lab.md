@@ -101,3 +101,15 @@ The manifest twrp-12.1 tip observed on 2026-10-28 was
 `67ae349583e66424e5af0a3b7a386b42b6c958e0`; vbmeta header blob was
 `f9cbac447d0941429d813ca0aadef4401e7ec8d7`. These reference observations do not prove a downloaded,
 compiled or device-tested recovery. No large Android checkout was downloaded for this release.
+
+## Phase 3 intelligence
+
+Use `js inspect PATH` for reusable Image Intelligence, `js recovery device --help` for local
+evidence models, `js recovery tree diagnose PATH` for explained static blockers, and
+`js recovery tree derive --device NAME --output NEW_PATH` for review-only candidates.
+`js recovery plan NAME` correlates source/tree/model/host evidence without a build.
+
+See [format capabilities](image-intelligence.md) and [model/planner semantics](device-model.md).
+Candidate tree != build-ready tree. Image structure != cryptographic verification.
+Compilation != bootability != device qualification. Temporary boot remains refused when
+compatibility/support is unresolved; no destructive device capability was added.

@@ -34,3 +34,19 @@ Runtime paths remain unchanged by the launcher migration: `$SECRIPTS_DATA_HOME`,
 new state directories use 0700. Build artifacts and logs stay outside Git. One configured recovery
 workspace remains supported; multiple-workspace selection is future work. Runtime dependencies remain
 standard-library-only. Bash completion dynamically queries candidates and never probes devices/services.
+
+## Phase 3 image and evidence architecture
+
+`secripts.images` is independent of TWRP: common bounds/hash readers, content identification,
+Android containers, compression/CPIO, FDT/DTBO, ELF/uImage/vendor markers, AVB and optional
+providers. Recovery compatibility modules preserve existing consumers. Native content results
+are cached by SHA-256/parser version; external evidence is explicit and per-invocation.
+
+`recovery.model` stores source-linked local JSON facts with conflict detection; `recovery.planner`
+correlates those facts with static trees, manifest metadata and host constraints. Candidate
+derivation is a guarded local MUTATING operation with line provenance and no build-ready claim.
+New registry operations and recipes reuse the existing safety/receipt path. Model-management
+commands add structured source evidence, not arbitrary shell commands.
+
+See [Image Intelligence](image-intelligence.md), [Device Models](device-model.md),
+[research](research.md) and [credits](../CREDITS.md).

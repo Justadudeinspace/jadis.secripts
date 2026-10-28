@@ -24,7 +24,7 @@ class Parameter:
 
     def __post_init__(self):
         if (
-            self.name not in {"tree", "artifact", "device"}
+            self.name not in {"tree", "artifact", "device", "model", "output"}
             or self.kind not in {"text", "path"}
             or not self.description
         ):
@@ -116,6 +116,7 @@ class Registry:
 
 def registry() -> Registry:
     from secripts.arsenal import additional
+    from secripts.laboratory import operations as lab_operations
 
     def cmd(name, title, summary, category, argv, legacy=(), **kwargs):
         return Operation(
@@ -291,5 +292,6 @@ def registry() -> Registry:
                 handler="host",
             ),
             *additional(),
+            *lab_operations(),
         ]
     )

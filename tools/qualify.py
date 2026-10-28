@@ -13,6 +13,7 @@ commands = [
     [sys.executable, "-m", "ruff", "format", "--check", "."],
     [sys.executable, "-m", "pytest", "-q"],
     [sys.executable, "tools/secret_scan.py"],
+    [sys.executable, "tools/audit_docs.py"],
     [sys.executable, "-m", "build"],
 ]
 checks = []

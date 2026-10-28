@@ -34,3 +34,15 @@ Image decoding is bounded and non-extracting. Unsupported compression and unreso
 remain unresolved/partial evidence, never silently accepted as verified functionality. AVB declarations
 are untrusted; no signature, key trust, rollback or hardware claim follows. Receipt comparisons do not
 execute or replay commands. Current tree snapshots do not certify historical build inputs.
+
+## Phase 3 hostile input and derivation
+
+Archive members are never executed or extracted to archive-controlled names. Streamed inventory
+has member/total/depth caps; paths, symlinks, special files and likely keys are classified and
+excluded from promotion. Corpus signing keys are never used. [Research](research.md).
+
+Image parsers impose independent region/count/string/decompression limits, never execute payloads
+or follow CPIO links. Reports omit raw firmware contents and identifier-bearing bootconfig.
+Optional providers require explicit invocation with fixed argv/timeouts. Candidate trees require
+a new directory, safe names and source-linked architecture; TODOs remain unresolved. Model facts
+and plans preserve uncertainty. Neither model import nor derivation changes a connected device.

@@ -52,7 +52,7 @@ js run android.sdk.validate
 js run git.status --dry-run
 ```
 
-**63 operations across 18 categories** cover Git/GitHub, Python, Java, SDK, ADB/Fastboot, Termux,
+**70 operations across 19 categories** cover Git/GitHub, Python, Java, SDK, ADB/Fastboot, Termux,
 Linux/Debian, SSH, local networking, filesystem, environment, local AI tooling and Recovery Lab.
 The [generated catalog](docs/catalog.md) is the same contract consumed by search, execution and menus.
 Search ranks exact IDs, ID prefixes, titles, tags, categories, summaries and sanitized legacy filenames.
@@ -114,7 +114,7 @@ js recipe run twrp-tree-review --tree /path/to/tree --dry-run
 js recipe run post-build-verification --artifact /path/to/recovery.img
 ```
 
-**19 recipes** explain purpose and prerequisites, expose their operations, support dry-run and write a
+**23 recipes** explain purpose and prerequisites, expose their operations, support dry-run and write a
 parent receipt linking step receipts. They stop on invocation failure and retain uncertain evidence.
 Network recipes require `--network`; dry-runs never contact services. These are inspection/preparation
 workflows, not automatic package bootstraps, release publishing or device qualification.
@@ -136,6 +136,36 @@ unknown states. No root/reboot request is sent. Inspection is explicit operator 
 Serials are omitted from returned evidence, argv and receipts. Package names and CPU serial fields are
 not retained. Fastboot reads a fixed getvar allowlist, never `getvar all`, flash, unlock, erase or reboot.
 A device observation does not establish recovery functionality.
+
+## Image Intelligence and Recovery Device Models — 0.3.0
+
+```sh
+js inspect /path/to/boot.img --json
+js inspect /path/to/kernel --providers --json
+js run image.providers
+js recovery device create example
+js recovery device add-image example boot /path/to/boot.img
+js recovery device add-tree example /path/to/tree
+js recovery device report example --json
+js recovery tree diagnose /path/to/tree --json
+js recovery tree derive --device example --output /existing/parent/new-candidate
+js recovery plan example --json
+```
+
+The reusable Image Intelligence Engine handles Android containers, bounded compression/CPIO,
+FDT/DTBO, ELF, legacy uImage and FIT metadata, AVB and partial vendor-marker recognition.
+It never executes payloads. Optional installed `file`/`avbtool` evidence is explicit; structural
+inspection is not cryptographic verification. [Format support and bounds](docs/image-intelligence.md).
+
+Local Recovery Device Models retain source hashes, fact locations, confidence states and conflicts.
+Candidate derivation writes review-only configuration with per-line provenance and unresolved TODOs;
+it does not guess kernel paths, partition sizes or a functional fstab. The build planner explains
+host/source/tree/model blockers and candidate targets without syncing or compiling.
+[Device models and planning](docs/device-model.md). The cockpit/dossier show actual Image Lab
+capabilities, optional provider presence and local model/analysis counts.
+
+The supplied recovery corpus is inspected recursively under strict limits, outside Git. Historical
+tools are research input, never trusted executables. [Research coverage](docs/research.md).
 
 ## Recovery Lab
 
@@ -162,7 +192,7 @@ from conditional/external/unresolved evidence. No Makefile or dependency code is
 Image inspection supports Android boot headers v0–v4 and vendor_boot v3/v4, section bounds, ramdisk
 compression, bounded gzip/bzip2/XZ decoding, non-extracting newc CPIO metadata, DTB/bootconfig boundaries,
 vendor fragment tables and inferred init_boot candidates. Boot and recovery share a header: partition
-role cannot be proven from a filename. LZ4/Zstd are recognized but not decompressed natively.
+role cannot be proven from a filename. LZ4/Zstd are recognized but not decompressed natively. Phase 3 adds bounded LZ4 structural parsing.
 
 AVB footer/vbmeta parsing reports untrusted algorithm, rollback/flags and bounded hash-descriptor
 partition declarations. **No cryptographic signature, trusted-key, rollback enforcement, bootability or
@@ -238,3 +268,10 @@ No unit test downloads Android sources or touches devices. Synthetic fixtures ar
 CI uses a serial Python matrix and local checks; its observed results are recorded separately from local
 validation. See [verification](docs/verification.md), [architecture](docs/architecture.md) and
 [contributing](CONTRIBUTING.md) for evidence, limits and remaining qualification work.
+
+## Credits and attribution
+
+[CREDITS.md](CREDITS.md) identifies material specifications, developers, projects and research
+influences, with source and licensing boundaries. Detailed lineage lives in research provenance.
+Attribution and licensing review are required when adding an externally influenced capability;
+credits do not substitute for required license notices.

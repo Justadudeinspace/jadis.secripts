@@ -1,0 +1,234 @@
+{
+  "schema": 1,
+  "retrieved": "2026-10-28",
+  "relationship": "References/research, not copied or adapted third-party code",
+  "sources": [
+    {
+      "id": "aosp",
+      "name": "Android Open Source Project",
+      "url": "https://android.googlesource.com/platform/system/tools/mkbootimg/+/refs/heads/main/include/bootimg/bootimg.h",
+      "source_type": "primary",
+      "topic": "Android image section layouts",
+      "implementation_influence": "Specification; independent parsers",
+      "confidence": "HIGH",
+      "license_observation": "Per-file; bootimg header notice must be consulted",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    },
+    {
+      "id": "aosp-dtbo",
+      "name": "Android Open Source Project",
+      "url": "https://android.googlesource.com/platform/system/libufdt/+/refs/heads/main/utils/src/dt_table.h",
+      "source_type": "primary",
+      "topic": "DTBO table layout",
+      "implementation_influence": "Specification; native bounds parser",
+      "confidence": "HIGH",
+      "license_observation": "Apache-2.0 header verified",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    },
+    {
+      "id": "twrp",
+      "name": "Team Win Recovery Project",
+      "url": "https://github.com/TeamWin/android_bootable_recovery",
+      "source_type": "primary",
+      "topic": "Recovery architecture and source organization",
+      "implementation_influence": "Existing TWRP adapter; no source copied",
+      "confidence": "HIGH",
+      "license_observation": "See upstream per-file licenses",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    },
+    {
+      "id": "aik",
+      "name": "Android Image Kitchen \u2014 osm0sis",
+      "url": "https://github.com/osm0sis/Android-Image-Kitchen",
+      "source_type": "primary",
+      "topic": "Historical integration and tool families",
+      "implementation_influence": "Research only; no binaries/scripts trusted",
+      "confidence": "HIGH",
+      "license_observation": "Repository-level license not established",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    },
+    {
+      "id": "aik-authors",
+      "name": "Android Image Kitchen authors",
+      "url": "https://raw.githubusercontent.com/osm0sis/Android-Image-Kitchen/master/authors.txt",
+      "source_type": "primary",
+      "topic": "Underlying mkbootimg/ELF/MTK/Loki/Rockchip provenance",
+      "implementation_influence": "Historical lineage; distinguish original projects from patches",
+      "confidence": "HIGH",
+      "license_observation": "See each underlying project",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    },
+    {
+      "id": "file",
+      "name": "file/libmagic \u2014 Ian F. Darwin, Christos Zoulas and contributors",
+      "url": "https://raw.githubusercontent.com/file/file/master/COPYING",
+      "source_type": "primary",
+      "topic": "Authorship and classification tooling",
+      "implementation_influence": "Optional installed file provider, not bundled",
+      "confidence": "HIGH",
+      "license_observation": "BSD-style two-condition notice verified",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    },
+    {
+      "id": "lz4",
+      "name": "LZ4 \u2014 Yann Collet and contributors",
+      "url": "https://raw.githubusercontent.com/lz4/lz4/dev/doc/lz4_Frame_format.md",
+      "source_type": "primary",
+      "topic": "Frame/legacy/skippable boundaries and flags",
+      "implementation_influence": "Independent structural parser; no custom decompressor",
+      "confidence": "HIGH",
+      "license_observation": "Specification redistribution notice; library BSD-2-Clause, other code GPL-2.0-or-later unless specified",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    },
+    {
+      "id": "uboot",
+      "name": "Das U-Boot contributors",
+      "url": "https://docs.u-boot-project.org/en/latest/usage/fit/index.html",
+      "source_type": "primary",
+      "topic": "FIT is an FDT container; configuration metadata",
+      "implementation_influence": "Independent FIT/uImage metadata inspection",
+      "confidence": "HIGH",
+      "license_observation": "See upstream per-file licenses",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    },
+    {
+      "id": "uboot-header",
+      "name": "Das U-Boot image interface",
+      "url": "https://raw.githubusercontent.com/u-boot/u-boot/master/include/image.h",
+      "source_type": "primary",
+      "topic": "Legacy uImage field layout and identifiers",
+      "implementation_influence": "Independent parser; CRC is not signature verification",
+      "confidence": "HIGH",
+      "license_observation": "GPL-2.0+ header; no header copied",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    },
+    {
+      "id": "dt-spec",
+      "name": "Devicetree Specification contributors",
+      "url": "https://devicetree-specification.readthedocs.io/en/stable/flattened-format.html",
+      "source_type": "primary",
+      "topic": "FDT v17 tokens/regions/strings",
+      "implementation_influence": "Independent bounded parser",
+      "confidence": "HIGH",
+      "license_observation": "See upstream documentation license",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    },
+    {
+      "id": "linux",
+      "name": "Linux kernel contributors",
+      "url": "https://raw.githubusercontent.com/torvalds/linux/master/include/uapi/linux/elf.h",
+      "source_type": "primary",
+      "topic": "ELF class/endianness/header interfaces",
+      "implementation_influence": "Independent ELF parser",
+      "confidence": "HIGH",
+      "license_observation": "GPL-2.0 WITH Linux-syscall-note header; no header copied",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    },
+    {
+      "id": "cpio",
+      "name": "Linux early-userspace documentation",
+      "url": "https://www.kernel.org/doc/Documentation/early-userspace/buffer-format.txt",
+      "source_type": "primary",
+      "topic": "newc/CRC CPIO layout and initramfs context",
+      "implementation_influence": "Independent metadata inspection; no extraction",
+      "confidence": "HIGH",
+      "license_observation": "See upstream documentation license",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    },
+    {
+      "id": "lopestom",
+      "name": "lopestom public recovery research",
+      "url": "https://gist.github.com/lopestom",
+      "source_type": "community",
+      "topic": "Device-specific firmware/tree dependency research",
+      "implementation_influence": "Planner/derivation review boundaries; not authoritative build proof",
+      "confidence": "COMMUNITY_REFERENCE",
+      "license_observation": "Not established; no text/code copied",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    },
+    {
+      "id": "cygwin",
+      "name": "Cygwin project",
+      "url": "https://cygwin.com/licensing.html",
+      "source_type": "primary",
+      "topic": "POSIX compatibility does not establish native portability",
+      "implementation_influence": "Historical provider/path boundary research; Windows unsupported",
+      "confidence": "HIGH",
+      "license_observation": "API LGPLv3+ with exception; tools have independent licenses",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    },
+    {
+      "id": "mkmtkhdr",
+      "name": "OmniROM/AOSP MTK tooling, osm0sis integration",
+      "url": "https://github.com/osm0sis/mkmtkhdr/blob/master/mkmtkhdr.c",
+      "source_type": "primary",
+      "topic": "Historical legacy MTK header",
+      "implementation_influence": "Independent bounded recognition, no copied code",
+      "confidence": "HISTORICAL_REFERENCE",
+      "license_observation": "Complete tool licensing not established",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    },
+    {
+      "id": "loki",
+      "name": "Loki \u2014 djrbliss / Dan Rosenberg",
+      "url": "https://github.com/djrbliss/loki/blob/master/loki.h",
+      "source_type": "primary",
+      "topic": "Historical header marker only",
+      "implementation_influence": "Marker recognition only; no exploit or patch behavior",
+      "confidence": "HISTORICAL_REFERENCE",
+      "license_observation": "BSD-2-Clause verified in upstream LICENSE.txt; no source copied",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED",
+      "attribution_reference": "https://raw.githubusercontent.com/djrbliss/loki/master/LICENSE.txt"
+    },
+    {
+      "id": "avb",
+      "name": "Android Verified Boot \u2014 AOSP",
+      "url": "https://android.googlesource.com/platform/external/avb/+/refs/heads/main/README.md",
+      "source_type": "primary",
+      "topic": "AVB footer, vbmeta and descriptor semantics",
+      "implementation_influence": "Independent metadata parsing; no trust/rollback/crypto assertion",
+      "confidence": "HIGH",
+      "license_observation": "See upstream per-file notices",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    }
+  ],
+  "unavailable": [
+    {
+      "url": "https://www.darwinsys.com/file/",
+      "status": "502; upstream GitHub COPYING used"
+    },
+    {
+      "url": "https://xdaforums.com/t/tool-android-image-kitchen-unpack-repack-kernel-ramdisk-win-android-linux-mac.2073775/",
+      "status": "403; no thread-content claim"
+    },
+    {
+      "url": "https://xdaforums.com/t/dev-how-to-compile-twrp-touch-recovery.1943625/page-215#post-79086262",
+      "status": "Unavailable; no thread-content claim"
+    },
+    {
+      "url": "https://refspecs.linuxfoundation.org/elf/gabi4+/ch4.eheader.html",
+      "status": "Access denied; Linux UAPI used"
+    },
+    {
+      "url": "https://github.com/rockchip-linux/rkflashtool",
+      "status": "GitHub API 404; historical AIK attribution and corpus README retained"
+    }
+  ]
+}

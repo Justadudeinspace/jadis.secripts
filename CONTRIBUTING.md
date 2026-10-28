@@ -19,3 +19,9 @@ for the local gate and `python tools/validate.py` with the installed launcher on
 smoke must be explicit (`--devices`, `--network`); unit tests must mock both. Regenerate release provenance
 only from matching-release evidence. Build and exercise the wheel outside the checkout before claiming
 the entry point works. The repository is intended to remain private.
+
+Meaningful externally influenced capabilities require review of upstream authorship, licenses and
+notices. Update CREDITS.md and detailed research provenance before considering them complete.
+Do not guess names/licenses, substitute credits for notices, or use corpus binaries as providers.
+Run `python tools/audit_docs.py` and installed-launcher `python tools/validate_images.py` for
+Image Lab changes; the latter uses temporary synthetic fixtures and isolated runtime state.

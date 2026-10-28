@@ -65,6 +65,15 @@ CATEGORIES = [
     ),
 ]
 
+CATEGORIES.append(
+    (
+        "I",
+        "Image Intelligence",
+        "image",
+        "Inspect containers, ramdisks, DTB/DTBO, ELF and provider availability.",
+    )
+)
+
 
 def dashboard(*, devices=False):
     from secripts.dossier import dossier
@@ -77,6 +86,7 @@ def dashboard(*, devices=False):
     state = value["secripts"]
     recovery = value["recovery"]
     return {
+        "IMAGE LAB": value["image_lab"],
         "SYSTEM": value["host"],
         "DEVELOPMENT": {name: check["status"] for name, check in value["development"].items()},
         "ANDROID SDK": {
@@ -122,6 +132,11 @@ def recovery_console():
     print(
         "\nRECOVERY LAB // TWRP\n"
         "doctor                   Inspect prerequisites and workspace evidence.\n"
+        "device list              List local evidence-backed device models.\n"
+        "device inspect NAME      Show facts, sources and conflicts.\n"
+        "tree diagnose PATH       Explain static tree blockers and generation hints.\n"
+        "tree derive --help       Generate a traceable candidate only.\n"
+        "plan NAME                Plan from model, tree, source and host evidence.\n"
         "inspect IMAGE / --device Inspect headers or one authorized ADB device.\n"
         "tree audit PATH          Parse declarations without executing makefiles.\n"
         "configure                Show explicit source and target configuration.\n"

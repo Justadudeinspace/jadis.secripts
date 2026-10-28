@@ -32,6 +32,15 @@ def parser() -> argparse.ArgumentParser:
         item.add_argument("--json", action="store_true", help="Machine-readable output")
         return item
 
+    inspect = add("inspect", "Content-first Image Intelligence; no payload execution")
+    inspect.add_argument("path", type=Path)
+    inspect.add_argument(
+        "--providers",
+        action="store_true",
+        help="Explicitly invoke allowlisted installed metadata providers",
+    )
+    corpus = add("research", "Bounded recursive corpus inventory; never executes members")
+    corpus.add_argument("archives", nargs="+", type=Path)
     add("list", "List registered operations")
     find = add("find", "Ranked operation and recipe search")
     find.add_argument("query", nargs="?", default="")
@@ -57,7 +66,7 @@ def parser() -> argparse.ArgumentParser:
     r = add("run", "Execute a registered operation with a local receipt")
     r.add_argument("operation")
     r.add_argument("--dry-run", action="store_true")
-    for name in ("tree", "artifact", "device"):
+    for name in ("tree", "artifact", "device", "model", "output"):
         r.add_argument("--" + name)
     add("recipes", "List guided workflows")
     recipe = add("recipe", "Inspect or execute a recipe")
@@ -65,7 +74,7 @@ def parser() -> argparse.ArgumentParser:
     recipe.add_argument("name")
     recipe.add_argument("--dry-run", action="store_true")
     recipe.add_argument("--network", action="store_true")
-    for name in ("tree", "artifact", "device"):
+    for name in ("tree", "artifact", "device", "model", "output"):
         recipe.add_argument("--" + name)
     hist = add("history", "Filter local receipts; no replay")
     hist.add_argument("--operation")
@@ -100,8 +109,20 @@ def parser() -> argparse.ArgumentParser:
     inspect.add_argument("image", nargs="?", type=Path)
     inspect.add_argument("--device", action="store_true")
     tree = rec("tree", "Static device-tree evidence; never executes makefiles")
-    tree.add_argument("action", choices=["audit", "inspect"])
-    tree.add_argument("path", type=Path)
+    tree.add_argument("action", choices=["audit", "inspect", "diagnose", "derive"])
+    tree.add_argument("path", type=Path, nargs="?")
+    tree.add_argument("--device", dest="model")
+    tree.add_argument("--output", type=Path)
+    tree.add_argument("--dry-run", action="store_true")
+    plan = rec("plan", "Build plan from model evidence; no source acquisition/build")
+    plan.add_argument("model")
+    device = rec("device", "Manage local evidence-backed recovery models")
+    device.add_argument(
+        "action",
+        choices=["create", "list", "add-image", "add-tree", "add-metadata", "inspect", "report"],
+    )
+    device.add_argument("name", nargs="?")
+    device.add_argument("inputs", nargs="*")
     init = rec("init", "Configure one isolated workspace; no source download")
     init.add_argument("device")
     for option in ("root", "tree"):
@@ -165,8 +186,38 @@ def recovery_dispatch(a):
     cmd = a.recovery_command
     if cmd in (None, "doctor"):
         return w.recovery_doctor()
+    if cmd == "device":
+        from secripts.recovery import model
+
+        if a.action == "list":
+            return model.catalog()
+        if not a.name:
+            raise SecError("Device model name required", 2)
+        if a.action == "create":
+            return model.create(a.name)
+        if a.action in ("inspect", "report"):
+            return model.report(a.name)
+        if a.action == "add-image" and len(a.inputs) == 2:
+            return model.add_image(a.name, a.inputs[0], Path(a.inputs[1]))
+        if a.action == "add-tree" and len(a.inputs) == 1:
+            return model.add_tree(a.name, Path(a.inputs[0]))
+        if a.action == "add-metadata" and len(a.inputs) == 1:
+            return model.add_metadata(a.name, Path(a.inputs[0]))
+        raise SecError("Invalid device evidence arguments; use --help", 2)
+    if cmd == "plan":
+        from secripts.operations import execute
+
+        return execute("recovery.plan", parameters={"model": a.model})
     if cmd == "tree":
-        return audit_tree(a.path)
+        from secripts.recovery.planner import derive, diagnose
+
+        if a.action == "derive":
+            if not a.model or not a.output:
+                raise SecError("Derivation requires --device MODEL --output PATH", 2)
+            return derive(a.model, a.output, a.dry_run)
+        if a.path is None:
+            raise SecError("Tree path required", 2)
+        return diagnose(a.path) if a.action == "diagnose" else audit_tree(a.path)
     if cmd in ("inspect", "verify"):
         if cmd == "inspect" and a.device:
             if a.image:
@@ -234,6 +285,46 @@ def dispatch(a):
     from secripts.registry import registry
 
     cmd = a.command
+    if cmd == "inspect":
+        from secripts.images.engine import inspect
+        from secripts.receipts import save
+
+        value = inspect(a.path, providers=a.providers)
+        receipt = save(
+            "image.inspect",
+            "READ_ONLY",
+            [],
+            result="FAIL" if value["structure_status"] == "FAIL" else "PASS",
+            file_sha256=value["sha256"],
+            parser_version=value["parser_version"],
+            evidence=value,
+            warnings=value["warnings"],
+            unresolved=value["qualification"],
+        )
+        return {
+            **value,
+            "receipt_id": receipt["receipt_id"],
+            "exit_code": 1 if value["structure_status"] == "FAIL" else 0,
+        }
+    if cmd == "research":
+        from secripts.corpus import inventory
+        from secripts.context import data_dir
+        from secripts.receipts import write_json, save
+
+        value = inventory(a.archives)
+        output = data_dir() / "research/corpus-inventory.json"
+        write_json(output, value)
+        receipt = save(
+            "research.inventory",
+            "READ_ONLY",
+            [],
+            result="PASS",
+            artifacts=[{"path": str(output)}],
+            warnings=["No corpus contents imported or executed"],
+        )
+        return {k: v for k, v in value.items() if k != "components"} | {
+            "receipt_id": receipt["receipt_id"]
+        }
     if cmd == "dossier":
         from secripts.dossier import dossier
 
@@ -293,7 +384,9 @@ def dispatch(a):
         from secripts.operations import execute
 
         return execute(
-            a.operation, a.dry_run, {k: getattr(a, k) for k in ("tree", "artifact", "device")}
+            a.operation,
+            a.dry_run,
+            {k: getattr(a, k) for k in ("tree", "artifact", "device", "model", "output")},
         )
     if cmd in ("recipes", "recipe"):
         from secripts.recipes import RECIPES, get, run
@@ -306,7 +399,7 @@ def dispatch(a):
             else run(
                 a.name,
                 a.dry_run,
-                {k: getattr(a, k) for k in ("tree", "artifact", "device")},
+                {k: getattr(a, k) for k in ("tree", "artifact", "device", "model", "output")},
                 network=a.network,
             )
         )
@@ -370,19 +463,25 @@ def main(argv=None) -> int:
         return value.get("exit_code", 0) if isinstance(value, dict) else 0
     except SecError as exc:
         evidence = {"error": str(exc), "exit_code": exc.code}
-        if a.command == "recovery" and a.recovery_command in (
-            "sync",
-            "build",
-            "boot",
-            "inspect",
-            "verify",
+        if a.command == "inspect" or (
+            a.command == "recovery"
+            and a.recovery_command
+            in (
+                "sync",
+                "build",
+                "boot",
+                "inspect",
+                "verify",
+            )
         ):
             from secripts.receipts import save
 
             try:
                 evidence["receipt_id"] = save(
-                    f"recovery.{a.recovery_command}",
-                    "MUTATING" if a.recovery_command in ("sync", "build", "boot") else "READ_ONLY",
+                    "image.inspect" if a.command == "inspect" else f"recovery.{a.recovery_command}",
+                    "MUTATING"
+                    if getattr(a, "recovery_command", None) in ("sync", "build", "boot")
+                    else "READ_ONLY",
                     [],
                     result="REFUSED" if exc.code == 4 else "FAIL",
                     warnings=[str(exc)],

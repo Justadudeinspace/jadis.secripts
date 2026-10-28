@@ -24,6 +24,8 @@ def candidates(words):
     if previous == "recovery":
         return [
             "doctor",
+            "device",
+            "plan",
             "inspect",
             "tree",
             "init",
@@ -37,9 +39,13 @@ def candidates(words):
             "clean",
         ]
     if previous == "tree":
-        return ["audit", "inspect"]
+        return ["audit", "inspect", "diagnose", "derive"]
     if previous == "device":
-        return ["inspect", "transports", "fastboot"]
+        return (
+            ["inspect", "transports", "fastboot"]
+            if "recovery" not in words
+            else ["create", "list", "add-image", "add-tree", "add-metadata", "inspect", "report"]
+        )
     return (
         commands
         if len(words) < 2

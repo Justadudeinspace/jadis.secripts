@@ -1,11 +1,11 @@
 {
   "schema": 1,
-  "release": "0.2.0",
+  "release": "0.3.0",
   "operations": [
     {
       "operation": "git.status",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [
         {
@@ -36,7 +36,7 @@
     {
       "operation": "git.branches",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [
         {
@@ -66,7 +66,7 @@
     {
       "operation": "git.remotes",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [
         {
@@ -96,7 +96,7 @@
     {
       "operation": "git.log",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [
         {
@@ -126,7 +126,7 @@
     {
       "operation": "git.integrity",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [
         {
@@ -156,7 +156,7 @@
     {
       "operation": "github.auth",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -176,7 +176,7 @@
     {
       "operation": "adb.devices",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [
         {
@@ -207,7 +207,7 @@
     {
       "operation": "adb.version",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [
         {
@@ -238,7 +238,7 @@
     {
       "operation": "fastboot.devices",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [
         {
@@ -269,7 +269,7 @@
     {
       "operation": "fastboot.version",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [
         {
@@ -300,7 +300,7 @@
     {
       "operation": "android.sdk.validate",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [
         {
@@ -340,7 +340,7 @@
     {
       "operation": "environment.path",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -361,7 +361,7 @@
     {
       "operation": "environment.runtimes",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [
         {
@@ -391,7 +391,7 @@
     {
       "operation": "termux.inspect",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [
         {
@@ -421,7 +421,7 @@
     {
       "operation": "debian.packages",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [
         {
@@ -451,7 +451,7 @@
     {
       "operation": "ssh.version",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -471,7 +471,7 @@
     {
       "operation": "models.ollama",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -491,7 +491,7 @@
     {
       "operation": "network.interfaces",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -511,7 +511,7 @@
     {
       "operation": "repo.disk",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -531,7 +531,7 @@
     {
       "operation": "diagnostics.host",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -551,7 +551,7 @@
     {
       "operation": "git.root",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -571,7 +571,7 @@
     {
       "operation": "git.branch",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -591,7 +591,7 @@
     {
       "operation": "git.health",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -612,7 +612,7 @@
     {
       "operation": "git.tags",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -632,7 +632,7 @@
     {
       "operation": "git.worktrees",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -652,7 +652,7 @@
     {
       "operation": "git.submodules",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -672,7 +672,7 @@
     {
       "operation": "git.stashes",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -692,7 +692,7 @@
     {
       "operation": "git.ignored",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -712,7 +712,7 @@
     {
       "operation": "git.untracked",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -732,7 +732,7 @@
     {
       "operation": "git.changed",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -752,7 +752,7 @@
     {
       "operation": "git.largest",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -772,7 +772,7 @@
     {
       "operation": "git.objects",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -792,7 +792,7 @@
     {
       "operation": "git.contributors",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -812,7 +812,7 @@
     {
       "operation": "git.cleanup",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -832,7 +832,7 @@
     {
       "operation": "git.signatures",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -852,7 +852,7 @@
     {
       "operation": "git.remote",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -872,7 +872,7 @@
     {
       "operation": "github.repository",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -893,7 +893,7 @@
     {
       "operation": "github.pulls",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -913,7 +913,7 @@
     {
       "operation": "github.workflows",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -934,7 +934,7 @@
     {
       "operation": "github.releases",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -954,7 +954,7 @@
     {
       "operation": "github.issues",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -974,7 +974,7 @@
     {
       "operation": "python.environment",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -995,7 +995,7 @@
     {
       "operation": "python.project",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -1016,7 +1016,7 @@
     {
       "operation": "python.editables",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -1036,7 +1036,7 @@
     {
       "operation": "python.dependencies",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -1056,7 +1056,7 @@
     {
       "operation": "java.environment",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -1077,7 +1077,7 @@
     {
       "operation": "adb.inspect",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -1097,7 +1097,7 @@
     {
       "operation": "fastboot.inspect",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -1117,7 +1117,7 @@
     {
       "operation": "linux.environment",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -1137,7 +1137,7 @@
     {
       "operation": "linux.packages",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -1157,7 +1157,7 @@
     {
       "operation": "network.configuration",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -1177,7 +1177,7 @@
     {
       "operation": "network.routes",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -1197,7 +1197,7 @@
     {
       "operation": "network.sockets",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -1217,7 +1217,7 @@
     {
       "operation": "ssh.environment",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -1237,7 +1237,7 @@
     {
       "operation": "ssh.agent",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -1257,7 +1257,7 @@
     {
       "operation": "ssh.github",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -1277,7 +1277,7 @@
     {
       "operation": "filesystem.capacity",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -1297,7 +1297,7 @@
     {
       "operation": "environment.xdg",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -1317,7 +1317,7 @@
     {
       "operation": "models.environment",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -1337,7 +1337,7 @@
     {
       "operation": "diagnostics.system",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -1357,7 +1357,7 @@
     {
       "operation": "recovery.doctor",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -1377,7 +1377,7 @@
     {
       "operation": "recovery.tree",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",
@@ -1397,7 +1397,147 @@
     {
       "operation": "recovery.image",
       "created": "2026-10-28",
-      "release": "0.2.0",
+      "release": "0.3.0",
+      "version": 1,
+      "legacy": [],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "image.inspect",
+      "created": "2026-10-28",
+      "release": "0.3.0",
+      "version": 1,
+      "legacy": [],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "image.providers",
+      "created": "2026-10-28",
+      "release": "0.3.0",
+      "version": 1,
+      "legacy": [],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "recovery.model",
+      "created": "2026-10-28",
+      "release": "0.3.0",
+      "version": 1,
+      "legacy": [],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "recovery.diagnose",
+      "created": "2026-10-28",
+      "release": "0.3.0",
+      "version": 1,
+      "legacy": [],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "recovery.plan",
+      "created": "2026-10-28",
+      "release": "0.3.0",
+      "version": 1,
+      "legacy": [],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "recovery.host",
+      "created": "2026-10-28",
+      "release": "0.3.0",
+      "version": 1,
+      "legacy": [],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "recovery.derive",
+      "created": "2026-10-28",
+      "release": "0.3.0",
       "version": 1,
       "legacy": [],
       "implementation": "New engineering",

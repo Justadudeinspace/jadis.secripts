@@ -117,6 +117,31 @@ RECIPES.update(
     }
 )
 
+RECIPES.update(
+    {
+        "image-analysis": _recipe(
+            "Image analysis",
+            "Inspect image structures and optional-provider availability; no providers executed.",
+            ["image.inspect", "image.providers"],
+        ),
+        "recovery-tree-diagnosis": _recipe(
+            "Recovery tree diagnosis",
+            "Audit and explain unresolved tree/source dependencies.",
+            ["recovery.tree", "recovery.diagnose"],
+        ),
+        "recovery-build-plan": _recipe(
+            "Recovery build planning",
+            "Inspect model conflicts, host evidence and build blockers.",
+            ["recovery.model", "recovery.host", "recovery.plan"],
+        ),
+        "recovery-tree-derivation": _recipe(
+            "Candidate tree derivation",
+            "Review model and generate a new traceable candidate, never a build-ready claim.",
+            ["recovery.model", "recovery.derive"],
+        ),
+    }
+)
+
 
 def get(name: str) -> dict:
     from secripts.registry import registry

@@ -20,3 +20,13 @@ Use `python tools/qualify.py`, then installed-launcher `python tools/validate.py
 `python tools/provenance.py`. Evidence records are local runtime state, not Git. Public metadata
 contains no captured outputs or device identifiers. Operation IDs and old receipts survive the CLI
 namespace migration unchanged; historical runtime receipts are not rewritten.
+
+## Research and attribution provenance — 0.3.0
+
+`src/secripts/data/research.json` records public source IDs, retrieval dates, topics, influence,
+confidence, license observations and failed access attempts. Image reports attach source IDs
+and observed header offsets/version; model facts link source hashes/locations. Candidate
+configuration has per-line evidence and explicit review requirements. The sanitized corpus
+summary is separate from private local inventory. [CREDITS.md](../CREDITS.md) is the human
+project-level view; it cannot replace source license/notice obligations. Every externally
+influenced capability requires attribution/licensing review before completion.
