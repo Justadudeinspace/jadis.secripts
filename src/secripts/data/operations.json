@@ -1,0 +1,551 @@
+{
+  "schema": 1,
+  "operations": [
+    {
+      "operation": "git.status",
+      "created": "2026-10-28",
+      "version": 1,
+      "legacy": [
+        {
+          "id": "legacy-0136",
+          "source": "Getting_Started_Git.txt",
+          "source_sha256": "a7dd0e9fd7db6ae1ff51f570d492fed7f3b916f559bace0c8ca59c54d863b8b9",
+          "classification": "EXTRACT",
+          "duplicate_group": null,
+          "contained_secrets": false,
+          "review": "Intent/command review; rewritten independently, no source content imported"
+        }
+      ],
+      "implementation": "Independent rewrite of safe intent",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Read-only argv or static environment inspection; shared safety contract"
+      },
+      "verification": {
+        "static": "PASS",
+        "shared_unit_contract": "PASS",
+        "environment": {
+          "invocation": "PASS",
+          "exit_code": 0
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "git.branches",
+      "created": "2026-10-28",
+      "version": 1,
+      "legacy": [
+        {
+          "id": "legacy-0136",
+          "source": "Getting_Started_Git.txt",
+          "source_sha256": "a7dd0e9fd7db6ae1ff51f570d492fed7f3b916f559bace0c8ca59c54d863b8b9",
+          "classification": "EXTRACT",
+          "duplicate_group": null,
+          "contained_secrets": false,
+          "review": "Intent/command review; rewritten independently, no source content imported"
+        }
+      ],
+      "implementation": "Independent rewrite of safe intent",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Read-only argv or static environment inspection; shared safety contract"
+      },
+      "verification": {
+        "static": "PASS",
+        "shared_unit_contract": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "git.remotes",
+      "created": "2026-10-28",
+      "version": 1,
+      "legacy": [
+        {
+          "id": "legacy-0122",
+          "source": "git.md",
+          "source_sha256": "a2f3b00219e3b7cb14996653899c2c1b9aa60cd1174e0c56cfbb1f5bbb9bda93",
+          "classification": "EXTRACT",
+          "duplicate_group": null,
+          "contained_secrets": false,
+          "review": "Intent/command review; rewritten independently, no source content imported"
+        }
+      ],
+      "implementation": "Independent rewrite of safe intent",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Read-only argv or static environment inspection; shared safety contract"
+      },
+      "verification": {
+        "static": "PASS",
+        "shared_unit_contract": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "git.log",
+      "created": "2026-10-28",
+      "version": 1,
+      "legacy": [
+        {
+          "id": "legacy-0136",
+          "source": "Getting_Started_Git.txt",
+          "source_sha256": "a7dd0e9fd7db6ae1ff51f570d492fed7f3b916f559bace0c8ca59c54d863b8b9",
+          "classification": "EXTRACT",
+          "duplicate_group": null,
+          "contained_secrets": false,
+          "review": "Intent/command review; rewritten independently, no source content imported"
+        }
+      ],
+      "implementation": "Independent rewrite of safe intent",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Read-only argv or static environment inspection; shared safety contract"
+      },
+      "verification": {
+        "static": "PASS",
+        "shared_unit_contract": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "git.integrity",
+      "created": "2026-10-28",
+      "version": 1,
+      "legacy": [
+        {
+          "id": "legacy-0136",
+          "source": "Getting_Started_Git.txt",
+          "source_sha256": "a7dd0e9fd7db6ae1ff51f570d492fed7f3b916f559bace0c8ca59c54d863b8b9",
+          "classification": "EXTRACT",
+          "duplicate_group": null,
+          "contained_secrets": false,
+          "review": "Intent/command review; rewritten independently, no source content imported"
+        }
+      ],
+      "implementation": "Independent rewrite of safe intent",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Read-only argv or static environment inspection; shared safety contract"
+      },
+      "verification": {
+        "static": "PASS",
+        "shared_unit_contract": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "github.auth",
+      "created": "2026-10-28",
+      "version": 1,
+      "legacy": [],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Read-only argv or static environment inspection; shared safety contract"
+      },
+      "verification": {
+        "static": "PASS",
+        "shared_unit_contract": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "adb.devices",
+      "created": "2026-10-28",
+      "version": 1,
+      "legacy": [
+        {
+          "id": "legacy-0000",
+          "source": "adb-all.txt",
+          "source_sha256": "d1f7a0efbef710052da1ec8d69583f75b0adb7f161be201081ceb5a441591acf",
+          "classification": "EXTRACT",
+          "duplicate_group": null,
+          "contained_secrets": false,
+          "review": "Intent/command review; rewritten independently, no source content imported"
+        }
+      ],
+      "implementation": "Independent rewrite of safe intent",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Read-only argv or static environment inspection; shared safety contract"
+      },
+      "verification": {
+        "static": "PASS",
+        "shared_unit_contract": "PASS",
+        "environment": {
+          "invocation": "PASS",
+          "exit_code": 0
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "adb.version",
+      "created": "2026-10-28",
+      "version": 1,
+      "legacy": [
+        {
+          "id": "legacy-0009",
+          "source": "adb.txt",
+          "source_sha256": "015bf497c0eb7a247060243e0aea23d1f980c2c7b9b77fdb8a87d6a61324b8bd",
+          "classification": "EXTRACT",
+          "duplicate_group": null,
+          "contained_secrets": false,
+          "review": "Intent/command review; rewritten independently, no source content imported"
+        }
+      ],
+      "implementation": "Independent rewrite of safe intent",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Read-only argv or static environment inspection; shared safety contract"
+      },
+      "verification": {
+        "static": "PASS",
+        "shared_unit_contract": "PASS",
+        "environment": {
+          "invocation": "PASS",
+          "exit_code": 0
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "fastboot.devices",
+      "created": "2026-10-28",
+      "version": 1,
+      "legacy": [
+        {
+          "id": "legacy-0032",
+          "source": "twrp-instructions-and-plugin-upgrade.md",
+          "source_sha256": "c561d6ba6a7ce7a718e57e69b3630b82332c1d77394ab6d86e4205a05ea0b41a",
+          "classification": "EXTRACT",
+          "duplicate_group": null,
+          "contained_secrets": false,
+          "review": "Intent/command review; rewritten independently, no source content imported"
+        }
+      ],
+      "implementation": "Independent rewrite of safe intent",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Read-only argv or static environment inspection; shared safety contract"
+      },
+      "verification": {
+        "static": "PASS",
+        "shared_unit_contract": "PASS",
+        "environment": {
+          "invocation": "PASS",
+          "exit_code": 0
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "fastboot.version",
+      "created": "2026-10-28",
+      "version": 1,
+      "legacy": [
+        {
+          "id": "legacy-0032",
+          "source": "twrp-instructions-and-plugin-upgrade.md",
+          "source_sha256": "c561d6ba6a7ce7a718e57e69b3630b82332c1d77394ab6d86e4205a05ea0b41a",
+          "classification": "EXTRACT",
+          "duplicate_group": null,
+          "contained_secrets": false,
+          "review": "Intent/command review; rewritten independently, no source content imported"
+        }
+      ],
+      "implementation": "Independent rewrite of safe intent",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Read-only argv or static environment inspection; shared safety contract"
+      },
+      "verification": {
+        "static": "PASS",
+        "shared_unit_contract": "PASS",
+        "environment": {
+          "invocation": "PASS",
+          "exit_code": 0
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "android.sdk.validate",
+      "created": "2026-10-28",
+      "version": 1,
+      "legacy": [
+        {
+          "id": "legacy-0003",
+          "source": "install-android-dependencies.txt",
+          "source_sha256": "0b21bdf185d754a5da0fb45752fecf52b38957ace4f1f2e4c2c2cfee5d045aac",
+          "classification": "EXTRACT",
+          "duplicate_group": null,
+          "contained_secrets": false,
+          "review": "Intent/command review; rewritten independently, no source content imported"
+        },
+        {
+          "id": "legacy-0013",
+          "source": "add-android-licenses-validation.txt",
+          "source_sha256": "b7633bc2e725b5a2a1e3ea0c65a3c1a0eec3d08297c85c8bdc2277d3aa5024f5",
+          "classification": "EXTRACT",
+          "duplicate_group": null,
+          "contained_secrets": false,
+          "review": "Intent/command review; rewritten independently, no source content imported"
+        }
+      ],
+      "implementation": "Independent rewrite of safe intent",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Read-only argv or static environment inspection; shared safety contract"
+      },
+      "verification": {
+        "static": "PASS",
+        "shared_unit_contract": "PASS",
+        "environment": {
+          "invocation": "PASS",
+          "exit_code": 0
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "environment.path",
+      "created": "2026-10-28",
+      "version": 1,
+      "legacy": [],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Read-only argv or static environment inspection; shared safety contract"
+      },
+      "verification": {
+        "static": "PASS",
+        "shared_unit_contract": "PASS",
+        "environment": {
+          "invocation": "PASS",
+          "exit_code": 0
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "environment.runtimes",
+      "created": "2026-10-28",
+      "version": 1,
+      "legacy": [
+        {
+          "id": "legacy-0024",
+          "source": "debian-dev-bootstrap.sh",
+          "source_sha256": "41ea6e0f678c4357a742129c6ae7450a1e2999a832b29ca1814b17059845335c",
+          "classification": "EXTRACT",
+          "duplicate_group": null,
+          "contained_secrets": false,
+          "review": "Intent/command review; rewritten independently, no source content imported"
+        }
+      ],
+      "implementation": "Independent rewrite of safe intent",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Read-only argv or static environment inspection; shared safety contract"
+      },
+      "verification": {
+        "static": "PASS",
+        "shared_unit_contract": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "termux.inspect",
+      "created": "2026-10-28",
+      "version": 1,
+      "legacy": [
+        {
+          "id": "legacy-0024",
+          "source": "debian-dev-bootstrap.sh",
+          "source_sha256": "41ea6e0f678c4357a742129c6ae7450a1e2999a832b29ca1814b17059845335c",
+          "classification": "EXTRACT",
+          "duplicate_group": null,
+          "contained_secrets": false,
+          "review": "Intent/command review; rewritten independently, no source content imported"
+        }
+      ],
+      "implementation": "Independent rewrite of safe intent",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Read-only argv or static environment inspection; shared safety contract"
+      },
+      "verification": {
+        "static": "PASS",
+        "shared_unit_contract": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "debian.packages",
+      "created": "2026-10-28",
+      "version": 1,
+      "legacy": [
+        {
+          "id": "legacy-0024",
+          "source": "debian-dev-bootstrap.sh",
+          "source_sha256": "41ea6e0f678c4357a742129c6ae7450a1e2999a832b29ca1814b17059845335c",
+          "classification": "EXTRACT",
+          "duplicate_group": null,
+          "contained_secrets": false,
+          "review": "Intent/command review; rewritten independently, no source content imported"
+        }
+      ],
+      "implementation": "Independent rewrite of safe intent",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Read-only argv or static environment inspection; shared safety contract"
+      },
+      "verification": {
+        "static": "PASS",
+        "shared_unit_contract": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "ssh.version",
+      "created": "2026-10-28",
+      "version": 1,
+      "legacy": [],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Read-only argv or static environment inspection; shared safety contract"
+      },
+      "verification": {
+        "static": "PASS",
+        "shared_unit_contract": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "models.ollama",
+      "created": "2026-10-28",
+      "version": 1,
+      "legacy": [],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Read-only argv or static environment inspection; shared safety contract"
+      },
+      "verification": {
+        "static": "PASS",
+        "shared_unit_contract": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "network.interfaces",
+      "created": "2026-10-28",
+      "version": 1,
+      "legacy": [],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Read-only argv or static environment inspection; shared safety contract"
+      },
+      "verification": {
+        "static": "PASS",
+        "shared_unit_contract": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "repo.disk",
+      "created": "2026-10-28",
+      "version": 1,
+      "legacy": [],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Read-only argv or static environment inspection; shared safety contract"
+      },
+      "verification": {
+        "static": "PASS",
+        "shared_unit_contract": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "diagnostics.host",
+      "created": "2026-10-28",
+      "version": 1,
+      "legacy": [],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Read-only argv or static environment inspection; shared safety contract"
+      },
+      "verification": {
+        "static": "PASS",
+        "shared_unit_contract": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    }
+  ]
+}

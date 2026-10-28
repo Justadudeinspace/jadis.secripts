@@ -33,3 +33,17 @@ google-services.json
 
 # Android Profiling
 *.hprof
+
+# Python and local execution evidence
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+builds/
+.coverage
+.env
+*.zip
+.venv-*/
