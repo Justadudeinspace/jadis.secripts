@@ -21,7 +21,7 @@ reviewed = {
 for row in value["artifacts"]:
     replacements = [op.id for op in registry().search() if row["id"] in op.legacy]
     if row["id"] == "legacy-0032":
-        replacements += ["sec recovery tree audit", "sec recovery build"]
+        replacements += ["js recovery tree audit", "js recovery build"]
     if row["classification"] == "EXTRACT" and row["id"] not in reviewed:
         row["classification"] = "ARCHIVE"
         row["reason"] = (

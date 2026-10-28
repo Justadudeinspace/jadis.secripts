@@ -63,3 +63,41 @@ def scan_paths(paths: list[Path]) -> list[str]:
         for p in paths
         if p.is_file() and contains_secret(p.read_bytes().decode("utf-8", errors="replace"))
     ]
+
+
+def mask_identifiers(value, identifiers=()):
+    """Remove explicitly collected device identifiers from every string, including argv/output."""
+    if isinstance(value, dict):
+        return {k: mask_identifiers(v, identifiers) for k, v in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [mask_identifiers(v, identifiers) for v in value]
+    if isinstance(value, str):
+        for identifier in sorted(set(identifiers), key=len, reverse=True):
+            if identifier:
+                value = value.replace(identifier, "[REDACTED_IDENTIFIER]")
+    return value
+
+
+def sanitize_evidence(value):
+    """Also mask explicitly named identifiers in legacy receipts before sharing/comparing."""
+    identifiers = []
+
+    def collect(item):
+        if isinstance(item, dict):
+            for key, child in item.items():
+                if str(key).lower() in {
+                    "serial",
+                    "serial_number",
+                    "device_serial",
+                    "imei",
+                    "imsi",
+                    "android_id",
+                } and isinstance(child, str):
+                    identifiers.append(child)
+                collect(child)
+        elif isinstance(item, (tuple, list)):
+            for child in item:
+                collect(child)
+
+    collect(value)
+    return redact(mask_identifiers(value, identifiers))

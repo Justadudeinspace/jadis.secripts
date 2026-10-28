@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "jadis-secripts"
-version = "0.1.0"
+version = "0.2.0"
 description = "JADIS personal developer operations arsenal and Android Recovery Laboratory"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -16,7 +16,7 @@ dependencies = []
 dev = ["pytest>=8", "ruff>=0.9", "build>=1"]
 
 [project.scripts]
-sec = "secripts.cli:main"
+js = "secripts.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

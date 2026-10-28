@@ -8,7 +8,7 @@ import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from secripts.context import data_dir, host
-from secripts.secrets import redact
+from secripts.secrets import sanitize_evidence
 from secripts.safety import SecError
 
 
@@ -18,7 +18,7 @@ def write_json(path: Path, value) -> None:
     try:
         with temp.open("x", encoding="utf-8") as stream:
             os.chmod(temp, 0o600)
-            json.dump(redact(value), stream, indent=2, ensure_ascii=True)
+            json.dump(sanitize_evidence(value), stream, indent=2, ensure_ascii=True)
             stream.write("\n")
         temp.replace(path)
     finally:
@@ -30,6 +30,11 @@ def save(operation: str, risk: str, commands: list, **extra) -> dict:
         "receipt_id": uuid.uuid4().hex,
         "operation": operation,
         "operation_version": 1,
+        "secripts_version": __import__("secripts").__version__,
+        "association": {
+            "cwd": str(Path.cwd()),
+            "environment": {"python": host()["python"], "architecture": host()["architecture"]},
+        },
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "host": socket.gethostname(),
         "platform": host(),
@@ -44,7 +49,7 @@ def save(operation: str, risk: str, commands: list, **extra) -> dict:
         "warnings": [],
         **extra,
     }
-    value = redact(value)
+    value = sanitize_evidence(value)
     write_json(data_dir() / "receipts" / f"{value['receipt_id']}.json", value)
     return value
 
@@ -60,14 +65,19 @@ def load(receipt_id: str) -> dict:
             or not isinstance(value.get("operation"), str)
             or not isinstance(value.get("commands"), list)
             or not isinstance(value.get("result"), str)
+            or not all(isinstance(command, dict) for command in value.get("commands", []))
+            or not isinstance(value.get("artifacts", []), list)
+            or not all(isinstance(artifact, dict) for artifact in value.get("artifacts", []))
         ):
             raise ValueError()
-        return redact(value)
+        return sanitize_evidence(value)
     except (OSError, ValueError) as exc:
         raise SecError("Receipt missing or corrupted", 1) from exc
 
 
-def history() -> list:
+def history(
+    *, operation=None, failed=False, limit=None, since=None, result=None, artifact=None
+) -> list:
     root = data_dir() / "receipts"
     records = []
     for path in sorted(root.glob("*.json"), reverse=True):
@@ -75,4 +85,87 @@ def history() -> list:
             records.append(load(path.stem))
         except SecError:
             records.append({"receipt_id": path.stem, "result": "CORRUPTED"})
-    return sorted(records, key=lambda r: r.get("timestamp", ""), reverse=True)
+    records = sorted(records, key=lambda r: (r.get("timestamp", ""), r["receipt_id"]), reverse=True)
+    if since:
+        try:
+            cutoff = datetime.fromisoformat(since.replace("Z", "+00:00"))
+            if cutoff.tzinfo is None:
+                cutoff = cutoff.replace(tzinfo=timezone.utc)
+        except ValueError as exc:
+            raise SecError("--since requires an ISO date/time", 2) from exc
+    filtered = []
+    for row in records:
+        if operation and row.get("operation") != operation:
+            continue
+        if result and row.get("result") != result:
+            continue
+        if failed and row.get("result") not in {
+            "FAIL",
+            "MISSING",
+            "TIMEOUT",
+            "REFUSED",
+            "CORRUPTED",
+        }:
+            continue
+        if artifact and not any(
+            artifact in (a.get("path"), a.get("sha256"))
+            for a in row.get("artifacts", [])
+            if isinstance(a, dict)
+        ):
+            continue
+        if since:
+            try:
+                stamp = datetime.fromisoformat(row.get("timestamp", "").replace("Z", "+00:00"))
+                if stamp.tzinfo is None:
+                    stamp = stamp.replace(tzinfo=timezone.utc)
+                if stamp < cutoff:
+                    continue
+            except ValueError:
+                continue
+        filtered.append(row)
+    if limit is not None and limit < 0:
+        raise SecError("--limit must be nonnegative", 2)
+    return filtered if limit is None else filtered[:limit]
+
+
+def latest(*, failed=False):
+    records = history(failed=failed, limit=1)
+    if not records:
+        raise SecError("No matching receipt", 3)
+    return records[0]
+
+
+def summary(value):
+    return {
+        k: value.get(k)
+        for k in (
+            "receipt_id",
+            "operation",
+            "timestamp",
+            "result",
+            "duration",
+            "artifacts",
+            "association",
+        )
+    }
+
+
+def compare(first, second):
+    a = latest() if first == "latest" else load(first)
+    b = latest() if second == "latest" else load(second)
+    changes = []
+
+    def walk(left, right, path=""):
+        if isinstance(left, dict) and isinstance(right, dict):
+            for key in sorted(set(left) | set(right)):
+                walk(left.get(key), right.get(key), f"{path}/{key}")
+        elif left != right:
+            changes.append({"path": path, "before": left, "after": right})
+
+    walk(a, b)
+    return {
+        "first": a["receipt_id"],
+        "second": b["receipt_id"],
+        "changes": changes,
+        "note": "Evidence comparison only; commands are not replayed",
+    }

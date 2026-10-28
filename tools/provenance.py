@@ -1,31 +1,38 @@
-"""Publish verification metadata only, never local command output or host identities."""
+"""Generate release-specific lineage without inventing current validation evidence."""
 
 import json
 from pathlib import Path
+from secripts import __version__
 from secripts.context import data_dir
 from secripts.provenance import packaged
 from secripts.registry import registry
 
-legacy = {r["id"]: r for r in packaged()["artifacts"]}
-smoke_path = data_dir() / "validation/smoke.json"
-smoke = json.loads(smoke_path.read_text()) if smoke_path.exists() else []
-executed = {}
-for item in smoke:
-    args = item["arguments"]
-    if len(args) > 1 and args[0] == "run":
-        value = json.loads(item["stdout"])
-        executed[args[1]] = {"invocation": value["result"], "exit_code": value["exit_code"]}
+legacy = {row["id"]: row for row in packaged()["artifacts"]}
+root = data_dir() / "validation"
+quality = (
+    json.loads((root / "phase2-quality.json").read_text())
+    if (root / "phase2-quality.json").is_file()
+    else {}
+)
+validated = quality.get("release") == __version__ and quality.get("result") == "PASS"
+smoke = (
+    json.loads((root / "phase2-smoke.json").read_text())
+    if (root / "phase2-smoke.json").is_file()
+    else {}
+)
+executed = smoke.get("operations", {}) if smoke.get("release") == __version__ else {}
 records = []
 for op in registry().search():
     records.append(
         {
             "operation": op.id,
             "created": "2026-10-28",
+            "release": __version__,
             "version": 1,
             "legacy": [
                 {
-                    k: legacy[source][k]
-                    for k in (
+                    key: legacy[source][key]
+                    for key in (
                         "id",
                         "source",
                         "source_sha256",
@@ -43,16 +50,15 @@ for op in registry().search():
             "review": {
                 "sensitive_content_excluded": True,
                 "modernized": True,
-                "technical_review": "Read-only argv or static environment inspection; shared safety contract",
+                "technical_review": "Allowlisted inspection contract; no generic argument forwarding",
             },
             "verification": {
-                "static": "PASS",
-                "shared_unit_contract": "PASS",
+                "registry_and_shared_tests": "PASS" if validated else "UNTESTED",
                 "environment": executed.get(op.id, {"invocation": "UNTESTED"}),
                 "hardware": "UNTESTED",
             },
         }
     )
 Path("src/secripts/data/operations.json").write_text(
-    json.dumps({"schema": 1, "operations": records}, indent=2) + "\n"
+    json.dumps({"schema": 1, "release": __version__, "operations": records}, indent=2) + "\n"
 )

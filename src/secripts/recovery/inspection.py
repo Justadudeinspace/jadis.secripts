@@ -4,7 +4,6 @@ import hashlib
 import json
 from pathlib import Path
 import re
-import struct
 from secripts.safety import SecError
 
 
@@ -17,105 +16,9 @@ def artifact_hash(path: Path) -> str:
 
 
 def inspect_image(path: Path) -> dict:
-    if not path.is_file():
-        raise SecError("Recovery image does not exist", 3)
-    size = path.stat().st_size
-    with path.open("rb") as stream:
-        header = stream.read(4096)
-    result = {
-        "path": str(path.resolve()),
-        "bytes": size,
-        "sha256": artifact_hash(path),
-        "type": "UNKNOWN",
-        "confidence": "UNRESOLVED",
-        "properties": {},
-        "architecture": "UNRESOLVED",
-        "partition": "UNRESOLVED",
-        "device_compatibility": "UNTESTED",
-        "warnings": [],
-    }
-    if header[:8] == b"ANDROID!":
-        if len(header) < 48:
-            raise SecError("Truncated Android boot header", 1)
-        version = struct.unpack_from("<I", header, 40)[0]
-        if version > 4:
-            result["warnings"].append("Unsupported boot header version")
-            return result
-        minimum = {0: 1632, 1: 1648, 2: 1660, 3: 1580, 4: 1584}[version]
-        if size < minimum:
-            raise SecError("Truncated Android boot image", 1)
-        kernel_size = struct.unpack_from("<I", header, 8)[0]
-        ramdisk_size = struct.unpack_from("<I", header, 12 if version >= 3 else 16)[0]
-        page_size = 4096 if version >= 3 else struct.unpack_from("<I", header, 36)[0]
-        if page_size < minimum or page_size > 65536 or page_size & (page_size - 1):
-            raise SecError("Invalid boot image page size", 1)
+    from secripts.recovery.images import inspect_image as inspect
 
-        def align(n):
-            return ((n + page_size - 1) // page_size) * page_size
-
-        if page_size + align(kernel_size) + ramdisk_size > size:
-            raise SecError("Boot image payload extends beyond file", 1)
-        result.update(
-            type="ANDROID_BOOT",
-            confidence="VERIFIED",
-            properties={
-                "header_version": version,
-                "kernel_size": kernel_size,
-                "ramdisk_size": ramdisk_size,
-                "page_size": page_size,
-            },
-        )
-        result["warnings"].append(
-            "Header recognized; AVB, ramdisk contents and target compatibility unresolved"
-        )
-    elif header[:8] == b"VNDRBOOT":
-        if len(header) < 2112:
-            raise SecError("Truncated vendor_boot header", 1)
-        version, page = struct.unpack_from("<II", header, 8)
-        if version not in (3, 4):
-            raise SecError("Unsupported vendor_boot header version", 5)
-        minimum = 2112 if version == 3 else 2128
-        if len(header) < minimum:
-            raise SecError("Truncated vendor_boot header", 1)
-        ramdisk = struct.unpack_from("<I", header, 24)[0]
-        header_size, dtb = struct.unpack_from("<II", header, 2096)
-        if page < 512 or page > 65536 or page & (page - 1) or header_size != minimum:
-            raise SecError("Invalid vendor_boot page/header size", 1)
-
-        def aligned(n):
-            return ((n + page - 1) // page) * page
-
-        required = aligned(header_size) + aligned(ramdisk) + aligned(dtb)
-        extra = {}
-        if version == 4:
-            table, entries, entry_size, bootconfig = struct.unpack_from("<IIII", header, 2112)
-            if entries and (entry_size < 108 or entries * entry_size > table):
-                raise SecError("Invalid vendor ramdisk table bounds", 1)
-            required += aligned(table) + aligned(bootconfig)
-            extra = {
-                "ramdisk_table_size": table,
-                "ramdisk_entries": entries,
-                "bootconfig_size": bootconfig,
-            }
-        if required > size:
-            raise SecError("Vendor boot payload extends beyond file", 1)
-        result.update(
-            type="VENDOR_BOOT",
-            confidence="VERIFIED",
-            properties={
-                "header_version": version,
-                "page_size": page,
-                "ramdisk_size": ramdisk,
-                "dtb_size": dtb,
-                **extra,
-            },
-        )
-        result["warnings"].append(
-            "Magic/header only; vendor ramdisk table and target relationship unresolved"
-        )
-    else:
-        result["warnings"].append("Unrecognized image; no bootability claim")
-    return result
+    return inspect(path)
 
 
 def audit_tree(root: Path) -> dict:
@@ -135,7 +38,7 @@ def audit_tree(root: Path) -> dict:
             continue
         if (
             not path.is_file()
-            or path.suffix not in {".mk", ".fstab", ".sh", ".dependencies", ".json"}
+            or path.suffix not in {".mk", ".fstab", ".sh", ".dependencies", ".json", ".xml"}
             and path.name not in {"recovery.fstab", "dependencies"}
         ):
             continue
@@ -256,7 +159,11 @@ def audit_tree(root: Path) -> dict:
                 finding("WARN", "missing local reference", reference)
     if not files:
         finding("FAIL", "tree contents", "No supported recovery configuration files")
+    from secripts.recovery.tree import graph
+
+    dependency_graph = graph(root, files)
     return {
+        "dependency_graph": dependency_graph,
         "tree": str(root),
         "files": sorted(files),
         "configuration_hashes": {name: artifact_hash(root / name) for name in sorted(files)},

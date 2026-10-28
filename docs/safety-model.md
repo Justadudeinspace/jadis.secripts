@@ -19,3 +19,18 @@ Secret-class patterns detect provider token prefixes, assignments, bearer string
 credential-bearing URLs. Arguments matching them are refused. Outputs, receipts and public rendering
 are redacted. Raw command captures are temporary and never copied into the repository. Arbitrary
 personal data and unknown credential formats remain a human review responsibility.
+
+Phase 2 preserves those controls. Typed tree/artifact/device parameters are never arbitrary subprocess
+arguments. Network recipes require `--network`; explicit individual network operations identify that
+behavior in their metadata. Dossier does not probe the network. Interactive cockpit enumeration is
+explicit local transport evidence; non-TTY/JSON cockpit snapshots leave device counts UNTESTED.
+
+Device identifiers are masked before receipt persistence and returned evidence. Enumerations retain
+states/counts, not serials; package lists retain only counts; CPU serial fields are discarded. Legacy
+receipts with named identifier fields are sanitized on read without rewriting stored history. Unknown
+personal identifiers in arbitrary external output still require human review before sharing.
+
+Image decoding is bounded and non-extracting. Unsupported compression and unresolved Make expansion
+remain unresolved/partial evidence, never silently accepted as verified functionality. AVB declarations
+are untrusted; no signature, key trust, rollback or hardware claim follows. Receipt comparisons do not
+execute or replay commands. Current tree snapshots do not certify historical build inputs.

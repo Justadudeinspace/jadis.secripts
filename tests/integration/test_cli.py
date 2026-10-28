@@ -65,6 +65,10 @@ def test_console_interactive_paths(monkeypatch, capsys):
 
     monkeypatch.setattr(sys.stdin, "isatty", lambda: True)
     monkeypatch.setattr(sys.stdout, "isatty", lambda: True)
+    monkeypatch.setattr(
+        "secripts.ui.console.dashboard",
+        lambda **kwargs: {"host": "fixture; device probing disabled"},
+    )
     answers = iter(["4", "git.status", "D", "A", "git", "3", "doctor", "B", "Q"])
     monkeypatch.setattr("builtins.input", lambda _: next(answers))
     assert main(["1337"]) == 0

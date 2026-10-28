@@ -1,16 +1,22 @@
 # Provenance
 
-`src/secripts/data/legacy.json` is the canonical packaged inventory. It contains source hashes,
-opaque IDs, safe basenames, duplicate groups, classifications, reasons and modern replacements.
-It contains no source contents. Secret-bearing artifacts use opaque names. `sec archaeology` exposes
-this metadata; `sec explain ID` exposes the source IDs used by that operation.
+`src/secripts/data/legacy.json` remains the canonical metadata-only legacy inventory: safe names,
+opaque IDs, SHA256 hashes, duplicate groups, classifications, reasons and modern replacements.
+No source contents are shipped. Secret-bearing entries have opaque names. Only modern launcher
+references changed in Phase 2; historical hashes and classification decisions remain intact.
+`js archaeology` exposes lineage; `js explain ID` includes operation-specific evidence.
 
-PROMOTE means reviewed source suitable for hardening. EXTRACT means rewritten technical intent.
-ARCHIVE retains metadata for historical context. REJECT excludes duplicates, unsuitable or unrelated
-work. SECRET excludes all contents even if some knowledge could have been useful. No original source
-was promoted verbatim. Classification is a review decision, not a claim of technical validity.
+PROMOTE means reviewed source suitable for hardening; EXTRACT means rewritten intent; ARCHIVE retains
+safe context; REJECT excludes unsuitable/duplicate/unrelated material; SECRET excludes contents.
+No original source was promoted verbatim. New Phase 2 operations are independently engineered,
+not fictitiously attributed to legacy sources. There are still eight reviewed extraction artifacts.
 
-Operation-specific review and verification records live under `src/secripts/data/operations.json`.
-Independent tests verify contracts and failure behavior. Environment validation applies only to
-commands actually exercised here. Hardware remains UNTESTED. Do not change that state based on
-unit tests or tool presence.
+`src/secripts/data/operations.json` records release-specific operation verification. Generation reads
+actual local validation records for the matching release. Without matching successful gate evidence,
+shared-test verification is UNTESTED. Environment execution is populated only from matching-release
+smoke observations, never inferred from unit tests. Fixture tests do not become hardware evidence.
+
+Use `python tools/qualify.py`, then installed-launcher `python tools/validate.py`, then
+`python tools/provenance.py`. Evidence records are local runtime state, not Git. Public metadata
+contains no captured outputs or device identifiers. Operation IDs and old receipts survive the CLI
+namespace migration unchanged; historical runtime receipts are not rewritten.

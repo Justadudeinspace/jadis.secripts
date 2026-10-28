@@ -22,22 +22,9 @@ TOOLS = {
 
 
 def sdk() -> dict:
-    roots = {k: os.environ.get(k) for k in ("ANDROID_HOME", "ANDROID_SDK_ROOT")}
-    root = roots["ANDROID_HOME"] or roots["ANDROID_SDK_ROOT"]
-    components = {}
-    if root:
-        for name in ("platform-tools", "platforms", "build-tools", "cmdline-tools", "licenses"):
-            p = Path(root) / name
-            components[name] = "PRESENT" if p.is_dir() else "MISSING"
-    return {
-        "status": "PASS" if root and Path(root).is_dir() else "WARN",
-        "roots": roots,
-        "components": components,
-        "warning": "License directory presence does not prove license acceptance.",
-        "conflict": bool(
-            all(roots.values()) and roots["ANDROID_HOME"] != roots["ANDROID_SDK_ROOT"]
-        ),
-    }
+    from secripts.inspectors import sdk as inspect
+
+    return inspect()
 
 
 def path_analysis() -> list:
@@ -72,11 +59,32 @@ def doctor() -> dict:
         {"name": "fastboot device", "status": "UNTESTED", "evidence": "Not probed"},
     ]
     disk = shutil.disk_usage(Path.cwd())
+    from secripts.evidence import overall
+
+    sdk_value = sdk()
+    checks.append(
+        {
+            "name": "Android SDK",
+            "status": sdk_value["status"],
+            "evidence": sdk_value["selected_root"],
+            "reason": "SDK roots disagree"
+            if sdk_value["conflict"]
+            else "Configured root and component presence",
+            "remediation": sdk_value["remediation"],
+        }
+    )
+    if host()["platform"] == "unsupported":
+        checks.append({"name": "host support", "status": "UNSUPPORTED", "evidence": host()["os"]})
     return {
+        "status": overall(checks),
+        "summary": {
+            state: sum(c["status"] == state for c in checks)
+            for state in ("PASS", "WARN", "FAIL", "UNKNOWN", "UNTESTED", "BLOCKED", "UNSUPPORTED")
+        },
         "host": host(),
         "shell": os.environ.get("SHELL", "UNKNOWN"),
         "checks": checks,
-        "sdk": sdk(),
+        "sdk": sdk_value,
         "disk_free_bytes": disk.free,
         "path": path_analysis(),
         "hardware_qualification": "UNTESTED",

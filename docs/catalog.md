@@ -1,6 +1,6 @@
 # Operation catalog
 
-Generated from `sec list --json`; update with `python tools/catalog.py`.
+Generated from `js list --json`; update with `python tools/catalog.py`.
 
 | Operation | Summary | Risk |
 |---|---|---|
@@ -24,3 +24,46 @@ Generated from `sec list --json`; update with `python tools/catalog.py`.
 | `network.interfaces` | Inspect local interface addresses; no external requests. | READ_ONLY |
 | `repo.disk` | Show free space for the current filesystem. | READ_ONLY |
 | `diagnostics.host` | Inspect OS, architecture and Python with explicit unknown states. | READ_ONLY |
+| `git.root` | Locate the current working-tree root. | READ_ONLY |
+| `git.branch` | Resolve branch name; detached HEAD is reported by Git. | READ_ONLY |
+| `git.health` | Combine root, branch, dirty state, upstream and local divergence. | READ_ONLY |
+| `git.tags` | List tags ordered by creation time without contacting remotes. | READ_ONLY |
+| `git.worktrees` | List existing worktrees and their branch relationships. | READ_ONLY |
+| `git.submodules` | Inspect recorded submodule revisions without initialization or update. | READ_ONLY |
+| `git.stashes` | List stash references and subjects without showing patches. | READ_ONLY |
+| `git.ignored` | Inspect ignored untracked paths; file contents are never read. | READ_ONLY |
+| `git.untracked` | Inspect untracked file names without reading their contents. | READ_ONLY |
+| `git.changed` | Inspect tracked worktree changes without exposing patches. | READ_ONLY |
+| `git.largest` | Rank up to 10,000 tracked files by current disk size. | READ_ONLY |
+| `git.objects` | Inspect loose/packed Git object counts and storage. | READ_ONLY |
+| `git.contributors` | Summarize authors of the most recent 200 commits. | READ_ONLY |
+| `git.cleanup` | List branches merged into HEAD; never delete branches. | READ_ONLY |
+| `git.signatures` | Inspect signature-header presence without invoking a verifier. | READ_ONLY |
+| `git.remote` | Explicitly contact origin and query its HEAD without fetching objects. | READ_ONLY |
+| `github.repository` | Explicit network query for visibility, default branch, owner and viewer permissions. | READ_ONLY |
+| `github.pulls` | Query the latest twenty open PR summaries. | READ_ONLY |
+| `github.workflows` | Query the latest ten workflow run states; do not infer billing causes. | READ_ONLY |
+| `github.releases` | Query the latest ten release summaries without downloading assets. | READ_ONLY |
+| `github.issues` | Query the latest twenty issue summaries. | READ_ONLY |
+| `python.environment` | Inspect interpreter, venv boundaries and developer-tool availability. | READ_ONLY |
+| `python.project` | Parse allowlisted pyproject build metadata without executing backend code. | READ_ONLY |
+| `python.editables` | Locate editable distributions using installed direct-url metadata. | READ_ONLY |
+| `python.dependencies` | Ask the current interpreter pip to validate installed dependency relationships. | READ_ONLY |
+| `java.environment` | Inspect Java/Javac versions, JAVA_HOME, JDK paths and wrapper presence. | READ_ONLY |
+| `adb.inspect` | Collect allowlisted read-only identity, build, security and hardware observations. | READ_ONLY |
+| `fastboot.inspect` | Read selected safe Fastboot variables from one transport; no boot or flash. | READ_ONLY |
+| `linux.environment` | Inspect distro, architecture, build tools and host/guest boundary evidence. | READ_ONLY |
+| `linux.packages` | Inspect installed versions of core development packages. | READ_ONLY |
+| `network.configuration` | Inspect hostname and configured nameservers without resolving external hosts. | READ_ONLY |
+| `network.routes` | Inspect local routes without transmitting probes. | READ_ONLY |
+| `network.sockets` | Inspect local TCP/UDP listeners without probing other hosts. | READ_ONLY |
+| `ssh.environment` | Inspect client, agent socket and config-file presence; never read private keys. | READ_ONLY |
+| `ssh.agent` | Ask the local agent for public-key fingerprints; no private key contents. | READ_ONLY |
+| `ssh.github` | Explicit network authentication handshake; host-key policy is never bypassed. | READ_ONLY |
+| `filesystem.capacity` | Inspect bytes, inode availability, temp access and current-directory permissions. | READ_ONLY |
+| `environment.xdg` | Inspect configured user-data/config/cache/state locations without creating them. | READ_ONLY |
+| `models.environment` | Detect known executables and explicitly configured model directories only. | READ_ONLY |
+| `diagnostics.system` | Inspect distro, kernel, CPU count, memory and mount context. | READ_ONLY |
+| `recovery.doctor` | Inspect tools, host suitability, workspace and unresolved dependencies. | READ_ONLY |
+| `recovery.tree` | Audit static device-tree declarations and a bounded local dependency graph. | READ_ONLY |
+| `recovery.image` | Inspect image boundaries, ramdisk metadata and unverified AVB declarations. | READ_ONLY |

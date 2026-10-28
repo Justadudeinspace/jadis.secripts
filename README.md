@@ -2,162 +2,223 @@
 
 **Personal Developer Operations Arsenal & Android Recovery Laboratory**
 
-Old hacks → hardened tools. Commands → operations. Notes → guided workflows.
+**CLI: `js` · Cockpit: `js 1337` · Recovery Lab: `js recovery`**
 
-**NO COPY/PASTE ROULETTE. NO MYSTERY COMMANDS. NO SILENT DESTRUCTION.**
-
-Secripts is Christopher Osburn / JADIS's personal developer tooling project. The name keeps the
-history of a script collection; the implementation gives that collection a contract. `sec` makes
-operations discoverable, explains their effects and records what ran. `sec 1337` is the master
-operator console. `sec recovery` is a developer-side Android recovery laboratory with a TWRP backend.
-This is an independent JADIS project, not an Outer-Void product or universal control plane.
+Secripts is Christopher Osburn / JADIS's independent personal developer arsenal: one inspectable
+command surface for understanding a development environment, a repository, and Android recovery work.
+The name keeps the history of scattered scripts; typed operations give that knowledge a contract.
+This private repository coexists with Outer Void projects. It is not their universal CLI/control plane.
 
 > Build the system. Prove the system. Then remove the scaffolding.
 
+No copy/paste roulette. No mystery commands. No silent destruction.
+
 ## Install
 
-Python 3.11+; Linux is the primary host. Termux and Debian PRoot diagnostics are supported in the
-code path, with separate host qualification still limited. Windows/macOS execution is unsupported.
-No runtime dependencies beyond Python's standard library.
+Python 3.11+; Linux and Termux are the supported execution paths. Native Termux/PRoot and hardware
+qualification remain distinct from interpreter tests. Runtime dependencies: Python standard library only.
 
 ```sh
 python3 -m venv .venv
 . .venv/bin/activate
 python -m pip install -e .
-sec --help
-sec doctor
-sec 1337
+js --help
+js --version
+js doctor
+js dossier
+js 1337
 ```
 
-Alternatively, use `pipx install .`. Keep the virtual environment active, or use pipx, to put `sec`
-on PATH. There is no need to invoke source files manually. See [verification](docs/verification.md)
-for the exact environments actually exercised.
+Alternatively, `pipx install .` exposes `js` without activating a project environment. The distribution
+is `jadis-secripts`; the Python package remains `secripts`. Version 0.2.0 makes a deliberate pre-1.0
+launcher break; no compatibility alias is installed. Existing receipts retain their operation identities.
+If your system already uses `js` for Node, keep that executable and place the virtual environment or
+pipx application directory first on PATH. This host's `/usr/bin/js` is preserved.
 
-## Use the arsenal
+## Everyday operations
 
 ```sh
-sec list
-sec find android
-sec find 'sdk license'
-sec show android.sdk.validate
-sec explain git.status
-sec run git.status --dry-run
-sec run environment.path
-sec doctor --json
-sec recipes
-sec recipe show android-dev
-sec recipe run git-review --dry-run
-sec history
-sec receipt RECEIPT_ID --json
+js list
+js find git
+js find 'device tree'
+js find --category recovery
+js find --risk READ_ONLY
+js show android.sdk.validate
+js explain git.health
+js run git.health
+js run python.project
+js run java.environment
+js run android.sdk.validate
+js run git.status --dry-run
 ```
 
-Twenty registered operations cover Git/GitHub, ADB/Fastboot, SDK inspection, PATH analysis, runtimes,
-Termux boundaries, Debian package queries, SSH, local model runtime detection, network interfaces,
-disk and host context. They inspect rather than installing packages or guessing fixes. Five recipes
-compose those operations into preparation/diagnostic workflows and stop on failure. They do not
-perform an automatic environment bootstrap. The [catalog](docs/catalog.md) is generated from the
-same metadata used for execution and search.
+**63 operations across 18 categories** cover Git/GitHub, Python, Java, SDK, ADB/Fastboot, Termux,
+Linux/Debian, SSH, local networking, filesystem, environment, local AI tooling and Recovery Lab.
+The [generated catalog](docs/catalog.md) is the same contract consumed by search, execution and menus.
+Search ranks exact IDs, ID prefixes, titles, tags, categories, summaries and sanitized legacy filenames.
 
-`list`, `find`, `show`, `explain`, `doctor`, operation execution, recipes, history and receipts support
-`--json`. Diagnostic commands can succeed while individual checks report WARN, UNKNOWN or UNTESTED.
-Tool presence is evidence of a found executable, never a connected or qualified device.
+Git tools inspect worktrees, local divergence, tags, submodules, stashes, changed/untracked/ignored files,
+working-file sizes, object storage and recorded signature headers. No branches are deleted and no
+signature verifier runs implicitly. Remote reachability and GitHub operations are explicit network calls.
 
-## 1337 mode
+Python inspections use the interpreter running Secripts: venv boundaries, allowlisted pyproject metadata,
+editable installs and dependency checks. Project build backends and Gradle wrappers are not executed by
+inspection. Java inspection reports observed versions and architecture; branch-specific Android JDK
+compatibility stays UNKNOWN. SDK inspection lists installed components and root conflicts without
+updating packages or accepting licenses. Local model inspection never searches the entire filesystem.
+
+## Dossier and doctor
 
 ```sh
-sec 1337
+js doctor
+js doctor --json
+js dossier
+js dossier --json
+js dossier --devices --json
 ```
 
-The console offers described categories, real host/tool detection, metadata-derived operation
-context, prerequisites, explain, run and dry-run actions, recipe execution, search and filtered
-archaeology. Recovery Lab has its own command prompt using the same CLI handlers. Plain text works
-without Unicode frames or terminal libraries. Color is optional (`NO_COLOR` disables it). Without a
-TTY it prints a useful menu preview and exits; normal CLI operations never require a TTY.
+Doctor gives a concise human summary and detailed JSON with PASS/WARN/FAIL/UNKNOWN/UNTESTED/BLOCKED/
+UNSUPPORTED states and non-destructive remediation. Invocation success is not a global environment pass.
+
+Dossier combines host, filesystem, guest boundaries, current repository, Python, tool presence, SDK,
+local network configuration, model tooling, history and Recovery Lab state. It performs no network calls.
+Device counts remain UNTESTED until `--devices` explicitly enumerates transports; enumeration does not
+qualify hardware. Java version probing and detailed device interrogation are separate operations.
+
+## The developer cockpit
+
+```sh
+js 1337
+js 1337 --json
+```
+
+The opening dashboard shows actual host/tool evidence, repository branch/dirty/upstream state,
+operation/recipe/receipt counts, latest operation/failure, SDK state and Recovery Lab blockers.
+An interactive session enumerates transports with bounded probes. Non-TTY preview and JSON snapshots
+do not probe devices. Hardware remains UNTESTED regardless of tool presence or device counts.
+
+Described categories lead to metadata-derived operation context, prerequisites, run/dry-run, recipes,
+ranked search, filtered archaeology, history/receipt comparison and the Recovery Lab prompt. `V` refreshes
+evidence and transports; `T` opens history. `NO_COLOR` disables color. Plain terminals need no frames,
+Unicode decoration or terminal framework. The operator prompt is `js://1337 >`.
+
+## Guided workflows
+
+```sh
+js recipes
+js recipe show python-dev
+js recipe run git-review --dry-run
+js recipe run python-dev
+js recipe run github-readiness --network
+js recipe run twrp-tree-review --tree /path/to/tree --dry-run
+js recipe run post-build-verification --artifact /path/to/recovery.img
+```
+
+**19 recipes** explain purpose and prerequisites, expose their operations, support dry-run and write a
+parent receipt linking step receipts. They stop on invocation failure and retain uncertain evidence.
+Network recipes require `--network`; dry-runs never contact services. These are inspection/preparation
+workflows, not automatic package bootstraps, release publishing or device qualification.
+
+## Android devices
+
+```sh
+js device transports --json
+js device inspect --json
+js device inspect --device TRANSPORT_IDENTIFIER --json
+js device fastboot --json
+```
+
+ADB dossier selects one authorized transport and collects allowlisted properties plus battery, storage,
+display, CPU/memory, package count and existing shell-UID observations. Missing/unauthorized/multiple
+transports stop clearly. Identity, Android, build, security, boot and hardware sections retain individual
+unknown states. No root/reboot request is sent. Inspection is explicit operator context, not proof of ownership.
+
+Serials are omitted from returned evidence, argv and receipts. Package names and CPU serial fields are
+not retained. Fastboot reads a fixed getvar allowlist, never `getvar all`, flash, unlock, erase or reboot.
+A device observation does not establish recovery functionality.
 
 ## Recovery Lab
 
 ```sh
-sec recovery doctor --json
-sec recovery inspect recovery.img --json
-sec recovery inspect --device
-sec recovery tree audit /path/to/device/tree --json
-sec recovery init --help
-sec recovery configure
-sec recovery sync --dry-run
-sec recovery build --dry-run
-sec recovery verify recovery.img
-sec recovery test recovery.img --device MY_DEVICE
-sec recovery report recovery.img --device MY_DEVICE --markdown
+js recovery doctor --json
+js recovery tree audit /path/to/tree --json
+js recovery inspect recovery.img --json
+js recovery inspect --device
+js recovery verify recovery.img
+js recovery init --help
+js recovery configure
+js recovery sync --dry-run
+js recovery build --dry-run
+js recovery test recovery.img --device OWNER_CHOSEN_ALIAS
+js recovery report recovery.img --tree /path/to/tree --json
+js recovery report recovery.img --markdown
 ```
 
-The tree auditor identifies local architecture/product declarations, fstab, kernel references,
-slots, dynamic partitions, recovery/vendor_boot arrangements and crypto declarations. External make
-expansion stays UNRESOLVED. Image inspection hashes the file and recognizes Android boot/vendor_boot
-headers; it does not unpack ramdisks, validate AVB or certify compatibility.
+Static tree intelligence covers products, architecture, slots/virtual A/B, dynamic partitions,
+recovery/vendor_boot arrangements, kernel/DTB/DTBO references, fstab, encryption/metadata and AVB flags.
+A bounded graph resolves literal local and LOCAL_DIR references, reports cycles and separates direct
+from conditional/external/unresolved evidence. No Makefile or dependency code is executed.
 
-Workspaces require explicit manifest, revision, tree, lunch product and build target. Sync and build
-use at most two jobs and refuse concurrent workspace mutations. Builds collect actual new images,
-hashes, source locks, audit evidence, bounded logs and receipts. A successful compile means
-**BUILD SUCCESS**, with hardware still **UNTESTED**. Qualification records manual evidence against
-an artifact hash and a specific device; reports include failures and untested areas.
+Image inspection supports Android boot headers v0–v4 and vendor_boot v3/v4, section bounds, ramdisk
+compression, bounded gzip/bzip2/XZ decoding, non-extracting newc CPIO metadata, DTB/bootconfig boundaries,
+vendor fragment tables and inferred init_boot candidates. Boot and recovery share a header: partition
+role cannot be proven from a filename. LZ4/Zstd are recognized but not decompressed natively.
 
-| Capability | Release status |
-|---|---|
-| Registry, CLI, receipts, doctor, console, recipes, archaeology | IMPLEMENTED; locally tested |
-| Static tree audit | IMPLEMENTED; heuristic evidence, unresolved external dependencies |
-| Image inspection | IMPLEMENTED; partial header inspection only |
-| ADB device properties | ENVIRONMENT/HARDWARE-DEPENDENT; no root requested |
-| TWRP source sync and build orchestration | EXPERIMENTAL; fixture-tested, real build blocked on this host |
-| Actual TWRP compilation and device qualification | UNTESTED |
-| Temporary boot | Safety refusal implemented; execution PLANNED pending reliable support checks |
-| Permanent flashing, unlocking and wiping | Not implemented |
-| Shell completion, multiple workspaces, full ramdisk/AVB inspection | PLANNED |
+AVB footer/vbmeta parsing reports untrusted algorithm, rollback/flags and bounded hash-descriptor
+partition declarations. **No cryptographic signature, trusted-key, rollback enforcement, bootability or
+compatibility verification occurs.** Optional upstream tools are detected, not silently installed/run.
 
-Read [Recovery Lab](docs/recovery-lab.md) for current upstream references, explicit workspace examples
-and limitations. Historical TWRP notes are lineage, never current build authority.
+Reports combine current workspace/tree evidence, graph findings, hash-matched recorded builds,
+image/AVB inspection, explicit saved device dossiers and manual qualification records. Source, tree,
+build, image structure, device observations and device qualification are separate states. A current tree
+audit does not prove which inputs produced an old image.
 
-## Lineage without leaking history
+TWRP orchestration remains **experimental**. It requires explicit source/revision/tree/product/target,
+uses at most two jobs and refuses concurrent workspace mutations. This ARM64, low-disk host is not
+qualified for real TWRP compilation. Temporary boot refuses unresolved support. Permanent flashing,
+unlocking, wiping and repartitioning are absent. Read [Recovery Lab](docs/recovery-lab.md).
 
-The historical archive was inventoried in place: **153 files, 27 duplicate members**. Final decisions:
-**8 EXTRACT · 41 ARCHIVE · 69 REJECT · 35 SECRET · 0 PROMOTE**. Eight safe sources inspired rewritten
-operations; no historical file contents were imported. Secret-bearing entries have opaque names.
-Rejected material includes separate projects, duplicates and ownership-bypass/offensive intent.
+## Receipts, completion and lineage
 
 ```sh
-sec archaeology --json
-sec ingest /private/legacy.zip --output /private/inventory.json
-sec scan path/to/file
+js history --operation git.health --limit 20 --summary
+js history --failed --since 2026-01-01 --json
+js receipt latest
+js receipt latest --failed
+js receipt diff FIRST_ID SECOND_ID --json
+js history --artifact ARTIFACT_SHA256 --json
+js completion bash > ~/.config/js-completion.bash
+# Source that file from your Bash configuration after creating its parent directory.
+js archaeology --json
 ```
 
-The [archaeology workflow](docs/archaeology.md) bounds archive processing and separates automatic
-classification from explicit human/technical review. [Provenance](docs/provenance.md) connects
-source hashes and duplicate groups to modern replacements and verification evidence.
+Receipts retain sanitized commands, effects, prerequisites, results, durations, artifacts, launcher
+release and cwd/environment association. Filters, latest-failure retrieval and comparison do not replay
+commands. Older receipts remain readable. Canonical storage is private local JSON, without a database.
 
-## Safety and receipts
+Bash completion discovers commands, operation/recipe IDs and safe enumerations from current contracts.
+It performs no diagnostics, network requests or device probes. Zsh/Fish-specific completion is not provided.
 
-The four risk classes have different enforcement: READ_ONLY inspects; MUTATING describes writes;
-PRIVILEGED requires explicit privileges without elevation; DESTRUCTIVE requires a terminal and a
-specific confirmation phrase. Recipes use the same guards. No destructive production operation ships.
-`sec recovery boot` refuses unresolved support; `clean` explains scope without deleting anything.
+The historical archive remains metadata-only: **153 members · 27 duplicates · 8 EXTRACT · 41 ARCHIVE ·
+69 REJECT · 35 SECRET · 0 PROMOTE**. No source contents or historical credentials are imported. Existing
+opaque secret exclusions and source hashes remain intact. [Archaeology](docs/archaeology.md) and
+[provenance](docs/provenance.md) explain review boundaries and release-specific verification.
 
-The runner uses argument vectors. The only shell program is a fixed TWRP adapter for upstream shell
-functions, with product/target passed as arguments. Secret-like arguments are refused; outputs and
-receipts are sanitized. Pattern scanning is deliberately conservative and cannot replace review.
-Read [SECURITY.md](SECURITY.md) before sharing execution evidence.
+## Safety and configuration
 
-Receipts answer “what did that script just do?” with commands, sanitized arguments/output, exit codes,
-duration, effects, preconditions, result and artifacts. Canonical storage is private local JSON.
-Failures leave receipts too. `history` lists evidence; `receipt` renders human or JSON output.
+READ_ONLY inspects; MUTATING describes writes; PRIVILEGED never elevates; DESTRUCTIVE requires a
+specific interactive phrase. No destructive production operation ships. Recipes use the same dispatcher.
+Argument vectors are the rule; the fixed TWRP shell adapter exists only for trusted upstream shell
+functions. Secret-like arguments are refused and output is sanitized. Pattern scanning and identifier
+masking cannot replace review of personal information before sharing. Read [SECURITY.md](SECURITY.md).
 
-Configuration precedence: explicit command arguments define a recovery workspace; `SECRIPTS_DATA_HOME`
-overrides the XDG data root, then `XDG_DATA_HOME/secripts`, then `~/.local/share/secripts`. SDK discovery
-uses `ANDROID_HOME` then `ANDROID_SDK_ROOT`, reporting conflicting roots. Basic commands need no config.
-Runtime receipts, workspaces and build evidence stay outside this Git repository. Config stores no
-credentials. This release has one workspace configuration, inspectable with `sec recovery configure`.
+Explicit CLI parameters override workspace choices. `SECRIPTS_DATA_HOME` overrides
+`$XDG_DATA_HOME/secripts`, defaulting to `~/.local/share/secripts`. SDK selection uses `ANDROID_HOME`
+then `ANDROID_SDK_ROOT`, reporting conflicts. Basic commands require no configuration. Runtime state,
+receipts and builds stay outside Git; the launcher rename does not migrate or rewrite that state.
 
-Exit codes: **0** success, **1** operation/state failure, **2** invalid usage, **3** prerequisite missing,
-**4** safety refusal, **5** unsupported host/backend, **130** interrupted. Individual diagnostic states
-remain authoritative; an exit code of zero is not hardware qualification.
+Exit codes: 0 invocation success; 1 operation/state failure; 2 invalid usage; 3 missing prerequisite or
+device; 4 safety refusal; 5 unsupported host/backend; 130 interruption. Inspect evidence states separately.
 
 ## Prove changes
 
@@ -168,10 +229,12 @@ ruff format --check .
 pytest -q
 python tools/secret_scan.py
 python -m build
+python tools/qualify.py
+python tools/validate.py                 # installed js must be on PATH
+python tools/validate.py --devices       # explicit transport enumeration
 ```
 
-The suite tests failure paths, safety refusals, argv handling, sanitized receipts, duplicate/secret
-legacy members, image bounds, tree uncertainty, sync/build failure and manual qualification states.
-Tests never download Android sources or touch real devices. CI runs the same stack on Linux; external
-CI status is distinct from local validation. See [verification evidence](docs/verification.md),
-[architecture](docs/architecture.md), [safety](docs/safety-model.md) and [contributing](CONTRIBUTING.md).
+No unit test downloads Android sources or touches devices. Synthetic fixtures are explicitly labeled.
+CI uses a serial Python matrix and local checks; its observed results are recorded separately from local
+validation. See [verification](docs/verification.md), [architecture](docs/architecture.md) and
+[contributing](CONTRIBUTING.md) for evidence, limits and remaining qualification work.

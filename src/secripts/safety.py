@@ -24,7 +24,7 @@ def authorize(
     if dry_run:
         return
     if risk == Risk.PRIVILEGED and os.geteuid() != 0:
-        raise SecError("Requires explicit privileged environment; sec never elevates.", 3)
+        raise SecError("Requires explicit privileged environment; js never elevates.", 3)
     if risk == Risk.DESTRUCTIVE:
         if not sys.stdin.isatty():
             raise SecError("Destructive action refused without an interactive terminal.", 4)

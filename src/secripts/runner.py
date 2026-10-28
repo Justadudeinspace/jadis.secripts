@@ -5,14 +5,19 @@ import subprocess
 import tempfile
 import time
 from pathlib import Path
-from secripts.secrets import SENSITIVE, contains_secret, redact
+from secripts.secrets import SENSITIVE, contains_secret, redact, mask_identifiers
 from secripts.safety import SecError
 
 MAX_CAPTURE = 128 * 1024
 
 
 def run_command(
-    argv: list[str], *, cwd: Path | None = None, timeout: float = 30, dry_run: bool = False
+    argv: list[str],
+    *,
+    cwd: Path | None = None,
+    timeout: float = 30,
+    dry_run: bool = False,
+    identifiers: tuple[str, ...] = (),
 ) -> dict:
     if not argv or any(not isinstance(a, str) or "\0" in a for a in argv):
         raise SecError("Invalid argument vector", 2)
@@ -28,7 +33,7 @@ def run_command(
         "result": "DRY_RUN",
     }
     if dry_run:
-        return result
+        return mask_identifiers(result, identifiers)
     start = time.monotonic()
     # File-backed capture avoids unbounded in-memory output. Temporary files are private/unlinked.
     with tempfile.TemporaryFile() as out, tempfile.TemporaryFile() as err:
@@ -67,4 +72,4 @@ def run_command(
             if value:
                 result[name] = redact(value.decode("utf-8", errors="replace")) + result[name]
     result["duration"] = round(time.monotonic() - start, 4)
-    return result
+    return mask_identifiers(result, identifiers)

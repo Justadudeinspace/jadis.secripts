@@ -64,6 +64,7 @@ def test_image_metadata(tmp_path):
     header = bytearray(4096)
     header[:8] = b"ANDROID!"
     struct.pack_into("<I", header, 40, 4)
+    struct.pack_into("<I", header, 20, 1584)
     path.write_bytes(header)
     value = inspect_image(path)
     assert value["type"] == "ANDROID_BOOT"
@@ -98,11 +99,13 @@ def test_qualification_no_auto_pass(tmp_path):
 def test_device_disconnected_or_missing(monkeypatch):
     monkeypatch.setattr(
         "secripts.recovery.device.run_command",
-        lambda _: {"result": "PASS", "stdout": "List of devices attached\n"},
+        lambda _, **kwargs: {"result": "PASS", "stdout": "List of devices attached\n"},
     )
-    with pytest.raises(SecError, match="Exactly one"):
+    with pytest.raises(SecError, match="exactly one"):
         inspect_device()
-    monkeypatch.setattr("secripts.recovery.device.run_command", lambda _: {"result": "MISSING"})
+    monkeypatch.setattr(
+        "secripts.recovery.device.run_command", lambda _, **kwargs: {"result": "MISSING"}
+    )
     with pytest.raises(SecError, match="unavailable"):
         inspect_device()
 

@@ -550,8 +550,8 @@
       "modern_replacement": [
         "fastboot.devices",
         "fastboot.version",
-        "sec recovery tree audit",
-        "sec recovery build"
+        "js recovery tree audit",
+        "js recovery build"
       ],
       "review": "Intent/command review; rewritten independently, no source content imported"
     },

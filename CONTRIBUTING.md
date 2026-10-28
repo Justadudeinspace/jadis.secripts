@@ -12,3 +12,10 @@ execution, credential arguments, guessed device partitions and automatic privile
 Tests must prove failure behavior without downloading source trees or touching devices. Synthetic
 secret test values must be clearly invalid and assembled from fragments. Record environment and
 hardware limitations honestly. No agent fan-out or more than two background processes.
+
+Phase 2 uses `js` as its sole canonical launcher. Keep the distribution jadis-secripts and package
+secripts; do not reintroduce a compatibility alias or rename operation IDs. Run `python tools/qualify.py`
+for the local gate and `python tools/validate.py` with the installed launcher on PATH. Device/network
+smoke must be explicit (`--devices`, `--network`); unit tests must mock both. Regenerate release provenance
+only from matching-release evidence. Build and exercise the wheel outside the checkout before claiming
+the entry point works. The repository is intended to remain private.

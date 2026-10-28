@@ -52,7 +52,7 @@ def load_workspace() -> dict:
         return value
     except (OSError, ValueError, TypeError, KeyError) as exc:
         raise SecError(
-            "Recovery workspace missing or malformed. Use sec recovery init --help.", 3
+            "Recovery workspace missing or malformed. Use js recovery init --help.", 3
         ) from exc
 
 
@@ -168,7 +168,20 @@ def recovery_doctor() -> dict:
     except SecError as exc:
         value = None
         checks.append({"name": "workspace", "status": "WARN", "evidence": str(exc)})
+    blockers = []
+    if host()["architecture"] != "x86_64":
+        blockers.append("Build backend requires a qualified x86_64 host")
+    if general["disk_free_bytes"] < 40 * 1024**3:
+        blockers.append("Below minimum disk-space floor")
+    if not shutil.which("repo"):
+        blockers.append("repo launcher missing")
+    if value is None:
+        blockers.append("Recovery workspace unavailable")
+    if any(check["status"] == "FAIL" for check in checks):
+        blockers.append("Workspace/source preconditions failed")
     return {
+        "status": "BLOCKED" if blockers else "UNKNOWN",
+        "build_blockers": blockers,
         "backend": "twrp",
         "checks": checks,
         "workspace": value,

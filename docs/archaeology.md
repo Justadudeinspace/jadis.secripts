@@ -11,6 +11,6 @@ The bounded ZIP reader refuses encrypted members, members over 8 MiB, total decl
 source excerpts. A separate explicit review step rejects ownership-bypass/offensive filenames and
 separate project plans. Pattern classification alone does not authorize promotion.
 
-Reproduce with `sec ingest /path/to/archive.zip --output /private/inventory.json`, then review decisions.
+Reproduce with `js ingest /path/to/archive.zip --output /private/inventory.json`, then review decisions.
 `tools/review_legacy.py` records this release's curated decisions; it is not a generic automatic
 promotion engine. Never commit the archive, extraction directories or historical credential values.

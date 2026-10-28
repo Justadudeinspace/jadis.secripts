@@ -10,7 +10,7 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        python: ['3.11', '3.13']
+        python: ['3.11', '3.13', '3.14']
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -22,4 +22,5 @@ jobs:
       - run: pytest -q
       - run: python tools/secret_scan.py
       - run: python -m build
-      - run: sec --help && sec list --json && sec 1337
+      - run: js --help && js --version && js list --json && js doctor --json && js dossier --json && js 1337
+      - run: js completion bash > /tmp/js.bash && bash -n /tmp/js.bash

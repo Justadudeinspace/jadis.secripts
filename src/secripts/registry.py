@@ -2,7 +2,33 @@
 
 from dataclasses import asdict, dataclass
 import re
+from functools import lru_cache
 from secripts.safety import Risk, SecError
+
+
+@lru_cache(maxsize=1)
+def lineage_terms():
+    from secripts.provenance import packaged
+
+    return {
+        row["id"]: row["source"] for row in packaged()["artifacts"] if not row["contained_secrets"]
+    }
+
+
+@dataclass(frozen=True)
+class Parameter:
+    name: str
+    description: str
+    required: bool = False
+    kind: str = "text"
+
+    def __post_init__(self):
+        if (
+            self.name not in {"tree", "artifact", "device"}
+            or self.kind not in {"text", "path"}
+            or not self.description
+        ):
+            raise ValueError("Invalid parameter contract")
 
 
 @dataclass(frozen=True)
@@ -23,6 +49,7 @@ class Operation:
     handler: str = "command"
     argv: tuple[str, ...] = ()
     legacy: tuple[str, ...] = ()
+    parameters: tuple[Parameter, ...] = ()
 
     def __post_init__(self):
         if not re.fullmatch(r"[a-z][a-z0-9]*(?:\.[a-z][a-z0-9]*)+", self.id):
@@ -31,6 +58,8 @@ class Operation:
             raise ValueError("Descriptions and category are required")
         if not isinstance(self.risk, Risk):
             raise ValueError("Invalid risk class")
+        if len({p.name for p in self.parameters}) != len(self.parameters):
+            raise ValueError("Duplicate parameter")
         if self.handler == "command" and not self.argv:
             raise ValueError("Command operation needs argv")
 
@@ -50,18 +79,44 @@ class Registry:
         try:
             return self.operations[name]
         except KeyError as exc:
-            raise SecError(f"Unknown operation: {name}. Use sec find <query>.", 2) from exc
+            raise SecError(f"Unknown operation: {name}. Use js find <query>.", 2) from exc
 
-    def search(self, query: str = "") -> list[Operation]:
+    def search(
+        self, query: str = "", *, category: str | None = None, risk: str | None = None
+    ) -> list[Operation]:
         words = query.casefold().split()
-        return [
-            op
-            for op in self.operations.values()
-            if all(w in str(op.metadata()).casefold() for w in words)
-        ]
+        scored = []
+        for op in self.operations.values():
+            if category and op.category != category or risk and op.risk != risk:
+                continue
+            fields = [
+                op.id,
+                op.title,
+                " ".join(op.tags),
+                op.category,
+                op.summary,
+                " ".join((*op.legacy, *(lineage_terms().get(source, "") for source in op.legacy)))
+                if query
+                else "",
+            ]
+            lowered = [field.casefold() for field in fields]
+            if not all(any(word in field for field in lowered) for word in words):
+                continue
+            q = query.casefold().strip()
+            rank = (
+                0
+                if q and op.id == q
+                else 1
+                if q and op.id.startswith(q)
+                else next((i + 2 for i, field in enumerate(lowered[1:]) if q and q in field), 9)
+            )
+            scored.append((rank, op.id, op))
+        return [op for _, _, op in sorted(scored)] if query else [op for _, _, op in scored]
 
 
 def registry() -> Registry:
+    from secripts.arsenal import additional
+
     def cmd(name, title, summary, category, argv, legacy=(), **kwargs):
         return Operation(
             name,
@@ -130,7 +185,8 @@ def registry() -> Registry:
                 "List ADB transports. A listed device is not recovery qualification.",
                 "adb",
                 ["adb", "devices", "-l"],
-                ("legacy-0000",),
+                legacy=("legacy-0000",),
+                handler="adb_transports",
                 effect="ADB may start its local daemon; no device configuration is changed.",
             ),
             cmd(
@@ -147,7 +203,8 @@ def registry() -> Registry:
                 "Enumerate bootloader transports without modifying devices.",
                 "fastboot",
                 ["fastboot", "devices", "-l"],
-                ("legacy-0032",),
+                legacy=("legacy-0032",),
+                handler="fastboot_transports",
             ),
             cmd(
                 "fastboot.version",
@@ -186,7 +243,7 @@ def registry() -> Registry:
                 "Termux boundaries",
                 "Inspect Termux and PRoot indicators without assuming Android host access.",
                 "termux",
-                handler="host",
+                handler="termux",
                 legacy=("legacy-0024",),
             ),
             Operation(
@@ -233,5 +290,6 @@ def registry() -> Registry:
                 "diagnostics",
                 handler="host",
             ),
+            *additional(),
         ]
     )

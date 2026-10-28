@@ -3,11 +3,13 @@
 import sys
 import os
 import shlex
+from functools import partial
 from secripts.registry import registry
 from secripts.doctor import doctor
+from secripts.safety import SecError
 from secripts.operations import execute
 from secripts.provenance import packaged
-from secripts.recipes import RECIPES, run
+from secripts.recipes import RECIPES, run, get
 
 CATEGORIES = [
     ("1", "Android", "android", "Inspect SDK configuration and installed Android components."),
@@ -24,7 +26,94 @@ CATEGORIES = [
     ("7", "Environment", "environment", "Analyze PATH and installed developer runtimes."),
     ("8", "Models / AI", "models", "Inspect local model tooling without provider credentials."),
     ("9", "Diagnostics", "diagnostics", "Inspect host context, disk, SSH and network interfaces."),
+    (
+        "P",
+        "Python",
+        "python",
+        "Inspect interpreter isolation, metadata, editables and dependencies.",
+    ),
+    ("J", "Java / JVM", "java", "Inspect JDK versions, JAVA_HOME and build tool availability."),
+    (
+        "G",
+        "GitHub",
+        "github",
+        "Explicit network queries for repository, PR, workflow and release state.",
+    ),
+    (
+        "N",
+        "Networking",
+        "network",
+        "Inspect local interfaces, routing, resolver and listening sockets.",
+    ),
+    (
+        "F",
+        "Filesystem",
+        "filesystem",
+        "Inspect free space, inodes and relevant access permissions.",
+    ),
+    (
+        "L",
+        "Linux / PRoot",
+        "linux",
+        "Inspect distribution, build packages and guest/host boundary evidence.",
+    ),
+    (
+        "K",
+        "SSH",
+        "ssh",
+        "Inspect agent/config presence; network connectivity is an explicit operation.",
+    ),
 ]
+
+
+def dashboard(*, devices=False):
+    from secripts.dossier import dossier
+
+    value = dossier(devices=devices)["sections"]
+    devices_state = {
+        name: {"status": data["status"], "count": data.get("count", "UNTESTED")}
+        for name, data in value["devices"].items()
+    }
+    state = value["secripts"]
+    recovery = value["recovery"]
+    return {
+        "SYSTEM": value["host"],
+        "DEVELOPMENT": {name: check["status"] for name, check in value["development"].items()},
+        "ANDROID SDK": {
+            "status": value["android_sdk"]["status"],
+            "root": value["android_sdk"]["selected_root"],
+        },
+        "REPOSITORY": value["repository"],
+        "DEVICES": devices_state,
+        "SECRIPTS": {
+            "operations": state["operations"],
+            "recipes": state["recipes"],
+            "receipts": state["receipts"],
+            "last_operation": state["latest"]["operation"] if state["latest"] else None,
+            "last_failure": state["last_failure"]["operation"] if state["last_failure"] else None,
+        },
+        "RECOVERY LAB": {
+            "backend": recovery["backend"],
+            "workspace": "BLOCKED"
+            if recovery["workspace"].get("status") == "BLOCKED"
+            else "CONFIGURED",
+            "build_host": recovery["build_host"]["status"],
+            "blockers": recovery["build_host"]["evidence"],
+            "hardware": "UNTESTED",
+        },
+    }
+
+
+def parameters_for(metadata):
+    result = {}
+    for parameter in metadata:
+        required = parameter.required
+        value = input(
+            f"{parameter.name}: {parameter.description} ({'required' if required else 'blank for sole device'}) > "
+        ).strip()
+        if value:
+            result[parameter.name] = value
+    return result
 
 
 def recovery_console():
@@ -55,7 +144,7 @@ def recovery_console():
                 print("Invalid quoting; enter a recovery subcommand or B.")
 
 
-def console(emit) -> int:
+def _console(emit) -> int:
     banner = "J A D I S // S E C R I P T S\n1337 MODE // OPERATOR CONSOLE"
     if (
         sys.stdout.isatty()
@@ -64,6 +153,8 @@ def console(emit) -> int:
     ):
         banner = "\033[1;36m" + banner + "\033[0m"
     print(banner + "\n")
+    interactive = sys.stdin.isatty() and sys.stdout.isatty()
+    emit(dashboard(devices=interactive))
     for key, title, _, description in CATEGORIES:
         print(f"[{key}] {title}\n    {description}")
     for key, title, desc in [
@@ -71,28 +162,43 @@ def console(emit) -> int:
         ("A", "Archaeology", "Sanitized lineage, classifications and modern replacements."),
         ("S", "Search Everything", "Search operation metadata and recipes."),
         ("D", "Doctor", "Inspect host tools; device functionality remains untested."),
+        ("T", "History / Receipts", "Inspect recent execution evidence and compare receipts."),
+        ("V", "Refresh cockpit", "Refresh local evidence and explicitly enumerate transports."),
         ("H", "Help", "Explain commands and risk labels."),
         ("Q", "Exit", "Leave the console."),
     ]:
         print(f"[{key}] {title}\n    {desc}")
     if not sys.stdin.isatty() or not sys.stdout.isatty():
-        print("\nNoninteractive preview. Use sec list, sec doctor or sec recovery --help.")
+        print("\nNoninteractive preview. Use js list, js doctor or js recovery --help.")
         return 0
-    print("\nHOST STATUS (binary presence only)")
-    value = doctor()
-    emit(value["host"])
-    for check in value["checks"]:
-        print(f"{check['name']:18} {check['status']}")
     reg = registry()
     while True:
         try:
-            choice = input("\n1337 > ").strip().upper()
+            choice = input("\njs://1337 > ").strip().upper()
         except (EOFError, KeyboardInterrupt):
             print()
             return 0
         if choice in ("Q", "QUIT"):
             return 0
-        if choice == "D":
+        if choice == "V":
+            emit(dashboard(devices=True))
+        elif choice == "T":
+            from secripts.receipts import history, summary, load, latest, compare
+
+            emit([summary(r) for r in history(limit=10)])
+            request = input("Receipt ID, latest, diff ID1 ID2, or blank to return > ").split()
+            if request:
+                try:
+                    emit(
+                        compare(*request[1:])
+                        if request[0] == "diff" and len(request) == 3
+                        else latest()
+                        if request[0] == "latest"
+                        else load(request[0])
+                    )
+                except SecError as exc:
+                    emit({"error": str(exc)})
+        elif choice == "D":
             emit(doctor())
         elif choice == "A":
             value = packaged()
@@ -116,13 +222,26 @@ def console(emit) -> int:
                     )
         elif choice == "H":
             print(
-                "sec show/explain ID: inspect contract. sec run ID --dry-run: preview.\nREAD_ONLY inspects; MUTATING writes; PRIVILEGED never elevates; DESTRUCTIVE requires identity confirmation."
+                "js show/explain ID: inspect contract. js run ID --dry-run: preview.\nREAD_ONLY inspects; MUTATING writes; PRIVILEGED never elevates; DESTRUCTIVE requires identity confirmation."
             )
         elif choice == "R":
             emit(RECIPES)
             name = input("Recipe name (blank to return): ").strip()
             if name in RECIPES:
-                emit(run(name, dry_run=input("[P]review or [R]un? ").strip().upper() != "R"))
+                recipe = get(name)
+                emit(recipe)
+                params = {
+                    k: input(f"{k}: {v['description']} > ").strip()
+                    for k, v in recipe["parameters"].items()
+                }
+                dry_run = input("[P]review or [R]un? ").strip().upper() != "R"
+                network = (
+                    recipe["network"]
+                    and not dry_run
+                    and input("Recipe contacts network services. Type NETWORK to continue > ")
+                    == "NETWORK"
+                )
+                attempt(partial(run, name, dry_run, params, network=network), emit)
         elif choice == "3":
             recovery_console()
         else:
@@ -133,7 +252,9 @@ def console(emit) -> int:
             else:
                 category = next((v for k, _, v, _ in CATEGORIES if k == choice), None)
                 if category is None:
-                    print("Choose 1-9, R, A, S, D, H or Q. Each category is described above.")
+                    print(
+                        "Choose a described category key, R, A, S, D, T, V, H or Q. Each category is described above."
+                    )
                     continue
                 groups = {
                     "transports": {"adb", "fastboot"},
@@ -167,7 +288,8 @@ def console(emit) -> int:
                 .upper()
             )
             if action in ("", "D"):
-                emit(execute(name, action == "D"))
+                params = parameters_for(op.parameters)
+                attempt(partial(execute, name, action == "D", params), emit)
             elif action == "E":
                 emit(op.metadata())
             elif action == "P":
@@ -178,3 +300,18 @@ def console(emit) -> int:
                         "device_required": op.device_required,
                     }
                 )
+
+
+def attempt(action, emit):
+    try:
+        emit(action())
+    except SecError as exc:
+        emit({"error": str(exc), "exit_code": exc.code})
+
+
+def console(emit) -> int:
+    try:
+        return _console(emit)
+    except (EOFError, KeyboardInterrupt):
+        print("\nLeaving cockpit.")
+        return 0

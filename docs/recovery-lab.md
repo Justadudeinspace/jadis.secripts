@@ -1,68 +1,103 @@
 # Recovery Lab
 
-Implemented: tool/workspace doctor, static tree evidence, image hashes and boot-header fields,
-single authorized ADB device properties, explicit workspace configuration, source sync orchestration,
-bounded TWRP build orchestration, artifact evidence and manual qualification reports.
+`js recovery` retains the backend protocol and one real backend, TWRP. Doctor, inspection, tree audit,
+workspace configuration, source/build dry-run, fixture-tested orchestration, manual qualification and
+combined reports are implemented. Real source sync/build remains experimental and unqualified here.
 
-Experimental: source/build integration. Environment-dependent: Android clients and source tools.
-Hardware-dependent: every qualification result. Planned: validated temporary boot, multiple workspaces,
-full ramdisk/AVB inspection and broader dependency resolution. Permanent flashing is intentionally absent.
+## Static intelligence
 
-Upstream reviewed 2026-10-28:
+`js recovery tree audit TREE --json` inventories bounded local files without evaluating Make. The graph
+records products, architecture, A/B and virtual A/B, dynamic partitions, recovery/vendor_boot layouts,
+kernel/DTB/DTBO references, fstab, encryption/metadata partitions, AVB and dependency/manifest hints.
 
-- [TeamWin compilation guidance](https://twrp.me/faq/howtocompiletwrp.html)
-- [Minimal AOSP manifest, twrp-12.1](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp/tree/twrp-12.1)
-- [Manifest source organization](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp/blob/twrp-12.1/default.xml)
-- [TeamWin maintainer checks](https://twrp.me/faq/OfficialMaintainer.html)
+Evidence distinguishes DIRECTLY_DECLARED, STATICALLY_RESOLVED/INFERRED, EXTERNALLY_DEPENDENT and
+UNRESOLVED. LOCAL_DIR and literal references within the audited inventory can resolve; arbitrary
+Make expansion, conditional evaluation and external checkout traversal cannot. Cycles are reported.
+Symlinks are not followed. DTD/entity/NUL XML is refused. Limits: 10,000 entries and 1 MiB per parsed file.
+The graph is explicitly incomplete. A declaration is never a hardware PASS.
 
-The inspected manifest uses Android 12.1 platform sources. Its instructions choose recoveryimage,
-bootimage or vendorbootimage according to the actual device layout; Secripts requires an explicit
-choice. The upstream example enables missing dependencies; Secripts does not suppress them. Branch
-selection is not a promise that a particular device or Android release works. Pin an appropriate
-manifest revision and review the generated resolved source lock. No source updates happen during doctor.
+## Images and AVB
 
-Example preparation (replace every device-specific value):
+`js recovery inspect IMAGE --json` and `verify IMAGE` hash and statically parse, not certify, an image.
+Android boot v0–v4 and vendor_boot v3/v4 layouts have bounded header/kernel/ramdisk/DTB/DTBO/signature/
+bootconfig/table sections. Vendor fragment ranges are checked for overflow and overlap. A v4 ramdisk-only
+image is an INFERRED init_boot candidate. Boot versus recovery partition role remains unresolved.
+
+Gzip, bzip2 and XZ ramdisks can be decoded in memory; raw newc/CRC CPIO metadata is inspected without
+extracting files or exposing payloads. LZ4 and Zstd magic is recognized; decompression remains optional
+future tooling. Compressed regions over 16 MiB are not decoded; output is capped at 16 MiB per decode,
+32 MiB per image, with a 64 MiB XZ decoder memory limit. CPIO names/entries are bounded. Only counts and
+allowlisted boot/recovery marker names are returned. CRC checks and concatenated compression streams
+are not validated; trailing data is reported.
+
+Native AVB inspection recognizes end footers and standalone vbmeta, validates declared block and
+descriptor ranges, and reports untrusted algorithm/rollback/flags and hash-descriptor partition names.
+Other descriptor types remain tagged metadata. Signature validity, signer trust, rollback enforcement,
+full descriptor semantics and compatibility are UNTESTED. A footer is never a VERIFIED image.
+`avbtool` and `unpack_bootimg` are optional detected capabilities, not automatically invoked/installed.
+
+## Devices and reports
+
+`js recovery inspect --device` uses the same privacy-preserving dossier as `js device inspect`.
+An explicit selection or sole authorized transport is required; root is not requested. Serials,
+CPU serial fields and package names are omitted from returned evidence and captured commands.
+This inspection does not infer device ownership or qualify recovery behavior.
 
 ```sh
-sec recovery init example --root /work/twrp --tree /work/twrp/device/vendor/example \
+js recovery test recovery.img --device OWNER_CHOSEN_ALIAS
+js recovery test recovery.img --device OWNER_CHOSEN_ALIAS --area touch --state BLOCKED --note 'No hardware available'
+js recovery report recovery.img --tree /path/to/tree --json
+js recovery report recovery.img --markdown
+```
+
+Reports do not invent or auto-pass qualification records. They combine current workspace/tree audit,
+dependency findings, image/hash/AVB evidence, a hash-matched successful recorded build and existing manual
+attestations. `--device-evidence FILE` explicitly attaches a bounded saved JSON device dossier; it never
+launches an implicit device probe. User-supplied evidence is labeled as such. Use an owner-chosen alias
+for manual qualification, not a serial. Current tree evidence is not proof of historical build inputs.
+
+SOURCE selection/lock, STATIC TREE REVIEW, BUILD SUCCESS, IMAGE STRUCTURE, DEVICE OBSERVATIONS and
+DEVICE QUALIFICATION have separate states. BUILD SUCCESS never passes a hardware area. Reports remain
+JSON/Markdown. TeamWin-inspired BLOCKING/MAJOR/MINOR areas require explicit evidence notes; no official
+TeamWin qualification is asserted.
+
+## TWRP workspace and source boundaries
+
+```sh
+js recovery init example --root /work/twrp --tree /work/twrp/device/vendor/example \
   --manifest https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git \
   --revision twrp-12.1 --lunch twrp_example-eng --target vendorbootimage
-sec recovery sync --dry-run
-sec recovery tree audit /work/twrp/device/vendor/example --json
-sec recovery build --dry-run
+js recovery sync --dry-run
+js recovery build --dry-run
 ```
 
-`sync` performs explicit repo init/sync and captures a revision-resolved manifest. It needs repo,
-network and at least 40 GiB free; actual requirements may be higher. `build` requires an x86_64 host,
-source checkout, local tree, resolved manifest and Git tree revision. It runs the trusted source build
-system, limits jobs to two, captures bounded sanitized logs and collects only a newly produced artifact.
-Build evidence is under the user data directory's `builds/<device>/<UTC-build-id>/` with build.json,
-sources.lock.xml, tree-audit.json, build.log and hashes/images only when actually present.
+Every value above is a device-specific example, not a recommended target. Source selection and build
+partition target must be explicit. Sync uses repo init/sync and captures a resolved lock. No source
+updates happen during doctor. Real sync/build needs repo, network, sufficient disk (40 GiB floor only),
+a qualified x86_64 host, complete sources and a valid device tree. Source code is executable trusted
+input. Missing dependencies are not suppressed. Workspace locking prevents concurrent mutations;
+build and sync each limit jobs to two.
 
-The auditor parses declarations without make expansion. External includes, common/kernel dependencies
-and undeclared partition layout remain UNRESOLVED. Recognized headers prove format fields only; no
-architecture, AVB signature, decryption or hardware compatibility claim follows.
+Existing artifact collection remains under the user-data directory's `builds/<device>/<build-id>/`:
+actual new target image, hashes, build.json, sources.lock.xml, tree-audit.json and bounded sanitized log.
+A source lock does not record arbitrary uncommitted changes across an entire Android checkout.
+Temporary boot refuses unresolved device support/compatibility. Flash, unlock, wipe and repartition
+remain absent. Multiple-workspace selection is not implemented.
 
-Qualification uses BLOCKING/MAJOR/MINOR severities inspired by TeamWin's checklist: display/touch,
-backup/restore, system reboot and ADB are blocking. Extra local checks are extensions, not upstream
-approval. Record explicit observations, including blocked/failed tests:
+## Upstream references and observed revisions
 
-```sh
-sec recovery test recovery.img --device owner-device
-sec recovery test recovery.img --device owner-device --area touch --state BLOCKED --note 'No hardware available'
-sec recovery report recovery.img --device owner-device --markdown
-sec recovery report recovery.img --device owner-device --json
-```
+Reviewed format definitions, independently implemented; upstream code was not copied:
 
-Records are artifact-hash and device-bound. No area starts PASS. A report can include a matching latest
-build receipt; unrelated builds are not attached. Reports do not grant official TeamWin support.
+- [TeamWin compilation guidance](https://twrp.me/faq/howtocompiletwrp.html)
+- [Minimal TWRP manifest](https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp/tree/twrp-12.1)
+- [TeamWin maintainer checks](https://twrp.me/faq/OfficialMaintainer.html)
+- [AOSP boot image layout](https://android.googlesource.com/platform/system/tools/mkbootimg/+/refs/heads/main/include/bootimg/bootimg.h)
+- [AVB footer](https://android.googlesource.com/platform/external/avb/+/refs/heads/main/libavb/avb_footer.h)
+- [AVB vbmeta header](https://android.googlesource.com/platform/external/avb/+/refs/heads/main/libavb/avb_vbmeta_image.h)
+- [AVB hash descriptor](https://android.googlesource.com/platform/external/avb/+/refs/heads/main/libavb/avb_hash_descriptor.h)
 
-The reviewed `twrp-12.1` manifest branch tip was
-`6dc117d9cbd08430daa16db2013560e1c4017fa8` on 2026-10-28 (`git ls-remote`). This is a
-reference observation, not a downloaded/qualified build. Every actual sync captures its own source lock.
-
-Header layouts were checked against [AOSP bootimg.h](https://android.googlesource.com/platform/system/tools/mkbootimg/+/refs/heads/main/include/bootimg/bootimg.h)
-(blob `67ae349583e66424e5af0a3b7a386b42b6c958e0`) and
-[AOSP vendor_boot layout](https://source.android.com/docs/core/architecture/partitions/vendor-boot-partitions).
-Fields are independently parsed; upstream implementation code was not copied. Vendor header/page,
-ramdisk/DTB/table/bootconfig bounds are checked; table entries are not unpacked or device-qualified.
+The manifest twrp-12.1 tip observed on 2026-10-28 was
+`6dc117d9cbd08430daa16db2013560e1c4017fa8`; bootimg.h blob was
+`67ae349583e66424e5af0a3b7a386b42b6c958e0`; vbmeta header blob was
+`f9cbac447d0941429d813ca0aadef4401e7ec8d7`. These reference observations do not prove a downloaded,
+compiled or device-tested recovery. No large Android checkout was downloaded for this release.
