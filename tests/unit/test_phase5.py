@@ -534,3 +534,35 @@ def test_generated_reference_independent_of_terminal_width(monkeypatch):
     narrow = module.reference()
     monkeypatch.setenv("COLUMNS", "180")
     assert module.reference() == narrow
+
+
+def test_reference_normalizes_older_positional_required_metadata(monkeypatch):
+    import argparse
+    import importlib.util
+
+    root = Path(__file__).resolve().parents[2]
+    spec = importlib.util.spec_from_file_location("manual", root / "tools/manual.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    expected = module.reference()
+    original = module.parser
+
+    def older():
+        p = original()
+
+        def walk(current):
+            for action in current._actions:
+                if not action.option_strings and action.nargs in ("*", argparse.REMAINDER):
+                    action.required = True
+                if isinstance(action, argparse._SubParsersAction):
+                    for child in {id(c): c for c in action.choices.values()}.values():
+                        walk(child)
+
+        walk(p)
+        # These remain accepted with no trailing values, as on Python 3.11.
+        assert p.parse_args(["comp", "candidates"]).words == []
+        assert p.parse_args(["rcpt", "latest"]).other == []
+        return p
+
+    monkeypatch.setattr(module, "parser", older)
+    assert module.reference() == expected

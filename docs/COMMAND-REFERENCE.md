@@ -33,7 +33,7 @@ js help [TOPIC] [options]
 |---|---|---|---|
 | -h, --help | show this help message and exit | '==SUPPRESS==' | optional |
 | --json | Machine-readable output | False | optional |
-| topic | Positional topic | None | image,recovery,device,evidence,ai |
+| topic | Positional topic | None | optional; image,recovery,device,evidence,ai |
 
 ## js guide
 
@@ -109,7 +109,7 @@ js ai models [options]
 |---|---|---|---|
 | -h, --help | show this help message and exit | '==SUPPRESS==' | optional |
 | --json | Explicit json selector | False | optional |
-| --provider | Explicit provider selector | None | openai,claude,deepseek |
+| --provider | Explicit provider selector | None | required; openai,claude,deepseek |
 | --network | Explicit catalog request to the selected provider | False | optional |
 
 ## js ai context
@@ -142,7 +142,7 @@ js ai ask QUESTION [options]
 |---|---|---|---|
 | -h, --help | show this help message and exit | '==SUPPRESS==' | optional |
 | --json | Explicit json selector | False | optional |
-| --provider | Explicit provider selector | None | openai,claude,deepseek |
+| --provider | Explicit provider selector | None | required; openai,claude,deepseek |
 | --context | Explicit bounded saved JSON report | None | optional |
 | question | Positional question | None | required |
 | --model | Explicit provider model ID; no default guessed | None | optional |
@@ -163,7 +163,7 @@ js ai tools TOOL [ARGUMENT] [options]
 |---|---|---|---|
 | -h, --help | show this help message and exit | '==SUPPRESS==' | optional |
 | --json | Explicit json selector | False | optional |
-| tool | Positional tool | None | registry.search,registry.show,receipt.summary |
+| tool | Positional tool | None | required; registry.search,registry.show,receipt.summary |
 | argument | Positional argument | '' | optional |
 
 ## js img
@@ -407,7 +407,7 @@ js ram pack WORKSPACE [options]
 | --dry-run | Explicit dry_run selector | False | optional |
 | workspace | Positional workspace | None | required |
 | --output | Explicit output selector | None | required |
-| --compression | Explicit compression selector | None | none,gzip,zlib,raw-deflate,xz,lzma-alone,bzip2,lz4 |
+| --compression | Explicit compression selector | None | optional; none,gzip,zlib,raw-deflate,xz,lzma-alone,bzip2,lz4 |
 
 ## js ram cmp
 
@@ -646,7 +646,7 @@ js fd [QUERY] [options]
 | --json | Machine-readable output | False | optional |
 | query | Positional query | '' | optional |
 | --category | Explicit category selector | None | optional |
-| --risk | Explicit risk selector | None | READ_ONLY,MUTATING,PRIVILEGED,DESTRUCTIVE |
+| --risk | Explicit risk selector | None | optional; READ_ONLY,MUTATING,PRIVILEGED,DESTRUCTIVE |
 
 ## js dos
 
@@ -678,7 +678,7 @@ js comp SHELL [WORDS ...] [options]
 |---|---|---|---|
 | -h, --help | show this help message and exit | '==SUPPRESS==' | optional |
 | --json | Machine-readable output | False | optional |
-| shell | Positional shell | None | bash,candidates |
+| shell | Positional shell | None | required; bash,candidates |
 | words | Positional words | None | optional |
 
 ## js dce
@@ -695,7 +695,7 @@ js dce ACTION [options]
 |---|---|---|---|
 | -h, --help | show this help message and exit | '==SUPPRESS==' | optional |
 | --json | Machine-readable output | False | optional |
-| action | Positional action | None | inspect,transports,fastboot |
+| action | Positional action | None | required; inspect,transports,fastboot |
 | --device | Select one transport; not retained in evidence | None | optional |
 
 ## js sh
@@ -802,7 +802,7 @@ js rcp ACTION NAME [options]
 |---|---|---|---|
 | -h, --help | show this help message and exit | '==SUPPRESS==' | optional |
 | --json | Machine-readable output | False | optional |
-| action | Positional action | None | show,run |
+| action | Positional action | None | required; show,run |
 | name | Positional name | None | required |
 | --dry-run | Explicit dry_run selector | False | optional |
 | --network | Explicit network selector | False | optional |
@@ -951,7 +951,7 @@ js ry acquire [options]
 |---|---|---|---|
 | -h, --help | show this help message and exit | '==SUPPRESS==' | optional |
 | --json | Explicit json selector | False | optional |
-| --have | Explicit have selector | 'identity' | firmware,images,device,tree,recovery,kernel,identity |
+| --have | Explicit have selector | 'identity' | optional; firmware,images,device,tree,recovery,kernel,identity |
 | --artifact | Explicit artifact selector | None | optional |
 | --tree | Explicit tree selector | None | optional |
 | --model | Explicit model selector | None | optional |
@@ -1035,7 +1035,7 @@ js ry tree ACTION [PATH] [options]
 |---|---|---|---|
 | -h, --help | show this help message and exit | '==SUPPRESS==' | optional |
 | --json | Explicit json selector | False | optional |
-| action | Positional action | None | audit,inspect,diagnose,derive |
+| action | Positional action | None | required; audit,inspect,diagnose,derive |
 | path | Positional path | None | optional |
 | --device | Explicit model selector | None | optional |
 | --output | Explicit output selector | None | optional |
@@ -1071,7 +1071,7 @@ js ry dce ACTION [NAME] [INPUTS ...] [options]
 |---|---|---|---|
 | -h, --help | show this help message and exit | '==SUPPRESS==' | optional |
 | --json | Explicit json selector | False | optional |
-| action | Positional action | None | create,list,add-image,add-tree,add-metadata,inspect,report |
+| action | Positional action | None | required; create,list,add-image,add-tree,add-metadata,inspect,report |
 | name | Positional name | None | optional |
 | inputs | Positional inputs | None | optional |
 
@@ -1095,7 +1095,7 @@ js ry init DEVICE [options]
 | --manifest | Explicit manifest selector | None | required |
 | --revision | Explicit revision selector | None | required |
 | --lunch | Explicit lunch selector | None | required |
-| --target | Explicit target selector | None | recoveryimage,bootimage,vendorbootimage |
+| --target | Explicit target selector | None | required; recoveryimage,bootimage,vendorbootimage |
 
 ## js ry cfg
 
@@ -1193,7 +1193,7 @@ js ry test ARTIFACT [options]
 | artifact | Positional artifact | None | required |
 | --device | Explicit device selector | None | required |
 | --area | Explicit area selector | None | optional |
-| --state | Explicit state selector | None | PASS,FAIL,SKIPPED,BLOCKED,UNTESTED |
+| --state | Explicit state selector | None | optional; PASS,FAIL,SKIPPED,BLOCKED,UNTESTED |
 | --note | Explicit note selector | '' | optional |
 
 ## js ry report

@@ -7,6 +7,16 @@ from secripts.cli import parser
 from secripts import __version__
 
 
+def required(action):
+    # Python 3.11 marks some zero-arity positionals required in metadata even
+    # though parsing accepts zero values. Options still use their explicit guard.
+    return (
+        bool(action.required)
+        if action.option_strings
+        else action.nargs not in ("?", "*", argparse.REMAINDER, 0)
+    )
+
+
 def syntax(p, route):
     """Canonical syntax from contracts, independent of argparse terminal layout/version."""
     tokens = [*route]
@@ -72,11 +82,9 @@ def reference():
                 else "Explicit " + a.dest + " selector"
             )
             default = repr(a.default)
-            choices = (
-                ",".join(str(s) for s in a.choices)
-                if a.choices
-                else ("required" if a.required else "optional")
-            )
+            choices = "required" if required(a) else "optional"
+            if a.choices:
+                choices += "; " + ",".join(str(s) for s in a.choices)
             lines.append(
                 "| "
                 + " | ".join(

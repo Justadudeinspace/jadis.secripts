@@ -85,7 +85,7 @@ Starting main was bc943ec1c124b12235763df379bbf37883a371bd, installed 0.4.0,
 87 operations / 22 categories / 26 recipes. The full 265-test baseline and all
 quality gates passed before implementation. Research/gap gate preceded product code.
 
-Phase 5 has 92 operations / 23 categories / 28 recipes and 363 tests. Coverage adds
+Phase 5 has 92 operations / 23 categories / 28 recipes and 364 tests. Coverage adds
 guided/no-argument behavior, topic help, acquisition choices, source declarations,
 conservative log classes, AI consent/context/redaction, per-provider request/response
 contracts, missing/offline/oversized/malformed response refusal and typed tool limits.
@@ -110,3 +110,8 @@ Initial Phase 5 CI on a1ec462 passed tests but failed the Python 3.11 generated
 command-reference check. Reference syntax now derives directly from action metadata
 instead of terminal/interpreter-dependent argparse formatting. Width-invariance and
 AI input-growth tests cover the correction; final-commit CI remains the authority.
+
+A follow-up CI diff isolated three optional positionals whose required attribute
+differs on Python 3.11 despite accepting empty input. Reference requirements now
+derive positional arity from nargs, preserving explicit option guards. A regression
+reproduces the older metadata and checks identical reference output.
