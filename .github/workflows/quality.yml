@@ -17,12 +17,18 @@ jobs:
         with:
           python-version: '${{ matrix.python }}'
       - run: python -m pip install -e '.[dev]'
+      - name: Prepare pinned optional AVB verification provider
+        run: |
+          python tools/prepare_avb_provider.py --output "$RUNNER_TEMP/secripts-avb"
+          echo "$RUNNER_TEMP/secripts-avb" >> "$GITHUB_PATH"
       - run: ruff check .
       - run: ruff format --check .
       - run: pytest -q
       - run: python tools/secret_scan.py
       - run: python tools/audit_docs.py
       - run: python -m build
-      - run: js --help && js --version && js list --json && js doctor --json && js dossier --json && js 1337
+      - run: js --help && js --version && js ls --json && js doc --json && js dos --json && js 1337
       - run: python tools/validate_images.py
-      - run: js completion bash > /tmp/js.bash && bash -n /tmp/js.bash
+      - run: python tools/validate_phase4.py
+      - run: python tools/validate_oracles.py --fetch-upstream
+      - run: js comp bash > /tmp/js.bash && bash -n /tmp/js.bash

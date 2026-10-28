@@ -14,6 +14,7 @@ def execute(name: str, dry_run: bool = False, parameters: dict | None = None) ->
     from secripts.evidence import Collector
     from secripts.inspectors import HANDLERS
     from secripts.laboratory import HANDLERS as LAB_HANDLERS
+    from secripts.engineering import handle as engineering_handle
     from secripts.devices import adb_inspect, fastboot_inspect, transport_summary
 
     parameters = {k: v for k, v in (parameters or {}).items() if v is not None}
@@ -48,6 +49,7 @@ def execute(name: str, dry_run: bool = False, parameters: dict | None = None) ->
                 "path": lambda c, **kw: path_analysis(),
                 **HANDLERS,
                 **LAB_HANDLERS,
+                "engineering": lambda c, **kw: engineering_handle(op.id, kw),
                 "adb_inspect": adb_inspect,
                 "fastboot_inspect": fastboot_inspect,
                 "adb_transports": lambda c, **kw: transport_summary(c, "adb"),
@@ -65,7 +67,11 @@ def execute(name: str, dry_run: bool = False, parameters: dict | None = None) ->
                 else handlers[op.handler](collector, **parameters)
             )
             result, code = ("DRY_RUN" if dry_run else "PASS"), 0
-    except (OSError, ValueError) as exc:
+            if op.handler == "engineering" and not dry_run and isinstance(data, dict):
+                code = data.get("exit_code", 0)
+                if code:
+                    result = "FAIL"
+    except (OSError, ValueError, KeyError, TypeError, IndexError, AttributeError) as exc:
         warnings.append(str(exc))
         data, code = {"error": str(exc)}, 1
     except SecError as exc:

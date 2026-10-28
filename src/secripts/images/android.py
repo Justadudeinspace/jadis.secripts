@@ -190,7 +190,7 @@ def inspect_image(path: Path) -> dict:
                     ):
                         raise SecError("Vendor ramdisk fragment bounds/overlap", 1)
                     occupied.append((start, start + length))
-                    name = entry[12:44].split(b"\0")[0].decode("utf-8", errors="replace")
+                    name = entry[12:44].split(b"\0")[0].decode("utf-8", errors="strict")
                     key = f"fragment_{index}"
                     ramdisk(key, offset + start, length)
                     fragments.append(

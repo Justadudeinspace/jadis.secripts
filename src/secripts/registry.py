@@ -24,7 +24,19 @@ class Parameter:
 
     def __post_init__(self):
         if (
-            self.name not in {"tree", "artifact", "device", "model", "output"}
+            self.name
+            not in {
+                "tree",
+                "artifact",
+                "device",
+                "model",
+                "output",
+                "other",
+                "workspace",
+                "compression",
+                "key",
+                "tools",
+            }
             or self.kind not in {"text", "path"}
             or not self.description
         ):
@@ -293,5 +305,6 @@ def registry() -> Registry:
             ),
             *additional(),
             *lab_operations(),
+            *__import__("secripts.engineering", fromlist=["operations"]).operations(),
         ]
     )

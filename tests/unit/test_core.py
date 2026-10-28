@@ -13,7 +13,7 @@ from secripts.provenance import packaged, validate
 
 def test_registry_contract():
     ops = registry().search()
-    assert len(ops) == 70
+    assert len(ops) == 87
     assert all(
         op.summary and op.effect and op.platforms and isinstance(op.risk, Risk) for op in ops
     )
@@ -106,7 +106,7 @@ def test_provenance_packaged():
 
 
 def test_catalog_consistency():
-    expected = "# Operation catalog\n\nGenerated from `js list --json`; update with `python tools/catalog.py`.\n\n"
+    expected = "# Operation catalog\n\nGenerated from `js ls --json`; update with `python tools/catalog.py`.\n\n"
     expected += "| Operation | Summary | Risk |\n|---|---|---|\n"
     for op in registry().search():
         expected += f"| `{op.id}` | {op.summary} | {op.risk} |\n"

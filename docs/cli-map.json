@@ -1,0 +1,823 @@
+{
+  "schema": 1,
+  "commands": [
+    {
+      "scope": [],
+      "identity": "image",
+      "canonical": "img",
+      "aliases": [
+        "image"
+      ],
+      "display_name": "Image",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "image"
+      ],
+      "identity": "inspect",
+      "canonical": "insp",
+      "aliases": [
+        "inspect"
+      ],
+      "display_name": "Inspect",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "image"
+      ],
+      "identity": "model",
+      "canonical": "model",
+      "aliases": [],
+      "display_name": "Model",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "image"
+      ],
+      "identity": "unpack",
+      "canonical": "upk",
+      "aliases": [
+        "unpack"
+      ],
+      "display_name": "Unpack",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "image"
+      ],
+      "identity": "workspace",
+      "canonical": "ws",
+      "aliases": [
+        "workspace"
+      ],
+      "display_name": "Workspace",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "image"
+      ],
+      "identity": "rebuild",
+      "canonical": "rb",
+      "aliases": [
+        "rebuild"
+      ],
+      "display_name": "Rebuild",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "image"
+      ],
+      "identity": "compare",
+      "canonical": "cmp",
+      "aliases": [
+        "compare"
+      ],
+      "display_name": "Compare",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "image"
+      ],
+      "identity": "roundtrip",
+      "canonical": "rt",
+      "aliases": [
+        "roundtrip"
+      ],
+      "display_name": "Roundtrip",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "image"
+      ],
+      "identity": "providers",
+      "canonical": "prov",
+      "aliases": [
+        "providers"
+      ],
+      "display_name": "Providers",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "image"
+      ],
+      "identity": "differential",
+      "canonical": "diff",
+      "aliases": [
+        "differential"
+      ],
+      "display_name": "Differential",
+      "kind": "command"
+    },
+    {
+      "scope": [],
+      "identity": "ramdisk",
+      "canonical": "ram",
+      "aliases": [
+        "ramdisk"
+      ],
+      "display_name": "Ramdisk",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "ramdisk"
+      ],
+      "identity": "inspect",
+      "canonical": "insp",
+      "aliases": [
+        "inspect"
+      ],
+      "display_name": "Inspect",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "ramdisk"
+      ],
+      "identity": "extract",
+      "canonical": "ext",
+      "aliases": [
+        "extract"
+      ],
+      "display_name": "Extract",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "ramdisk"
+      ],
+      "identity": "pack",
+      "canonical": "pack",
+      "aliases": [],
+      "display_name": "Pack",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "ramdisk"
+      ],
+      "identity": "compare",
+      "canonical": "cmp",
+      "aliases": [
+        "compare"
+      ],
+      "display_name": "Compare",
+      "kind": "command"
+    },
+    {
+      "scope": [],
+      "identity": "dtbo",
+      "canonical": "dtbo",
+      "aliases": [],
+      "display_name": "Dtbo",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "dtbo"
+      ],
+      "identity": "inspect",
+      "canonical": "insp",
+      "aliases": [
+        "inspect"
+      ],
+      "display_name": "Inspect",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "dtbo"
+      ],
+      "identity": "extract",
+      "canonical": "ext",
+      "aliases": [
+        "extract"
+      ],
+      "display_name": "Extract",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "dtbo"
+      ],
+      "identity": "rebuild",
+      "canonical": "rb",
+      "aliases": [
+        "rebuild"
+      ],
+      "display_name": "Rebuild",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "dtbo"
+      ],
+      "identity": "compare",
+      "canonical": "cmp",
+      "aliases": [
+        "compare"
+      ],
+      "display_name": "Compare",
+      "kind": "command"
+    },
+    {
+      "scope": [],
+      "identity": "avb",
+      "canonical": "avb",
+      "aliases": [],
+      "display_name": "Avb",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "avb"
+      ],
+      "identity": "inspect",
+      "canonical": "insp",
+      "aliases": [
+        "inspect"
+      ],
+      "display_name": "Inspect",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "avb"
+      ],
+      "identity": "verify",
+      "canonical": "vfy",
+      "aliases": [
+        "verify"
+      ],
+      "display_name": "Verify",
+      "kind": "command"
+    },
+    {
+      "scope": [],
+      "identity": "inspect",
+      "canonical": "insp",
+      "aliases": [
+        "inspect"
+      ],
+      "display_name": "Inspect",
+      "kind": "command"
+    },
+    {
+      "scope": [],
+      "identity": "providers",
+      "canonical": "prov",
+      "aliases": [
+        "providers"
+      ],
+      "display_name": "Providers",
+      "kind": "command"
+    },
+    {
+      "scope": [],
+      "identity": "research",
+      "canonical": "res",
+      "aliases": [
+        "research"
+      ],
+      "display_name": "Research",
+      "kind": "command"
+    },
+    {
+      "scope": [],
+      "identity": "list",
+      "canonical": "ls",
+      "aliases": [
+        "list"
+      ],
+      "display_name": "List",
+      "kind": "command"
+    },
+    {
+      "scope": [],
+      "identity": "find",
+      "canonical": "fd",
+      "aliases": [
+        "find"
+      ],
+      "display_name": "Find",
+      "kind": "command"
+    },
+    {
+      "scope": [],
+      "identity": "dossier",
+      "canonical": "dos",
+      "aliases": [
+        "dossier"
+      ],
+      "display_name": "Dossier",
+      "kind": "command"
+    },
+    {
+      "scope": [],
+      "identity": "completion",
+      "canonical": "comp",
+      "aliases": [
+        "completion"
+      ],
+      "display_name": "Completion",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "completion"
+      ],
+      "identity": "bash",
+      "canonical": "bash",
+      "aliases": [],
+      "display_name": "Bash",
+      "kind": "enumeration"
+    },
+    {
+      "scope": [
+        "completion"
+      ],
+      "identity": "candidates",
+      "canonical": "candidates",
+      "aliases": [],
+      "display_name": "Candidates",
+      "kind": "enumeration"
+    },
+    {
+      "scope": [],
+      "identity": "device",
+      "canonical": "dce",
+      "aliases": [
+        "device"
+      ],
+      "display_name": "Device",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "device"
+      ],
+      "identity": "inspect",
+      "canonical": "insp",
+      "aliases": [
+        "inspect"
+      ],
+      "display_name": "Inspect",
+      "kind": "action"
+    },
+    {
+      "scope": [
+        "device"
+      ],
+      "identity": "transports",
+      "canonical": "transports",
+      "aliases": [],
+      "display_name": "Transports",
+      "kind": "action"
+    },
+    {
+      "scope": [
+        "device"
+      ],
+      "identity": "fastboot",
+      "canonical": "fastboot",
+      "aliases": [],
+      "display_name": "Fastboot",
+      "kind": "action"
+    },
+    {
+      "scope": [],
+      "identity": "show",
+      "canonical": "sh",
+      "aliases": [
+        "show"
+      ],
+      "display_name": "Show",
+      "kind": "command"
+    },
+    {
+      "scope": [],
+      "identity": "explain",
+      "canonical": "exp",
+      "aliases": [
+        "explain"
+      ],
+      "display_name": "Explain",
+      "kind": "command"
+    },
+    {
+      "scope": [],
+      "identity": "doctor",
+      "canonical": "doc",
+      "aliases": [
+        "doctor"
+      ],
+      "display_name": "Doctor",
+      "kind": "command"
+    },
+    {
+      "scope": [],
+      "identity": "run",
+      "canonical": "run",
+      "aliases": [],
+      "display_name": "Run",
+      "kind": "command"
+    },
+    {
+      "scope": [],
+      "identity": "recipes",
+      "canonical": "rcps",
+      "aliases": [
+        "recipes"
+      ],
+      "display_name": "Recipes",
+      "kind": "command"
+    },
+    {
+      "scope": [],
+      "identity": "recipe",
+      "canonical": "rcp",
+      "aliases": [
+        "recipe"
+      ],
+      "display_name": "Recipe",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "recipe"
+      ],
+      "identity": "show",
+      "canonical": "sh",
+      "aliases": [
+        "show"
+      ],
+      "display_name": "Show",
+      "kind": "action"
+    },
+    {
+      "scope": [
+        "recipe"
+      ],
+      "identity": "run",
+      "canonical": "run",
+      "aliases": [],
+      "display_name": "Run",
+      "kind": "action"
+    },
+    {
+      "scope": [],
+      "identity": "history",
+      "canonical": "hist",
+      "aliases": [
+        "history"
+      ],
+      "display_name": "History",
+      "kind": "command"
+    },
+    {
+      "scope": [],
+      "identity": "receipt",
+      "canonical": "rcpt",
+      "aliases": [
+        "receipt",
+        "receipts"
+      ],
+      "display_name": "Receipt",
+      "kind": "command"
+    },
+    {
+      "scope": [],
+      "identity": "1337",
+      "canonical": "1337",
+      "aliases": [],
+      "display_name": "1337",
+      "kind": "command"
+    },
+    {
+      "scope": [],
+      "identity": "archaeology",
+      "canonical": "arch",
+      "aliases": [
+        "archaeology"
+      ],
+      "display_name": "Archaeology",
+      "kind": "command"
+    },
+    {
+      "scope": [],
+      "identity": "scan",
+      "canonical": "scan",
+      "aliases": [],
+      "display_name": "Scan",
+      "kind": "command"
+    },
+    {
+      "scope": [],
+      "identity": "ingest",
+      "canonical": "ing",
+      "aliases": [
+        "ingest"
+      ],
+      "display_name": "Ingest",
+      "kind": "command"
+    },
+    {
+      "scope": [],
+      "identity": "recovery",
+      "canonical": "ry",
+      "aliases": [
+        "recovery"
+      ],
+      "display_name": "Recovery",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "doctor",
+      "canonical": "doc",
+      "aliases": [
+        "doctor"
+      ],
+      "display_name": "Doctor",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "inspect",
+      "canonical": "insp",
+      "aliases": [
+        "inspect"
+      ],
+      "display_name": "Inspect",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "tree",
+      "canonical": "tree",
+      "aliases": [],
+      "display_name": "Tree",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "recovery",
+        "tree"
+      ],
+      "identity": "audit",
+      "canonical": "audit",
+      "aliases": [],
+      "display_name": "Audit",
+      "kind": "action"
+    },
+    {
+      "scope": [
+        "recovery",
+        "tree"
+      ],
+      "identity": "inspect",
+      "canonical": "insp",
+      "aliases": [
+        "inspect"
+      ],
+      "display_name": "Inspect",
+      "kind": "action"
+    },
+    {
+      "scope": [
+        "recovery",
+        "tree"
+      ],
+      "identity": "diagnose",
+      "canonical": "diag",
+      "aliases": [
+        "diagnose"
+      ],
+      "display_name": "Diagnose",
+      "kind": "action"
+    },
+    {
+      "scope": [
+        "recovery",
+        "tree"
+      ],
+      "identity": "derive",
+      "canonical": "derive",
+      "aliases": [],
+      "display_name": "Derive",
+      "kind": "action"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "plan",
+      "canonical": "plan",
+      "aliases": [],
+      "display_name": "Plan",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "device",
+      "canonical": "dce",
+      "aliases": [
+        "device"
+      ],
+      "display_name": "Device",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "recovery",
+        "device"
+      ],
+      "identity": "create",
+      "canonical": "create",
+      "aliases": [],
+      "display_name": "Create",
+      "kind": "action"
+    },
+    {
+      "scope": [
+        "recovery",
+        "device"
+      ],
+      "identity": "list",
+      "canonical": "ls",
+      "aliases": [
+        "list"
+      ],
+      "display_name": "List",
+      "kind": "action"
+    },
+    {
+      "scope": [
+        "recovery",
+        "device"
+      ],
+      "identity": "add-image",
+      "canonical": "add-image",
+      "aliases": [],
+      "display_name": "Add Image",
+      "kind": "action"
+    },
+    {
+      "scope": [
+        "recovery",
+        "device"
+      ],
+      "identity": "add-tree",
+      "canonical": "add-tree",
+      "aliases": [],
+      "display_name": "Add Tree",
+      "kind": "action"
+    },
+    {
+      "scope": [
+        "recovery",
+        "device"
+      ],
+      "identity": "add-metadata",
+      "canonical": "add-metadata",
+      "aliases": [],
+      "display_name": "Add Metadata",
+      "kind": "action"
+    },
+    {
+      "scope": [
+        "recovery",
+        "device"
+      ],
+      "identity": "inspect",
+      "canonical": "insp",
+      "aliases": [
+        "inspect"
+      ],
+      "display_name": "Inspect",
+      "kind": "action"
+    },
+    {
+      "scope": [
+        "recovery",
+        "device"
+      ],
+      "identity": "report",
+      "canonical": "report",
+      "aliases": [],
+      "display_name": "Report",
+      "kind": "action"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "init",
+      "canonical": "init",
+      "aliases": [],
+      "display_name": "Init",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "configure",
+      "canonical": "cfg",
+      "aliases": [
+        "configure"
+      ],
+      "display_name": "Configure",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "sync",
+      "canonical": "sync",
+      "aliases": [],
+      "display_name": "Sync",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "build",
+      "canonical": "build",
+      "aliases": [],
+      "display_name": "Build",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "verify",
+      "canonical": "vfy",
+      "aliases": [
+        "verify"
+      ],
+      "display_name": "Verify",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "boot",
+      "canonical": "boot",
+      "aliases": [],
+      "display_name": "Boot",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "test",
+      "canonical": "test",
+      "aliases": [],
+      "display_name": "Test",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "report",
+      "canonical": "report",
+      "aliases": [],
+      "display_name": "Report",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "clean",
+      "canonical": "clean",
+      "aliases": [],
+      "display_name": "Clean",
+      "kind": "command"
+    }
+  ]
+}

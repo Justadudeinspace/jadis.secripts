@@ -1,0 +1,748 @@
+{
+  "schema": 1,
+  "result": "PASS",
+  "rows": [
+    {
+      "scope": [],
+      "identity": "image",
+      "canonical": "img",
+      "aliases": [
+        "image"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [],
+      "identity": "ramdisk",
+      "canonical": "ram",
+      "aliases": [
+        "ramdisk"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [],
+      "identity": "dtbo",
+      "canonical": "dtbo",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [],
+      "identity": "avb",
+      "canonical": "avb",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [],
+      "identity": "inspect",
+      "canonical": "insp",
+      "aliases": [
+        "inspect"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [],
+      "identity": "research",
+      "canonical": "res",
+      "aliases": [
+        "research"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [],
+      "identity": "list",
+      "canonical": "ls",
+      "aliases": [
+        "list"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [],
+      "identity": "find",
+      "canonical": "fd",
+      "aliases": [
+        "find"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [],
+      "identity": "dossier",
+      "canonical": "dos",
+      "aliases": [
+        "dossier"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [],
+      "identity": "completion",
+      "canonical": "comp",
+      "aliases": [
+        "completion"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [],
+      "identity": "device",
+      "canonical": "dce",
+      "aliases": [
+        "device"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [],
+      "identity": "show",
+      "canonical": "sh",
+      "aliases": [
+        "show"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [],
+      "identity": "explain",
+      "canonical": "exp",
+      "aliases": [
+        "explain"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [],
+      "identity": "doctor",
+      "canonical": "doc",
+      "aliases": [
+        "doctor"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [],
+      "identity": "run",
+      "canonical": "run",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [],
+      "identity": "recipes",
+      "canonical": "rcps",
+      "aliases": [
+        "recipes"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [],
+      "identity": "recipe",
+      "canonical": "rcp",
+      "aliases": [
+        "recipe"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [],
+      "identity": "history",
+      "canonical": "hist",
+      "aliases": [
+        "history"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [],
+      "identity": "receipt",
+      "canonical": "rcpt",
+      "aliases": [
+        "receipt",
+        "receipts"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [],
+      "identity": "1337",
+      "canonical": "1337",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [],
+      "identity": "archaeology",
+      "canonical": "arch",
+      "aliases": [
+        "archaeology"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [],
+      "identity": "scan",
+      "canonical": "scan",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [],
+      "identity": "ingest",
+      "canonical": "ing",
+      "aliases": [
+        "ingest"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [],
+      "identity": "recovery",
+      "canonical": "ry",
+      "aliases": [
+        "recovery"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [],
+      "identity": "providers",
+      "canonical": "prov",
+      "aliases": [
+        "providers"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "image"
+      ],
+      "identity": "model",
+      "canonical": "model",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "image"
+      ],
+      "identity": "unpack",
+      "canonical": "upk",
+      "aliases": [
+        "unpack"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "image"
+      ],
+      "identity": "workspace",
+      "canonical": "ws",
+      "aliases": [
+        "workspace"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "image"
+      ],
+      "identity": "rebuild",
+      "canonical": "rb",
+      "aliases": [
+        "rebuild"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "image"
+      ],
+      "identity": "compare",
+      "canonical": "cmp",
+      "aliases": [
+        "compare"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "image"
+      ],
+      "identity": "roundtrip",
+      "canonical": "rt",
+      "aliases": [
+        "roundtrip"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "image"
+      ],
+      "identity": "providers",
+      "canonical": "prov",
+      "aliases": [
+        "providers"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "image"
+      ],
+      "identity": "differential",
+      "canonical": "diff",
+      "aliases": [
+        "differential"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "image"
+      ],
+      "identity": "inspect",
+      "canonical": "insp",
+      "aliases": [
+        "inspect"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "ramdisk"
+      ],
+      "identity": "inspect",
+      "canonical": "insp",
+      "aliases": [
+        "inspect"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "ramdisk"
+      ],
+      "identity": "extract",
+      "canonical": "ext",
+      "aliases": [
+        "extract"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "ramdisk"
+      ],
+      "identity": "pack",
+      "canonical": "pack",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "ramdisk"
+      ],
+      "identity": "compare",
+      "canonical": "cmp",
+      "aliases": [
+        "compare"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "dtbo"
+      ],
+      "identity": "inspect",
+      "canonical": "insp",
+      "aliases": [
+        "inspect"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "dtbo"
+      ],
+      "identity": "extract",
+      "canonical": "ext",
+      "aliases": [
+        "extract"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "dtbo"
+      ],
+      "identity": "rebuild",
+      "canonical": "rb",
+      "aliases": [
+        "rebuild"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "dtbo"
+      ],
+      "identity": "compare",
+      "canonical": "cmp",
+      "aliases": [
+        "compare"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "avb"
+      ],
+      "identity": "inspect",
+      "canonical": "insp",
+      "aliases": [
+        "inspect"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "avb"
+      ],
+      "identity": "verify",
+      "canonical": "vfy",
+      "aliases": [
+        "verify"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "completion"
+      ],
+      "identity": "bash",
+      "canonical": "bash",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "completion"
+      ],
+      "identity": "candidates",
+      "canonical": "candidates",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "device"
+      ],
+      "identity": "inspect",
+      "canonical": "insp",
+      "aliases": [
+        "inspect"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "device"
+      ],
+      "identity": "transports",
+      "canonical": "transports",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "device"
+      ],
+      "identity": "fastboot",
+      "canonical": "fastboot",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recipe"
+      ],
+      "identity": "show",
+      "canonical": "sh",
+      "aliases": [
+        "show"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recipe"
+      ],
+      "identity": "run",
+      "canonical": "run",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "doctor",
+      "canonical": "doc",
+      "aliases": [
+        "doctor"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "inspect",
+      "canonical": "insp",
+      "aliases": [
+        "inspect"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "tree",
+      "canonical": "tree",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "plan",
+      "canonical": "plan",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "device",
+      "canonical": "dce",
+      "aliases": [
+        "device"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "init",
+      "canonical": "init",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "configure",
+      "canonical": "cfg",
+      "aliases": [
+        "configure"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "sync",
+      "canonical": "sync",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "build",
+      "canonical": "build",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "verify",
+      "canonical": "vfy",
+      "aliases": [
+        "verify"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "boot",
+      "canonical": "boot",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "test",
+      "canonical": "test",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "report",
+      "canonical": "report",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "clean",
+      "canonical": "clean",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery",
+        "tree"
+      ],
+      "identity": "audit",
+      "canonical": "audit",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery",
+        "tree"
+      ],
+      "identity": "inspect",
+      "canonical": "insp",
+      "aliases": [
+        "inspect"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery",
+        "tree"
+      ],
+      "identity": "diagnose",
+      "canonical": "diag",
+      "aliases": [
+        "diagnose"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery",
+        "tree"
+      ],
+      "identity": "derive",
+      "canonical": "derive",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery",
+        "device"
+      ],
+      "identity": "create",
+      "canonical": "create",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery",
+        "device"
+      ],
+      "identity": "list",
+      "canonical": "ls",
+      "aliases": [
+        "list"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery",
+        "device"
+      ],
+      "identity": "add-image",
+      "canonical": "add-image",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery",
+        "device"
+      ],
+      "identity": "add-tree",
+      "canonical": "add-tree",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery",
+        "device"
+      ],
+      "identity": "add-metadata",
+      "canonical": "add-metadata",
+      "aliases": [],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery",
+        "device"
+      ],
+      "identity": "inspect",
+      "canonical": "insp",
+      "aliases": [
+        "inspect"
+      ],
+      "collision": "NONE"
+    },
+    {
+      "scope": [
+        "recovery",
+        "device"
+      ],
+      "identity": "report",
+      "canonical": "report",
+      "aliases": [],
+      "collision": "NONE"
+    }
+  ]
+}

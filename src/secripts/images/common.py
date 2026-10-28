@@ -44,4 +44,7 @@ class Reader:
         end = raw.find(b"\0")
         if end < 0:
             raise ValueError("Unterminated or excessive string")
-        return raw[:end].decode("utf-8", errors="replace"), end + 1
+        text = raw[:end].decode("utf-8", errors="strict")
+        if any(ord(c) < 32 or ord(c) == 127 for c in text):
+            raise ValueError("Control characters in structural string")
+        return text, end + 1

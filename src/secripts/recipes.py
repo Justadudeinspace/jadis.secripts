@@ -143,6 +143,27 @@ RECIPES.update(
 )
 
 
+RECIPES.update(
+    {
+        "artifact-roundtrip": _recipe(
+            "Artifact round-trip evidence",
+            "Model, reconstruct and compare offline artifacts; no compatibility claim.",
+            ["image.model", "image.roundtrip"],
+        ),
+        "ramdisk-review": _recipe(
+            "Ramdisk reconstruction review",
+            "Inspect bounded CPIO/compression evidence alongside provider capability.",
+            ["ramdisk.inspect", "image.providers"],
+        ),
+        "avb-evidence": _recipe(
+            "AVB verification evidence",
+            "Parse native metadata then explicitly verify with optional avbtool; device trust remains unknown.",
+            ["avb.inspect", "avb.verify"],
+        ),
+    }
+)
+
+
 def get(name: str) -> dict:
     from secripts.registry import registry
 
@@ -195,9 +216,13 @@ def run(name: str, dry_run: bool = False, parameters=None, network=False) -> dic
             for r in results
         ]
     )
+    risks = ["READ_ONLY", "MUTATING", "PRIVILEGED", "DESTRUCTIVE"]
+    parent_risk = max(
+        (registry().get(identifier).risk for identifier in recipe["operations"]), key=risks.index
+    )
     receipt = save(
         "recipe." + name,
-        "READ_ONLY",
+        parent_risk,
         [],
         result="FAIL" if code else "DRY_RUN" if dry_run else "PASS",
         step_receipts=[r["receipt_id"] for r in results],

@@ -59,7 +59,7 @@ def test_ramdisk_bomb_truncation_and_cpio_traversal(monkeypatch):
     assert inspect_ramdisk(b"\x1f\x8b", 2)["status"] == "FAIL"
     data = newc("../unsafe")
     assert inspect_ramdisk(data, len(data))["cpio"]["unsafe_paths"] == 1
-    assert inspect_ramdisk(b"\x04\x22\x4d\x18", 4)["status"] == "UNRESOLVED"
+    assert inspect_ramdisk(b"\x04\x22\x4d\x18", 4)["status"] == "FAIL"
 
 
 def test_boot_payload_and_header_bounds(tmp_path):

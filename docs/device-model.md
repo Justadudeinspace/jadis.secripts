@@ -73,3 +73,12 @@ Local Make analysis resolves only bounded simple earlier literal variables, LOCA
 append/default declarations and explicit paths. Conditional/external/dynamic Make
 expansion remains unresolved. Source manifest selections and default revisions are
 reported as declarations; no complete GNU Make or repo manifest evaluator is claimed.
+
+## Phase 4 artifact interfaces
+
+The persistent Recovery Device Model remains schema 1; existing records are not rewritten.
+New canonical image, ramdisk, DTBO, AVB and comparison models use explicit schema 1 interfaces
+and hashes. Device identity, image format and contextual partition role remain separate.
+Use `js ry dce`/`js recovery device` interchangeably. Image workspaces and round-trip results
+are offline artifact evidence, not a device qualification import or a new automatic trust score.
+See [workspaces](image-workspaces.md), [comparison](roundtrip.md), [CLI aliases](cli.md).

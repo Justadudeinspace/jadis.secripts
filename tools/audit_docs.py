@@ -5,6 +5,8 @@ from pathlib import Path
 import re
 from urllib.parse import urlparse
 from secripts.registry import registry
+from secripts.commands import inventory, collision_audit, CommandName
+from secripts.cli import parser
 
 root = Path(__file__).resolve().parents[1]
 errors = []
@@ -30,5 +32,17 @@ if "CREDITS.md" not in (root / "README.md").read_text():
 catalog = (root / "docs/catalog.md").read_text()
 if any(f"`{op.id}`" not in catalog for op in registry().search()):
     errors.append("Catalog operation missing")
+
+current = inventory(parser())
+expected = json.loads(json.dumps({"schema": 1, "commands": current}))
+if json.loads((root / "docs/cli-map.json").read_text()) != expected:
+    errors.append("CLI map drift; run python tools/cli_map.py")
+scopes = {}
+for row in current:
+    scopes.setdefault(tuple(row["scope"]), []).append(
+        CommandName(row["identity"], row["canonical"], tuple(row["aliases"]))
+    )
+for contracts in scopes.values():
+    collision_audit(contracts)
 print("\n".join(errors) if errors else "Documentation/reference audit: PASS")
 raise SystemExit(bool(errors))

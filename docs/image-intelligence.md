@@ -1,57 +1,52 @@
-# Image Intelligence — 0.3.0
+# Image Intelligence — 0.4.0
 
-`js inspect PATH --json` identifies content, not an extension. `js run image.inspect
---artifact PATH` uses the same engine through the operation registry. `js inspect
-PATH --providers` explicitly requests installed external evidence; ordinary inspection
-executes no payload or external decoder.
+`js insp PATH --json` (`js inspect`) identifies content rather than trusting an extension.
+`js img insp` uses the same command path. Registry IDs retain their full stable names.
+The [CLI map](cli.md) lists every shorthand and descriptive alias.
 
-The independent `secripts.images` package owns identification, Android containers,
-compression/ramdisks, FDT/DTBO, ELF/uImage/vendor markers, AVB metadata and optional
-providers. Recovery Lab consumes this engine through compatibility facades.
+`secripts.images` now separates bounded reading, codecs/LZ4/XXH32, CPIO, canonical ramdisks,
+Android image models, workspaces, comparisons, DT tables, AVB models and explicit oracles.
+The recovery compatibility facades remain. Android ramdisk inspection consumes the shared
+codec/CPIO engine; it does not maintain an independent boot-specific implementation.
 
-## Supported scope
+| Capability | Inspect | Extract | Rebuild | Compare | Verification actually provided |
+|---|---|---|---|---|---|
+| Boot v0–v2 | Native | Components/opaque bytes | Exact geometry | Bytes/known fields | Reparse, hashes, byte identity; no signature trust |
+| Boot v3/v4 | Native | Components/signature region | Exact; constrained unsigned resize | Bytes/fields/decoded ramdisk evidence | Reparse, bounds, hashes; edits to signed images refused |
+| vendor_boot v3/v4 | Native | Whole ramdisk, DTB, v4 fragments/table/bootconfig | Exact; constrained unsigned resize | Bytes/known fragment metadata | Ordering/types/names/board IDs preserved |
+| init_boot | V4 structure | As boot container | As supported boot container | Structure/context separate | Partition role remains inferred |
+| LZ4 frame/legacy | Native | Bounded decode | Deterministic uncompressed-block frames | Decoded bytes/CPIO | Standard-frame XXH32 checksums; legacy checksums absent |
+| gzip/zlib/DEFLATE | Native/contextual | Bounded decode | Stdlib encoders; normalized gzip header | Content vs encoding separate | Format checksums where defined; raw DEFLATE has none |
+| CPIO newc/CRC | Native | Virtual numbered payloads | Canonical pack | Entry semantics | Bounds and CRC additive sums; not authenticity |
+| DTB/FDT | Native | Model only | Standalone DTB authoring unsupported | Canonical property hashes/reserves | Structural bounds; arbitrary bindings unverified |
+| DTBO v0/v1 | Native | Entries, shared blobs | Canonical known layouts | Entry/geometry evidence | Documented zlib/gzip checksums and nested FDT bounds |
+| ELF | Native | Unsupported | Unsupported | Opaque byte evidence only | No load/execute behavior |
+| uImage | Native | Unsupported | Unsupported | Header/payload | Header/data CRC; not signature authenticity |
+| FIT | Native FDT | Unsupported | Unsupported | Canonical model | Embedded supported hash checks; signatures unverified |
+| AVB | Native | No signing-key extraction | No signing/bypass | Metadata/trust states | Explicit optional avbtool; see AVB documentation |
+| Historical vendor wrappers | Recognition/bounded metadata | Unsupported | Unsupported | Opaque evidence | No compatibility/service claims |
 
-| Family | Native inspection | Limits |
-|---|---|---|
-| Android boot v0–v4 | Header, alignment, bounded section ranges, recovery DTBO/DTB/signature regions | No bootability or partition identity proof |
-| vendor_boot v3/v4 | Ramdisk, DTB, v4 fragment table/types/names/board IDs, bootconfig ranges | Fragment contents may need unsupported decoding |
-| init_boot | Probable role from v4/no-kernel/ramdisk plus contextual evidence | Never authoritative from filename alone |
-| gzip, bzip2, XZ, LZMA-alone | Bounded native decompression and CPIO metadata where supported | No extraction or execution; cap failure remains partial |
-| LZ4 | Frame/legacy/skippable structure, descriptors, blocks, checksum presence | No native decompression or checksum validation |
-| CPIO newc/CRC | Counts, bounded paths, executable/link counts, indicators, fstab flags, CRC sums | Symlinks never followed; unsafe paths reported; not a complete initramfs concatenation evaluator |
-| FDT v17 | Header/region/reservation bounds, token hierarchy, allowlisted properties | No complete hardware interpretation |
-| DTBO v0/v1 | Table, entry ranges and native embedded FDT | Compressed entries remain partial |
-| ELF32/64 | Both byte orders, architecture, entry point, program/section ranges | Never loaded/executed |
-| uImage | Header and payload fields/CRC checks | CRC is not cryptographic verification |
-| FIT | FDT `/images` and `/configurations` recognition and bounded metadata | External data and signature verification not implemented |
-| AVB | Footer/vbmeta fields and bounded descriptors | Metadata only; no cryptographic verification |
-| MTK legacy | 512-byte wrapper recognition and payload range | Device-specific compatibility unresolved |
-| Rockchip, Loki, ChromeOS | Historical marker recognition | Partial identification only |
+## Evidence and bounds
 
-A content report separates `structure_status`, identification evidence,
-provider agreement and qualification. `PASS` on structure means only that the
-implemented checks passed. Header version observations include byte offsets and
-research source IDs. Source IDs resolve through
-[research.json](../src/secripts/data/research.json) and [credits](../CREDITS.md).
+PARSER_VERSION 4.0.2 invalidates old immutable native-analysis caches. Canonical image/ramdisk/
+DTBO/AVB/comparison models use schema 1. Older inspection-report schemas retain compatible additive
+fields. Unsupported model versions are refused; no historical runtime receipt/model is rewritten.
 
-## Hostile-input bounds
+Native non-Android inspection uses a 32 MiB window. Explicit artifact workspaces cap inputs at
+128 MiB; compression/ramdisk output is capped at 32 MiB. Boot inspection retains smaller aggregate
+budgets. Models cap serialized metadata at 8 MiB. Entry/node/property/depth/string/stream limits
+are enforced before allocation/use. FDT paths and canonical metadata have independent budgets.
+Shared DTBO blobs avoid payload-copy/extraction amplification. Expected malformed inputs return
+structured CLI failures. Deterministic mutation tests are evidence, not a formal parser audit.
 
-Default native non-Android inspection reads at most 32 MiB (oversized files are
-stream-hashed and reported partial). Android headers use bounded seeks for declared
-regions; ramdisk input/output is separately capped. Generic parsers cap entries
-20,000, FDT nodes 4,096/properties 16,000, strings 4,096 bytes and nesting 64.
-CPIO and decompression have their own smaller limits. No filesystem extraction
-occurs. Traversal, malformed lengths, overlaps, table limits and truncated data
-produce refusals/findings. This is defensive parsing, not a claim of formal proof.
+The engine never executes a payload. Command-line/header bytes are preserved as artifact components,
+not dumped into receipts. Raw firmware data, private keys and complete ramdisk contents do not enter
+receipts. Receipt evidence is sanitized, bounded and explicitly marked when truncated.
 
-SHA-256 is streamed. Immutable native results are cached by content hash and parser
-version below the local data directory, with per-invocation filename context and
-providers added afterward. Changes during inspection are refused. Raw ramdisk
-contents, bootconfig, AVB property values and firmware payloads are not receipts.
+Optional providers report availability/path/capability/version and actual invocation evidence.
+`js prov --probe` is explicit; ordinary help/list/dossier do not spawn version or network probes.
+Native/provider disagreements remain evidence. `dtc`/`mkdtimg` are detected but complete adapters
+remain unimplemented. AOSP differential tools require exact pinned source hashes and private quarantine.
 
-`file` and `avbtool info_image` are optional explicit fixed-argv evidence calls with
-timeouts. `dtc`, `lz4`, `unlz4` and `cpio` are availability observations only. Nothing
-is downloaded. Corpus executables are not providers. Disagreement is retained.
-
-Structural inspection != cryptographic verification != trusted key verification
-!= rollback enforcement != bootability != device compatibility.
+See [workspaces](image-workspaces.md), [round trips](roundtrip.md), [ramdisks](ramdisk.md),
+[AVB trust](avb.md), [research provenance](research.md) and [credits](../CREDITS.md).

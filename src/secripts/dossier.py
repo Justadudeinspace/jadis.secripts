@@ -115,6 +115,40 @@ def laboratory_state():
 
     return {
         "formats": list(FORMATS),
+        "model_schemas": {"image": 1, "ramdisk": 1, "dtbo": 1, "avb": 1, "comparison": 1},
+        "native_decoders": {
+            "lz4": "AVAILABLE",
+            "gzip_concat": "AVAILABLE",
+            "zlib": "AVAILABLE",
+            "raw_deflate": "CONTEXT_REQUIRED",
+            "xz": "AVAILABLE",
+            "bzip2": "AVAILABLE",
+            "lzma_alone": "AVAILABLE",
+            "output_limit_bytes": 32 * 1024**2,
+        },
+        "packers": {
+            "cpio_newc_crc": "AVAILABLE",
+            "lz4_uncompressed_blocks": "AVAILABLE",
+            "gzip_deterministic_headers": "AVAILABLE",
+            "dtbo_v0_v1": "AVAILABLE",
+        },
+        "reconstruction": {
+            "boot_0_2": "EXACT_LAYOUT_ONLY",
+            "boot_3_4": "EXACT_AND_RESIZED_UNSIGNED",
+            "vendor_boot_3_4": "EXACT_AND_RESIZED_UNSIGNED",
+            "signed_modifications": "REFUSED",
+        },
+        "verification": {
+            "checksums": "NATIVE_BOUNDED",
+            "avb_signature": "PROVIDER_AVAILABLE_UNTESTED"
+            if availability()["avbtool"]["path"]
+            else "CRYPTO_PROVIDER_UNAVAILABLE",
+            "device_rollback": "UNVERIFIED",
+            "root_of_trust": "UNVERIFIED",
+        },
+        "differential_testing": "EXPLICIT_HASH_PINNED_AOSP_SOURCE_REQUIRED",
+        "recent_roundtrips": len(history(operation="image.roundtrip", limit=20)),
+        "fixture_coverage": "See release verification and fixture provenance; no runtime hardware qualification",
         "providers": availability(),
         "device_models": catalog(),
         "recent_inspections": len(history(operation="image.inspect", limit=10)),

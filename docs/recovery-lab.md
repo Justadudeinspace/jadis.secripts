@@ -113,3 +113,10 @@ See [format capabilities](image-intelligence.md) and [model/planner semantics](d
 Candidate tree != build-ready tree. Image structure != cryptographic verification.
 Compilation != bootability != device qualification. Temporary boot remains refused when
 compatibility/support is unresolved; no destructive device capability was added.
+
+## Phase 4 artifact laboratory
+
+Canonical working names are `js ry` and `js img`; descriptive aliases remain supported.
+Recovery Device Models/planning retain their contracts. Offline reconstruction does not expand
+TWRP build or device-service authority. See [Image Intelligence support](image-intelligence.md),
+[CLI map](cli.md) and [AVB trust](avb.md) for actual inspection/extraction/rebuild/verification limits.

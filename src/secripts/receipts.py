@@ -50,6 +50,13 @@ def save(operation: str, risk: str, commands: list, **extra) -> dict:
         **extra,
     }
     value = sanitize_evidence(value)
+    for key in ("data", "transformation", "evidence", "analysis"):
+        if key in value:
+            value[key], truncated = bounded_evidence(value[key])
+            if truncated:
+                value["warnings"].append(
+                    f"{key} evidence truncated to local receipt budget; inspect explicit workspace/report for detail"
+                )
     write_json(data_dir() / "receipts" / f"{value['receipt_id']}.json", value)
     return value
 
@@ -169,3 +176,73 @@ def compare(first, second):
         "changes": changes,
         "note": "Evidence comparison only; commands are not replayed",
     }
+
+
+def bounded_evidence(value, limit=128 * 1024):
+    """Bound new nested evidence without altering historical receipts or required receipt identity."""
+    remaining = limit
+    truncated = False
+    priority = {
+        "status",
+        "result",
+        "exit_code",
+        "sha256",
+        "source_sha256",
+        "original_sha256",
+        "rebuilt_sha256",
+        "byte_identity",
+        "semantic_equivalence",
+        "cryptographic_state",
+        "root_of_trust",
+        "device_compatibility",
+        "signature",
+        "expected_key_match",
+        "hashtrees",
+        "chains",
+        "workspace",
+        "receipt_id",
+    }
+
+    def visit(item, depth=0):
+        nonlocal remaining, truncated
+        if remaining <= 0 or depth > 12:
+            truncated = True
+            return "[EVIDENCE_TRUNCATED]"
+        if isinstance(item, dict):
+            result = {}
+            keys = sorted(item, key=lambda key: (str(key) not in priority, str(key)))
+            for key in keys[:128]:
+                if remaining <= 0:
+                    result["_truncated"] = True
+                    truncated = True
+                    break
+                remaining -= len(str(key)) + 8
+                result[key] = visit(item[key], depth + 1)
+            if len(keys) > 128:
+                result["_truncated"] = True
+                truncated = True
+            return result
+        if isinstance(item, (list, tuple)):
+            result = []
+            for child in item[:256]:
+                if remaining <= 0:
+                    truncated = True
+                    break
+                result.append(visit(child, depth + 1))
+            if len(result) < len(item):
+                result.append({"_truncated_items": len(item) - len(result)})
+                truncated = True
+            return result
+        if isinstance(item, str):
+            bound = min(4096, max(0, remaining))
+            payload = item.encode("utf-8")
+            remaining -= min(len(payload), bound) + 4
+            if len(payload) > bound:
+                truncated = True
+                return payload[:bound].decode("utf-8", errors="ignore") + "[TRUNCATED]"
+            return item
+        remaining -= 32
+        return item
+
+    result = visit(value)
+    return result, truncated

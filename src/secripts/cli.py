@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import sys
 from secripts import __version__
+from secripts.commands import Parser, named, action_argument, normalize
 from secripts.safety import SecError
 from secripts.secrets import redact
 
@@ -20,25 +21,99 @@ def emit(value, machine=False):
 
 
 def parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(
+    p = Parser(
         prog="js",
-        description="JADIS // SECRIPTS — Personal Developer Operations Arsenal & Android Recovery Laboratory",
+        description=f"JADIS // SECRIPTS {__version__} — Personal Developer Operations Arsenal & Android Recovery Laboratory",
+        epilog="Short names are the working interface; descriptive names remain accepted aliases. See docs/cli.md for the complete map.",
     )
     p.add_argument("--version", action="version", version=f"js {__version__}")
-    sub = p.add_subparsers(dest="command")
+    sub = p.add_subparsers(dest="command", metavar="<command>")
 
     def add(name, help_text):
-        item = sub.add_parser(name, help=help_text)
+        item = named(sub, name, dest="command", help_text=help_text)
         item.add_argument("--json", action="store_true", help="Machine-readable output")
         return item
 
+    engineering_commands = {
+        "image": {
+            "inspect": ("artifact",),
+            "model": ("artifact",),
+            "unpack": ("artifact",),
+            "workspace": ("workspace",),
+            "rebuild": ("workspace",),
+            "compare": ("artifact", "other"),
+            "roundtrip": ("artifact",),
+            "providers": (),
+            "differential": ("artifact",),
+        },
+        "ramdisk": {
+            "inspect": ("artifact",),
+            "extract": ("artifact",),
+            "pack": ("workspace",),
+            "compare": ("artifact", "other"),
+        },
+        "dtbo": {
+            "inspect": ("artifact",),
+            "extract": ("artifact",),
+            "rebuild": ("workspace",),
+            "compare": ("artifact", "other"),
+        },
+        "avb": {"inspect": ("artifact",), "verify": ("artifact",)},
+    }
+    for family, actions in engineering_commands.items():
+        group = add(family, "Offline artifact engineering with explicit evidence states")
+        actions_parser = group.add_subparsers(dest="engineering_action", required=True)
+        for action, positional in actions.items():
+            item = named(actions_parser, action, dest="engineering_action")
+            item.add_argument("--json", action="store_true")
+            item.add_argument("--dry-run", action="store_true")
+            for parameter in positional:
+                item.add_argument(parameter, type=Path)
+            if action in {"unpack", "extract", "rebuild", "pack", "roundtrip"}:
+                item.add_argument("--output", type=Path, required=action != "roundtrip")
+            if family == "image" and action == "inspect":
+                item.add_argument("--providers", action="store_true")
+            if family == "image" and action == "differential":
+                item.add_argument("--tools", type=Path, required=True)
+            if family == "ramdisk" and action == "pack":
+                item.add_argument(
+                    "--compression",
+                    choices=[
+                        "none",
+                        "gzip",
+                        "zlib",
+                        "raw-deflate",
+                        "xz",
+                        "lzma-alone",
+                        "bzip2",
+                        "lz4",
+                    ],
+                )
+            if family == "avb" and action == "verify":
+                item.add_argument("--key", type=Path, help="Expected PEM public key only")
+                item.add_argument(
+                    "--partition",
+                    action="append",
+                    default=[],
+                    help="Explicit NAME=PATH companion image",
+                )
+            if family == "image" and action == "providers":
+                item.add_argument(
+                    "--probe", action="store_true", help="Explicit bounded provider version probes"
+                )
     inspect = add("inspect", "Content-first Image Intelligence; no payload execution")
     inspect.add_argument("path", type=Path)
+    inspect.add_argument("--dry-run", action="store_true")
     inspect.add_argument(
         "--providers",
         action="store_true",
         help="Explicitly invoke allowlisted installed metadata providers",
     )
+    provider = add(
+        "providers", "Inspect optional Image Lab providers; explicit version probes only"
+    )
+    provider.add_argument("--probe", action="store_true")
+    provider.add_argument("--dry-run", action="store_true")
     corpus = add("research", "Bounded recursive corpus inventory; never executes members")
     corpus.add_argument("archives", nargs="+", type=Path)
     add("list", "List registered operations")
@@ -52,13 +127,11 @@ def parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Explicitly enumerate transports; no device shell probing",
     )
-    completion = sub.add_parser(
-        "completion", help="Generate Bash completion or list safe candidates"
-    )
+    completion = add("completion", "Generate Bash completion or list safe candidates")
     completion.add_argument("shell", choices=["bash", "candidates"])
     completion.add_argument("words", nargs=argparse.REMAINDER)
     device = add("device", "Explicit read-only device inspection; identifiers omitted")
-    device.add_argument("action", choices=["inspect", "transports", "fastboot"])
+    action_argument(device, "action", ["inspect", "transports", "fastboot"])
     device.add_argument("--device", help="Select one transport; not retained in evidence")
     for name in ("show", "explain"):
         add(name, "Inspect an operation contract and provenance").add_argument("operation")
@@ -66,15 +139,37 @@ def parser() -> argparse.ArgumentParser:
     r = add("run", "Execute a registered operation with a local receipt")
     r.add_argument("operation")
     r.add_argument("--dry-run", action="store_true")
-    for name in ("tree", "artifact", "device", "model", "output"):
+    for name in (
+        "tree",
+        "artifact",
+        "device",
+        "model",
+        "output",
+        "other",
+        "workspace",
+        "compression",
+        "key",
+        "tools",
+    ):
         r.add_argument("--" + name)
     add("recipes", "List guided workflows")
     recipe = add("recipe", "Inspect or execute a recipe")
-    recipe.add_argument("action", choices=["show", "run"])
+    action_argument(recipe, "action", ["show", "run"])
     recipe.add_argument("name")
     recipe.add_argument("--dry-run", action="store_true")
     recipe.add_argument("--network", action="store_true")
-    for name in ("tree", "artifact", "device", "model", "output"):
+    for name in (
+        "tree",
+        "artifact",
+        "device",
+        "model",
+        "output",
+        "other",
+        "workspace",
+        "compression",
+        "key",
+        "tools",
+    ):
         recipe.add_argument("--" + name)
     hist = add("history", "Filter local receipts; no replay")
     hist.add_argument("--operation")
@@ -100,7 +195,7 @@ def parser() -> argparse.ArgumentParser:
     rs = recovery.add_subparsers(dest="recovery_command")
 
     def rec(name, help_text):
-        item = rs.add_parser(name, help=help_text)
+        item = named(rs, name, dest="recovery_command", help_text=help_text)
         item.add_argument("--json", action="store_true")
         return item
 
@@ -109,7 +204,7 @@ def parser() -> argparse.ArgumentParser:
     inspect.add_argument("image", nargs="?", type=Path)
     inspect.add_argument("--device", action="store_true")
     tree = rec("tree", "Static device-tree evidence; never executes makefiles")
-    tree.add_argument("action", choices=["audit", "inspect", "diagnose", "derive"])
+    action_argument(tree, "action", ["audit", "inspect", "diagnose", "derive"])
     tree.add_argument("path", type=Path, nargs="?")
     tree.add_argument("--device", dest="model")
     tree.add_argument("--output", type=Path)
@@ -117,9 +212,10 @@ def parser() -> argparse.ArgumentParser:
     plan = rec("plan", "Build plan from model evidence; no source acquisition/build")
     plan.add_argument("model")
     device = rec("device", "Manage local evidence-backed recovery models")
-    device.add_argument(
+    action_argument(
+        device,
         "action",
-        choices=["create", "list", "add-image", "add-tree", "add-metadata", "inspect", "report"],
+        ["create", "list", "add-image", "add-tree", "add-metadata", "inspect", "report"],
     )
     device.add_argument("name", nargs="?")
     device.add_argument("inputs", nargs="*")
@@ -277,7 +373,7 @@ def recovery_dispatch(a):
     if cmd == "clean":
         return {
             "result": "NO_ACTION",
-            "guidance": "Inspect js recovery configure and local build receipts. Remove only individually reviewed build directories; js does not delete sources or artifacts automatically.",
+            "guidance": "Inspect js ry cfg and local build receipts. Remove only individually reviewed build directories; js does not delete sources or artifacts automatically.",
         }
 
 
@@ -285,16 +381,49 @@ def dispatch(a):
     from secripts.registry import registry
 
     cmd = a.command
+    if cmd == "providers":
+        from secripts.images.providers import inventory
+
+        return {"planned": "Provider inspection"} if a.dry_run else inventory(probe=a.probe)
+    if cmd in {"image", "ramdisk", "dtbo", "avb"}:
+        from secripts.operations import execute
+
+        if cmd == "image" and a.engineering_action == "providers":
+            from secripts.images.providers import inventory
+
+            return inventory(probe=a.probe)
+        parameters = {
+            name: str(getattr(a, name))
+            for name in ("artifact", "other", "workspace", "output", "compression", "key", "tools")
+            if getattr(a, name, None) is not None
+        }
+        if cmd == "avb" and a.engineering_action == "verify" and a.partition and not a.dry_run:
+            from secripts.images.avbmodel import verify
+
+            companions = {}
+            for specification in a.partition:
+                if "=" not in specification:
+                    raise SecError("Companion must be NAME=PATH", 2)
+                name, path = specification.split("=", 1)
+                if name in companions:
+                    raise SecError("Duplicate companion name", 2)
+                companions[name] = Path(path)
+            return verify(a.artifact, expected_key=a.key, partitions=companions)
+        return execute(cmd + "." + a.engineering_action, a.dry_run, parameters)
     if cmd == "inspect":
-        from secripts.images.engine import inspect
+        from secripts.images.engine import inspect, inspection_failed
         from secripts.receipts import save
 
+        if a.dry_run:
+            from secripts.operations import execute
+
+            return execute("image.inspect", True, {"artifact": str(a.path)})
         value = inspect(a.path, providers=a.providers)
         receipt = save(
             "image.inspect",
             "READ_ONLY",
             [],
-            result="FAIL" if value["structure_status"] == "FAIL" else "PASS",
+            result="FAIL" if inspection_failed(value) else "PASS",
             file_sha256=value["sha256"],
             parser_version=value["parser_version"],
             evidence=value,
@@ -304,7 +433,7 @@ def dispatch(a):
         return {
             **value,
             "receipt_id": receipt["receipt_id"],
-            "exit_code": 1 if value["structure_status"] == "FAIL" else 0,
+            "exit_code": 1 if inspection_failed(value) else 0,
         }
     if cmd == "research":
         from secripts.corpus import inventory
@@ -386,7 +515,21 @@ def dispatch(a):
         return execute(
             a.operation,
             a.dry_run,
-            {k: getattr(a, k) for k in ("tree", "artifact", "device", "model", "output")},
+            {
+                k: getattr(a, k)
+                for k in (
+                    "tree",
+                    "artifact",
+                    "device",
+                    "model",
+                    "output",
+                    "other",
+                    "workspace",
+                    "compression",
+                    "key",
+                    "tools",
+                )
+            },
         )
     if cmd in ("recipes", "recipe"):
         from secripts.recipes import RECIPES, get, run
@@ -399,7 +542,21 @@ def dispatch(a):
             else run(
                 a.name,
                 a.dry_run,
-                {k: getattr(a, k) for k in ("tree", "artifact", "device", "model", "output")},
+                {
+                    k: getattr(a, k)
+                    for k in (
+                        "tree",
+                        "artifact",
+                        "device",
+                        "model",
+                        "output",
+                        "other",
+                        "workspace",
+                        "compression",
+                        "key",
+                        "tools",
+                    )
+                },
                 network=a.network,
             )
         )
@@ -446,7 +603,7 @@ def dispatch(a):
 
 def main(argv=None) -> int:
     p = parser()
-    a = p.parse_args(argv)
+    a = normalize(p.parse_args(argv))
     if a.command is None:
         p.print_help()
         return 0
@@ -492,7 +649,7 @@ def main(argv=None) -> int:
                 )
         emit(evidence, getattr(a, "json", False))
         return exc.code
-    except (OSError, ValueError, KeyError) as exc:
+    except (OSError, ValueError, KeyError, TypeError, IndexError, AttributeError) as exc:
         emit({"error": f"Input/state error: {exc}", "exit_code": 1}, getattr(a, "json", False))
         return 1
     except KeyboardInterrupt:

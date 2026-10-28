@@ -4,7 +4,7 @@ JADIS // SECRIPTS is original personal developer operations software and an
 Android Recovery/Image Laboratory. These credits identify material technical
 lineage, rather than a list of everything encountered in an archive.
 
-Research was reviewed on 2026-10-28. Detailed capability relationships and
+Research was reviewed on 2026-10-28 (Phase 3 and Phase 4). Detailed capability relationships and
 access limitations are recorded in [research provenance](src/secripts/data/research.json)
 and [corpus archaeology](docs/research.md). Specifications, historical research,
 implementation influence and optional providers are distinguished below.
@@ -65,9 +65,9 @@ Darwin website was unavailable; upstream attribution was checked instead.
 ### LZ4 — Yann Collet and contributors
 
 **Role:** Primary frame-format reference for independent recognition and bounded
-structural inspection of standard, legacy and skippable streams. Checksum
-presence is inspected; checksum correctness and decompression are separate,
-unimplemented native capabilities. Installed LZ4 tools are detected, not bundled.
+structural inspection of standard, legacy and skippable streams. Phase 4 adds independent bounded block/frame decoding and XXH32-based header, block and
+content checksum verification. The deterministic encoder emits uncompressed LZ4 blocks.
+Installed LZ4 tools/libraries are optional validation oracles, not bundled components.
 **Upstream:** [LZ4](https://lz4.org/),
 [frame specification](https://github.com/lz4/lz4/blob/dev/doc/lz4_Frame_format.md),
 [license distinctions](https://github.com/lz4/lz4/blob/dev/LICENSE).
@@ -78,7 +78,7 @@ specified otherwise. The specification has its own redistribution notice.
 
 **Role:** Primary references for independent legacy uImage parsing and FDT-based
 FIT identification. CRC checks do not establish signature validity or key trust.
-**Upstream:** [official FIT documentation](https://docs.u-boot-project.org/en/latest/usage/fit/index.html),
+**Upstream:** [official FIT documentation](https://docs.u-boot.org/en/latest/usage/fit/index.html),
 [image interface](https://github.com/u-boot/u-boot/blob/master/include/image.h).
 **License:** The referenced image header carries GPL-2.0+; no header is copied.
 See upstream for documentation and other file licenses.
@@ -100,6 +100,41 @@ extracted and no kernel source is incorporated.
 [initramfs buffer format](https://www.kernel.org/doc/Documentation/early-userspace/buffer-format.txt).
 **License:** ELF header GPL-2.0 WITH Linux-syscall-note; see upstream for the
 buffer-format document's applicable licensing.
+
+### xxHash — Yann Collet
+
+**Role:** Primary XXH32 specification for an independently written checksum implementation
+used by the LZ4 decoder/encoder. Published vectors and installed-library comparisons validate
+behavior. XXH32 is noncryptographic; a matching checksum never authenticates an artifact.
+**Upstream:** [specification](https://github.com/Cyan4973/xxHash/blob/dev/doc/xxhash_spec.md),
+[library license](https://github.com/Cyan4973/xxHash/blob/dev/LICENSE).
+**License:** BSD-2-Clause library notice verified; the specification has its own redistribution
+notice. Neither library code nor specification text is bundled or adapted.
+
+### zlib — Jean-loup Gailly and Mark Adler
+
+**Role:** Compression/checksum behavior reference and Python standard-library provider for
+bounded gzip, zlib and contextual raw DEFLATE. Concatenated gzip members and format checksums
+are checked. Python's zlib implementation is used, not reimplemented or distributed by Secripts.
+**Upstream:** [manual](https://zlib.net/manual.html), [license](https://zlib.net/zlib_license.html).
+**License:** zlib license verified. No zlib source is bundled.
+
+### AOSP reconstruction and AVB verification — Phase 4
+
+**Role:** Current mkbootimg/unpack_bootimg and libavb/avbtool structures, source tests and
+verification behavior are primary authorities. Independent native models preserve AOSP
+headers/components; optional hash-pinned upstream tools provide differential and cryptographic
+evidence. No homemade RSA implementation is used. Temporary synthetic signing keys exist only
+for verification tests and are never project artifacts or credentials.
+**Upstream:** [pinned mkbootimg tree](https://android.googlesource.com/platform/system/tools/mkbootimg/+/d2bb0af5ba6d3198a3e99529c97eda1be0b5a093/),
+[pinned avbtool](https://android.googlesource.com/platform/external/avb/+/761178607206f4cb2af79ed9eec52d8cbd814adb/avbtool.py),
+[generic boot architecture](https://source.android.com/docs/core/architecture/partitions/generic-boot),
+[vendor_boot](https://source.android.com/docs/core/architecture/partitions/vendor-boot-partitions),
+[DTBO partitions](https://source.android.com/docs/core/architecture/dto/partitions).
+**License:** Apache-2.0 source notices verified on the packer/unpacker; MIT-style notices verified
+on the referenced AVB source. Source providers are not incorporated in the distribution. Small
+corpus/upstream binary fixtures have unestablished redistribution terms and are not committed.
+Source hashes and research relationships are recorded separately in research provenance.
 
 ## Recovery development research
 
@@ -160,9 +195,10 @@ the corpus README, not from a currently retrievable repository.
 
 ## Optional external providers
 
-Installed `file` and `avbtool` may be invoked only by explicit provider requests,
-using fixed argument vectors and timeouts. `dtc`, `lz4`, `unlz4` and `cpio`
-availability is reported without implying a working decode/verification adapter.
+Installed `file`, `avbtool` verification/digest commands, and compression oracles are explicit
+fixed-argv calls with time/output bounds. Hash-pinned AOSP scripts run only in a private
+quarantine for differential validation. Their source notices remain intact; none is bundled.
+`dtc`, `mkdtimg` and `cpio` availability does not imply a complete differential adapter.
 Provider tools are not bundled. Their upstream licensing remains independent.
 A tool's presence does not establish successful verification.
 

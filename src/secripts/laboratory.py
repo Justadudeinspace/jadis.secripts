@@ -4,10 +4,10 @@ from pathlib import Path
 
 
 def image(c=None, **parameters):
-    from secripts.images.engine import inspect
+    from secripts.images.engine import inspect, inspection_failed
 
     result = inspect(Path(parameters["artifact"]))
-    if result["structure_status"] == "FAIL":
+    if inspection_failed(result):
         from secripts.safety import SecError
 
         raise SecError("Image structure inspection failed: " + "; ".join(result["warnings"]), 1)

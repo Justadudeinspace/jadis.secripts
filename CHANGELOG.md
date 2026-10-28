@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.4.0 — 2026-10-28
+
+- Added first-class CLI naming contracts: short canonical names, preserved descriptive aliases,
+  scoped collision checks, nested normalization, suggestions, completion and cockpit shortcuts.
+  Operation IDs, recipes and historical receipts remain compatible; js 1337 is unchanged.
+- Added native bounded LZ4 block/frame decoding, XXH32 checksums, concatenated gzip/zlib/contextual
+  DEFLATE, canonical CPIO newc/CRC models, virtual extraction, deterministic pack and comparison.
+- Added hash-checked artifact workspaces, AOSP section extraction, constrained unsigned reconstruction,
+  round-trip evidence and explicit byte/structure/component/metadata/semantic comparisons.
+- Added DTBO shared-blob/v1 gzip-zlib handling and canonical packing; deeper FDT/FIT metadata/hash checks.
+- Added native AVB descriptor/hash evidence and explicit optional upstream signature/key/hashtree/digest
+  verification. Chain/device trust/rollback/FIT signatures remain unverified; no bypass/signing feature.
+- Added targeted corpus/upstream differential evidence, pinned optional providers, bounded receipts,
+  attribution for xxHash/zlib and expanded AOSP research. No corpus payloads or keys incorporated.
+
 ## 0.3.0 — 2026-10-28
 
 - Added reusable content-first Image Intelligence: bounded Android, FDT/DTBO, ELF, uImage/FIT, compression/CPIO and AVB metadata inspection; explicit optional evidence providers.

@@ -44,13 +44,26 @@ for op in registry().search():
                 }
                 for source in op.legacy
             ],
+            "research_sources": (
+                ["mkbootimg", "vendor-boot", "generic-boot"]
+                if op.category == "image" and op.id != "image.providers"
+                else ["file", "avb-provider", "lz4"]
+                if op.id == "image.providers"
+                else ["cpio", "lz4-block", "xxhash", "zlib"]
+                if op.category == "ramdisk"
+                else ["aosp-dtbo", "dtbo-v1", "dt-spec"]
+                if op.category == "dtbo"
+                else ["avb", "avb-provider"]
+                if op.category == "avb"
+                else []
+            ),
             "implementation": "Independent rewrite of safe intent"
             if op.legacy
             else "New engineering",
             "review": {
                 "sensitive_content_excluded": True,
                 "modernized": True,
-                "technical_review": "Allowlisted inspection contract; no generic argument forwarding",
+                "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding",
             },
             "verification": {
                 "registry_and_shared_tests": "PASS" if validated else "UNTESTED",

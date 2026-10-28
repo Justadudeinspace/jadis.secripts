@@ -1,11 +1,11 @@
 {
   "schema": 1,
-  "release": "0.3.0",
+  "release": "0.4.0",
   "operations": [
     {
       "operation": "git.status",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [
         {
@@ -18,11 +18,12 @@
           "review": "Intent/command review; rewritten independently, no source content imported"
         }
       ],
+      "research_sources": [],
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -36,7 +37,7 @@
     {
       "operation": "git.branches",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [
         {
@@ -49,11 +50,12 @@
           "review": "Intent/command review; rewritten independently, no source content imported"
         }
       ],
+      "research_sources": [],
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -66,7 +68,7 @@
     {
       "operation": "git.remotes",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [
         {
@@ -79,11 +81,12 @@
           "review": "Intent/command review; rewritten independently, no source content imported"
         }
       ],
+      "research_sources": [],
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -96,7 +99,7 @@
     {
       "operation": "git.log",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [
         {
@@ -109,11 +112,12 @@
           "review": "Intent/command review; rewritten independently, no source content imported"
         }
       ],
+      "research_sources": [],
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -126,7 +130,7 @@
     {
       "operation": "git.integrity",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [
         {
@@ -139,11 +143,12 @@
           "review": "Intent/command review; rewritten independently, no source content imported"
         }
       ],
+      "research_sources": [],
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -156,14 +161,15 @@
     {
       "operation": "github.auth",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -176,7 +182,7 @@
     {
       "operation": "adb.devices",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [
         {
@@ -189,17 +195,17 @@
           "review": "Intent/command review; rewritten independently, no source content imported"
         }
       ],
+      "research_sources": [],
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
         "environment": {
-          "invocation": "PASS",
-          "exit_code": 0
+          "invocation": "UNTESTED"
         },
         "hardware": "UNTESTED"
       }
@@ -207,7 +213,7 @@
     {
       "operation": "adb.version",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [
         {
@@ -220,11 +226,12 @@
           "review": "Intent/command review; rewritten independently, no source content imported"
         }
       ],
+      "research_sources": [],
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -238,7 +245,7 @@
     {
       "operation": "fastboot.devices",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [
         {
@@ -251,17 +258,17 @@
           "review": "Intent/command review; rewritten independently, no source content imported"
         }
       ],
+      "research_sources": [],
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
         "environment": {
-          "invocation": "PASS",
-          "exit_code": 0
+          "invocation": "UNTESTED"
         },
         "hardware": "UNTESTED"
       }
@@ -269,7 +276,7 @@
     {
       "operation": "fastboot.version",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [
         {
@@ -282,11 +289,12 @@
           "review": "Intent/command review; rewritten independently, no source content imported"
         }
       ],
+      "research_sources": [],
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -300,7 +308,7 @@
     {
       "operation": "android.sdk.validate",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [
         {
@@ -322,11 +330,12 @@
           "review": "Intent/command review; rewritten independently, no source content imported"
         }
       ],
+      "research_sources": [],
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -340,14 +349,15 @@
     {
       "operation": "environment.path",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -361,7 +371,7 @@
     {
       "operation": "environment.runtimes",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [
         {
@@ -374,11 +384,12 @@
           "review": "Intent/command review; rewritten independently, no source content imported"
         }
       ],
+      "research_sources": [],
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -391,7 +402,7 @@
     {
       "operation": "termux.inspect",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [
         {
@@ -404,11 +415,12 @@
           "review": "Intent/command review; rewritten independently, no source content imported"
         }
       ],
+      "research_sources": [],
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -421,7 +433,7 @@
     {
       "operation": "debian.packages",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [
         {
@@ -434,11 +446,12 @@
           "review": "Intent/command review; rewritten independently, no source content imported"
         }
       ],
+      "research_sources": [],
       "implementation": "Independent rewrite of safe intent",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -451,14 +464,15 @@
     {
       "operation": "ssh.version",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -471,14 +485,15 @@
     {
       "operation": "models.ollama",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -491,14 +506,15 @@
     {
       "operation": "network.interfaces",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -511,14 +527,15 @@
     {
       "operation": "repo.disk",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -531,14 +548,15 @@
     {
       "operation": "diagnostics.host",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -551,14 +569,15 @@
     {
       "operation": "git.root",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -571,14 +590,15 @@
     {
       "operation": "git.branch",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -591,14 +611,15 @@
     {
       "operation": "git.health",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -612,14 +633,15 @@
     {
       "operation": "git.tags",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -632,14 +654,15 @@
     {
       "operation": "git.worktrees",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -652,14 +675,15 @@
     {
       "operation": "git.submodules",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -672,14 +696,15 @@
     {
       "operation": "git.stashes",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -692,14 +717,15 @@
     {
       "operation": "git.ignored",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -712,14 +738,15 @@
     {
       "operation": "git.untracked",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -732,14 +759,15 @@
     {
       "operation": "git.changed",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -752,14 +780,15 @@
     {
       "operation": "git.largest",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -772,14 +801,15 @@
     {
       "operation": "git.objects",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -792,14 +822,15 @@
     {
       "operation": "git.contributors",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -812,14 +843,15 @@
     {
       "operation": "git.cleanup",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -832,14 +864,15 @@
     {
       "operation": "git.signatures",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -852,14 +885,15 @@
     {
       "operation": "git.remote",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -872,20 +906,20 @@
     {
       "operation": "github.repository",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
         "environment": {
-          "invocation": "PASS",
-          "exit_code": 0
+          "invocation": "UNTESTED"
         },
         "hardware": "UNTESTED"
       }
@@ -893,14 +927,15 @@
     {
       "operation": "github.pulls",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -913,20 +948,20 @@
     {
       "operation": "github.workflows",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
         "environment": {
-          "invocation": "PASS",
-          "exit_code": 0
+          "invocation": "UNTESTED"
         },
         "hardware": "UNTESTED"
       }
@@ -934,14 +969,15 @@
     {
       "operation": "github.releases",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -954,14 +990,15 @@
     {
       "operation": "github.issues",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -974,14 +1011,15 @@
     {
       "operation": "python.environment",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -995,14 +1033,15 @@
     {
       "operation": "python.project",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1016,14 +1055,15 @@
     {
       "operation": "python.editables",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1036,14 +1076,15 @@
     {
       "operation": "python.dependencies",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1056,14 +1097,15 @@
     {
       "operation": "java.environment",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1077,14 +1119,15 @@
     {
       "operation": "adb.inspect",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1097,14 +1140,15 @@
     {
       "operation": "fastboot.inspect",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1117,14 +1161,15 @@
     {
       "operation": "linux.environment",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1137,14 +1182,15 @@
     {
       "operation": "linux.packages",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1157,14 +1203,15 @@
     {
       "operation": "network.configuration",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1177,14 +1224,15 @@
     {
       "operation": "network.routes",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1197,14 +1245,15 @@
     {
       "operation": "network.sockets",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1217,14 +1266,15 @@
     {
       "operation": "ssh.environment",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1237,14 +1287,15 @@
     {
       "operation": "ssh.agent",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1257,14 +1308,15 @@
     {
       "operation": "ssh.github",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1277,14 +1329,15 @@
     {
       "operation": "filesystem.capacity",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1297,14 +1350,15 @@
     {
       "operation": "environment.xdg",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1317,14 +1371,15 @@
     {
       "operation": "models.environment",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1337,14 +1392,15 @@
     {
       "operation": "diagnostics.system",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1357,14 +1413,15 @@
     {
       "operation": "recovery.doctor",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1377,14 +1434,15 @@
     {
       "operation": "recovery.tree",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1397,14 +1455,15 @@
     {
       "operation": "recovery.image",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1417,14 +1476,19 @@
     {
       "operation": "image.inspect",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [
+        "mkbootimg",
+        "vendor-boot",
+        "generic-boot"
+      ],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1437,14 +1501,19 @@
     {
       "operation": "image.providers",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [
+        "file",
+        "avb-provider",
+        "lz4"
+      ],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1457,14 +1526,15 @@
     {
       "operation": "recovery.model",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1477,14 +1547,15 @@
     {
       "operation": "recovery.diagnose",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1497,14 +1568,15 @@
     {
       "operation": "recovery.plan",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1517,14 +1589,15 @@
     {
       "operation": "recovery.host",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",
@@ -1537,14 +1610,442 @@
     {
       "operation": "recovery.derive",
       "created": "2026-10-28",
-      "release": "0.3.0",
+      "release": "0.4.0",
       "version": 1,
       "legacy": [],
+      "research_sources": [],
       "implementation": "New engineering",
       "review": {
         "sensitive_content_excluded": true,
         "modernized": true,
-        "technical_review": "Allowlisted inspection contract; no generic argument forwarding"
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "image.differential",
+      "created": "2026-10-28",
+      "release": "0.4.0",
+      "version": 1,
+      "legacy": [],
+      "research_sources": [
+        "mkbootimg",
+        "vendor-boot",
+        "generic-boot"
+      ],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "image.model",
+      "created": "2026-10-28",
+      "release": "0.4.0",
+      "version": 1,
+      "legacy": [],
+      "research_sources": [
+        "mkbootimg",
+        "vendor-boot",
+        "generic-boot"
+      ],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "image.unpack",
+      "created": "2026-10-28",
+      "release": "0.4.0",
+      "version": 1,
+      "legacy": [],
+      "research_sources": [
+        "mkbootimg",
+        "vendor-boot",
+        "generic-boot"
+      ],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "image.workspace",
+      "created": "2026-10-28",
+      "release": "0.4.0",
+      "version": 1,
+      "legacy": [],
+      "research_sources": [
+        "mkbootimg",
+        "vendor-boot",
+        "generic-boot"
+      ],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "image.rebuild",
+      "created": "2026-10-28",
+      "release": "0.4.0",
+      "version": 1,
+      "legacy": [],
+      "research_sources": [
+        "mkbootimg",
+        "vendor-boot",
+        "generic-boot"
+      ],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "image.compare",
+      "created": "2026-10-28",
+      "release": "0.4.0",
+      "version": 1,
+      "legacy": [],
+      "research_sources": [
+        "mkbootimg",
+        "vendor-boot",
+        "generic-boot"
+      ],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "image.roundtrip",
+      "created": "2026-10-28",
+      "release": "0.4.0",
+      "version": 1,
+      "legacy": [],
+      "research_sources": [
+        "mkbootimg",
+        "vendor-boot",
+        "generic-boot"
+      ],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "ramdisk.inspect",
+      "created": "2026-10-28",
+      "release": "0.4.0",
+      "version": 1,
+      "legacy": [],
+      "research_sources": [
+        "cpio",
+        "lz4-block",
+        "xxhash",
+        "zlib"
+      ],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "ramdisk.extract",
+      "created": "2026-10-28",
+      "release": "0.4.0",
+      "version": 1,
+      "legacy": [],
+      "research_sources": [
+        "cpio",
+        "lz4-block",
+        "xxhash",
+        "zlib"
+      ],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "ramdisk.pack",
+      "created": "2026-10-28",
+      "release": "0.4.0",
+      "version": 1,
+      "legacy": [],
+      "research_sources": [
+        "cpio",
+        "lz4-block",
+        "xxhash",
+        "zlib"
+      ],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "ramdisk.compare",
+      "created": "2026-10-28",
+      "release": "0.4.0",
+      "version": 1,
+      "legacy": [],
+      "research_sources": [
+        "cpio",
+        "lz4-block",
+        "xxhash",
+        "zlib"
+      ],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "dtbo.inspect",
+      "created": "2026-10-28",
+      "release": "0.4.0",
+      "version": 1,
+      "legacy": [],
+      "research_sources": [
+        "aosp-dtbo",
+        "dtbo-v1",
+        "dt-spec"
+      ],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "dtbo.extract",
+      "created": "2026-10-28",
+      "release": "0.4.0",
+      "version": 1,
+      "legacy": [],
+      "research_sources": [
+        "aosp-dtbo",
+        "dtbo-v1",
+        "dt-spec"
+      ],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "dtbo.rebuild",
+      "created": "2026-10-28",
+      "release": "0.4.0",
+      "version": 1,
+      "legacy": [],
+      "research_sources": [
+        "aosp-dtbo",
+        "dtbo-v1",
+        "dt-spec"
+      ],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "dtbo.compare",
+      "created": "2026-10-28",
+      "release": "0.4.0",
+      "version": 1,
+      "legacy": [],
+      "research_sources": [
+        "aosp-dtbo",
+        "dtbo-v1",
+        "dt-spec"
+      ],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "avb.inspect",
+      "created": "2026-10-28",
+      "release": "0.4.0",
+      "version": 1,
+      "legacy": [],
+      "research_sources": [
+        "avb",
+        "avb-provider"
+      ],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
+      },
+      "verification": {
+        "registry_and_shared_tests": "PASS",
+        "environment": {
+          "invocation": "UNTESTED"
+        },
+        "hardware": "UNTESTED"
+      }
+    },
+    {
+      "operation": "avb.verify",
+      "created": "2026-10-28",
+      "release": "0.4.0",
+      "version": 1,
+      "legacy": [],
+      "research_sources": [
+        "avb",
+        "avb-provider"
+      ],
+      "implementation": "New engineering",
+      "review": {
+        "sensitive_content_excluded": true,
+        "modernized": true,
+        "technical_review": "Allowlisted operation contract; fixed parameters, no generic argument forwarding"
       },
       "verification": {
         "registry_and_shared_tests": "PASS",

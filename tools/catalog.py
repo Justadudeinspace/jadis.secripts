@@ -3,7 +3,7 @@
 from pathlib import Path
 from secripts.registry import registry
 
-text = "# Operation catalog\n\nGenerated from `js list --json`; update with `python tools/catalog.py`.\n\n"
+text = "# Operation catalog\n\nGenerated from `js ls --json`; update with `python tools/catalog.py`.\n\n"
 text += "| Operation | Summary | Risk |\n|---|---|---|\n"
 for op in registry().search():
     text += f"| `{op.id}` | {op.summary} | {op.risk} |\n"

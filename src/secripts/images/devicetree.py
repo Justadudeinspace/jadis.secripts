@@ -3,7 +3,7 @@
 from secripts.images.common import Reader, DEFAULT_LIMITS
 
 
-def fdt(data):
+def fdt(data, *, canonical=False):
     r = Reader(data)
     (
         magic,
@@ -26,6 +26,7 @@ def fdt(data):
         ranges[0][1], ranges[1][1]
     ):
         raise ValueError("FDT region bounds/overlap")
+    reservations = []
     reserve = off_reserve
     for _ in range(DEFAULT_LIMITS.nodes):
         address, size = r.unpack(">QQ", reserve)
@@ -34,6 +35,7 @@ def fdt(data):
             raise ValueError("FDT reservation bounds")
         if not address and not size:
             break
+        reservations.append({"address": address, "size": size})
     else:
         raise ValueError("FDT reservation count")
     if any(max(off_reserve, start) < min(reserve, end) for start, end in ranges):
@@ -43,7 +45,10 @@ def fdt(data):
     cursor = 0
     stack = []
     nodes = []
+    metadata_bytes = 0
+    active_paths = []
     properties = []
+    raw_properties = {}
     ended = False
     while cursor < len(tokens.data):
         opcode = tokens.unpack(">I", cursor)[0]
@@ -58,11 +63,16 @@ def fdt(data):
             stack.append(name)
             if len(stack) > DEFAULT_LIMITS.depth or len(nodes) >= DEFAULT_LIMITS.nodes:
                 raise ValueError("FDT node/depth limit")
-            nodes.append("/" + "/".join(stack[1:]))
+            current_path = "/" + "/".join(stack[1:])
+            if len(current_path.encode()) > 4096:
+                raise ValueError("FDT path length budget")
+            active_paths.append(current_path)
+            nodes.append(current_path)
         elif opcode == 2:
             if not stack:
                 raise ValueError("Unbalanced FDT node")
             stack.pop()
+            active_paths.pop()
         elif opcode == 3:
             if not stack:
                 raise ValueError("FDT property outside node")
@@ -73,7 +83,11 @@ def fdt(data):
             name, _ = strings.string(offset, len(strings.data) - offset)
             if len(properties) >= DEFAULT_LIMITS.properties:
                 raise ValueError("FDT property count limit")
-            entry = {"node": "/" + "/".join(stack[1:]), "name": name, "bytes": length}
+            entry = {"node": active_paths[-1], "name": name, "bytes": length}
+            if (entry["node"], name) in raw_properties:
+                raise ValueError("Duplicate FDT property")
+            raw_properties[(entry["node"], name)] = value
+            entry["sha256"] = __import__("hashlib").sha256(value).hexdigest()
             # Payloads/signatures/keys/serial properties are never dumped.
             if (
                 name
@@ -94,9 +108,15 @@ def fdt(data):
                 }
                 and length <= 4096
             ):
-                entry["value"] = value.rstrip(b"\0").decode("utf-8", errors="replace").split("\0")
+                entry["value"] = [
+                    "".join(c if c.isprintable() else f"\\x{ord(c):02x}" for c in part)
+                    for part in value.rstrip(b"\0").decode("utf-8", errors="replace").split("\0")
+                ]
             elif name in {"load", "entry", "#address-cells", "#size-cells"} and length in (4, 8):
                 entry["value"] = int.from_bytes(value, "big")
+            metadata_bytes += len(entry["node"]) + len(name) + min(length, 4096) + 256
+            if canonical and metadata_bytes > 8 * 1024**2:
+                raise ValueError("Canonical FDT metadata budget")
             properties.append(entry)
         elif opcode == 4:
             continue
@@ -118,9 +138,21 @@ def fdt(data):
         "boot_cpu": cpu,
         "node_count": len(nodes),
         "property_count": len(properties),
-        "nodes": nodes[:256],
-        "properties": properties[:512],
-        "output_truncated": len(nodes) > 256 or len(properties) > 512,
+        "nodes": nodes if canonical else nodes[:256],
+        "properties": properties if canonical else properties[:512],
+        "output_truncated": not canonical and (len(nodes) > 256 or len(properties) > 512),
+        "schema": 1,
+        "model": "fdt",
+        "reservations": reservations,
+        "header": {"version": version, "last_compatible_version": compatible, "boot_cpu": cpu},
+        "regions": {
+            "structure_offset": off_struct,
+            "structure_size": struct_size,
+            "strings_offset": off_strings,
+            "strings_size": string_size,
+            "reserve_offset": off_reserve,
+        },
+        "fit": fit_evidence(nodes, raw_properties) if is_fit else None,
         "signature_verification": "UNTESTED",
         "trailing_bytes": len(data) - total,
     }
@@ -142,21 +174,52 @@ def dtbo(data):
         raise ValueError("Invalid DTBO table bounds")
     entries = []
     regions = []
+    parsed_blobs = {}
+    inspection_bytes = 0
     for index in range(count):
         size, start, identity, revision, *custom = r.unpack(">8I", offset + index * entry_size)
         if (
             start < offset + count * entry_size
             or start + size > total
-            or any(start < end and start + size > begin for begin, end in regions)
+            or any(
+                start < end and start + size > begin and (start, start + size) != (begin, end)
+                for begin, end in regions
+            )
         ):
             raise ValueError("DTBO payload overlap/bounds")
         regions.append((start, start + size))
         payload = r.region(start, size)
-        details = (
-            fdt(payload)
-            if payload.startswith(b"\xd0\x0d\xfe\xed")
-            else {"format": "UNKNOWN_OR_COMPRESSED", "structure_status": "PARTIAL"}
-        )
+        compressed = version == 1 and bool(custom[0] & 15)
+        key = (start, size, custom[0] & 15 if version == 1 else 0)
+        shared = parsed_blobs.get(key)
+        if shared is not None:
+            details = {
+                "format": entries[shared]["device_tree"]["format"],
+                "structure_status": entries[shared]["device_tree"]["structure_status"],
+                "shared_entry": shared,
+            }
+        elif compressed:
+            from secripts.images.codecs import decode
+
+            code = custom[0] & 15
+            if code not in (1, 2):
+                details = {"format": "COMPRESSED_ENTRY_UNSUPPORTED", "structure_status": "PARTIAL"}
+            else:
+                decoded, verification = decode(
+                    payload,
+                    "zlib" if code == 1 else "gzip",
+                    limit=DEFAULT_LIMITS.read_bytes - inspection_bytes,
+                )
+                inspection_bytes += len(decoded)
+                details = {**fdt(decoded), "compression_verification": verification}
+        elif inspection_bytes + size > DEFAULT_LIMITS.read_bytes:
+            details = {"format": "INSPECTION_BUDGET_EXCEEDED", "structure_status": "PARTIAL"}
+        elif payload.startswith(b"\xd0\x0d\xfe\xed"):
+            details = fdt(payload)
+            inspection_bytes += size
+        else:
+            details = {"format": "UNKNOWN_OR_COMPRESSED", "structure_status": "PARTIAL"}
+        parsed_blobs.setdefault(key, index)
         entries.append(
             {
                 "index": index,
@@ -166,6 +229,16 @@ def dtbo(data):
                 "revision": revision,
                 "custom": custom,
                 "device_tree": details,
+                "sha256": __import__("hashlib").sha256(payload).hexdigest(),
+                "compression_status": "CHECKSUM_VERIFIED_BY_STDLIB"
+                if compressed
+                and code_supported(custom[0] & 15)
+                and details["structure_status"] == "PASS"
+                else "NOT_COMPRESSED"
+                if not compressed and payload.startswith(b"\xd0\x0d\xfe\xed")
+                else "COMPRESSED_ENTRY_UNSUPPORTED",
+                "flags": custom[0] if version == 1 else None,
+                "custom_fields": custom[1:] if version == 1 else custom,
             }
         )
     return {
@@ -178,3 +251,79 @@ def dtbo(data):
         "entries": entries,
         "total_size": total,
     }
+
+
+def fit_evidence(nodes, properties):
+    import hashlib
+
+    images = []
+    configurations = []
+    for node in nodes:
+        if node.startswith("/images/") and node.count("/") == 2:
+            payload = properties.get((node, "data"))
+            hashes = []
+            signatures = []
+            for descendant in nodes:
+                if not descendant.startswith(node + "/"):
+                    continue
+                algo = (
+                    properties.get((descendant, "algo"), b"").rstrip(b"\0").decode(errors="replace")
+                )
+                if "/hash" in descendant:
+                    expected = properties.get((descendant, "value"))
+                    actual = (
+                        hashlib.new(algo, payload).digest()
+                        if payload is not None and algo in {"sha1", "sha256", "sha384", "sha512"}
+                        else None
+                    )
+                    hashes.append(
+                        {
+                            "node": descendant,
+                            "algorithm": algo,
+                            "state": "HASH_MATCHED"
+                            if actual is not None and actual == expected
+                            else "HASH_MISMATCH"
+                            if actual is not None
+                            else "UNVERIFIED",
+                        }
+                    )
+                if "/signature" in descendant:
+                    signatures.append(
+                        {"node": descendant, "algorithm": algo, "state": "SIGNATURE_UNVERIFIED"}
+                    )
+            images.append(
+                {
+                    "node": node,
+                    "data_bytes": len(payload) if payload is not None else None,
+                    "payload_state": "EMBEDDED" if payload is not None else "EXTERNAL_OR_UNKNOWN",
+                    "hashes": hashes,
+                    "signatures": signatures,
+                }
+            )
+        elif node.startswith("/configurations/") and node.count("/") == 2:
+            refs = {}
+            for role in ("kernel", "ramdisk", "fdt", "firmware", "loadables"):
+                value = properties.get((node, role))
+                if value is not None:
+                    refs[role] = value.rstrip(b"\0").decode(errors="replace").split("\0")
+            configurations.append(
+                {
+                    "node": node,
+                    "references": refs,
+                    "missing_references": [
+                        name
+                        for names in refs.values()
+                        for name in names
+                        if "/images/" + name not in nodes
+                    ],
+                }
+            )
+    return {
+        "images": images,
+        "configurations": configurations,
+        "signature_verification": "UNVERIFIED",
+    }
+
+
+def code_supported(code):
+    return code in (1, 2)

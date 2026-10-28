@@ -213,6 +213,20 @@ def _parse(path, digest):
                 if kind.startswith("lz4"):
                     details = compression.lz4(data)
                     details["format"] = "COMPRESSION"
+                    from secripts.images.codecs import decode
+                    from secripts.images.lz4codec import DictionaryRequired
+
+                    try:
+                        decoded, verification = decode(data)
+                        details["native_verification"] = verification
+                        details["decoded_bytes"] = len(decoded)
+                    except DictionaryRequired:
+                        details["native_verification"] = {"status": "BLOCKED_MISSING_DICTIONARY"}
+                    except ValueError as exc:
+                        details["native_verification"] = {
+                            "status": "CHECKSUM_OR_DECODE_FAILED",
+                            "reason": str(exc),
+                        }
                 elif kind != "UNKNOWN":
                     details = {
                         "format": "RAMDISK",
@@ -242,3 +256,22 @@ def _parse(path, digest):
     except (ValueError, OverflowError, IndexError, SecError) as exc:
         result.update(structure_status="FAIL", warnings=["Parser refusal: " + str(exc)])
     return result
+
+
+def inspection_failed(value):
+    details = value.get("container", {})
+    if value.get("type") == "UBOOT_LEGACY" and (
+        "FAIL" in (details.get("header_crc"), details.get("data_crc"))
+    ):
+        return True
+    if any(
+        h.get("state") == "HASH_MISMATCH"
+        for image in (details.get("fit") or {}).get("images", [])
+        for h in image["hashes"]
+    ):
+        return True
+    return (
+        value.get("structure_status") == "FAIL"
+        or value.get("container", {}).get("native_verification", {}).get("status")
+        == "CHECKSUM_OR_DECODE_FAILED"
+    )

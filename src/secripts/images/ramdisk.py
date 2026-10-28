@@ -1,11 +1,7 @@
 """Bounded, non-extracting compression and newc CPIO metadata inspection."""
 
-import bz2
-import lzma
 from pathlib import PurePosixPath
-import zlib
 import re
-import stat
 
 LIMIT = 16 * 1024 * 1024
 
@@ -27,80 +23,41 @@ def compression(data):
 
 
 def cpio_metadata(data):
-    offset, count = 0, 0
+    from secripts.images.cpio import parse
+
+    model = parse(data)
+    entries = model["entries"]
     markers = set()
-    unsafe = 0
-    directories = symlinks = executables = files = 0
-    paths = []
-    links = []
     fstabs = []
-    crc_failures = 0
-    while offset + 110 <= len(data) and count < 20000:
-        header = data[offset : offset + 110]
-        if header[:6] not in (b"070701", b"070702"):
-            raise ValueError("Unsupported/malformed CPIO header")
-        size = int(header[54:62], 16)
-        namesize = int(header[94:102], 16)
-        if not 1 <= namesize <= 4096 or offset + 110 + namesize > len(data):
-            raise ValueError("CPIO name bounds")
-        raw = data[offset + 110 : offset + 110 + namesize]
-        if raw[-1] != 0:
-            raise ValueError("CPIO name lacks terminator")
-        name = raw[:-1].decode("utf-8", errors="replace")
-        body = (offset + 110 + namesize + 3) // 4 * 4
-        if body + size > len(data):
-            raise ValueError("CPIO payload bounds")
-        if name == "TRAILER!!!":
-            return {
-                "status": "PASS",
-                "entries": count,
-                "markers": sorted(markers),
-                "unsafe_paths": unsafe,
-                "files": files,
-                "directories": directories,
-                "symlinks": symlinks,
-                "executables": executables,
-                "paths": paths,
-                "links": links,
-                "fstabs": fstabs,
-                "crc_failures": crc_failures,
-                "paths_truncated": count > len(paths),
-                "note": "Metadata only; no extraction, symlink following or device qualification",
-            }
+    links = []
+    paths = []
+    unsafe = directories = symlinks = executables = files = 0
+    for entry in entries:
+        name = entry["path"]
         path = PurePosixPath(name)
-        if path.is_absolute() or ".." in path.parts:
-            unsafe += 1
-        mode = int(header[14:22], 16)
-        if stat.S_ISDIR(mode):
-            directories += 1
-        elif stat.S_ISLNK(mode):
-            symlinks += 1
-        else:
-            files += 1
-        if mode & 0o111:
-            executables += 1
+        payload = entry["payload"]
+        unsafe += entry["extraction_safety"] == "UNSAFE"
+        directories += entry["type"] == "directory"
+        symlinks += entry["type"] == "symlink"
+        files += entry["type"] == "file"
+        executables += bool(entry["mode"] & 0o111)
         sensitive = bool(re.search(r"(?i)(?:\.(?:pem|key|pk8|crt|cer)$|serial|credential)", name))
         if len(paths) < 256:
             paths.append("[SENSITIVE_PATH_OMITTED]" if sensitive else name)
-        if stat.S_ISLNK(mode) and size <= 4096 and len(links) < 128:
-            target = data[body : body + size].decode(errors="replace")
+        if entry["type"] == "symlink" and len(links) < 128:
+            target = entry["symlink_target"]
             links.append(
                 {
-                    "path": name,
-                    "target": target,
+                    "path": "[SENSITIVE_PATH_OMITTED]" if sensitive else name,
+                    "target": "[SENSITIVE_PATH_OMITTED]" if sensitive else target,
                     "unsafe": PurePosixPath(target).is_absolute()
                     or ".." in PurePosixPath(target).parts,
                     "followed": False,
                 }
             )
-        if header[:6] == b"070702" and sum(data[body : body + size]) & 0xFFFFFFFF != int(
-            header[102:110], 16
-        ):
-            crc_failures += 1
-        if "fstab" in path.name and size <= 65536 and len(fstabs) < 8 and not sensitive:
-            text = data[body : body + size].decode(errors="replace")
+        if "fstab" in path.name and len(payload) <= 65536 and len(fstabs) < 8 and not sensitive:
             rows = []
-            for line in text.splitlines()[:512]:
+            for line in payload.decode(errors="replace").splitlines()[:512]:
                 fields = line.split("#", 1)[0].split()
                 if len(fields) >= 3:
                     rows.append(
@@ -129,14 +86,27 @@ def cpio_metadata(data):
             markers.add("init.recovery.*")
         if "selinux" in name or path.name in ("sepolicy", "file_contexts"):
             markers.add("selinux")
-        basename = path.name
-        if basename in {"init", "recovery", "twrp", "prop.default"} or basename.startswith(
+        if path.name in {"init", "recovery", "twrp", "prop.default"} or path.name.startswith(
             "fstab."
         ):
-            markers.add(basename if not basename.startswith("fstab.") else "fstab.*")
-        count += 1
-        offset = (body + size + 3) // 4 * 4
-    raise ValueError("CPIO missing trailer or entry limit exceeded")
+            markers.add("fstab.*" if path.name.startswith("fstab.") else path.name)
+    return {
+        "status": "PASS",
+        "entries": len(entries),
+        "markers": sorted(markers),
+        "unsafe_paths": unsafe,
+        "files": files,
+        "directories": directories,
+        "symlinks": symlinks,
+        "executables": executables,
+        "paths": paths,
+        "links": links,
+        "fstabs": fstabs,
+        "crc_failures": 0,
+        "archives": model["archives"],
+        "paths_truncated": len(entries) > len(paths),
+        "note": "Metadata only; shared canonical CPIO parser; no extraction",
+    }
 
 
 def inspect_ramdisk(data, declared_size, *, output_limit=None):
@@ -156,37 +126,28 @@ def inspect_ramdisk(data, declared_size, *, output_limit=None):
     if declared_size > LIMIT:
         return {**result, "reason": "Compressed region exceeds inspection limit"}
     try:
-        if kind == "gzip":
-            decoder = zlib.decompressobj(31)
-            decoded = decoder.decompress(data, cap + 1)
-        elif kind == "xz":
-            decoder = lzma.LZMADecompressor(memlimit=64 * 1024 * 1024)
-            decoded = decoder.decompress(data, max_length=cap + 1)
-        elif kind == "lzma-alone":
-            decoder = lzma.LZMADecompressor(format=lzma.FORMAT_ALONE, memlimit=64 * 1024 * 1024)
-            decoded = decoder.decompress(data, max_length=cap + 1)
-        elif kind == "bzip2":
-            decoder = bz2.BZ2Decompressor()
-            decoded = decoder.decompress(data, max_length=cap + 1)
-        elif kind in ("cpio-newc", "cpio-crc"):
-            decoder = None
-            decoded = data
-        else:
-            return {
-                **result,
-                "reason": "Native decompressor unavailable or format unknown; no external tools executed",
-            }
+        from secripts.images.codecs import decode
+        from secripts.images.lz4codec import DictionaryRequired
+
+        try:
+            decoded, verification = decode(data, limit=cap)
+        except DictionaryRequired:
+            return {**result, "status": "UNRESOLVED", "reason": "BLOCKED_MISSING_DICTIONARY"}
         if len(decoded) > cap:
             raise ValueError("Decompressed ramdisk exceeds output limit")
-        if decoder is not None and not decoder.eof:
-            raise ValueError("Truncated compressed ramdisk")
         metadata = cpio_metadata(decoded)
         return {
             **result,
-            "status": "PARTIAL" if metadata["unsafe_paths"] or metadata["crc_failures"] else "PASS",
+            "status": "PARTIAL" if metadata["unsafe_paths"] else "PASS",
             "decompressed_bytes": len(decoded),
             "cpio": metadata,
-            "trailing_compressed_data": bool(decoder and decoder.unused_data),
+            "verification": verification,
+            "trailing_compressed_data": len(verification.get("members", [])) > 1,
         }
-    except (ValueError, OSError, EOFError, zlib.error, lzma.LZMAError) as exc:
+    except (ValueError, OSError, EOFError) as exc:
+        if str(exc) == "UNSUPPORTED_COMPRESSION":
+            return {
+                **result,
+                "reason": "Native decompressor unavailable; no external tools executed",
+            }
         return {**result, "status": "FAIL", "reason": str(exc)}

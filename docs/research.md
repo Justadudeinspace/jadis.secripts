@@ -94,3 +94,43 @@ review category, not approval to use it. No corpus executable became a runtime p
 A corpus family count is not implementation support. Source licenses, correctness
 and real device relevance need separate review. No corpus payload serves as a CI
 fixture; all newly committed image fixtures are generated synthetic structures.
+
+## Phase 4 targeted follow-up
+
+The Phase 3 inventory was reused, not blindly rescanned. Only two non-secret public recovery
+project test images were read from selected nested ZIP members, with inventory hashes verified:
+
+| Component | Bytes | SHA-256 | Observation |
+|---|---:|---|---|
+| Recovery project boot test image | 783655 | `c5eac632addba77fc76afb95b51e35f15ab02ba9c14ce799fba3aec87f4aead0` | BYTE_IDENTICAL reconstruction |
+| Recovery project recovery test image | 529707 | `455684ae541a4fa15634ed459c173f69b8bb4555c1582e0f30a7502b400d0a2f` | BYTE_IDENTICAL reconstruction |
+
+Neither artifact was executed or redistributed. Their licensing/stock-device provenance is not
+established. They are corpus test artifacts, not real-device qualification. Phase 3's recursive
+coverage limitations remain; this follow-up does not turn the original 4 GiB pass into complete coverage.
+
+Current AOSP mkbootimg/unpack_bootimg/header/tests/helper sources were studied alongside generic boot,
+vendor_boot and DTBO documentation. The fixed source commit and exact executable source hashes are
+recorded in research.json. Seven small valid AOSP-generated fixtures match native round trips and
+upstream unpack/repack. Earlier zero-ID/missing-DTB synthetic disagreements remain evidence.
+
+AOSP AVB small_blob.bin is a 21-byte upstream test payload with SHA-256
+`d30fca4adc515ea718f2193c38fd9acb78dc1a5b472eb937e7e09f415ef53b55`.
+It was zero-padded to 4096 and wrapped in locally generated synthetic AVB data to exercise real
+signature, expected-public-key, native descriptor hash and digest checks. No upstream test signing
+key was downloaded. No binary fixture is committed when redistribution licensing is unestablished.
+
+LZ4 frame/block and xxHash specifications informed independent native implementations. Twenty-seven
+XXH32 and five LZ4 block cases matched installed system libraries. zlib's manual/license informed the
+stdlib compression path. Devicetree and current U-Boot references informed canonical FDT/FIT/hash/CRC
+interpretation. These are intellectual influences, not imported source implementations.
+
+[Phase 4 fixture evidence](../src/secripts/data/phase4-evidence.json),
+[research source records](../src/secripts/data/research.json) and [CREDITS.md](../CREDITS.md) retain
+source roles, dates, hashes, confidence and licensing boundaries. No research archive, firmware image,
+key/certificate, extracted corpus tree or unknown executable belongs in this repository.
+
+One pinned Gitiles fetch returned HTTP 503 during qualification. A later fetch of the exact
+pinned revision succeeded and all seven oracle cases passed. Explicit development fetchers
+may retry the official main reference after transport failure, but only identical pinned
+SHA-256 content is accepted and the actual retrieval URL is retained. No hash check is relaxed.

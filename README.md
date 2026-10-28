@@ -1,22 +1,19 @@
 # JADIS // SECRIPTS
 
-**Personal Developer Operations Arsenal & Android Recovery Laboratory**
+**Personal Developer Operations Arsenal & Android Recovery/Image Laboratory**
 
-**CLI: `js` · Cockpit: `js 1337` · Recovery Lab: `js recovery`**
+**CLI: `js` · Cockpit: `js 1337` · Recovery Lab: `js ry` · Image Lab: `js img`**
 
-Secripts is Christopher Osburn / JADIS's independent personal developer arsenal: one inspectable
-command surface for understanding a development environment, a repository, and Android recovery work.
-The name keeps the history of scattered scripts; typed operations give that knowledge a contract.
-This private repository coexists with Outer Void projects. It is not their universal CLI/control plane.
+Christopher Osburn / JADIS's independent personal developer arsenal turns scattered commands,
+notes and recovery research into typed, inspectable operations. This private project coexists
+with Outer Void tooling; it is not that ecosystem's universal CLI or control plane.
 
 > Build the system. Prove the system. Then remove the scaffolding.
 
-No copy/paste roulette. No mystery commands. No silent destruction.
-
 ## Install
 
-Python 3.11+; Linux and Termux are the supported execution paths. Native Termux/PRoot and hardware
-qualification remain distinct from interpreter tests. Runtime dependencies: Python standard library only.
+Python 3.11+; Linux/Termux execution paths. Interpreter tests do not qualify every PRoot host or
+Android device. Runtime dependencies are Python's standard library; external providers are optional.
 
 ```sh
 python3 -m venv .venv
@@ -24,233 +21,177 @@ python3 -m venv .venv
 python -m pip install -e .
 js --help
 js --version
-js doctor
-js dossier
+js doc
+js dos
 js 1337
 ```
 
-Alternatively, `pipx install .` exposes `js` without activating a project environment. The distribution
-is `jadis-secripts`; the Python package remains `secripts`. Version 0.2.0 makes a deliberate pre-1.0
-launcher break; no compatibility alias is installed. Existing receipts retain their operation identities.
-If your system already uses `js` for Node, keep that executable and place the virtual environment or
-pipx application directory first on PATH. This host's `/usr/bin/js` is preserved.
+Alternatively use `pipx install .`. Distribution: `jadis-secripts`; Python package: `secripts`;
+sole executable: `js`. The old pre-0.2 executable is not installed. Existing system Node `js`
+commands are preserved; put the project environment/pipx application directory first on PATH.
 
-## Everyday operations
+## Short working names, descriptive aliases
 
 ```sh
-js list
-js find git
-js find 'device tree'
-js find --category recovery
-js find --risk READ_ONLY
-js show android.sdk.validate
-js explain git.health
+js ls                              # also: js list
+js fd android                      # also: js find android
+js sh android.sdk.validate         # also: js show ...
+js exp image.roundtrip             # also: js explain ...
+js doc --json                      # also: js doctor --json
+js dos --json                      # also: js dossier --json
+js hist --failed --limit 10         # also: js history ...
+js rcpt latest                     # also: js receipt latest / js receipts latest
+js rcp sh python-dev               # also: js recipe show python-dev
+js ry doc                          # also: js recovery doctor
+```
+
+Aliases are first-class metadata, normalized before guarded execution. Operation IDs remain stable;
+`image.inspect` is still `image.inspect`. The [complete CLI map](docs/cli.md) documents every spelling,
+nested alias, collision check and convenience route. `js 1337` remains permanent.
+
+## Everyday developer operations
+
+**87 operations across 22 categories; 26 recipes.** The [generated catalog](docs/catalog.md) drives
+search, explanations, cockpit context and execution. Discover by ID, title, tags, category or risk:
+
+```sh
+js fd 'device tree'
+js fd --category git
+js fd --risk READ_ONLY
 js run git.health
 js run python.project
 js run java.environment
 js run android.sdk.validate
 js run git.status --dry-run
+js rcps
+js rcp run git-review --dry-run
+js rcp run python-dev
 ```
 
-**70 operations across 19 categories** cover Git/GitHub, Python, Java, SDK, ADB/Fastboot, Termux,
-Linux/Debian, SSH, local networking, filesystem, environment, local AI tooling and Recovery Lab.
-The [generated catalog](docs/catalog.md) is the same contract consumed by search, execution and menus.
-Search ranks exact IDs, ID prefixes, titles, tags, categories, summaries and sanitized legacy filenames.
+Git/GitHub inspections cover repository health, divergence, changes, worktrees, history and explicit
+read-only network queries. Python/JVM/SDK inspections report actual versions/components and conflicts
+without installations or license acceptance. Termux/Linux/PRoot, filesystem, SSH, local networking and
+model tooling remain bounded diagnostics. No filesystem-wide model search or network scanning occurs.
 
-Git tools inspect worktrees, local divergence, tags, submodules, stashes, changed/untracked/ignored files,
-working-file sizes, object storage and recorded signature headers. No branches are deleted and no
-signature verifier runs implicitly. Remote reachability and GitHub operations are explicit network calls.
+Doctor reports individual PASS/WARN/FAIL/UNKNOWN/UNTESTED/BLOCKED states and remediation. Dossier combines
+local evidence without network calls; transport enumeration is explicit with `--devices`. Neither a
+successful invocation nor a tool's presence qualifies the environment or hardware.
 
-Python inspections use the interpreter running Secripts: venv boundaries, allowlisted pyproject metadata,
-editable installs and dependency checks. Project build backends and Gradle wrappers are not executed by
-inspection. Java inspection reports observed versions and architecture; branch-specific Android JDK
-compatibility stays UNKNOWN. SDK inspection lists installed components and root conflicts without
-updating packages or accepting licenses. Local model inspection never searches the entire filesystem.
-
-## Dossier and doctor
+## Image engineering — 0.4.0
 
 ```sh
-js doctor
-js doctor --json
-js dossier
-js dossier --json
-js dossier --devices --json
+js insp /path/to/boot.img --json
+js img model /path/to/boot.img --json
+js img upk /path/to/boot.img --output /existing/parent/workspace
+js img ws /existing/parent/workspace
+js img rb /existing/parent/workspace --output /existing/parent/rebuilt.img
+js img cmp /path/to/boot.img /existing/parent/rebuilt.img --json
+js img rt /path/to/boot.img --json
+js prov
+js img prov --probe
 ```
 
-Doctor gives a concise human summary and detailed JSON with PASS/WARN/FAIL/UNKNOWN/UNTESTED/BLOCKED/
-UNSUPPORTED states and non-destructive remediation. Invocation success is not a global environment pass.
+The shared engine identifies content, parses bounded structures, extracts controlled components,
+models them, reconstructs supported layouts and compares independently demonstrated properties.
+No payload executes. Sources become read-only hash-checked snapshots. Outputs must be new; existing
+files/directories, source overwrite and ambiguous edits are refused.
 
-Dossier combines host, filesystem, guest boundaries, current repository, Python, tool presence, SDK,
-local network configuration, model tooling, history and Recovery Lab state. It performs no network calls.
-Device counts remain UNTESTED until `--devices` explicitly enumerates transports; enumeration does not
-qualify hardware. Java version probing and detailed device interrogation are separate operations.
+Android boot v0–v2 support exact-layout reconstruction. Boot v3/v4 and vendor_boot v3/v4 additionally
+support constrained unsigned component resizing. Headers, addresses, command-line bytes, OS metadata,
+fragments/board IDs, DTB, bootconfig, padding and opaque trailers are preserved in the workspace.
+Signed/AVB-bearing modifications are refused. Whole-blob v4 resizing requires explicit fragment mapping.
 
-## The developer cockpit
+Round trips report byte, structure, component, metadata and semantic equivalence separately. Two corpus
+recovery test images and seven current-AOSP-generated boot/vendor_boot cases rebuilt byte-identically.
+That evidence is **not stock-device compatibility or bootability**. See [Image Intelligence](docs/image-intelligence.md),
+[workspaces](docs/image-workspaces.md), [round-trip semantics](docs/roundtrip.md) and [verification](docs/verification.md).
+
+## Ramdisks, DTB/DTBO and AVB
 
 ```sh
-js 1337
-js 1337 --json
+js ram insp /path/to/ramdisk.lz4 --json
+js ram ext /path/to/ramdisk.lz4 --output /existing/parent/ramdisk-workspace
+js ram pack /existing/parent/ramdisk-workspace --output /existing/parent/ramdisk.gz --compression gzip
+js ram cmp /path/to/ramdisk.lz4 /existing/parent/ramdisk.gz --json
+js dtbo insp /path/to/dtbo.img --json
+js dtbo ext /path/to/dtbo.img --output /existing/parent/dtbo-workspace
+js dtbo rb /existing/parent/dtbo-workspace --output /existing/parent/rebuilt-dtbo.img
+js avb insp /path/to/vbmeta.img --json
+js avb vfy /path/to/vbmeta.img --key /path/to/expected-public.pem --json
 ```
 
-The opening dashboard shows actual host/tool evidence, repository branch/dirty/upstream state,
-operation/recipe/receipt counts, latest operation/failure, SDK state and Recovery Lab blockers.
-An interactive session enumerates transports with bounded probes. Non-TTY preview and JSON snapshots
-do not probe devices. Hardware remains UNTESTED regardless of tool presence or device counts.
+Native LZ4 decodes compressed/uncompressed, dependent/independent blocks, concatenated/skippable and
+legacy streams with output limits and standard-frame XXH32 checksum validation. Dictionary-dependent
+streams stop as BLOCKED_MISSING_DICTIONARY. Its deterministic encoder emits uncompressed blocks.
+Gzip supports concatenated members and checksum checks; zlib and contextual raw DEFLATE reuse stdlib.
 
-Described categories lead to metadata-derived operation context, prerequisites, run/dry-run, recipes,
-ranked search, filtered archaeology, history/receipt comparison and the Recovery Lab prompt. `V` refreshes
-evidence and transports; `T` opens history. `NO_COLOR` disables color. Plain terminals need no frames,
-Unicode decoration or terminal framework. The operator prompt is `js://1337 >`.
+CPIO newc/CRC models preserve order, owners, modes, timestamps, links and device metadata. Extraction is
+a **virtual payload workspace**: archive paths never become host write paths; links and special files
+remain metadata. Sensitive paths/content are refused. Directory packing is deliberately normalized;
+workspace packing preserves supported entry metadata. [Ramdisk contracts](docs/ramdisk.md).
 
-## Guided workflows
+DTB/FIT inspection includes canonical property hashes, reserve maps, configurations and embedded FIT
+hash checks. DTBO v0/v1 handles shared blobs, documented gzip/zlib flags and canonical reconstruction.
+Unknown compression, extended table layouts and arbitrary vendor binding semantics remain limited.
+
+AVB parsing and native hash checks are separate from explicit optional `avbtool` verification.
+Signature mathematics, expected-key match, hash/hashtree evidence and vbmeta digest are independent.
+Chained verification, FEC, device rollback enforcement and root-of-trust qualification remain unverified.
+No homemade RSA, signing-key extraction or AVB bypass is provided. [AVB trust model](docs/avb.md).
+
+## Recovery Device Models and planning
 
 ```sh
-js recipes
-js recipe show python-dev
-js recipe run git-review --dry-run
-js recipe run python-dev
-js recipe run github-readiness --network
-js recipe run twrp-tree-review --tree /path/to/tree --dry-run
-js recipe run post-build-verification --artifact /path/to/recovery.img
+js ry dce create example
+js ry dce add-image example boot /path/to/boot.img
+js ry dce add-tree example /path/to/tree
+js ry dce report example --json
+js ry tree diag /path/to/tree
+js ry tree derive --device example --output /existing/parent/candidate
+js ry plan example --json
 ```
 
-**23 recipes** explain purpose and prerequisites, expose their operations, support dry-run and write a
-parent receipt linking step receipts. They stop on invocation failure and retain uncertain evidence.
-Network recipes require `--network`; dry-runs never contact services. These are inspection/preparation
-workflows, not automatic package bootstraps, release publishing or device qualification.
+Models retain source-linked OBSERVED/DECLARED/DERIVED/INFERRED/USER_SUPPLIED/UNKNOWN/CONFLICT evidence.
+Tree analysis never executes Makefiles. Candidate configuration has per-line provenance and unresolved
+TODOs; it is not build-ready. Planning explains host/source/kernel/common/vendor blockers without a sync
+or compilation. Actual TWRP compilation remains blocked on this host; hardware qualification is UNTESTED.
+[Device models](docs/device-model.md) and [Recovery Lab](docs/recovery-lab.md).
 
-## Android devices
+Existing `js dce`/`js device` interfaces retain explicit read-only ADB/Fastboot inspection. Serial-like
+identifiers are masked. No flashing, unlocking, wiping, root installation or automatic device boot occurs.
+
+## Cockpit, receipts and lineage
+
+`js 1337` shows real host/tool/repository/Recovery/Image Lab evidence and described operations. INSP,
+IMG, RAM, RY, DOC, DOS, RCP and HIST shortcuts route to the same CLI contracts. NO_COLOR and non-TTY/JSON
+previews remain available. Destructive hardware qualification is never inferred from a dashboard.
 
 ```sh
-js device transports --json
-js device inspect --json
-js device inspect --device TRANSPORT_IDENTIFIER --json
-js device fastboot --json
+js hist --operation image.roundtrip --limit 20 --summary
+js rcpt latest
+js rcpt diff FIRST_ID SECOND_ID --json
+js comp bash > ~/.config/js-completion.bash
+js arch --json
 ```
 
-ADB dossier selects one authorized transport and collects allowlisted properties plus battery, storage,
-display, CPU/memory, package count and existing shell-UID observations. Missing/unauthorized/multiple
-transports stop clearly. Identity, Android, build, security, boot and hardware sections retain individual
-unknown states. No root/reboot request is sent. Inspection is explicit operator context, not proof of ownership.
+Receipts retain sanitized commands, hashes, effects, outcomes and association. New nested evidence is
+bounded; truncation is explicit. Raw firmware bodies and signing keys are not receipts. Existing
+receipts remain readable, regardless of invocation spelling. Completion performs no probes.
 
-Serials are omitted from returned evidence, argv and receipts. Package names and CPU serial fields are
-not retained. Fastboot reads a fixed getvar allowlist, never `getvar all`, flash, unlock, erase or reboot.
-A device observation does not establish recovery functionality.
+Original legacy lineage remains metadata-only. Phase 4 reused the Phase 3 inventory for targeted
+follow-up instead of rescanning everything. Research archives, upstream fixtures, private keys and
+firmware images are not repository contents. [Research and fixture provenance](docs/research.md).
 
-## Image Intelligence and Recovery Device Models — 0.3.0
+## Safety and development
 
-```sh
-js inspect /path/to/boot.img --json
-js inspect /path/to/kernel --providers --json
-js run image.providers
-js recovery device create example
-js recovery device add-image example boot /path/to/boot.img
-js recovery device add-tree example /path/to/tree
-js recovery device report example --json
-js recovery tree diagnose /path/to/tree --json
-js recovery tree derive --device example --output /existing/parent/new-candidate
-js recovery plan example --json
-```
+READ_ONLY inspects. MUTATING explains filesystem writes and supports preview. PRIVILEGED never silently
+elevates. DESTRUCTIVE requires deliberate identity confirmation; no destructive production operation
+ships. Recipes use those same contracts. Pattern scanning does not replace privacy review before sharing.
 
-The reusable Image Intelligence Engine handles Android containers, bounded compression/CPIO,
-FDT/DTBO, ELF, legacy uImage and FIT metadata, AVB and partial vendor-marker recognition.
-It never executes payloads. Optional installed `file`/`avbtool` evidence is explicit; structural
-inspection is not cryptographic verification. [Format support and bounds](docs/image-intelligence.md).
-
-Local Recovery Device Models retain source hashes, fact locations, confidence states and conflicts.
-Candidate derivation writes review-only configuration with per-line provenance and unresolved TODOs;
-it does not guess kernel paths, partition sizes or a functional fstab. The build planner explains
-host/source/tree/model blockers and candidate targets without syncing or compiling.
-[Device models and planning](docs/device-model.md). The cockpit/dossier show actual Image Lab
-capabilities, optional provider presence and local model/analysis counts.
-
-The supplied recovery corpus is inspected recursively under strict limits, outside Git. Historical
-tools are research input, never trusted executables. [Research coverage](docs/research.md).
-
-## Recovery Lab
-
-```sh
-js recovery doctor --json
-js recovery tree audit /path/to/tree --json
-js recovery inspect recovery.img --json
-js recovery inspect --device
-js recovery verify recovery.img
-js recovery init --help
-js recovery configure
-js recovery sync --dry-run
-js recovery build --dry-run
-js recovery test recovery.img --device OWNER_CHOSEN_ALIAS
-js recovery report recovery.img --tree /path/to/tree --json
-js recovery report recovery.img --markdown
-```
-
-Static tree intelligence covers products, architecture, slots/virtual A/B, dynamic partitions,
-recovery/vendor_boot arrangements, kernel/DTB/DTBO references, fstab, encryption/metadata and AVB flags.
-A bounded graph resolves literal local and LOCAL_DIR references, reports cycles and separates direct
-from conditional/external/unresolved evidence. No Makefile or dependency code is executed.
-
-Image inspection supports Android boot headers v0–v4 and vendor_boot v3/v4, section bounds, ramdisk
-compression, bounded gzip/bzip2/XZ decoding, non-extracting newc CPIO metadata, DTB/bootconfig boundaries,
-vendor fragment tables and inferred init_boot candidates. Boot and recovery share a header: partition
-role cannot be proven from a filename. LZ4/Zstd are recognized but not decompressed natively. Phase 3 adds bounded LZ4 structural parsing.
-
-AVB footer/vbmeta parsing reports untrusted algorithm, rollback/flags and bounded hash-descriptor
-partition declarations. **No cryptographic signature, trusted-key, rollback enforcement, bootability or
-compatibility verification occurs.** Optional upstream tools are detected, not silently installed/run.
-
-Reports combine current workspace/tree evidence, graph findings, hash-matched recorded builds,
-image/AVB inspection, explicit saved device dossiers and manual qualification records. Source, tree,
-build, image structure, device observations and device qualification are separate states. A current tree
-audit does not prove which inputs produced an old image.
-
-TWRP orchestration remains **experimental**. It requires explicit source/revision/tree/product/target,
-uses at most two jobs and refuses concurrent workspace mutations. This ARM64, low-disk host is not
-qualified for real TWRP compilation. Temporary boot refuses unresolved support. Permanent flashing,
-unlocking, wiping and repartitioning are absent. Read [Recovery Lab](docs/recovery-lab.md).
-
-## Receipts, completion and lineage
-
-```sh
-js history --operation git.health --limit 20 --summary
-js history --failed --since 2026-01-01 --json
-js receipt latest
-js receipt latest --failed
-js receipt diff FIRST_ID SECOND_ID --json
-js history --artifact ARTIFACT_SHA256 --json
-js completion bash > ~/.config/js-completion.bash
-# Source that file from your Bash configuration after creating its parent directory.
-js archaeology --json
-```
-
-Receipts retain sanitized commands, effects, prerequisites, results, durations, artifacts, launcher
-release and cwd/environment association. Filters, latest-failure retrieval and comparison do not replay
-commands. Older receipts remain readable. Canonical storage is private local JSON, without a database.
-
-Bash completion discovers commands, operation/recipe IDs and safe enumerations from current contracts.
-It performs no diagnostics, network requests or device probes. Zsh/Fish-specific completion is not provided.
-
-The historical archive remains metadata-only: **153 members · 27 duplicates · 8 EXTRACT · 41 ARCHIVE ·
-69 REJECT · 35 SECRET · 0 PROMOTE**. No source contents or historical credentials are imported. Existing
-opaque secret exclusions and source hashes remain intact. [Archaeology](docs/archaeology.md) and
-[provenance](docs/provenance.md) explain review boundaries and release-specific verification.
-
-## Safety and configuration
-
-READ_ONLY inspects; MUTATING describes writes; PRIVILEGED never elevates; DESTRUCTIVE requires a
-specific interactive phrase. No destructive production operation ships. Recipes use the same dispatcher.
-Argument vectors are the rule; the fixed TWRP shell adapter exists only for trusted upstream shell
-functions. Secret-like arguments are refused and output is sanitized. Pattern scanning and identifier
-masking cannot replace review of personal information before sharing. Read [SECURITY.md](SECURITY.md).
-
-Explicit CLI parameters override workspace choices. `SECRIPTS_DATA_HOME` overrides
-`$XDG_DATA_HOME/secripts`, defaulting to `~/.local/share/secripts`. SDK selection uses `ANDROID_HOME`
-then `ANDROID_SDK_ROOT`, reporting conflicts. Basic commands require no configuration. Runtime state,
-receipts and builds stay outside Git; the launcher rename does not migrate or rewrite that state.
-
-Exit codes: 0 invocation success; 1 operation/state failure; 2 invalid usage; 3 missing prerequisite or
-device; 4 safety refusal; 5 unsupported host/backend; 130 interruption. Inspect evidence states separately.
-
-## Prove changes
+Runtime state uses `SECRIPTS_DATA_HOME`, otherwise `$XDG_DATA_HOME/secripts`, otherwise
+`~/.local/share/secripts`. Artifact workspaces are explicit user-selected new paths. No runtime database
+or repository-local receipts are required. Exit codes: 0 invocation success, 1 failure, 2 usage,
+3 missing prerequisite, 4 safety refusal, 5 unsupported capability, 130 interrupted.
 
 ```sh
 python -m pip install -e '.[dev]'
@@ -258,20 +199,20 @@ ruff check .
 ruff format --check .
 pytest -q
 python tools/secret_scan.py
+python tools/audit_docs.py
 python -m build
-python tools/qualify.py
-python tools/validate.py                 # installed js must be on PATH
-python tools/validate.py --devices       # explicit transport enumeration
 ```
 
-No unit test downloads Android sources or touches devices. Synthetic fixtures are explicitly labeled.
-CI uses a serial Python matrix and local checks; its observed results are recorded separately from local
-validation. See [verification](docs/verification.md), [architecture](docs/architecture.md) and
-[contributing](CONTRIBUTING.md) for evidence, limits and remaining qualification work.
+Optional maintained-source validation is explicit: `python tools/validate_oracles.py --fetch-upstream`.
+It retrieves only three small hash-pinned AOSP sources. Ordinary commands and unit tests never sync
+Android source trees. CI uses a serial Python matrix and pinned optional verification providers.
+
+The evidence law is permanent: parsing is not verification; structural validity is not authenticity;
+round-trip equivalence is not compatibility; compatibility is not bootability; compilation and bootability
+are not hardware qualification.
 
 ## Credits and attribution
 
-[CREDITS.md](CREDITS.md) identifies material specifications, developers, projects and research
-influences, with source and licensing boundaries. Detailed lineage lives in research provenance.
-Attribution and licensing review are required when adding an externally influenced capability;
-credits do not substitute for required license notices.
+[CREDITS.md](CREDITS.md) identifies material projects, specifications, people and research influences.
+[Detailed provenance](docs/provenance.md) remains authoritative for per-capability lineage. Attribution
+and license review are implementation requirements; credits never replace required license notices.

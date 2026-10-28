@@ -1,6 +1,6 @@
 # Operation catalog
 
-Generated from `js list --json`; update with `python tools/catalog.py`.
+Generated from `js ls --json`; update with `python tools/catalog.py`.
 
 | Operation | Summary | Risk |
 |---|---|---|
@@ -74,3 +74,20 @@ Generated from `js list --json`; update with `python tools/catalog.py`.
 | `recovery.plan` | Correlate device/source/tree/host evidence; never sync, build or qualify hardware. | READ_ONLY |
 | `recovery.host` | Inspect architecture, memory, disk, prerequisites and unqualified boundaries. | READ_ONLY |
 | `recovery.derive` | Generate a new candidate tree with per-line evidence; never overwrite or claim build readiness. | MUTATING |
+| `image.differential` | Explicit hash-pinned AOSP unpack/repack comparison; no corpus tools. | READ_ONLY |
+| `image.model` | Inspect complete supported artifact structure without payload dumps. | READ_ONLY |
+| `image.unpack` | Create a new isolated artifact workspace, preserving source and section hashes. | MUTATING |
+| `image.workspace` | Inspect versioned model and immutable source hash. | READ_ONLY |
+| `image.rebuild` | Reconstruct a new artifact from an explicit workspace; never overwrite source. | MUTATING |
+| `image.compare` | Compare bytes, structure, components, metadata and semantic evidence independently. | READ_ONLY |
+| `image.roundtrip` | Extract, reconstruct, reparse and compare; device qualification remains UNTESTED. | MUTATING |
+| `ramdisk.inspect` | Decode bounded streams and model newc/CRC entries without extraction. | READ_ONLY |
+| `ramdisk.extract` | Create numbered payload files and metadata; never materialize archive symlinks or special files. | MUTATING |
+| `ramdisk.pack` | Pack a virtual workspace or safe directory deterministically into a new artifact. | MUTATING |
+| `ramdisk.compare` | Explain file, mode, owner, link, order and encoding differences. | READ_ONLY |
+| `dtbo.inspect` | Inspect entry metadata, shared blobs and supported FDT structures. | READ_ONLY |
+| `dtbo.extract` | Create an isolated workspace with individually bounded DT blobs. | MUTATING |
+| `dtbo.rebuild` | Create a canonical DT table with shared identical blobs and validated entries. | MUTATING |
+| `dtbo.compare` | Separate table layout from entry metadata and blob content. | READ_ONLY |
+| `avb.inspect` | Inspect authentication, auxiliary regions, descriptor types and public-key identity. | READ_ONLY |
+| `avb.verify` | Explicit optional avbtool signature/key verification plus native descriptor hash checks; no device trust claim. | READ_ONLY |

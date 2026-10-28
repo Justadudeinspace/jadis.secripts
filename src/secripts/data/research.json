@@ -207,6 +207,126 @@
       "license_observation": "See upstream per-file notices",
       "retrieved": "2026-10-28",
       "status": "ACCESSED"
+    },
+    {
+      "id": "generic-boot",
+      "name": "AOSP Generic Boot Architecture",
+      "url": "https://source.android.com/docs/core/architecture/partitions/generic-boot",
+      "source_type": "primary",
+      "topic": "Init_boot contextual role and generic ramdisk separation",
+      "implementation_influence": "Architecture reference; role remains inferred",
+      "confidence": "HIGH",
+      "license_observation": "See upstream documentation license",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    },
+    {
+      "id": "vendor-boot",
+      "name": "AOSP Vendor Boot Partitions",
+      "url": "https://source.android.com/docs/core/architecture/partitions/vendor-boot-partitions",
+      "source_type": "primary",
+      "topic": "v3/v4 layout, fragments and bootconfig",
+      "implementation_influence": "Native reconstruction models; no code copied",
+      "confidence": "HIGH",
+      "license_observation": "See upstream documentation license",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    },
+    {
+      "id": "mkbootimg",
+      "name": "AOSP mkbootimg/unpack_bootimg",
+      "url": "https://android.googlesource.com/platform/system/tools/mkbootimg/+/d2bb0af5ba6d3198a3e99529c97eda1be0b5a093/",
+      "source_type": "primary",
+      "topic": "Reconstruction-oriented args, section fields and tests",
+      "implementation_influence": "Primary layout authority and explicit hash-pinned optional oracle",
+      "confidence": "HIGH",
+      "license_observation": "Apache-2.0 source notices verified; not bundled",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    },
+    {
+      "id": "dtbo-v1",
+      "name": "AOSP DT table v1 compression",
+      "url": "https://android.googlesource.com/platform/system/libufdt/+/refs/heads/main/utils/src/mkdtboimg.py",
+      "source_type": "primary",
+      "topic": "Flags low four bits: none/zlib/gzip; DT table encoding",
+      "implementation_influence": "Independent bounded v1 decode and table packing",
+      "confidence": "HIGH",
+      "license_observation": "See upstream per-file notice; not copied",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    },
+    {
+      "id": "dtbo-partitions",
+      "name": "AOSP DTB/DTBO partitions",
+      "url": "https://source.android.com/docs/core/architecture/dto/partitions",
+      "source_type": "primary",
+      "topic": "DT header and entries",
+      "implementation_influence": "Primary reference; no code copied",
+      "confidence": "HIGH",
+      "license_observation": "See upstream documentation license",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    },
+    {
+      "id": "lz4-block",
+      "name": "LZ4 block format \u2014 Yann Collet",
+      "url": "https://github.com/lz4/lz4/blob/dev/doc/lz4_Block_format.md",
+      "source_type": "primary",
+      "topic": "Sequences, literals, offsets, overlapping matches",
+      "implementation_influence": "Independent bounded native decoder; no custom crypto",
+      "confidence": "HIGH",
+      "license_observation": "See upstream specification notice; no source copied",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    },
+    {
+      "id": "xxhash",
+      "name": "xxHash \u2014 Yann Collet",
+      "url": "https://github.com/Cyan4973/xxHash/blob/dev/doc/xxhash_spec.md",
+      "source_type": "primary",
+      "topic": "XXH32 arithmetic and frame checksum requirements",
+      "implementation_influence": "Independent implementation; known vectors and installed-library differential checks",
+      "confidence": "HIGH",
+      "license_observation": "Specification has redistribution notice; library BSD-2-Clause verified",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    },
+    {
+      "id": "zlib",
+      "name": "zlib \u2014 Jean-loup Gailly and Mark Adler",
+      "url": "https://zlib.net/manual.html",
+      "source_type": "primary",
+      "topic": "Bounded standard-library deflate/gzip/zlib and checksums",
+      "implementation_influence": "Python standard library implementation used; no zlib code bundled",
+      "confidence": "HIGH",
+      "license_observation": "zlib license verified separately at official license page",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    },
+    {
+      "id": "avb-provider",
+      "name": "AOSP avbtool/libavb",
+      "url": "https://android.googlesource.com/platform/external/avb/+/761178607206f4cb2af79ed9eec52d8cbd814adb/avbtool.py",
+      "source_type": "primary",
+      "topic": "Descriptors and exact verification semantics",
+      "implementation_influence": "Native structures/hashes; signature and hashtree validation delegated explicitly",
+      "confidence": "HIGH",
+      "license_observation": "MIT-style source notice verified; provider not bundled",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
+    },
+    {
+      "id": "uboot-phase4",
+      "name": "Das U-Boot current documentation",
+      "url": "https://docs.u-boot.org/en/latest/usage/fit/index.html",
+      "source_type": "primary",
+      "topic": "FIT nodes, references, hash and signature metadata",
+      "implementation_influence": "Independent native FDT/FIT interpretation; signatures unverified",
+      "confidence": "HIGH",
+      "license_observation": "See upstream per-file/documentation license",
+      "retrieved": "2026-10-28",
+      "status": "ACCESSED"
     }
   ],
   "unavailable": [
@@ -230,5 +350,20 @@
       "url": "https://github.com/rockchip-linux/rkflashtool",
       "status": "GitHub API 404; historical AIK attribution and corpus README retained"
     }
+  ],
+  "phase4_pins": {
+    "aosp_revision": "d2bb0af5ba6d3198a3e99529c97eda1be0b5a093",
+    "aosp_sources": {
+      "mkbootimg.py": "37d84b3d162e0bc62e36c1f4e1c63c85ea0caa9f29be023eb2f8efe006ad948c",
+      "unpack_bootimg.py": "a9d260978a63bd06a24b6347e7dee8a28ff96639793caea15dff6aa491316308",
+      "gki/generate_gki_certificate.py": "1bb1feec68a13da18d581aa2c631798f86f6bc10b55d587b2dd31446a0f8a203"
+    },
+    "avb_revision": "761178607206f4cb2af79ed9eec52d8cbd814adb",
+    "avbtool_sha256": "e5a664a38db623da00f080219bc0ee60a640a9dc4a872803616fae4938ac749b",
+    "dt_table_header_sha256": "8e0a30dee64fc6fc968ec4244711585e21ab54a130fd1cbe0ffed9e7e74e59e5",
+    "mkdtboimg_sha256": "04011264802cc566cb994b71344fd20e6f58363293e4ce80757b8176a165d7be"
+  },
+  "phase4_retrieval_notes": [
+    "Some Gitiles pages were unavailable through the page reader; bounded official ?format=TEXT retrieval succeeded. No corpus executable was used."
   ]
 }

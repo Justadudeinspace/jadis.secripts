@@ -1,0 +1,1088 @@
+{
+  "schema": 1,
+  "stage": "PHASE4_BEFORE_ALIAS_STREAMLINING",
+  "command_tree": [
+    {
+      "path": [
+        "image"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "image",
+        "model"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "image",
+        "unpack"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "image",
+        "workspace"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "image",
+        "rebuild"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "image",
+        "compare"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "image",
+        "roundtrip"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "image",
+        "providers"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "image",
+        "differential"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "ramdisk"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "ramdisk",
+        "inspect"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "ramdisk",
+        "extract"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "ramdisk",
+        "pack"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "ramdisk",
+        "compare"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "dtbo"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "dtbo",
+        "inspect"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "dtbo",
+        "extract"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "dtbo",
+        "rebuild"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "dtbo",
+        "compare"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "avb"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "avb",
+        "inspect"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "avb",
+        "verify"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "inspect"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "research"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "list"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "find"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "dossier"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "completion"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "completion"
+      ],
+      "kind": "positional_action",
+      "destination": "shell",
+      "choices": [
+        "bash",
+        "candidates"
+      ]
+    },
+    {
+      "path": [
+        "device"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "device"
+      ],
+      "kind": "positional_action",
+      "destination": "action",
+      "choices": [
+        "inspect",
+        "transports",
+        "fastboot"
+      ]
+    },
+    {
+      "path": [
+        "show"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "explain"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "doctor"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "run"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recipes"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recipe"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recipe"
+      ],
+      "kind": "positional_action",
+      "destination": "action",
+      "choices": [
+        "show",
+        "run"
+      ]
+    },
+    {
+      "path": [
+        "history"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "receipt"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "1337"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "archaeology"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "scan"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "ingest"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "doctor"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "inspect"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "tree"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "tree"
+      ],
+      "kind": "positional_action",
+      "destination": "action",
+      "choices": [
+        "audit",
+        "inspect",
+        "diagnose",
+        "derive"
+      ]
+    },
+    {
+      "path": [
+        "recovery",
+        "plan"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "device"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "device"
+      ],
+      "kind": "positional_action",
+      "destination": "action",
+      "choices": [
+        "create",
+        "list",
+        "add-image",
+        "add-tree",
+        "add-metadata",
+        "inspect",
+        "report"
+      ]
+    },
+    {
+      "path": [
+        "recovery",
+        "init"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "configure"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "sync"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "build"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "verify"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "boot"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "test"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "report"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "clean"
+      ],
+      "kind": "command",
+      "aliases": []
+    }
+  ],
+  "operations": [
+    "git.status",
+    "git.branches",
+    "git.remotes",
+    "git.log",
+    "git.integrity",
+    "github.auth",
+    "adb.devices",
+    "adb.version",
+    "fastboot.devices",
+    "fastboot.version",
+    "android.sdk.validate",
+    "environment.path",
+    "environment.runtimes",
+    "termux.inspect",
+    "debian.packages",
+    "ssh.version",
+    "models.ollama",
+    "network.interfaces",
+    "repo.disk",
+    "diagnostics.host",
+    "git.root",
+    "git.branch",
+    "git.health",
+    "git.tags",
+    "git.worktrees",
+    "git.submodules",
+    "git.stashes",
+    "git.ignored",
+    "git.untracked",
+    "git.changed",
+    "git.largest",
+    "git.objects",
+    "git.contributors",
+    "git.cleanup",
+    "git.signatures",
+    "git.remote",
+    "github.repository",
+    "github.pulls",
+    "github.workflows",
+    "github.releases",
+    "github.issues",
+    "python.environment",
+    "python.project",
+    "python.editables",
+    "python.dependencies",
+    "java.environment",
+    "adb.inspect",
+    "fastboot.inspect",
+    "linux.environment",
+    "linux.packages",
+    "network.configuration",
+    "network.routes",
+    "network.sockets",
+    "ssh.environment",
+    "ssh.agent",
+    "ssh.github",
+    "filesystem.capacity",
+    "environment.xdg",
+    "models.environment",
+    "diagnostics.system",
+    "recovery.doctor",
+    "recovery.tree",
+    "recovery.image",
+    "image.inspect",
+    "image.providers",
+    "recovery.model",
+    "recovery.diagnose",
+    "recovery.plan",
+    "recovery.host",
+    "recovery.derive",
+    "image.differential",
+    "image.model",
+    "image.unpack",
+    "image.workspace",
+    "image.rebuild",
+    "image.compare",
+    "image.roundtrip",
+    "ramdisk.inspect",
+    "ramdisk.extract",
+    "ramdisk.pack",
+    "ramdisk.compare",
+    "dtbo.inspect",
+    "dtbo.extract",
+    "dtbo.rebuild",
+    "dtbo.compare",
+    "avb.inspect",
+    "avb.verify"
+  ],
+  "recipes": {
+    "android-dev": {
+      "title": "Android development preparation",
+      "summary": "Inspect SDK, runtimes and ADB before changing your environment.",
+      "operations": [
+        "environment.runtimes",
+        "android.sdk.validate",
+        "adb.version"
+      ]
+    },
+    "git-review": {
+      "title": "Git repository review",
+      "summary": "Inspect changes, branches, remotes and history before synchronization.",
+      "operations": [
+        "git.status",
+        "git.branches",
+        "git.remotes",
+        "git.log"
+      ]
+    },
+    "termux-check": {
+      "title": "Termux developer preparation",
+      "summary": "Identify host boundaries and missing runtimes; no package upgrades.",
+      "operations": [
+        "termux.inspect",
+        "environment.path",
+        "environment.runtimes"
+      ]
+    },
+    "debian-check": {
+      "title": "Debian developer preparation",
+      "summary": "Inspect build packages and runtimes before installing anything.",
+      "operations": [
+        "debian.packages",
+        "environment.runtimes"
+      ]
+    },
+    "device-diagnostic": {
+      "title": "Android transport diagnostic",
+      "summary": "Enumerate ADB and Fastboot transports without device modification.",
+      "operations": [
+        "adb.devices",
+        "fastboot.devices"
+      ]
+    },
+    "developer-environment": {
+      "title": "Developer environment dossier",
+      "summary": "Inspect host, runtimes, filesystem and PATH before making changes.",
+      "operations": [
+        "diagnostics.system",
+        "filesystem.capacity",
+        "python.environment",
+        "java.environment",
+        "environment.path"
+      ]
+    },
+    "repository-health": {
+      "title": "Repository health",
+      "summary": "Inspect worktree, divergence, object storage and submodules.",
+      "operations": [
+        "git.health",
+        "git.objects",
+        "git.submodules"
+      ]
+    },
+    "repository-release-readiness": {
+      "title": "Release preparation",
+      "summary": "Review tracked changes, untracked files, tags and Python build metadata. This does not authorize publishing.",
+      "operations": [
+        "git.health",
+        "git.changed",
+        "git.untracked",
+        "git.tags",
+        "python.project"
+      ]
+    },
+    "github-readiness": {
+      "title": "GitHub readiness",
+      "summary": "Explicit network checks for authentication, repository permissions and workflows.",
+      "operations": [
+        "github.auth",
+        "github.repository",
+        "github.workflows"
+      ]
+    },
+    "python-dev": {
+      "title": "Python development health",
+      "summary": "Inspect interpreter isolation, project metadata, editables and dependency consistency.",
+      "operations": [
+        "python.environment",
+        "python.project",
+        "python.editables",
+        "python.dependencies"
+      ]
+    },
+    "android-sdk-health": {
+      "title": "Android SDK health",
+      "summary": "Inspect SDK components and Java, then platform-tool versions without license acceptance.",
+      "operations": [
+        "android.sdk.validate",
+        "java.environment",
+        "adb.version",
+        "fastboot.version"
+      ]
+    },
+    "adb-diagnostics": {
+      "title": "ADB diagnostics",
+      "summary": "Inspect client and sanitized transports; no device shell commands.",
+      "operations": [
+        "adb.version",
+        "adb.devices"
+      ]
+    },
+    "fastboot-diagnostics": {
+      "title": "Fastboot diagnostics",
+      "summary": "Inspect client and sanitized bootloader enumeration without modifying a device.",
+      "operations": [
+        "fastboot.version",
+        "fastboot.devices"
+      ]
+    },
+    "android-device-dossier": {
+      "title": "Android device dossier",
+      "summary": "Enumerate transports and collect allowlisted observations from one authorized device.",
+      "operations": [
+        "adb.devices",
+        "adb.inspect"
+      ]
+    },
+    "proot-dev": {
+      "title": "PRoot development boundaries",
+      "summary": "Inspect Linux and Termux context plus filesystem evidence without claiming native-host access.",
+      "operations": [
+        "linux.environment",
+        "termux.inspect",
+        "filesystem.capacity",
+        "environment.path"
+      ]
+    },
+    "recovery-readiness": {
+      "title": "Recovery readiness",
+      "summary": "Inspect host/build prerequisites, SDK and JDK; no source synchronization.",
+      "operations": [
+        "recovery.doctor",
+        "android.sdk.validate",
+        "java.environment"
+      ]
+    },
+    "twrp-tree-review": {
+      "title": "TWRP tree review",
+      "summary": "Audit a supplied tree and inspect the host without running makefiles.",
+      "operations": [
+        "recovery.tree",
+        "recovery.doctor"
+      ]
+    },
+    "twrp-build-readiness": {
+      "title": "TWRP build preparation",
+      "summary": "Combine supplied-tree audit, build prerequisites, Java and disk evidence.",
+      "operations": [
+        "recovery.tree",
+        "recovery.doctor",
+        "java.environment",
+        "filesystem.capacity"
+      ]
+    },
+    "post-build-verification": {
+      "title": "Post-build static verification",
+      "summary": "Inspect an artifact and current workspace evidence; hardware qualification remains independent.",
+      "operations": [
+        "recovery.image",
+        "recovery.doctor"
+      ]
+    },
+    "image-analysis": {
+      "title": "Image analysis",
+      "summary": "Inspect image structures and optional-provider availability; no providers executed.",
+      "operations": [
+        "image.inspect",
+        "image.providers"
+      ]
+    },
+    "recovery-tree-diagnosis": {
+      "title": "Recovery tree diagnosis",
+      "summary": "Audit and explain unresolved tree/source dependencies.",
+      "operations": [
+        "recovery.tree",
+        "recovery.diagnose"
+      ]
+    },
+    "recovery-build-plan": {
+      "title": "Recovery build planning",
+      "summary": "Inspect model conflicts, host evidence and build blockers.",
+      "operations": [
+        "recovery.model",
+        "recovery.host",
+        "recovery.plan"
+      ]
+    },
+    "recovery-tree-derivation": {
+      "title": "Candidate tree derivation",
+      "summary": "Review model and generate a new traceable candidate, never a build-ready claim.",
+      "operations": [
+        "recovery.model",
+        "recovery.derive"
+      ]
+    },
+    "artifact-roundtrip": {
+      "title": "Artifact round-trip evidence",
+      "summary": "Model, reconstruct and compare offline artifacts; no compatibility claim.",
+      "operations": [
+        "image.model",
+        "image.roundtrip"
+      ]
+    },
+    "ramdisk-review": {
+      "title": "Ramdisk reconstruction review",
+      "summary": "Inspect bounded CPIO/compression evidence alongside provider capability.",
+      "operations": [
+        "ramdisk.inspect",
+        "image.providers"
+      ]
+    },
+    "avb-evidence": {
+      "title": "AVB verification evidence",
+      "summary": "Parse native metadata then explicitly verify with optional avbtool; device trust remains unknown.",
+      "operations": [
+        "avb.inspect",
+        "avb.verify"
+      ]
+    }
+  },
+  "cli_reference_counts": {
+    "docs/catalog.md": 1,
+    "docs/architecture.md": 1,
+    "docs/provenance.md": 2,
+    "docs/archaeology.md": 1,
+    "docs/recovery-lab.md": 17,
+    "docs/verification.md": 6,
+    "docs/image-intelligence.md": 3,
+    "docs/device-model.md": 10,
+    "docs/research.md": 1,
+    "tests/unit/test_core.py": 1,
+    "tests/integration/test_phase2_cli.py": 2,
+    "src/secripts/ui/console.py": 5
+  },
+  "completion": "src/secripts/completion.py",
+  "cockpit": "src/secripts/ui/console.py",
+  "receipt_identity": "operation ID, independent of launcher spelling",
+  "baseline_commit": "51f57731b8403e812b25620df6755efaea51e680",
+  "baseline_command_tree": [
+    {
+      "path": [
+        "inspect"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "research"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "list"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "find"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "dossier"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "completion"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "device"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "show"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "explain"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "doctor"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "run"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recipes"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recipe"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "history"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "receipt"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "1337"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "archaeology"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "scan"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "ingest"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "doctor"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "inspect"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "tree"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "plan"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "device"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "init"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "configure"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "sync"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "build"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "verify"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "boot"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "test"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "report"
+      ],
+      "kind": "command",
+      "aliases": []
+    },
+    {
+      "path": [
+        "recovery",
+        "clean"
+      ],
+      "kind": "command",
+      "aliases": []
+    }
+  ]
+}

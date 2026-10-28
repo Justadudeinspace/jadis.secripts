@@ -5,8 +5,8 @@ Canonical launcher: js. Cockpit: js 1337. No compatibility launcher is installed
 This is an independent personal project, not an Outer Void router or control plane.
 
 The existing typed registry remains the contract for operations, ranked discovery, explanations,
-completion, generated catalog and cockpit context. Parameter contracts allow only device, tree and
-artifact selectors; arbitrary argv/shell forwarding is absent. The dispatcher validates parameters,
+completion, generated catalog and cockpit context. Parameter contracts allow explicit device, tree, artifact, workspace, output, comparison and
+verification selectors; arbitrary argv/shell forwarding is absent. The dispatcher validates parameters,
 platform/tool preconditions and risk before invoking an allowlisted handler. New operations extend
 that dispatcher rather than creating a competing execution framework.
 
@@ -50,3 +50,20 @@ commands add structured source evidence, not arbitrary shell commands.
 
 See [Image Intelligence](image-intelligence.md), [Device Models](device-model.md),
 [research](research.md) and [credits](../CREDITS.md).
+
+## Phase 4 reconstruction and streamlined CLI
+
+`commands.CommandName` owns canonical shorthand and accepted aliases. Scoped parser construction
+rejects collisions. Parsing normalizes spellings before authorization/dispatch. Operation IDs
+remain stable; recipes use those IDs, and receipts do not depend on launcher spelling. Completion,
+generated CLI maps and cockpit shortcuts consume the naming contracts. No shell alias/router exists.
+
+`images.codecs/lz4codec/cpio` form the reusable compression/ramdisk pipeline. `ramdisk_model`,
+`bootmodel`, `dtbo_model`, `artifacts`, `comparison` and `workflows` manage bounded versioned models,
+private workspaces, exclusive writes and independent equivalence states. `avbmodel` separates native
+metadata/hashes from explicit upstream cryptographic providers. `oracles` quarantines exact pinned
+AOSP source for differential validation. No payload executes and no artifact feature accesses devices.
+
+New nested receipt evidence is sanitized and budgeted while historical receipts remain readable.
+Source hashes and provenance are not substitutes for trusted-key or hardware qualification.
+See [CLI map](cli.md), [roundtrip](roundtrip.md), [ramdisk](ramdisk.md) and [AVB](avb.md).

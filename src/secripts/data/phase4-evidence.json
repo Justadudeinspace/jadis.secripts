@@ -1,0 +1,207 @@
+{
+  "schema": 1,
+  "release": "0.4.0",
+  "baseline_commit": "51f57731b8403e812b25620df6755efaea51e680",
+  "corpus_followup": [
+    {
+      "source": "TWRP2.zip",
+      "component": "android_bootable_recovery-android-12.1/tests/testdata/boot.img",
+      "sha256": "c5eac632addba77fc76afb95b51e35f15ab02ba9c14ce799fba3aec87f4aead0",
+      "bytes": 783655,
+      "evidence_kind": "CORPUS_SAMPLE",
+      "format": "ANDROID_BOOT",
+      "structure_status": "PASS",
+      "redistribution": "NOT_ESTABLISHED; artifact not committed",
+      "roundtrip": {
+        "byte_identity": "BYTE_IDENTICAL",
+        "semantic_equivalence": "SEMANTICALLY_EQUIVALENT",
+        "cryptographic_state": "UNVERIFIED",
+        "device_compatibility": "UNTESTED"
+      }
+    },
+    {
+      "source": "TWRP2.zip",
+      "component": "android_bootable_recovery-android-9.0/tests/testdata/recovery.img",
+      "sha256": "455684ae541a4fa15634ed459c173f69b8bb4555c1582e0f30a7502b400d0a2f",
+      "bytes": 529707,
+      "evidence_kind": "CORPUS_SAMPLE",
+      "format": "ANDROID_BOOT",
+      "structure_status": "PASS",
+      "redistribution": "NOT_ESTABLISHED; artifact not committed",
+      "roundtrip": {
+        "byte_identity": "BYTE_IDENTICAL",
+        "semantic_equivalence": "SEMANTICALLY_EQUIVALENT",
+        "cryptographic_state": "UNVERIFIED",
+        "device_compatibility": "UNTESTED"
+      }
+    },
+    {
+      "source_url": "https://android.googlesource.com/platform/external/avb/+/refs/heads/main/test/data/small_blob.bin",
+      "retrieved": "2026-10-28",
+      "sha256": "d30fca4adc515ea718f2193c38fd9acb78dc1a5b472eb937e7e09f415ef53b55",
+      "bytes": 21,
+      "evidence_kind": "UPSTREAM_FIXTURE",
+      "redistribution": "NOT_ESTABLISHED; artifact not committed",
+      "role": "AVB payload fixture for explicit hash verification"
+    }
+  ],
+  "aosp_qualification": {
+    "release": "0.4.0",
+    "result": "PASS",
+    "records": [
+      {
+        "evidence_kind": "SYNTHETIC_UPSTREAM_TOOL_GENERATED",
+        "family": "BOOT",
+        "version": 0,
+        "sha256": "b0324ce54fa766d98775dd3dc69b550edcbb8154c8bf5f065ab884b8cbf3389a",
+        "bytes": 6144,
+        "differential": "AGREEMENT",
+        "roundtrip": "BYTE_IDENTICAL",
+        "semantic_equivalence": "SEMANTICALLY_EQUIVALENT",
+        "provider_source_hashes": {
+          "mkbootimg.py": "37d84b3d162e0bc62e36c1f4e1c63c85ea0caa9f29be023eb2f8efe006ad948c",
+          "unpack_bootimg.py": "a9d260978a63bd06a24b6347e7dee8a28ff96639793caea15dff6aa491316308",
+          "gki/generate_gki_certificate.py": "1bb1feec68a13da18d581aa2c631798f86f6bc10b55d587b2dd31446a0f8a203"
+        },
+        "device_compatibility": "UNTESTED"
+      },
+      {
+        "evidence_kind": "SYNTHETIC_UPSTREAM_TOOL_GENERATED",
+        "family": "BOOT",
+        "version": 1,
+        "sha256": "797a7bf0197584ca521f36dd6bcbf14a8e9ed101c031b8cb3da9c74b2bfe5e78",
+        "bytes": 8192,
+        "differential": "AGREEMENT",
+        "roundtrip": "BYTE_IDENTICAL",
+        "semantic_equivalence": "SEMANTICALLY_EQUIVALENT",
+        "provider_source_hashes": {
+          "mkbootimg.py": "37d84b3d162e0bc62e36c1f4e1c63c85ea0caa9f29be023eb2f8efe006ad948c",
+          "unpack_bootimg.py": "a9d260978a63bd06a24b6347e7dee8a28ff96639793caea15dff6aa491316308",
+          "gki/generate_gki_certificate.py": "1bb1feec68a13da18d581aa2c631798f86f6bc10b55d587b2dd31446a0f8a203"
+        },
+        "device_compatibility": "UNTESTED"
+      },
+      {
+        "evidence_kind": "SYNTHETIC_UPSTREAM_TOOL_GENERATED",
+        "family": "BOOT",
+        "version": 2,
+        "sha256": "1ae36dbe10ed0d4e6c289690c3b6b5f893629c8a56eb9a8909aabf04f708f57e",
+        "bytes": 10240,
+        "differential": "AGREEMENT",
+        "roundtrip": "BYTE_IDENTICAL",
+        "semantic_equivalence": "SEMANTICALLY_EQUIVALENT",
+        "provider_source_hashes": {
+          "mkbootimg.py": "37d84b3d162e0bc62e36c1f4e1c63c85ea0caa9f29be023eb2f8efe006ad948c",
+          "unpack_bootimg.py": "a9d260978a63bd06a24b6347e7dee8a28ff96639793caea15dff6aa491316308",
+          "gki/generate_gki_certificate.py": "1bb1feec68a13da18d581aa2c631798f86f6bc10b55d587b2dd31446a0f8a203"
+        },
+        "device_compatibility": "UNTESTED"
+      },
+      {
+        "evidence_kind": "SYNTHETIC_UPSTREAM_TOOL_GENERATED",
+        "family": "BOOT",
+        "version": 3,
+        "sha256": "6ed9236fa8b3b2aca7f0816e8bf53e7076349f7fdbcc8b15a33b1c8334535ced",
+        "bytes": 12288,
+        "differential": "AGREEMENT",
+        "roundtrip": "BYTE_IDENTICAL",
+        "semantic_equivalence": "SEMANTICALLY_EQUIVALENT",
+        "provider_source_hashes": {
+          "mkbootimg.py": "37d84b3d162e0bc62e36c1f4e1c63c85ea0caa9f29be023eb2f8efe006ad948c",
+          "unpack_bootimg.py": "a9d260978a63bd06a24b6347e7dee8a28ff96639793caea15dff6aa491316308",
+          "gki/generate_gki_certificate.py": "1bb1feec68a13da18d581aa2c631798f86f6bc10b55d587b2dd31446a0f8a203"
+        },
+        "device_compatibility": "UNTESTED"
+      },
+      {
+        "evidence_kind": "SYNTHETIC_UPSTREAM_TOOL_GENERATED",
+        "family": "BOOT",
+        "version": 4,
+        "sha256": "af94904fe28fe2fdd79770cdb9877a3f519cab8c9933421724154e99c4064a01",
+        "bytes": 12288,
+        "differential": "AGREEMENT",
+        "roundtrip": "BYTE_IDENTICAL",
+        "semantic_equivalence": "SEMANTICALLY_EQUIVALENT",
+        "provider_source_hashes": {
+          "mkbootimg.py": "37d84b3d162e0bc62e36c1f4e1c63c85ea0caa9f29be023eb2f8efe006ad948c",
+          "unpack_bootimg.py": "a9d260978a63bd06a24b6347e7dee8a28ff96639793caea15dff6aa491316308",
+          "gki/generate_gki_certificate.py": "1bb1feec68a13da18d581aa2c631798f86f6bc10b55d587b2dd31446a0f8a203"
+        },
+        "device_compatibility": "UNTESTED"
+      },
+      {
+        "evidence_kind": "SYNTHETIC_UPSTREAM_TOOL_GENERATED",
+        "family": "VENDOR_BOOT",
+        "version": 3,
+        "sha256": "36905b992519c054fce825173d804e7e0b8834937f655112d39c82cf8f571db0",
+        "bytes": 12288,
+        "differential": "AGREEMENT",
+        "roundtrip": "BYTE_IDENTICAL",
+        "semantic_equivalence": "SEMANTICALLY_EQUIVALENT",
+        "provider_source_hashes": {
+          "mkbootimg.py": "37d84b3d162e0bc62e36c1f4e1c63c85ea0caa9f29be023eb2f8efe006ad948c",
+          "unpack_bootimg.py": "a9d260978a63bd06a24b6347e7dee8a28ff96639793caea15dff6aa491316308",
+          "gki/generate_gki_certificate.py": "1bb1feec68a13da18d581aa2c631798f86f6bc10b55d587b2dd31446a0f8a203"
+        },
+        "device_compatibility": "UNTESTED"
+      },
+      {
+        "evidence_kind": "SYNTHETIC_UPSTREAM_TOOL_GENERATED",
+        "family": "VENDOR_BOOT",
+        "version": 4,
+        "sha256": "52d53e123afd51b58b679678981099c81833a97a06e16ed79eb51820f6dad51d",
+        "bytes": 20480,
+        "differential": "AGREEMENT",
+        "roundtrip": "BYTE_IDENTICAL",
+        "semantic_equivalence": "SEMANTICALLY_EQUIVALENT",
+        "provider_source_hashes": {
+          "mkbootimg.py": "37d84b3d162e0bc62e36c1f4e1c63c85ea0caa9f29be023eb2f8efe006ad948c",
+          "unpack_bootimg.py": "a9d260978a63bd06a24b6347e7dee8a28ff96639793caea15dff6aa491316308",
+          "gki/generate_gki_certificate.py": "1bb1feec68a13da18d581aa2c631798f86f6bc10b55d587b2dd31446a0f8a203"
+        },
+        "device_compatibility": "UNTESTED"
+      }
+    ]
+  },
+  "library_oracles": [
+    {
+      "provider": "libxxhash.so.0",
+      "capability": "XXH32",
+      "cases": 27,
+      "status": "AGREEMENT"
+    },
+    {
+      "provider": "liblz4.so.1",
+      "capability": "LZ4 compressed blocks",
+      "cases": 5,
+      "status": "AGREEMENT"
+    }
+  ],
+  "upstream_fixture": {
+    "schema": 1,
+    "evidence_kind": "UPSTREAM_FIXTURE_WRAPPED_FOR_TEST",
+    "source_payload_sha256": "d30fca4adc515ea718f2193c38fd9acb78dc1a5b472eb937e7e09f415ef53b55",
+    "source_payload_bytes": 21,
+    "role": "AOSP small_blob payload, zero-padded to 4096 bytes, inside locally generated synthetic AVB image; not stock firmware",
+    "signature": "SIGNATURE_MATHEMATICALLY_VALID",
+    "expected_key": "EXPECTED_KEY_MATCH",
+    "hash_descriptors": [
+      {
+        "partition": "boot",
+        "state": "HASH_DESCRIPTOR_VALID"
+      }
+    ],
+    "vbmeta_digest": {
+      "state": "VBMETA_DIGEST_CALCULATED",
+      "sha256": "abf867dc3030b2432fa21ad8a833e892534d77a74623aeacc86c32a250c122bb"
+    },
+    "root_of_trust": "ROOT_OF_TRUST_UNVERIFIED",
+    "status": "PASS"
+  },
+  "initial_oracle_disagreements": [
+    "Minimal synthetic v0/v1 headers had zero legacy image IDs; AOSP recomputed different IDs.",
+    "Minimal v2 fixture lacked DTB; current upstream mkbootimg refused it."
+  ],
+  "fixture_redistribution": "No corpus/upstream binaries or signing keys committed; hashes and findings only",
+  "hardware_qualification": "UNTESTED"
+}

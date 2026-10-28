@@ -46,3 +46,19 @@ or follow CPIO links. Reports omit raw firmware contents and identifier-bearing 
 Optional providers require explicit invocation with fixed argv/timeouts. Candidate trees require
 a new directory, safe names and source-linked architecture; TODOs remain unresolved. Model facts
 and plans preserve uncertainty. Neither model import nor derivation changes a connected device.
+
+## Phase 4 boundaries
+
+Short and descriptive CLI names resolve before risk checks; neither creates a second operation.
+Mutating artifact commands only create explicit new outputs. Sources are hash-checked snapshots.
+Archive logical paths never become extraction paths; virtual numbered payloads prevent traversal,
+symlink and special-file creation attacks. Existing outputs, model tampering and ambiguous edits
+are refused. See [workspace safety](image-workspaces.md).
+
+Native decoders enforce input/output/member/block bounds and checksums. Providers receive isolated
+copies, safe partition names and fixed bounded argv. AOSP provider source is pinned and quarantined;
+no corpus binary/script becomes a provider. AVB metadata dimensions are bounded before invocation;
+chain following is absent. No keys from the corpus are trusted, used or extracted.
+
+Checksums, signature mathematics, expected key matches, device trust/rollback, round-trip equality
+and hardware qualification remain independent states. Signed artifact editing is refused, not bypassed.

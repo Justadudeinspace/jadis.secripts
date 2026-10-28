@@ -25,3 +25,14 @@ notices. Update CREDITS.md and detailed research provenance before considering t
 Do not guess names/licenses, substitute credits for notices, or use corpus binaries as providers.
 Run `python tools/audit_docs.py` and installed-launcher `python tools/validate_images.py` for
 Image Lab changes; the latter uses temporary synthetic fixtures and isolated runtime state.
+
+CLI names are contracts in secripts.commands. Favor unambiguous 2–4 character working forms,
+preserve full names, check scoped collisions, regenerate tools/cli_map.py and test alias/guard parity.
+Do not duplicate registry operations for spellings. Keep js 1337 permanent. New parser/model schema
+changes need explicit versions, malformed-input tests, provenance and credits/license review.
+Optional oracle qualification is explicit; never execute research-corpus programs or download keys.
+
+For optional cryptographic tests, an explicitly provisioned pinned provider can be prepared with
+`python tools/prepare_avb_provider.py --output /new/private/provider`; add that directory to PATH
+only for the test invocation. `python tools/validate_phase4.py` must use an installed js.
+Never confuse synthetic signing-key tests with production/device root-of-trust qualification.

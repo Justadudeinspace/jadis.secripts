@@ -30,3 +30,14 @@ configuration has per-line evidence and explicit review requirements. The saniti
 summary is separate from private local inventory. [CREDITS.md](../CREDITS.md) is the human
 project-level view; it cannot replace source license/notice obligations. Every externally
 influenced capability requires attribution/licensing review before completion.
+
+## Phase 4 transformations and verification
+
+Canonical models and comparison records use explicit schema versions. Every transformation records
+source/output hashes, component metadata, operation/parameters, native/provider identity, timestamp,
+warnings and unresolved state in sanitized receipts. Detailed local models/workspaces remain separate
+from bounded receipt views. Model/receipt history is not rewritten to adopt new shorthand.
+
+Pinned AOSP mkbootimg and AVB revisions, source SHA-256 values, targeted corpus test artifacts and
+upstream fixture preparation are in research.json and phase4-evidence.json. Provider/native disagreement
+is retained rather than silently selecting a winner. New xxHash/zlib technical lineage is credited.

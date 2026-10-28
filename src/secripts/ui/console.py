@@ -153,7 +153,12 @@ def recovery_console():
         if command.upper() in ("", "B"):
             return
         try:
-            main(["recovery", *shlex.split(command)])
+            main(
+                [
+                    __import__("secripts.commands", fromlist=["name"]).name("recovery").canonical,
+                    *shlex.split(command),
+                ]
+            )
         except (SystemExit, ValueError) as exc:
             if isinstance(exc, ValueError):
                 print("Invalid quoting; enter a recovery subcommand or B.")
@@ -183,8 +188,22 @@ def _console(emit) -> int:
         ("Q", "Exit", "Leave the console."),
     ]:
         print(f"[{key}] {title}\n    {desc}")
+    from secripts.commands import name as cli_name
+
+    shortcuts = [
+        ("inspect", "Inspect artifact"),
+        ("recovery", "Recovery Lab"),
+        ("image", "Image Lab"),
+        ("ramdisk", "Ramdisk Lab"),
+        ("doctor", "Doctor"),
+        ("dossier", "Dossier"),
+        ("recipe", "Recipes"),
+        ("history", "History"),
+    ]
+    for identity, description in shortcuts:
+        print(f"[{cli_name(identity).canonical.upper()}] {description} [{identity}]")
     if not sys.stdin.isatty() or not sys.stdout.isatty():
-        print("\nNoninteractive preview. Use js list, js doctor or js recovery --help.")
+        print("\nNoninteractive preview. Use js ls, js doc or js ry --help.")
         return 0
     reg = registry()
     while True:
@@ -193,6 +212,33 @@ def _console(emit) -> int:
         except (EOFError, KeyboardInterrupt):
             print()
             return 0
+        shortcut = {cli_name(identity).canonical.upper(): identity for identity, _ in shortcuts}
+        if choice in shortcut:
+            identity = shortcut[choice]
+            from secripts.cli import main as cli_main
+
+            if identity in {"image", "ramdisk", "recovery", "recipe"}:
+                try:
+                    cli_main([cli_name(identity).canonical, "--help"])
+                except SystemExit:
+                    pass
+                line = input(
+                    f"{cli_name(identity).canonical} arguments (blank to return) > "
+                ).strip()
+                if line:
+                    try:
+                        cli_main([cli_name(identity).canonical, *shlex.split(line)])
+                    except (SystemExit, ValueError):
+                        print("Invalid command; use --help.")
+            elif identity == "inspect":
+                line = input("Artifact path (blank to return) > ").strip()
+                if line:
+                    cli_main([cli_name(identity).canonical, line])
+            elif identity == "history":
+                cli_main([cli_name(identity).canonical, "--limit", "10", "--summary"])
+            else:
+                cli_main([cli_name(identity).canonical])
+            continue
         if choice in ("Q", "QUIT"):
             return 0
         if choice == "V":
@@ -237,7 +283,7 @@ def _console(emit) -> int:
                     )
         elif choice == "H":
             print(
-                "js show/explain ID: inspect contract. js run ID --dry-run: preview.\nREAD_ONLY inspects; MUTATING writes; PRIVILEGED never elevates; DESTRUCTIVE requires identity confirmation."
+                "js sh/exp ID: inspect contract. js run ID --dry-run: preview.\nREAD_ONLY inspects; MUTATING writes; PRIVILEGED never elevates; DESTRUCTIVE requires identity confirmation."
             )
         elif choice == "R":
             emit(RECIPES)
