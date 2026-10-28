@@ -1,6 +1,6 @@
-# Recipes — 0.5.0
+# Recipes — 0.6.0
 
-28 recipes compose 92 available operations across 23 categories.
+29 recipes compose 98 available operations across 23 categories.
 
 Inspect with `js rcp sh NAME`; preview `js rcp run NAME --dry-run`. Each step uses operation IDs, normal risk guards and linked receipts. Network steps require --network. Failure stops the recipe; a parent receipt keeps partial evidence. See [CLI](CLI-GUIDE.md).
 
@@ -225,5 +225,13 @@ Prerequisites and risk: inspect the constituent operation contracts with js sh; 
 Correlate a bounded build log with current source intelligence; symptoms remain hypotheses.
 
 Operations: `recovery.build.diagnose`, `recovery.source`.
+
+Prerequisites and risk: inspect the constituent operation contracts with js sh; required selectors are the union shown by js rcp sh. Missing prerequisites stop execution; no installs occur.
+
+## recovery-configuration-review
+
+Inspect independent outputs, flag validation, fstab and pinned dependencies before planning; no AI or acquisition.
+
+Operations: `recovery.architecture`, `recovery.flags.validate`, `recovery.fstab`, `recovery.dependencies`.
 
 Prerequisites and risk: inspect the constituent operation contracts with js sh; required selectors are the union shown by js rcp sh. Missing prerequisites stop execution; no installs occur.

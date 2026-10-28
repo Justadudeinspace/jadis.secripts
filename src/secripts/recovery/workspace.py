@@ -49,6 +49,7 @@ def load_workspace() -> dict:
         validate_workspace(value)
         if not Path(value["root"]).is_dir():
             raise SecError("Configured workspace root no longer exists", 3)
+        value["targets"] = value.get("targets", [value.get("target")])
         return value
     except (OSError, ValueError, TypeError, KeyError) as exc:
         raise SecError(
@@ -57,7 +58,7 @@ def load_workspace() -> dict:
 
 
 def validate_workspace(value: dict) -> None:
-    if not isinstance(value, dict) or value.get("schema") != 1:
+    if not isinstance(value, dict) or value.get("schema") not in (1, 2):
         raise SecError("Malformed workspace schema", 2)
     if value.get("backend") != "twrp":
         raise SecError("Unsupported recovery backend", 5)
@@ -67,7 +68,17 @@ def validate_workspace(value: dict) -> None:
             or ".." in value[key]
         ):
             raise SecError(f"Invalid workspace {key}", 2)
-    if "/" in value["device"] or value.get("target") not in TWRP.targets:
+    targets = value.get("targets", [value.get("target")])
+    if (
+        not isinstance(targets, list)
+        or not targets
+        or len(set(targets)) != len(targets)
+        or any(t not in TWRP.targets for t in targets)
+    ):
+        raise SecError("Explicit supported distinct build targets required", 2)
+    if value.get("target") is not None and value["target"] not in targets:
+        raise SecError("Legacy target disagrees with authoritative targets", 2)
+    if "/" in value["device"]:
         raise SecError("Explicit device name and supported build target required", 2)
     if not re.fullmatch(r"https://[A-Za-z0-9.-]+/[A-Za-z0-9_./-]+", value.get("manifest", "")):
         raise SecError("Manifest must be an explicit HTTPS URL without credentials", 2)
@@ -81,10 +92,19 @@ def validate_workspace(value: dict) -> None:
 
 
 def initialize(
-    root: Path, device: str, tree: Path, manifest: str, revision: str, lunch: str, target: str
+    root: Path,
+    device: str,
+    tree: Path,
+    manifest: str,
+    revision: str,
+    lunch: str,
+    target: str,
+    *,
+    targets=None,
+    model=None,
 ) -> dict:
     value = {
-        "schema": 1,
+        "schema": 2,
         "backend": "twrp",
         "root": str(root.resolve()),
         "device": device,
@@ -92,11 +112,17 @@ def initialize(
         "manifest": manifest,
         "revision": revision,
         "lunch": lunch,
-        "target": target,
+        "target": target if targets is None or len(targets) == 1 else None,
+        "targets": targets or [target],
+        "model": model,
         "common_trees": "UNRESOLVED",
         "kernel": "UNRESOLVED",
     }
     validate_workspace(value)
+    if model is not None:
+        from secripts.recovery.model import load
+
+        load(model)
     if config_path().exists():
         raise SecError(
             "Workspace already configured; inspect workspace.json before replacing it.", 4
@@ -235,7 +261,8 @@ def sync(dry_run=False) -> dict:
 def build(dry_run=False) -> dict:
     value = load_workspace()
     root, tree = Path(value["root"]), Path(value["tree"])
-    argv = TWRP().build_command(value["lunch"], value["target"])
+    targets = value.get("targets", [value["target"]])
+    argv = TWRP().build_command(value["lunch"], targets)
     if dry_run:
         return {
             "result": "DRY_RUN",
@@ -254,10 +281,29 @@ def build(dry_run=False) -> dict:
     if audit["result"] == "FAIL":
         raise SecError("Device tree audit failed", 3)
     # Avoid stale artifact collection: record existing hashes and require a changed artifact.
-    expected = root / "out/target/product" / value["device"] / TWRP.targets[value["target"]]
-    if not expected.resolve().is_relative_to(root.resolve()):
+    expected_images = {
+        target: root / "out/target/product" / value["device"] / TWRP.targets[target]
+        for target in targets
+    }
+    if any(not p.resolve().is_relative_to(root.resolve()) for p in expected_images.values()):
         raise SecError("Artifact output escapes workspace through a symlink", 4)
-    old = (expected.stat().st_mtime_ns, artifact_hash(expected)) if expected.is_file() else None
+    old = {
+        t: (p.stat().st_mtime_ns, artifact_hash(p)) if p.is_file() else None
+        for t, p in expected_images.items()
+    }
+    chain = None
+    if value.get("model"):
+        from secripts.recovery.chain import prepare
+
+        chain = prepare(value["model"], value)
+        if chain["blockers"]:
+            raise SecError("Build contract blocked: " + "; ".join(chain["blockers"]), 3)
+    if "initbootimage" in targets:
+        makefile = root / "build/make/core/Makefile"
+        from secripts.images.artifacts import read
+
+        if not makefile.is_file() or b"initbootimage" not in read(makefile, 2 * 1024**2):
+            raise SecError("initbootimage support not established in selected source", 5)
     authorize(Risk.MUTATING, "Execute trusted source makefiles and write build output")
     commands = []
     for args in (["repo", "manifest", "-r"], ["git", "-C", str(tree), "rev-parse", "HEAD"]):
@@ -273,15 +319,27 @@ def build(dry_run=False) -> dict:
     (output / "sources.lock.xml").write_text(commands[0]["stdout"])
     write_json(output / "tree-audit.json", audit)
     artifacts = []
-    changed = expected.is_file() and (expected.stat().st_mtime_ns, artifact_hash(expected)) != old
-    if command["result"] == "PASS" and changed and not expected.is_symlink():
-        dest = output / expected.name
-        shutil.copyfile(expected, dest)
-        artifacts.append(
-            {"path": str(dest), "sha256": artifact_hash(dest), "bytes": dest.stat().st_size}
+    for target, expected in expected_images.items():
+        changed = (
+            expected.is_file()
+            and (expected.stat().st_mtime_ns, artifact_hash(expected)) != old[target]
         )
-        (output / "sha256sums.txt").write_text(f"{artifacts[0]['sha256']}  {dest.name}\n")
-    success = command["result"] == "PASS" and bool(artifacts)
+        if command["result"] == "PASS" and changed and not expected.is_symlink():
+            dest = output / expected.name
+            shutil.copyfile(expected, dest)
+            artifacts.append(
+                {
+                    "path": str(dest),
+                    "sha256": artifact_hash(dest),
+                    "bytes": dest.stat().st_size,
+                    "build_target": target,
+                }
+            )
+    if artifacts:
+        (output / "sha256sums.txt").write_text(
+            "".join(a["sha256"] + "  " + Path(a["path"]).name + "\n" for a in artifacts)
+        )
+    success = command["result"] == "PASS" and len(artifacts) == len(targets)
     from secripts.recovery.diagnostics import classify
 
     diagnosis = classify(command["stdout"] + "\n" + command["stderr"]) if not success else None
@@ -295,8 +353,13 @@ def build(dry_run=False) -> dict:
         tree_revision=commands[1]["stdout"].strip(),
         device_qualification="UNTESTED",
         diagnosis=diagnosis,
+        evidence_chain=chain,
         warnings=["Log is bounded to 128 KiB per output stream; hardware untested."],
     )
+    if chain is not None:
+        from secripts.recovery.chain import complete
+
+        complete(value["model"], chain, receipt, artifacts, output)
     write_json(output / "build.json", receipt)
     write_json(data_dir() / "recovery/latest-build.json", receipt)
     return {"build": receipt, "output": str(output), "exit_code": 0 if success else 1}

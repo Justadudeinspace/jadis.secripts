@@ -134,3 +134,10 @@ One pinned Gitiles fetch returned HTTP 503 during qualification. A later fetch o
 pinned revision succeeded and all seven oracle cases passed. Explicit development fetchers
 may retry the official main reference after transport failure, but only identical pinned
 SHA-256 content is accepted and the actual retrieval URL is retained. No hash check is relaxed.
+
+## Phase 6
+
+The [audit/gap gate](research/phase6-gap-matrix.md), [primary-source ledger](research/phase6-sources.json)
+and [real A51 input evidence](research/phase6-a51-evidence.json) record target selection, hashes,
+source generations and known blockers. No corpus-wide rescan, stock firmware import or
+transitive source sync was performed. Public prebuilts are not evidence of a local build.

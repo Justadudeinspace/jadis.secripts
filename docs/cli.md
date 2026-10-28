@@ -93,6 +93,14 @@ and `js image roundtrip`; `js ry dce ls` and `js recovery device list`.
 | `js rcp` | `run` | — |
 | `js ry` | `acquire` | — |
 | `js ry` | `source` | — |
+| `js ry` | `status` | — |
+| `js ry` | `graph` | — |
+| `js ry` | `fstab` | — |
+| `js ry` | `deps` | — |
+| `js ry deps` | `graph` | — |
+| `js ry deps` | `validate` | — |
+| `js ry deps` | `resolve` | — |
+| `js ry` | `flags` | — |
 | `js ry` | `failure` | — |
 | `js ry` | `doc` | `doctor` |
 | `js ry` | `insp` | `inspect` |

@@ -16,7 +16,8 @@ adapted in this release. Existing Secripts code was reorganized within the proje
 ### Android Open Source Project
 
 **Role:** Primary format and architecture reference for Android boot v0–v4,
-vendor_boot v3/v4, init_boot context, DTBO and AVB metadata. The native parsers
+vendor_boot v3/v4, init_boot context, DTBO and AVB metadata. Phase 6 also studied
+current build/core board flags, composite kernel/ramdisk relationships and AVB chains. The native parsers
 are independent bounded implementations of documented structures.
 **Upstream:** [boot image header](https://android.googlesource.com/platform/system/tools/mkbootimg/+/refs/heads/main/include/bootimg/bootimg.h),
 [DTBO header](https://android.googlesource.com/platform/system/libufdt/+/refs/heads/main/utils/src/dt_table.h),
@@ -27,6 +28,9 @@ header. This is not a project-wide licensing assertion.
 ### Team Win Recovery Project
 
 **Role:** Recovery backend, build-source organization and device-tree research.
+Phase 6 consulted TeamWin’s official Samsung A51 and OnePlus guacamole trees and
+Android 12.1 build rules; A51 prebuilts were acquired outside Git for static analysis.
+No device-tree code or binaries are redistributed. See the [pinned research ledger](docs/research/phase6-sources.json).
 TWRP conventions inform static diagnosis; neither a parsed tree nor a build
 plan establishes device support.
 **Upstream:** [TeamWin recovery source](https://github.com/TeamWin/android_bootable_recovery).

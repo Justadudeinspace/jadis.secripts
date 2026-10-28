@@ -41,6 +41,52 @@ def operations():
             (),
         ),
     ]
+    definitions.extend(
+        [
+            (
+                "recovery.architecture",
+                "Composite recovery architecture",
+                "Inspect independent artifact/resource relationships and the evidence-backed multi-output graph.",
+                ("model",),
+                ("model",),
+            ),
+            (
+                "recovery.flags",
+                "Inspect typed recovery configuration",
+                "Inspect observed, derived, default and USER_OVERRIDE layers without changing evidence.",
+                ("model",),
+                ("model",),
+            ),
+            (
+                "recovery.flags.validate",
+                "Validate recovery configuration",
+                "Detect known flag conflicts, unsupported generations and unresolved dependencies.",
+                ("model",),
+                ("model",),
+            ),
+            (
+                "recovery.dependencies",
+                "Inspect pinned recovery dependencies",
+                "Validate selected dependency commits and checkout cleanliness; no acquisition.",
+                ("model",),
+                ("model",),
+            ),
+            (
+                "recovery.status",
+                "Persistent recovery project status",
+                "Summarize current evidence and stale build inputs with a deterministic next action.",
+                ("model",),
+                ("model",),
+            ),
+            (
+                "recovery.fstab",
+                "Review structured fstab evidence",
+                "Correlate safe mount declarations and conflicts without guessing block-device paths.",
+                ("model",),
+                ("model",),
+            ),
+        ]
+    )
     return [
         Operation(
             id,
@@ -64,6 +110,28 @@ def operations():
 
 
 def handle(id, p):
+    if id in {
+        "recovery.architecture",
+        "recovery.flags",
+        "recovery.flags.validate",
+        "recovery.dependencies",
+        "recovery.status",
+        "recovery.fstab",
+    }:
+        from secripts.recovery import model, architecture, flags, dependencies, projects, fstab
+
+        name = p["model"]
+        if id == "recovery.architecture":
+            return architecture.graph(model.report(name), flags.view(name))
+        if id == "recovery.flags":
+            return flags.view(name)
+        if id == "recovery.flags.validate":
+            return flags.validate(name)
+        if id == "recovery.dependencies":
+            return dependencies.validate(name)
+        if id == "recovery.status":
+            return projects.status(name)
+        return fstab.report(model.report(name))
     if id == "recovery.acquire":
         from secripts.recovery.guidance import acquire
 

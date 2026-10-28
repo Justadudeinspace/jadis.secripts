@@ -17,6 +17,8 @@ ROLES = {
     "init_boot",
     "recovery",
     "vbmeta",
+    "vbmeta_system",
+    "vbmeta_vendor",
     "dtbo",
     "dtb",
     "ramdisk",
@@ -59,9 +61,11 @@ def model_path(name):
 
 def load(name):
     try:
-        value = json.loads(model_path(name).read_text())
+        from secripts.images.artifacts import read
+
+        value = json.loads(read(model_path(name), 8 * 1024**2))
         if (
-            value.get("schema") != 1
+            value.get("schema") not in (1, 2)
             or value.get("name") != name
             or not isinstance(value.get("evidence"), list)
             or not isinstance(value.get("sources"), list)
@@ -72,6 +76,9 @@ def load(name):
                 s["id"] for s in value["sources"]
             }:
                 raise ValueError()
+        if value["schema"] == 1:
+            value["loaded_from_schema"] = 1
+            value["schema"] = 2
         return value
     except (OSError, ValueError, AttributeError, KeyError) as exc:
         raise SecError("Device model missing or malformed", 3) from exc
@@ -82,7 +89,7 @@ def create(name):
     if path.exists():
         raise SecError("Device model already exists; no overwrite", 4)
     value = {
-        "schema": 1,
+        "schema": 2,
         "name": name,
         "sources": [],
         "evidence": [],
@@ -117,11 +124,16 @@ def source_record(model, kind, path, digest, role=None):
 
 
 def fstab_facts(model, entries, source, location):
+    from secripts.recovery.fstab import parse
+
     mounts = []
     for row in entries:
         fields = row.get("fields", [])
         if len(fields) < 3:
             continue
+        structured = parse(fields, source, location)
+        if structured:
+            model.setdefault("fstab_evidence", []).append(structured)
         mount = (
             fields[0]
             if fields[1] in {"ext4", "f2fs", "vfat", "emmc", "auto", "squashfs", "erofs"}
@@ -323,6 +335,37 @@ def add_image(name, role, path):
         "structure_status": image["structure_status"],
     }
     model["sources"][-1]["inspection"] = image_record
+    from secripts.images.avbmodel import metadata
+
+    descriptors = []
+    if image.get("avb", {}).get("detected"):
+        try:
+            descriptors = metadata(Path(path))["descriptors"]
+        except (ValueError, SecError):
+            descriptors = []
+    markers = []
+    for section in image.get("sections", {}).values():
+        markers.extend(
+            m
+            for m in section.get("inspection", {}).get("cpio", {}).get("markers", [])
+            if m in {"recovery", "twrp", "init.recovery.*"}
+        )
+    model.setdefault("artifact_observations", []).append(
+        {
+            "role": role,
+            "source": src,
+            "sha256": image["sha256"],
+            "bytes": image.get("size"),
+            "header_version": image.get("properties", {}).get("header_version"),
+            "kernel_bytes": image.get("sections", {}).get("kernel", {}).get("size"),
+            "sections": [k for k, v in image.get("sections", {}).items() if v.get("size")],
+            "recovery_markers": sorted(set(markers)),
+            "recovery_fragment": any(f.get("type") == 2 for f in fragments),
+            "avb_descriptors": descriptors,
+            "structure_status": image["structure_status"],
+            "cryptographic_state": "UNVERIFIED",
+        }
+    )
     write_json(model_path(name), model)
     save(
         "recovery.device.addimage",
@@ -371,6 +414,21 @@ def add_tree(name, path):
             and not row["conditional"]
             else "UNKNOWN"
         )
+        from secripts.recovery.flags import spec
+        from secripts.secrets import contains_secret
+
+        if spec(key) and not contains_secret(row["value"]):
+            model.setdefault("configuration_evidence", []).append(
+                {
+                    "name": key,
+                    "value": row["value"],
+                    "resolved_value": value if state != "UNKNOWN" else None,
+                    "state": state,
+                    "source": src,
+                    "location": location,
+                    "conditional": row["conditional"],
+                }
+            )
         if state == "UNKNOWN":
             uncertain_field = TREE_MAP.get(key)
             if key in {
@@ -432,7 +490,7 @@ def add_tree(name, path):
             e = finding["evidence"]
             fstab_facts(
                 model,
-                [{"fields": e["first_fields"], "indicators": e["indicators"]}],
+                [{"fields": e.get("fields", e["first_fields"]), "indicators": e["indicators"]}],
                 src,
                 f"{e['file']}:{e['line']}",
             )
@@ -496,6 +554,7 @@ def summarize(model):
             "consensus": len(distinct) == 1 and len(evidence) > 1,
         }
     for field in (
+        "recovery_arrangement",
         "boot_header",
         "ramdisk_compression",
         "vendor_fragments",
@@ -508,8 +567,17 @@ def summarize(model):
             values["state"] = "DERIVED"
             values["value"] = [entry["value"] for entry in values["evidence"]]
             values["combination"] = "MULTI_VALUED"
+    fields["recovery_arrangement"]["deprecated"] = (
+        "Compatibility projection only; use recovery_architecture independent features"
+    )
+    from secripts.recovery.architecture import compose
+
+    result["recovery_architecture"] = compose(model)
     result["fields"] = fields
     result["conflicts"] = [k for k, v in fields.items() if v["state"] == "CONFLICT"]
+    result["conflicts"].extend(
+        "recovery_architecture." + name for name in result["recovery_architecture"]["conflicts"]
+    )
     result["qualification"] = "UNTESTED"
     result["status"] = "CONFLICT" if result["conflicts"] else "PARTIAL"
     return result

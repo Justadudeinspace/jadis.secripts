@@ -32,5 +32,6 @@ jobs:
       - run: python tools/validate_images.py
       - run: python tools/validate_phase4.py
       - run: python tools/validate_phase5.py
+      - run: python tools/validate_phase6.py
       - run: python tools/validate_oracles.py --fetch-upstream
       - run: js comp bash > /tmp/js.bash && bash -n /tmp/js.bash

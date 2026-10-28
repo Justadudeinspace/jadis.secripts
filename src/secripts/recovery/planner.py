@@ -12,18 +12,17 @@ from secripts.safety import SecError
 from secripts.recovery import model
 
 
-def target_for(device):
-    field = device["fields"]["recovery_arrangement"]
-    value = field["value"] if isinstance(field["value"], str) else None
+def target_for(device, configuration=None):
+    from secripts.recovery.architecture import graph
+
+    outputs = graph(device, configuration)
+    targets = outputs["targets"]
     return {
-        "target": {
-            "dedicated": "recoveryimage",
-            "boot": "bootimage",
-            "vendor_boot": "vendorbootimage",
-        }.get(value, "UNKNOWN"),
-        "state": "CONFLICT" if field["state"] == "CONFLICT" else "INFERRED" if value else "UNKNOWN",
-        "evidence": field["evidence"],
-        "reason": "Derived from arrangement evidence, never Android version",
+        "target": targets[0] if len(targets) == 1 and not outputs["blockers"] else "UNKNOWN",
+        "targets": targets,
+        "state": "CONFLICT" if device.get("conflicts") else "DERIVED" if targets else "UNKNOWN",
+        "graph": outputs,
+        "reason": "Compatibility single-target view only; authoritative targets come from independent output relationships",
     }
 
 
@@ -103,7 +102,11 @@ def derive(name, output, dry_run=False):
     code = codename["value"] if codename["state"] not in ("UNKNOWN", "CONFLICT") else name
     if not isinstance(code, str) or not re.fullmatch(r"[a-z][a-z0-9_]{0,63}", code):
         raise SecError("Unsafe codename; Make syntax injection refused", 4)
-    target = target_for(device)
+    from secripts.recovery import flags as build_flags
+    from secripts.recovery.fstab import generate as generate_fstab
+
+    configuration = build_flags.view(name)
+    target = target_for(device, configuration)
     provenance = []
     files = {}
 
@@ -124,27 +127,19 @@ def derive(name, output, dry_run=False):
             )
         files[filename] = "\n".join(text) + "\n"
 
-    board = [
-        (
-            f"TARGET_ARCH := {architecture['value']}",
-            architecture["evidence"],
-            "Architecture declaration; remaining ABI settings unresolved",
+    board_text, board_provenance = build_flags.make(configuration)
+    files["BoardConfig.mk"] = board_text
+    for row in board_provenance:
+        row.update(
+            file="BoardConfig.mk",
+            text=board_text.splitlines()[row["line"] - 1],
+            evidence=row.get("observed", {}).get("evidence", [])
+            or row.get("derived", {}).get("evidence", []),
+            state=row["source"],
+            requires_review=True,
+            reason="Source-linked effective configuration; an override is not evidence",
         )
-    ]
-    flags = {
-        "boot": "BOARD_USES_RECOVERY_AS_BOOT",
-        "vendor_boot": "BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT",
-    }
-    arrangement = device["fields"]["recovery_arrangement"]["value"]
-    if arrangement in flags:
-        board.append(
-            (
-                flags[arrangement] + " := true",
-                device["fields"]["recovery_arrangement"]["evidence"],
-                "Candidate arrangement; upstream generation must be reviewed",
-            )
-        )
-    generated("BoardConfig.mk", board)
+        provenance.append(row)
     generated(
         "AndroidProducts.mk",
         [
@@ -185,15 +180,40 @@ def derive(name, output, dry_run=False):
             )
         ],
     )
-    generated(
-        "recovery.fstab",
-        [
-            (
-                "# TODO: reconstruct fstab from reviewed stock evidence; no block-device names guessed",
-                device["fields"]["fstab"]["evidence"],
-                "Deliberately nonfunctional until reviewed",
+    fstab_text, fstab_review = generate_fstab(device)
+    if fstab_text:
+        files["recovery.fstab"] = fstab_text
+        for number, entry in enumerate(fstab_review["entries"], 1):
+            provenance.append(
+                {
+                    "file": "recovery.fstab",
+                    "line": number,
+                    "state": entry["state"],
+                    "evidence": [entry],
+                    "requires_review": True,
+                    "reason": "Preserved mount declaration; no block paths guessed",
+                }
             )
-        ],
+    else:
+        files["recovery.fstab"] = "# UNRESOLVED: no unambiguous source fstab; no paths guessed\n"
+    from secripts.recovery.dependencies import graph as dependency_graph
+
+    dependencies = dependency_graph(name)
+    files["dependencies.json"] = (
+        __import__("json").dumps(
+            {"schema": 1, "reviewed": dependencies["nodes"], "unresolved": dependencies["edges"]},
+            sort_keys=True,
+            indent=2,
+        )
+        + "\n"
+    )
+    files["manifest-snippet.xml"] = (
+        "<!-- REVIEW REQUIRED: pinned dependency declarations; select explicit upstream remotes -->\n<manifest>\n"
+        + "".join(
+            f'  <project name="{node["repository"].removeprefix("https://github.com/")}" path="{node["path"]}" revision="{node["revision"]}" remote="github" />\n'
+            for node in dependencies["nodes"]
+        )
+        + "</manifest>\n"
     )
     manifest = {
         "schema": 1,
@@ -201,6 +221,12 @@ def derive(name, output, dry_run=False):
         "model": name,
         "sources": device["sources"],
         "generated_lines": provenance,
+        "configuration_sha256": configuration["configuration_sha256"],
+        "flag_validation": build_flags.validate(name, configuration),
+        "recovery_architecture": device["recovery_architecture"],
+        "build_graph": target["graph"],
+        "fstab_review": fstab_review,
+        "dependency_graph": dependencies,
         "build_target_candidate": target,
         "unresolved": [
             "Kernel source/prebuilt",
@@ -314,7 +340,12 @@ def plan(name):
     from secripts.recovery.workspace import load_workspace
 
     device = model.report(name)
-    target = target_for(device)
+    from secripts.recovery import flags as build_flags
+    from secripts.recovery.dependencies import validate as dependency_validation
+
+    configuration = build_flags.view(name)
+    validation = build_flags.validate(name, configuration)
+    target = target_for(device, configuration)
     host_state = host_qualification()
     try:
         workspace = load_workspace()
@@ -326,8 +357,16 @@ def plan(name):
         else None
     )
     blockers = list(host_state["constraints"])
-    if target["target"] == "UNKNOWN":
-        blockers.append("Build target unresolved or conflicting; no partition guess made")
+    blockers.extend(target["graph"]["blockers"])
+    if validation["status"] == "FAIL":
+        blockers.extend(
+            f["reason"]
+            for f in validation["findings"]
+            if f["state"]
+            in {"INVALID_COMBINATION", "MISSING_DEPENDENCY", "UNSUPPORTED_FOR_SOURCE_GENERATION"}
+        )
+    deps = dependency_validation(name)
+    blockers.extend(deps["blockers"])
     blockers.extend("Conflicting model field: " + key for key in device["conflicts"])
     if not workspace.get("manifest"):
         blockers.append("Source manifest/checkout not configured")
@@ -346,6 +385,11 @@ def plan(name):
         "device": device,
         "tree": tree,
         "build_target": target,
+        "build_graph": target["graph"],
+        "required_build_targets": target["targets"],
+        "configuration": configuration,
+        "flag_validation": validation,
+        "dependencies": deps,
         "blockers": blockers,
         "next_actions": [
             "Resolve every unknown/conflict with source evidence",

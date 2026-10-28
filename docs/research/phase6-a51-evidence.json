@@ -1,0 +1,418 @@
+{
+  "schema": 1,
+  "evidence_class": "REAL_UPSTREAM_CHECKOUT",
+  "tree_commit": "d6d2a9d69f2b77bd63161618f859ef0d65e23a31",
+  "prebuilt_inputs": [
+    {
+      "role": "UPSTREAM_PREBUILT_INPUT",
+      "path": "prebuilt/Image",
+      "bytes": 43745292,
+      "sha256": "74406654ddbf07bcefc10a2fe1427ec4b18f7a1e5773fd2c4099826810b01370",
+      "inspection": {
+        "identification": {
+          "basis": "MAGIC_AND_STRUCTURE",
+          "state": "UNKNOWN",
+          "provider_agreement": "NOT_REQUESTED",
+          "research_sources": [],
+          "extension_context": ""
+        },
+        "structure_status": "PARTIAL",
+        "properties": null,
+        "warnings": [
+          "Non-Android input exceeds bounded parser window; hash only"
+        ],
+        "qualification": {
+          "bootability": "UNTESTED",
+          "device_compatibility": "UNTESTED"
+        }
+      }
+    },
+    {
+      "role": "UPSTREAM_PREBUILT_INPUT",
+      "path": "prebuilt/dtb/dtb.dtb",
+      "bytes": 135216,
+      "sha256": "bf27a307b8669b3617083b555d88c7266f6cb8daaa64fb9dc280a2ebe446b296",
+      "inspection": {
+        "identification": {
+          "basis": "MAGIC_AND_STRUCTURE",
+          "state": "OBSERVED",
+          "provider_agreement": "NOT_REQUESTED",
+          "research_sources": [
+            "aosp-dtbo",
+            "dt-spec"
+          ],
+          "extension_context": ".dtb"
+        },
+        "structure_status": "PASS",
+        "properties": null,
+        "warnings": [],
+        "qualification": {
+          "bootability": "UNTESTED",
+          "device_compatibility": "UNTESTED"
+        }
+      }
+    },
+    {
+      "role": "UPSTREAM_PREBUILT_INPUT",
+      "path": "prebuilt/recovery_dtbo",
+      "bytes": 476800,
+      "sha256": "fc649498a0d3d625df79e0d649b068a4d13bc50cdc2f887fca5c0f260de8f9f2",
+      "inspection": {
+        "identification": {
+          "basis": "MAGIC_AND_STRUCTURE",
+          "state": "OBSERVED",
+          "provider_agreement": "NOT_REQUESTED",
+          "research_sources": [
+            "aosp-dtbo",
+            "dt-spec"
+          ],
+          "extension_context": ""
+        },
+        "structure_status": "PASS",
+        "properties": null,
+        "warnings": [],
+        "qualification": {
+          "bootability": "UNTESTED",
+          "device_compatibility": "UNTESTED"
+        }
+      }
+    }
+  ],
+  "configuration_sha256": "f5e928aa6464a782deac459969532e381cebcbeace55dc61404c3fa65ca73e72",
+  "build_graph": {
+    "schema": 2,
+    "nodes": [
+      {
+        "id": "recovery.img",
+        "kind": "artifact"
+      }
+    ],
+    "edges": [],
+    "outputs": [
+      {
+        "artifact": "recovery.img",
+        "target": "recoveryimage",
+        "reason": "Dedicated recovery declaration and no explicit disabled recovery output",
+        "state": "DERIVED",
+        "evidence": [
+          {
+            "value": true,
+            "state": "DECLARED",
+            "evidence": {
+              "name": "BOARD_RECOVERYIMAGE_PARTITION_SIZE",
+              "value": "71102464",
+              "resolved_value": "71102464",
+              "state": "DECLARED",
+              "source": "evidence-0000",
+              "location": "BoardConfig.mk:70",
+              "conditional": false
+            }
+          }
+        ],
+        "flash_target": "NOT_INFERRED"
+      }
+    ],
+    "targets": [
+      "recoveryimage"
+    ],
+    "status": "REVIEW_REQUIRED",
+    "blockers": [],
+    "install_or_flash_plan": "NOT_PROVIDED",
+    "hardware_qualification": "UNTESTED"
+  },
+  "flag_validation": {
+    "schema": 1,
+    "model": "phase6_a51_reference",
+    "status": "FAIL",
+    "findings": [
+      {
+        "state": "INVALID_COMBINATION",
+        "flag": null,
+        "reason": "Secripts refuses to qualify dependency-suppressed builds; review upstream setting explicitly"
+      }
+    ],
+    "configuration_sha256": "f5e928aa6464a782deac459969532e381cebcbeace55dc61404c3fa65ca73e72",
+    "qualification": "CONFIGURATION_RULES_ONLY; Make acceptance and hardware remain separate"
+  },
+  "fstab": {
+    "schema": 1,
+    "entries": [
+      {
+        "mount_point": "/system",
+        "partition_source": "system",
+        "filesystem": "ext4",
+        "options": [
+          "ro,barrier=1,discard",
+          "logical,first_stage_mount"
+        ],
+        "style": "android",
+        "logical": true,
+        "slot_behavior": "UNKNOWN",
+        "encryption_indicators": [],
+        "metadata_relevance": false,
+        "source": "evidence-0000",
+        "location": "recovery/root/system/etc/recovery.fstab:29",
+        "state": "DECLARED",
+        "confidence": "STATIC_DECLARATION_NOT_DEVICE_QUALIFICATION"
+      },
+      {
+        "mount_point": "/vendor",
+        "partition_source": "vendor",
+        "filesystem": "ext4",
+        "options": [
+          "ro,barrier=1,discard",
+          "logical,first_stage_mount"
+        ],
+        "style": "android",
+        "logical": true,
+        "slot_behavior": "UNKNOWN",
+        "encryption_indicators": [],
+        "metadata_relevance": false,
+        "source": "evidence-0000",
+        "location": "recovery/root/system/etc/recovery.fstab:30",
+        "state": "DECLARED",
+        "confidence": "STATIC_DECLARATION_NOT_DEVICE_QUALIFICATION"
+      },
+      {
+        "mount_point": "/product",
+        "partition_source": "product",
+        "filesystem": "ext4",
+        "options": [
+          "ro,barrier=1,discard",
+          "logical,first_stage_mount"
+        ],
+        "style": "android",
+        "logical": true,
+        "slot_behavior": "UNKNOWN",
+        "encryption_indicators": [],
+        "metadata_relevance": false,
+        "source": "evidence-0000",
+        "location": "recovery/root/system/etc/recovery.fstab:31",
+        "state": "DECLARED",
+        "confidence": "STATIC_DECLARATION_NOT_DEVICE_QUALIFICATION"
+      },
+      {
+        "mount_point": "/odm",
+        "partition_source": "odm",
+        "filesystem": "ext4",
+        "options": [
+          "ro,barrier=1,discard",
+          "logical,first_stage_mount"
+        ],
+        "style": "android",
+        "logical": true,
+        "slot_behavior": "UNKNOWN",
+        "encryption_indicators": [],
+        "metadata_relevance": false,
+        "source": "evidence-0000",
+        "location": "recovery/root/system/etc/recovery.fstab:32",
+        "state": "DECLARED",
+        "confidence": "STATIC_DECLARATION_NOT_DEVICE_QUALIFICATION"
+      },
+      {
+        "mount_point": "/metadata",
+        "partition_source": "/dev/block/by-name/metadata",
+        "filesystem": "ext4",
+        "options": [
+          "defaults",
+          "wait,first_stage_mount"
+        ],
+        "style": "android",
+        "logical": false,
+        "slot_behavior": "UNKNOWN",
+        "encryption_indicators": [],
+        "metadata_relevance": true,
+        "source": "evidence-0000",
+        "location": "recovery/root/system/etc/recovery.fstab:34",
+        "state": "DECLARED",
+        "confidence": "STATIC_DECLARATION_NOT_DEVICE_QUALIFICATION"
+      },
+      {
+        "mount_point": "/data",
+        "partition_source": "/dev/block/by-name/userdata",
+        "filesystem": "f2fs",
+        "options": [
+          "noatime,nosuid,nodev,discard,usrquota,grpquota,fsync_mode=nobarrier,reserve_root=32768,resgid=5678",
+          "recoveryonly,length=-20480"
+        ],
+        "style": "android",
+        "logical": false,
+        "slot_behavior": "UNKNOWN",
+        "encryption_indicators": [],
+        "metadata_relevance": false,
+        "source": "evidence-0000",
+        "location": "recovery/root/system/etc/recovery.fstab:35",
+        "state": "DECLARED",
+        "confidence": "STATIC_DECLARATION_NOT_DEVICE_QUALIFICATION"
+      },
+      {
+        "mount_point": "/misc",
+        "partition_source": "/dev/block/by-name/misc",
+        "filesystem": "emmc",
+        "options": [
+          "defaults",
+          "recoveryonly"
+        ],
+        "style": "android",
+        "logical": false,
+        "slot_behavior": "UNKNOWN",
+        "encryption_indicators": [],
+        "metadata_relevance": false,
+        "source": "evidence-0000",
+        "location": "recovery/root/system/etc/recovery.fstab:38",
+        "state": "DECLARED",
+        "confidence": "STATIC_DECLARATION_NOT_DEVICE_QUALIFICATION"
+      }
+    ],
+    "conflicts": [],
+    "status": "REVIEW_REQUIRED",
+    "note": "Mount declarations are evidence; no live partition probing or block-device guessing"
+  },
+  "dependencies": {
+    "schema": 1,
+    "status": "BLOCKED",
+    "checks": [
+      {
+        "id": "a51-device",
+        "path": "device/samsung/a51",
+        "status": "PASS",
+        "expected": "d6d2a9d69f2b77bd63161618f859ef0d65e23a31",
+        "actual": "d6d2a9d69f2b77bd63161618f859ef0d65e23a31"
+      }
+    ],
+    "blockers": [
+      "8 external/static references require review (source-base files may resolve after full sync)"
+    ],
+    "unresolved": [
+      {
+        "source": "Android.mk",
+        "reference": "$(call",
+        "target": null,
+        "kind": "include",
+        "state": "UNRESOLVED",
+        "reason": "Make expansion or external dependency not evaluated",
+        "line": 19,
+        "conditional": true,
+        "potential_target": null,
+        "provenance": {
+          "source": "evidence-0000",
+          "location": "dependency_graph"
+        },
+        "resolved_by": []
+      },
+      {
+        "source": "Android.mk",
+        "reference": "all-makefiles-under,$(LOCAL_PATH))",
+        "target": null,
+        "kind": "include",
+        "state": "UNRESOLVED",
+        "reason": "Make expansion or external dependency not evaluated",
+        "line": 19,
+        "conditional": true,
+        "potential_target": null,
+        "provenance": {
+          "source": "evidence-0000",
+          "location": "dependency_graph"
+        },
+        "resolved_by": []
+      },
+      {
+        "source": "BoardConfig.mk",
+        "reference": "$(DEVICE_PATH)/prebuilt/Image",
+        "target": null,
+        "kind": "configuration_reference",
+        "state": "UNRESOLVED",
+        "reason": "Make expansion or external dependency not evaluated",
+        "line": 54,
+        "conditional": false,
+        "provenance": {
+          "source": "evidence-0000",
+          "location": "dependency_graph"
+        },
+        "resolved_by": []
+      },
+      {
+        "source": "BoardConfig.mk",
+        "reference": "$(DEVICE_PATH)/prebuilt/recovery_dtbo",
+        "target": null,
+        "kind": "configuration_reference",
+        "state": "UNRESOLVED",
+        "reason": "Make expansion or external dependency not evaluated",
+        "line": 55,
+        "conditional": false,
+        "provenance": {
+          "source": "evidence-0000",
+          "location": "dependency_graph"
+        },
+        "resolved_by": []
+      },
+      {
+        "source": "BoardConfig.mk",
+        "reference": "$(DEVICE_PATH)/prebuilt/dtb",
+        "target": null,
+        "kind": "configuration_reference",
+        "state": "UNRESOLVED",
+        "reason": "Make expansion or external dependency not evaluated",
+        "line": 56,
+        "conditional": false,
+        "provenance": {
+          "source": "evidence-0000",
+          "location": "dependency_graph"
+        },
+        "resolved_by": []
+      },
+      {
+        "source": "twrp_a51.mk",
+        "reference": "$(SRC_TARGET_DIR)/product/aosp_base.mk",
+        "target": null,
+        "kind": "inherit-product",
+        "state": "UNRESOLVED",
+        "reason": "Make expansion or external dependency not evaluated",
+        "line": 2,
+        "conditional": false,
+        "provenance": {
+          "source": "evidence-0000",
+          "location": "dependency_graph"
+        },
+        "resolved_by": []
+      },
+      {
+        "source": "twrp_a51.mk",
+        "reference": "vendor/twrp/config/common.mk",
+        "target": null,
+        "kind": "inherit-product",
+        "state": "EXTERNALLY_DEPENDENT",
+        "reason": "Referenced local file absent or outside supported inventory",
+        "line": 5,
+        "conditional": false,
+        "provenance": {
+          "source": "evidence-0000",
+          "location": "dependency_graph"
+        },
+        "resolved_by": []
+      },
+      {
+        "source": "twrp_a51.mk",
+        "reference": "device/samsung/a51/device.mk",
+        "target": null,
+        "kind": "inherit-product",
+        "state": "EXTERNALLY_DEPENDENT",
+        "reason": "Referenced local file absent or outside supported inventory",
+        "line": 8,
+        "conditional": false,
+        "provenance": {
+          "source": "evidence-0000",
+          "location": "dependency_graph"
+        },
+        "resolved_by": []
+      }
+    ],
+    "source_lock_scope": "Reviewed selected repositories, not a resolved complete repo manifest"
+  },
+  "stock_firmware": "NOT_ACQUIRED",
+  "full_recovery_source": "NOT_SYNCED",
+  "live_compilation": "BLOCKED",
+  "generated_recovery_artifacts": [],
+  "hardware_qualification": "UNTESTED",
+  "review_note": "Upstream ALLOW_MISSING_DEPENDENCIES=true remains a known blocker. No override was applied to conceal it."
+}

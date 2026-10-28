@@ -1,0 +1,536 @@
+{
+  "schema": 1,
+  "sources": [
+    {
+      "id": "generic",
+      "url": "https://source.android.com/docs/core/architecture/partitions/generic-boot",
+      "project": "AOSP",
+      "topic": "composite architecture and board flags",
+      "revision": null,
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "cf75a1b0a36f74394e269a67c6adeb5c6e1d43b37aa0fcaa07470fb328e976b9",
+      "bytes": 258497
+    },
+    {
+      "id": "vendor-boot",
+      "url": "https://source.android.com/docs/core/architecture/partitions/vendor-boot-partitions",
+      "project": "AOSP",
+      "topic": "ramdisk fragments",
+      "revision": null,
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "aa70c30d9d0e0f78ad70a826221fdaac5dd3e2beb119e04c80b46d25b588eedf",
+      "bytes": 216918
+    },
+    {
+      "id": "avb",
+      "url": "https://android.googlesource.com/platform/external/avb/+/refs/heads/main/README.md?format=TEXT",
+      "project": "AOSP",
+      "topic": "descriptor/chains/rollback policy",
+      "revision": null,
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "ecabf282c5a3bad0b29c1c4fb20bf57d27e7757821dd1ce0af0813adf42e2940",
+      "bytes": 56448
+    },
+    {
+      "id": "build-main",
+      "url": "https://android.googlesource.com/platform/build/+/refs/heads/main/core/Makefile?format=TEXT",
+      "project": "AOSP",
+      "topic": "actual image rules and supported targets",
+      "revision": null,
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "fb096106152a8c46a460a2432cf628cd1bce5fbd14a828d19917443795186af5",
+      "bytes": 373361
+    },
+    {
+      "id": "config-main",
+      "url": "https://android.googlesource.com/platform/build/+/refs/heads/main/core/board_config.mk?format=TEXT",
+      "project": "AOSP",
+      "topic": "actual build flag support",
+      "revision": null,
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "779e254e448fcacb1b8a93bac5377d635bc3af45f4b4917612789d9b909e196b",
+      "bytes": 44888
+    },
+    {
+      "id": "official-a51",
+      "url": "https://twrp.me/samsung/samsunggalaxya51.html",
+      "project": "TeamWin",
+      "topic": "known-use reference",
+      "revision": null,
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "8e64277aefc82894a6909c1d9a71360b607ea03eb8a73552c1449c775beeaa7a",
+      "bytes": 12296
+    },
+    {
+      "id": "official-guacamole",
+      "url": "https://twrp.me/oneplus/oneplus7pro.html",
+      "project": "TeamWin",
+      "topic": "known-use reference",
+      "revision": null,
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "8da80eb946faa059492c74199fa89f047defe2a89c5b1f9b149463ec5d839622",
+      "bytes": 10339
+    },
+    {
+      "id": "actions-budget",
+      "url": "https://docs.github.com/en/billing/reference/product-usage-included",
+      "project": "GitHub",
+      "topic": "no-cost host boundary",
+      "revision": null,
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "ad4357200e98a61a0e17bec685bb797acc19e408a1f4d9301434fb237b9f4a69",
+      "bytes": 143810
+    },
+    {
+      "id": "android_device_samsung_a51/BoardConfig.mk",
+      "url": "https://raw.githubusercontent.com/TeamWin/android_device_samsung_a51/d6d2a9d69f2b77bd63161618f859ef0d65e23a31/BoardConfig.mk",
+      "project": "TeamWin/android_device_samsung_a51",
+      "topic": "source/tree decisions",
+      "revision": "d6d2a9d69f2b77bd63161618f859ef0d65e23a31",
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "9d62ebe1185b94ee537d523bf946b3c302764aea6bfb2cdc09d96f00857afef7",
+      "bytes": 3344
+    },
+    {
+      "id": "android_device_samsung_a51/AndroidProducts.mk",
+      "url": "https://raw.githubusercontent.com/TeamWin/android_device_samsung_a51/d6d2a9d69f2b77bd63161618f859ef0d65e23a31/AndroidProducts.mk",
+      "project": "TeamWin/android_device_samsung_a51",
+      "topic": "source/tree decisions",
+      "revision": "d6d2a9d69f2b77bd63161618f859ef0d65e23a31",
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "bc878a14fc18c742b58f80a4b4d2a1e848745af5a2ffc8bea325621aff212aec",
+      "bytes": 684
+    },
+    {
+      "id": "android_device_samsung_a51/device.mk",
+      "url": "https://raw.githubusercontent.com/TeamWin/android_device_samsung_a51/d6d2a9d69f2b77bd63161618f859ef0d65e23a31/device.mk",
+      "project": "TeamWin/android_device_samsung_a51",
+      "topic": "source/tree decisions",
+      "revision": "d6d2a9d69f2b77bd63161618f859ef0d65e23a31",
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "406ca70ee5c14c44d8f64fc6abd5dcbd304d702fe9079d5e45dbc7eb8b7e038d",
+      "bytes": 240
+    },
+    {
+      "id": "android_device_samsung_a51/twrp_a51.mk",
+      "url": "https://raw.githubusercontent.com/TeamWin/android_device_samsung_a51/d6d2a9d69f2b77bd63161618f859ef0d65e23a31/twrp_a51.mk",
+      "project": "TeamWin/android_device_samsung_a51",
+      "topic": "source/tree decisions",
+      "revision": "d6d2a9d69f2b77bd63161618f859ef0d65e23a31",
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "aca53d2b8b640069c04a82a7251e8341e2134a812c72d4f0530aaf356a30de95",
+      "bytes": 534
+    },
+    {
+      "id": "android_device_samsung_a51/recovery/root/system/etc/recovery.fstab",
+      "url": "https://raw.githubusercontent.com/TeamWin/android_device_samsung_a51/d6d2a9d69f2b77bd63161618f859ef0d65e23a31/recovery/root/system/etc/recovery.fstab",
+      "project": "TeamWin/android_device_samsung_a51",
+      "topic": "source/tree decisions",
+      "revision": "d6d2a9d69f2b77bd63161618f859ef0d65e23a31",
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "0ab1d351f89d6bcae92f31b6019802bdf2deac3f434afd6848b14af9afc055cd",
+      "bytes": 2585
+    },
+    {
+      "id": "android_device_oneplus_guacamole/BoardConfig.mk",
+      "url": "https://raw.githubusercontent.com/TeamWin/android_device_oneplus_guacamole/abef9b8a105c9feee847a6b4ed0903bda8ffb5f9/BoardConfig.mk",
+      "project": "TeamWin/android_device_oneplus_guacamole",
+      "topic": "source/tree decisions",
+      "revision": "abef9b8a105c9feee847a6b4ed0903bda8ffb5f9",
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "62b9855816de2bc968e4dcf3bd4a13d599c70456fa9b94c98f621fd6d807f217",
+      "bytes": 1353
+    },
+    {
+      "id": "android_device_oneplus_guacamole/device.mk",
+      "url": "https://raw.githubusercontent.com/TeamWin/android_device_oneplus_guacamole/abef9b8a105c9feee847a6b4ed0903bda8ffb5f9/device.mk",
+      "project": "TeamWin/android_device_oneplus_guacamole",
+      "topic": "source/tree decisions",
+      "revision": "abef9b8a105c9feee847a6b4ed0903bda8ffb5f9",
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "9f8e9ea85ab2592214ddb4264e7fa711655e0f8a712e43d03c1dd550640c84cf",
+      "bytes": 3020
+    },
+    {
+      "id": "android_device_oneplus_guacamole/twrp.dependencies",
+      "url": "https://raw.githubusercontent.com/TeamWin/android_device_oneplus_guacamole/abef9b8a105c9feee847a6b4ed0903bda8ffb5f9/twrp.dependencies",
+      "project": "TeamWin/android_device_oneplus_guacamole",
+      "topic": "source/tree decisions",
+      "revision": "abef9b8a105c9feee847a6b4ed0903bda8ffb5f9",
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "d3cc0b7e2372bb4b044f33d551ee3a7be38d3338e64d92f34c213ade6375977a",
+      "bytes": 145
+    },
+    {
+      "id": "android_device_oneplus_guacamole/README.md",
+      "url": "https://raw.githubusercontent.com/TeamWin/android_device_oneplus_guacamole/abef9b8a105c9feee847a6b4ed0903bda8ffb5f9/README.md",
+      "project": "TeamWin/android_device_oneplus_guacamole",
+      "topic": "source/tree decisions",
+      "revision": "abef9b8a105c9feee847a6b4ed0903bda8ffb5f9",
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "3c841516d25a3d7bf377fdd79385fb0e5bcf45291f4911b855ec8a9bfbab2262",
+      "bytes": 3639
+    },
+    {
+      "id": "platform_manifest_twrp_aosp/README.md",
+      "url": "https://raw.githubusercontent.com/minimal-manifest-twrp/platform_manifest_twrp_aosp/6dc117d9cbd08430daa16db2013560e1c4017fa8/README.md",
+      "project": "minimal-manifest-twrp/platform_manifest_twrp_aosp",
+      "topic": "source/tree decisions",
+      "revision": "6dc117d9cbd08430daa16db2013560e1c4017fa8",
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "7e2c71f84f170dcf20a98475a1fee0eb60fbcc9f540d690043afc36b3ea03769",
+      "bytes": 2959
+    },
+    {
+      "id": "platform_manifest_twrp_aosp/default.xml",
+      "url": "https://raw.githubusercontent.com/minimal-manifest-twrp/platform_manifest_twrp_aosp/6dc117d9cbd08430daa16db2013560e1c4017fa8/default.xml",
+      "project": "minimal-manifest-twrp/platform_manifest_twrp_aosp",
+      "topic": "source/tree decisions",
+      "revision": "6dc117d9cbd08430daa16db2013560e1c4017fa8",
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "9cbca398dfa7f49bfebb0f763be2346fdea5baeeb082e61a65685c25565823a5",
+      "bytes": 110907
+    },
+    {
+      "id": "platform_manifest_twrp_aosp/twrp-default.xml",
+      "url": "https://raw.githubusercontent.com/minimal-manifest-twrp/platform_manifest_twrp_aosp/6dc117d9cbd08430daa16db2013560e1c4017fa8/twrp-default.xml",
+      "project": "minimal-manifest-twrp/platform_manifest_twrp_aosp",
+      "topic": "source/tree decisions",
+      "revision": "6dc117d9cbd08430daa16db2013560e1c4017fa8",
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "389d08c852d62851c3903f8774c29ea2681762286a5056e6370c44877aaea95d",
+      "bytes": 7306
+    },
+    {
+      "id": "platform_manifest_twrp_aosp/remove-minimal.xml",
+      "url": "https://raw.githubusercontent.com/minimal-manifest-twrp/platform_manifest_twrp_aosp/6dc117d9cbd08430daa16db2013560e1c4017fa8/remove-minimal.xml",
+      "project": "minimal-manifest-twrp/platform_manifest_twrp_aosp",
+      "topic": "source/tree decisions",
+      "revision": "6dc117d9cbd08430daa16db2013560e1c4017fa8",
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "27b319f6b53405999f72891041fb6b6ab83db35e7c29daffe04d7fcb936ec6ad",
+      "bytes": 52402
+    },
+    {
+      "id": "android_build/core/Makefile",
+      "url": "https://raw.githubusercontent.com/TeamWin/android_build/1b692e2248609f50a27c48cce53b7445cecdcfc5/core/Makefile",
+      "project": "TeamWin/android_build",
+      "topic": "source/tree decisions",
+      "revision": "1b692e2248609f50a27c48cce53b7445cecdcfc5",
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "249bfb263cd53f01ddd3ffc9b9ab550b7459ec5fcd1b10ebbe743c190e89848d",
+      "bytes": 286282
+    },
+    {
+      "id": "android_build/core/board_config.mk",
+      "url": "https://raw.githubusercontent.com/TeamWin/android_build/1b692e2248609f50a27c48cce53b7445cecdcfc5/core/board_config.mk",
+      "project": "TeamWin/android_build",
+      "topic": "source/tree decisions",
+      "revision": "1b692e2248609f50a27c48cce53b7445cecdcfc5",
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "486379f411de2c24dd8a194db41cc9342f90e626d212a50324a478c46d947282",
+      "bytes": 38632
+    },
+    {
+      "id": "android_build/core/config.mk",
+      "url": "https://raw.githubusercontent.com/TeamWin/android_build/1b692e2248609f50a27c48cce53b7445cecdcfc5/core/config.mk",
+      "project": "TeamWin/android_build",
+      "topic": "source/tree decisions",
+      "revision": "1b692e2248609f50a27c48cce53b7445cecdcfc5",
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "1c1bbf5315e2be26af1e72392f5226a3e3d715fa1e434beb5d37efb6ddf2f580",
+      "bytes": 49580
+    },
+    {
+      "id": "android_device_google_gs201/BoardConfig-common.mk",
+      "url": "https://raw.githubusercontent.com/LineageOS/android_device_google_gs201/f75ebcf4ce727966f026f89b5c28721caa15bb61/BoardConfig-common.mk",
+      "project": "LineageOS/android_device_google_gs201",
+      "topic": "source/tree decisions",
+      "revision": "f75ebcf4ce727966f026f89b5c28721caa15bb61",
+      "retrieved": "2026-10-28",
+      "source_type": "primary/upstream",
+      "code_adapted": false,
+      "relationship": "Specification/static research; independent implementation",
+      "license": "Per-file upstream notice; no source redistributed",
+      "status": "ACCESSED",
+      "sha256": "d673c7d17641b3c1fcbdca3f8c4fdd88e38f3908757cef83a2cc3050543c4fbd",
+      "bytes": 9937
+    }
+  ],
+  "repositories": {
+    "TeamWin/android_device_samsung_a51": {
+      "branch": "android-12.1",
+      "commit": "d6d2a9d69f2b77bd63161618f859ef0d65e23a31",
+      "inventory": [
+        {
+          "path": "Android.mk",
+          "type": "blob",
+          "bytes": 728,
+          "git_sha": "aacc2eec33ff1b730256489971f4b1179e2d0a21"
+        },
+        {
+          "path": "AndroidProducts.mk",
+          "type": "blob",
+          "bytes": 684,
+          "git_sha": "4770c4e9f64f4529373215324c22567b374417c8"
+        },
+        {
+          "path": "BoardConfig.mk",
+          "type": "blob",
+          "bytes": 3344,
+          "git_sha": "00a44138cbfe6b1bf4b8684a8b521762215c2c0f"
+        },
+        {
+          "path": "device.mk",
+          "type": "blob",
+          "bytes": 240,
+          "git_sha": "7cb92b85a6dcf35e0cd3f307fce9644a25517826"
+        },
+        {
+          "path": "prebuilt",
+          "type": "tree",
+          "bytes": null,
+          "git_sha": "d7459d4aecdfd173a474f08431c4c3ee5c67a809"
+        },
+        {
+          "path": "prebuilt/Image",
+          "type": "blob",
+          "bytes": 43745292,
+          "git_sha": "a967e68ea7306bb65bb3342bae78c5c3a046cf00"
+        },
+        {
+          "path": "prebuilt/dtb",
+          "type": "tree",
+          "bytes": null,
+          "git_sha": "e6dc9d3ac3ba3581627504ead1666455050fddb6"
+        },
+        {
+          "path": "prebuilt/dtb/dtb.dtb",
+          "type": "blob",
+          "bytes": 135216,
+          "git_sha": "72e70047f892c576d31bac55541c7c83cf1274be"
+        },
+        {
+          "path": "prebuilt/recovery_dtbo",
+          "type": "blob",
+          "bytes": 476800,
+          "git_sha": "c3a1808935f76970df59a00836bab7d0c871a2a3"
+        },
+        {
+          "path": "recovery",
+          "type": "tree",
+          "bytes": null,
+          "git_sha": "ca7cf3bac710b91f9498a89a37006dd8c7c80e9f"
+        },
+        {
+          "path": "recovery/root",
+          "type": "tree",
+          "bytes": null,
+          "git_sha": "aef2f7acb9b2320e56a1b3cc726855b7a6b81e1d"
+        },
+        {
+          "path": "recovery/root/init.recovery.exynos9611.rc",
+          "type": "blob",
+          "bytes": 566,
+          "git_sha": "585118af6e357b5b680b4b55c8f618feba1128a6"
+        },
+        {
+          "path": "recovery/root/init.recovery.samsung.rc",
+          "type": "blob",
+          "bytes": 90,
+          "git_sha": "3dded53fabb935190269dbb4d06f05dbecd4d15e"
+        },
+        {
+          "path": "recovery/root/init.recovery.usb.rc",
+          "type": "blob",
+          "bytes": 884,
+          "git_sha": "6b99fb0f023583cb24e545775118a182b2b8c84b"
+        },
+        {
+          "path": "recovery/root/system",
+          "type": "tree",
+          "bytes": null,
+          "git_sha": "1b6123117bf8238fa04d5e8cfc19147b9f28fe7e"
+        },
+        {
+          "path": "recovery/root/system/bin",
+          "type": "tree",
+          "bytes": null,
+          "git_sha": "59558abd5e2cdcd569dc7d5d0eaff40b79dcc8f4"
+        },
+        {
+          "path": "recovery/root/system/bin/multidisabler",
+          "type": "blob",
+          "bytes": 4318,
+          "git_sha": "72ea7ae3c4c9c9e083d4b94c1f71b2b5fa84cde7"
+        },
+        {
+          "path": "recovery/root/system/etc",
+          "type": "tree",
+          "bytes": null,
+          "git_sha": "c8b25a4964a7e1b6f8bbe7fc07077828cb0646f8"
+        },
+        {
+          "path": "recovery/root/system/etc/recovery.fstab",
+          "type": "blob",
+          "bytes": 2585,
+          "git_sha": "cad9283736da237e0f2d2b1737eee52066af486b"
+        },
+        {
+          "path": "recovery/root/system/etc/twrp.flags",
+          "type": "blob",
+          "bytes": 4691,
+          "git_sha": "e6849a7c2b005d1de05be052327b806e75620613"
+        },
+        {
+          "path": "system.prop",
+          "type": "blob",
+          "bytes": 96,
+          "git_sha": "3cad4e9b9e4263e6cb23f92cf8f9f65bb8a1da0b"
+        },
+        {
+          "path": "twrp_a51.mk",
+          "type": "blob",
+          "bytes": 534,
+          "git_sha": "982bc0c3c229e8b9b5c339d6aab328189ce9d73d"
+        }
+      ]
+    },
+    "TeamWin/android_device_oneplus_guacamole": {
+      "branch": "android-12.1",
+      "commit": "abef9b8a105c9feee847a6b4ed0903bda8ffb5f9"
+    },
+    "minimal-manifest-twrp/platform_manifest_twrp_aosp": {
+      "branch": "twrp-12.1",
+      "commit": "6dc117d9cbd08430daa16db2013560e1c4017fa8"
+    },
+    "TeamWin/android_build": {
+      "branch": "android-12.1",
+      "commit": "1b692e2248609f50a27c48cce53b7445cecdcfc5"
+    },
+    "LineageOS/android_device_google_gs201": {
+      "branch": "lineage-24.0",
+      "commit": "f75ebcf4ce727966f026f89b5c28721caa15bb61"
+    }
+  }
+}

@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.6.0 — Composite recovery engineering
+
+- Added schema-2 independent recovery architecture facts and multi-output dependency/AVB graphs.
+- Added typed flag layers, guarded overrides, validation, profiles and Make/JSON exports.
+- Added reviewed pinned dependency acquisition, source contracts and persistent project status.
+- Extended candidate flags/fstab/provenance generation and model-bound multi-output build receipts.
+- Investigated/acquired official pinned A51 tree and hashed/inspected real upstream prebuilts.
+- Actual source sync/compilation remain BLOCKED; no generated recovery artifacts or hardware tests.
+- Retained AI-free core, existing aliases, image/crypto boundaries and protected signing/rollback edits.
+
 ## 0.5.0 — Guided recovery engineering
 
 - Added passive beginner entry, topic help, compact cockpit navigation and AI access.

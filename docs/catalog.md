@@ -96,3 +96,9 @@ Generated from `js ls --json`; update with `python tools/catalog.py`.
 | `recovery.source` | Inspect configured manifest/toolchain declarations and research-backed source options without synchronizing sources. | READ_ONLY |
 | `ai.context` | Inspect exactly the bounded redacted JSON payload that can be approved for external transmission; no network. | READ_ONLY |
 | `ai.providers` | Show provider-specific environment indirection and authentication boundaries without exposing credentials or calling APIs. | READ_ONLY |
+| `recovery.architecture` | Inspect independent artifact/resource relationships and the evidence-backed multi-output graph. | READ_ONLY |
+| `recovery.flags` | Inspect observed, derived, default and USER_OVERRIDE layers without changing evidence. | READ_ONLY |
+| `recovery.flags.validate` | Detect known flag conflicts, unsupported generations and unresolved dependencies. | READ_ONLY |
+| `recovery.dependencies` | Validate selected dependency commits and checkout cleanliness; no acquisition. | READ_ONLY |
+| `recovery.status` | Summarize current evidence and stale build inputs with a deterministic next action. | READ_ONLY |
+| `recovery.fstab` | Correlate safe mount declarations and conflicts without guessing block-device paths. | READ_ONLY |

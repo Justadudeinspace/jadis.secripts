@@ -180,6 +180,13 @@ RECIPES.update(
 )
 
 
+RECIPES["recovery-configuration-review"] = _recipe(
+    "Composite recovery configuration review",
+    "Inspect independent outputs, flag validation, fstab and pinned dependencies before planning; no AI or acquisition.",
+    ["recovery.architecture", "recovery.flags.validate", "recovery.fstab", "recovery.dependencies"],
+)
+
+
 def get(name: str) -> dict:
     from secripts.registry import registry
 

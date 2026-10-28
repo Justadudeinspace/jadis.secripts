@@ -50,7 +50,13 @@ def audit_tree(root: Path) -> dict:
         if path.stat().st_size > 1024 * 1024:
             finding("WARN", "oversize file", str(path.relative_to(root)))
             continue
-        text = path.read_text(errors="replace")
+        from secripts.images.artifacts import read
+        from secripts.secrets import contains_secret
+
+        text = read(path, 1024 * 1024).decode("utf-8", errors="replace")
+        if contains_secret(text):
+            finding("WARN", "secret-containing source excluded", str(path.relative_to(root)))
+            continue
         files[str(path.relative_to(root))] = text
         for key, value in re.findall(r"(?m)^\s*([A-Z][A-Z0-9_]+)\s*:?=\s*([^\n#]+)", text):
             variables[key] = value.strip()
@@ -118,6 +124,7 @@ def audit_tree(root: Path) -> dict:
                             "file": filename,
                             "line": number,
                             "first_fields": fields[:3],
+                            "fields": fields[:8],
                             "indicators": flags,
                         },
                     )

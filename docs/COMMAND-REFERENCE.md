@@ -1,4 +1,4 @@
-# Complete command reference — 0.5.0
+# Complete command reference — 0.6.0
 
 Generated from the authoritative parser. Do not edit by hand.
 
@@ -8,7 +8,7 @@ JSON: `--json` emits uncolored machine data where listed. Invocation success is 
 
 ## js
 
-JADIS // SECRIPTS 0.5.0 — Personal Developer Operations Arsenal & Android Recovery Laboratory
+JADIS // SECRIPTS 0.6.0 — Personal Developer Operations Arsenal & Android Recovery Laboratory
 
 ```text
 js [COMMAND] [options]
@@ -963,7 +963,7 @@ Inspect manifest/toolchain declarations and researched generation options
 Aliases: none.
 
 ```text
-js ry source [options]
+js ry source [INPUTS ...] [options]
 ```
 
 | Argument / option | Purpose | Default | Required / choices |
@@ -971,6 +971,97 @@ js ry source [options]
 | -h, --help | show this help message and exit | '==SUPPRESS==' | optional |
 | --json | Explicit json selector | False | optional |
 | --workspace | Explicit workspace selector | None | optional |
+| inputs | Positional inputs | None | optional |
+| --lock | Explicit lock selector | None | optional |
+
+## js ry status
+
+Evidence-backed recovery project status
+
+Aliases: none.
+
+```text
+js ry status MODEL [options]
+```
+
+| Argument / option | Purpose | Default | Required / choices |
+|---|---|---|---|
+| -h, --help | show this help message and exit | '==SUPPRESS==' | optional |
+| --json | Explicit json selector | False | optional |
+| model | Positional model | None | required |
+
+## js ry graph
+
+Evidence-backed recovery project graph
+
+Aliases: none.
+
+```text
+js ry graph MODEL [options]
+```
+
+| Argument / option | Purpose | Default | Required / choices |
+|---|---|---|---|
+| -h, --help | show this help message and exit | '==SUPPRESS==' | optional |
+| --json | Explicit json selector | False | optional |
+| model | Positional model | None | required |
+
+## js ry fstab
+
+Evidence-backed recovery project fstab
+
+Aliases: none.
+
+```text
+js ry fstab MODEL [options]
+```
+
+| Argument / option | Purpose | Default | Required / choices |
+|---|---|---|---|
+| -h, --help | show this help message and exit | '==SUPPRESS==' | optional |
+| --json | Explicit json selector | False | optional |
+| model | Positional model | None | required |
+
+## js ry deps
+
+Reviewed pinned dependencies; acquisition requires --fetch
+
+Aliases: none.
+
+```text
+js ry deps ACTION MODEL [options]
+```
+
+| Argument / option | Purpose | Default | Required / choices |
+|---|---|---|---|
+| -h, --help | show this help message and exit | '==SUPPRESS==' | optional |
+| --json | Explicit json selector | False | optional |
+| action | Positional action | None | required; graph,validate,resolve |
+| model | Positional model | None | required |
+| --lock | Explicit lock selector | None | optional |
+| --root | Explicit root selector | None | optional |
+| --fetch | Explicit fetch selector | False | optional |
+| --dry-run | Explicit dry_run selector | False | optional |
+
+## js ry flags
+
+Typed flag layers, overrides, validation and reusable profiles
+
+Aliases: none.
+
+```text
+js ry flags [INPUTS ...] [options]
+```
+
+| Argument / option | Purpose | Default | Required / choices |
+|---|---|---|---|
+| -h, --help | show this help message and exit | '==SUPPRESS==' | optional |
+| --json | Explicit json selector | False | optional |
+| inputs | Positional inputs | None | optional |
+| --reason | Explicit reason selector | '' | optional |
+| --acknowledge-conflict | Explicit acknowledge_conflict selector | False | optional |
+| --output | Explicit output selector | None | optional |
+| --format | Explicit format selector | 'json' | optional; json,make |
 
 ## js ry failure
 
@@ -1095,7 +1186,8 @@ js ry init DEVICE [options]
 | --manifest | Explicit manifest selector | None | required |
 | --revision | Explicit revision selector | None | required |
 | --lunch | Explicit lunch selector | None | required |
-| --target | Explicit target selector | None | required; recoveryimage,bootimage,vendorbootimage |
+| --target | Explicit target selector | None | required; recoveryimage,bootimage,vendorbootimage,initbootimage |
+| --model | Explicit model selector | None | optional |
 
 ## js ry cfg
 

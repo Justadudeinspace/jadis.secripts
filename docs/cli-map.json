@@ -739,6 +739,89 @@
       "scope": [
         "recovery"
       ],
+      "identity": "status",
+      "canonical": "status",
+      "aliases": [],
+      "display_name": "Status",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "graph",
+      "canonical": "graph",
+      "aliases": [],
+      "display_name": "Graph",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "fstab",
+      "canonical": "fstab",
+      "aliases": [],
+      "display_name": "Fstab",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "deps",
+      "canonical": "deps",
+      "aliases": [],
+      "display_name": "Deps",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "recovery",
+        "deps"
+      ],
+      "identity": "graph",
+      "canonical": "graph",
+      "aliases": [],
+      "display_name": "Graph",
+      "kind": "enumeration"
+    },
+    {
+      "scope": [
+        "recovery",
+        "deps"
+      ],
+      "identity": "validate",
+      "canonical": "validate",
+      "aliases": [],
+      "display_name": "Validate",
+      "kind": "enumeration"
+    },
+    {
+      "scope": [
+        "recovery",
+        "deps"
+      ],
+      "identity": "resolve",
+      "canonical": "resolve",
+      "aliases": [],
+      "display_name": "Resolve",
+      "kind": "enumeration"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
+      "identity": "flags",
+      "canonical": "flags",
+      "aliases": [],
+      "display_name": "Flags",
+      "kind": "command"
+    },
+    {
+      "scope": [
+        "recovery"
+      ],
       "identity": "failure",
       "canonical": "failure",
       "aliases": [],

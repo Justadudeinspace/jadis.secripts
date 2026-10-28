@@ -50,15 +50,15 @@ provenance. The banner itself is not a generated configuration value.
 
 Output: BoardConfig.mk, AndroidProducts.mk, twrp_NAME.mk, device.mk, recovery.fstab,
 candidate.json and REVIEW.md. Unsupported settings, kernel dependencies, encryption
-flags, partition sizes and block-device paths are not invented. Fstab is deliberately
-a TODO until reviewed. This is a review scaffold, **not a build-ready tree**.
+flags, partition sizes and block-device paths are not invented. Fstab is preserved from unambiguous safe source declarations where available; missing or conflicting paths remain unresolved. This is a review scaffold, **not a build-ready tree**.
 
 ## Build planner
 
 The planner correlates model conflicts, configured workspace/tree, bounded manifest
 metadata, host architecture/RAM/free disk, repo/tool observations and static dependencies.
-Candidate targets derive from explicit recovery arrangements: dedicated→recoveryimage,
-recovery-as-boot→bootimage, vendor_boot→vendorbootimage. A conflict/absence returns UNKNOWN.
+Independent recovery features select a multi-output dependency graph. Dedicated, boot,
+vendor_boot and init_boot relationships may coexist. Presence alone does not schedule outputs.
+The legacy single-target projection returns UNKNOWN for multiple outputs/conflicts.
 Android version alone never selects a target or JDK.
 
 Every blocker gives a reason. The current backend's non-x86_64 path is unqualified;
@@ -76,9 +76,12 @@ reported as declarations; no complete GNU Make or repo manifest evaluator is cla
 
 ## Phase 4 artifact interfaces
 
-The persistent Recovery Device Model remains schema 1; existing records are not rewritten.
+Recovery Device Models use schema 2. Schema 1 records are adapted in memory without rewriting;
+new evidence mutations save schema 2. Compatible legacy arrangements become a collection.
 New canonical image, ramdisk, DTBO, AVB and comparison models use explicit schema 1 interfaces
 and hashes. Device identity, image format and contextual partition role remain separate.
 Use `js ry dce`/`js recovery device` interchangeably. Image workspaces and round-trip results
 are offline artifact evidence, not a device qualification import or a new automatic trust score.
 See [workspaces](image-workspaces.md), [comparison](roundtrip.md), [CLI aliases](cli.md).
+
+See [configuration](RECOVERY-CONFIGURATION.md) for layers, graphs and source constraints.

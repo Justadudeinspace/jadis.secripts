@@ -248,6 +248,24 @@ def parser() -> argparse.ArgumentParser:
         "source", "Inspect manifest/toolchain declarations and researched generation options"
     )
     source.add_argument("--workspace", type=Path)
+    source.add_argument("inputs", nargs="*")
+    source.add_argument("--lock", type=Path)
+    for namespace in ("status", "graph", "fstab"):
+        rec(namespace, "Evidence-backed recovery project " + namespace).add_argument("model")
+    deps = rec("deps", "Reviewed pinned dependencies; acquisition requires --fetch")
+    deps.add_argument("action", choices=["graph", "validate", "resolve"])
+    deps.add_argument("model")
+    deps.add_argument("--lock", type=Path)
+    deps.add_argument("--root", type=Path)
+    deps.add_argument("--fetch", action="store_true")
+    deps.add_argument("--dry-run", action="store_true")
+    flags = rec("flags", "Typed flag layers, overrides, validation and reusable profiles")
+    flags.add_argument("inputs", nargs="*")
+    flags.add_argument("--reason", default="")
+    flags.add_argument("--acknowledge-conflict", action="store_true")
+    flags.add_argument("--output", type=Path)
+    flags.add_argument("--format", choices=["json", "make"], default="json")
+
     failure = rec("failure", "Conservative bounded build-log diagnosis; no automatic fixes")
     failure.add_argument("artifact", type=Path)
     failure.add_argument("--tree", type=Path)
@@ -278,8 +296,12 @@ def parser() -> argparse.ArgumentParser:
     for option in ("manifest", "revision", "lunch"):
         init.add_argument(f"--{option}", required=True)
     init.add_argument(
-        "--target", required=True, choices=["recoveryimage", "bootimage", "vendorbootimage"]
+        "--target",
+        required=True,
+        action="append",
+        choices=["recoveryimage", "bootimage", "vendorbootimage", "initbootimage"],
     )
+    init.add_argument("--model")
     rec("configure", "Show the explicit workspace configuration")
     for name in ("sync", "build"):
         item = rec(
@@ -332,6 +354,43 @@ def recovery_dispatch(a):
     from secripts.safety import Risk
 
     cmd = a.recovery_command
+    if cmd == "flags":
+        from secripts.recovery.flag_cli import dispatch as flag_dispatch
+
+        return flag_dispatch(a)
+    if cmd == "status":
+        from secripts.recovery.projects import status
+
+        return status(a.model)
+    if cmd in {"graph", "fstab"}:
+        from secripts.recovery import model, flags, architecture, fstab
+
+        device = model.report(a.model)
+        return (
+            architecture.graph(device, flags.view(a.model))
+            if cmd == "graph"
+            else fstab.report(device)
+        )
+    if cmd == "deps":
+        from secripts.recovery import dependencies
+
+        if a.lock:
+            selected = dependencies.select(a.model, a.lock, a.dry_run)
+            if a.dry_run:
+                return selected
+        if a.action == "graph":
+            return dependencies.graph(a.model)
+        if a.action == "validate":
+            return dependencies.validate(a.model)
+        return dependencies.resolve(a.model, root=a.root, fetch=a.fetch, dry_run=a.dry_run)
+    if cmd == "source" and a.inputs:
+        from secripts.recovery.dependencies import source
+
+        action = a.inputs[0] if a.inputs[0] in {"resolve", "validate"} else "inspect"
+        inputs = a.inputs[1:] if action != "inspect" else a.inputs
+        if len(inputs) != 1:
+            raise SecError("Use source [resolve|validate] MODEL [--lock FILE]", 2)
+        return source(inputs[0], action, a.lock)
     if cmd in {"acquire", "failure", "source"}:
         from secripts.operations import execute
 
@@ -424,7 +483,17 @@ def recovery_dispatch(a):
             "Review the explicit arguments supplied to init.",
             file=sys.stderr,
         )
-        return w.initialize(a.root, a.device, a.tree, a.manifest, a.revision, a.lunch, a.target)
+        return w.initialize(
+            a.root,
+            a.device,
+            a.tree,
+            a.manifest,
+            a.revision,
+            a.lunch,
+            a.target[0],
+            targets=a.target,
+            model=a.model,
+        )
     if cmd == "configure":
         return w.load_workspace()
     if cmd == "sync":

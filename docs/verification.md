@@ -115,3 +115,11 @@ A follow-up CI diff isolated three optional positionals whose required attribute
 differs on Python 3.11 despite accepting empty input. Reference requirements now
 derive positional arity from nargs, preserving explicit option guards. A regression
 reproduces the older metadata and checks identical reference output.
+
+## Phase 6 boundaries
+
+Composite architecture/configuration tests use synthetic declarations. The separately recorded
+A51 tree and prebuilt hashes are real upstream inputs; they are not generated outputs.
+Actual compilation remains BLOCKED. Hardware and live AI provider qualification are UNTESTED.
+The source/configuration contract binds model, flags, dependency pins and actual output collection;
+legacy workspaces do not gain retrospective model-bound evidence.

@@ -13,7 +13,7 @@ from secripts.provenance import packaged, validate
 
 def test_registry_contract():
     ops = registry().search()
-    assert len(ops) == 92
+    assert len(ops) == 98
     assert all(
         op.summary and op.effect and op.platforms and isinstance(op.risk, Risk) for op in ops
     )

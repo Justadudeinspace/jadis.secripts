@@ -159,7 +159,11 @@ def test_model_conflicts_and_unknown_not_promoted(tmp_path):
     model.add_tree("fixture", make_tree(tmp_path / "one"))
     value = model.add_tree("fixture", make_tree(tmp_path / "two", "arm", "dedicated"))
     assert value["fields"]["architecture"]["state"] == "CONFLICT"
-    assert value["fields"]["recovery_arrangement"]["state"] == "CONFLICT"
+    assert set(value["fields"]["recovery_arrangement"]["value"]) == {"boot", "dedicated"}
+    assert (
+        value["recovery_architecture"]["features"]["dedicated_recovery_partition"]["value"] is True
+    )
+    assert value["recovery_architecture"]["features"]["recovery_in_boot"]["value"] is True
     assert planner.target_for(value)["target"] == "UNKNOWN"
     assert value["fields"]["manufacturer"]["state"] == "UNKNOWN"
     assert value["qualification"] == "UNTESTED"

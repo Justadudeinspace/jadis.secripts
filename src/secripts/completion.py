@@ -29,6 +29,25 @@ def candidates(words):
             continue
         if not token.startswith("-"):
             positionals += 1
+    if path == ["recovery", "flags"] and not positionals:
+        return [
+            "ls",
+            "sh",
+            "set",
+            "unset",
+            "reset",
+            "diff",
+            "validate",
+            "export",
+            "import",
+            "profile",
+            "list",
+            "show",
+        ]
+    if path == ["recovery", "flags"] and positionals >= 2:
+        from secripts.recovery.flags import CATALOG
+
+        return sorted(CATALOG)
     if previous == "--risk":
         from secripts.safety import Risk
 

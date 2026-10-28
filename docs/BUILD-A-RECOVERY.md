@@ -155,3 +155,40 @@ owner-authorized mission. Do not flash or boot a phone under this workflow.
 | Build succeeded | Inspect artifact; hardware still UNTESTED |
 
 [Qualification boundaries](QUALIFICATION.md) explain the evidence required after a build.
+
+## Composite recovery and reviewed custom configuration (0.6)
+
+A phone can have recovery.img **and** boot.img, init_boot.img, vendor_boot.img,
+vbmeta.img and dtbo.img. Do not choose one and discard the others. Boot may supply a
+kernel, vendor_boot may contain recovery resources, init_boot may supply the generic
+ramdisk, and vbmeta may describe verification chains. Presence alone proves none of
+those relationships. See [Recovery configuration](RECOVERY-CONFIGURATION.md) for the
+independent feature model, multi-output graph, flags editor and worked architecture cases.
+
+```sh
+js ry acquire --model example --have images --json
+js ry status example --json
+js ry graph example --json
+js ry flags example --json
+js ry flags validate example --json
+js ry fstab example --json
+js ry deps validate example --json
+js ry source example --json
+js ry plan example --json
+js ry build --dry-run
+js ry vfy /path/to/generated/recovery.img --json
+```
+
+Create/populate the named model first. Resolve every reported blocker; build previews
+are not compilations. Workspace initialization accepts repeated `--target` selections
+and `--model example`; choices must match the evidence-backed graph. A dedicated recovery
+using a boot kernel does not necessarily need a new boot image. A vendor recovery output
+does not prove a flash destination. No device booting/flashing is performed here.
+
+The Phase 6 reference is the official Samsung A51 tree, pinned in the packaged reference
+lock. Its prebuilts were inspected locally, but stock evidence, full source sync and an
+eligible build host remain incomplete. A future external x86_64 glibc Linux machine
+needs branch-selected tools, measured adequate disk/RAM and filesystem qualification;
+current full AOSP guidance is 400 GB disk/64 GB RAM, while recovery needs must be measured.
+The 40 GiB/8 GiB early-rejection floors are not host qualification. Do not attempt a huge
+source sync on this phone to work around these blockers.

@@ -12,7 +12,12 @@ TOPICS = {
     "recovery": (
         "Recovery Laboratory",
         "Start with evidence acquisition, then model, tree review and a build plan. No device mutation.",
-        ["js ry acquire", "js ry --help", "js ry plan MODEL --json"],
+        [
+            "js ry acquire",
+            "js ry status MODEL --json",
+            "js ry flags MODEL --json",
+            "js ry plan MODEL --json",
+        ],
         "docs/BUILD-A-RECOVERY.md",
     ),
     "device": (

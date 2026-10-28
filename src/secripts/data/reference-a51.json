@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "target": {
+    "manufacturer": "Samsung",
+    "device": "Galaxy A51 SM-A515F",
+    "codename": "a51",
+    "soc": "Exynos 9611",
+    "firmware_build": "UNKNOWN",
+    "stock_images": "NOT_ACQUIRED",
+    "selection_reason": "Official TeamWin support and self-contained public device tree with prebuilt kernel/DTB/DTBO; avoids larger common-tree/vendor chain",
+    "license": "Per-file upstream terms; no source or prebuilt binaries redistributed"
+  },
+  "source": {
+    "generation": "twrp-12.1",
+    "manifest": "https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp",
+    "revision": "6dc117d9cbd08430daa16db2013560e1c4017fa8",
+    "lunch": "twrp_a51-eng",
+    "targets": [
+      "recoveryimage"
+    ],
+    "transitive_pins": "UNACQUIRED: require repo manifest -r"
+  },
+  "dependencies": [
+    {
+      "id": "a51-device",
+      "role": "device",
+      "repository": "https://github.com/TeamWin/android_device_samsung_a51",
+      "revision": "d6d2a9d69f2b77bd63161618f859ef0d65e23a31",
+      "path": "device/samsung/a51"
+    }
+  ]
+}

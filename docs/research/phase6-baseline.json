@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "commit": "2ae5c69552385d57453fd9e8fcf5689a014689e5",
+  "release": "0.5.0",
+  "operations": 92,
+  "categories": 23,
+  "recipes": 28,
+  "tests_passed": 364,
+  "host": {
+    "architecture": "aarch64",
+    "disk_free_bytes": 32037212160,
+    "memory_kib": 5582532,
+    "ssh_configured": false,
+    "self_hosted_runners": 0,
+    "codespaces": "AUTH_SCOPE_UNAVAILABLE",
+    "billing_allowance": "UNVERIFIED"
+  },
+  "installed_cli": "js",
+  "legacy_sec": "ABSENT"
+}

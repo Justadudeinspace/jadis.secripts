@@ -58,7 +58,8 @@ Secripts installs only `js`, never a `sec` compatibility launcher.
   U-Boot intelligence; safe workspaces, reconstruction and comparisons.
 - **Recovery Lab:** guided acquisition, source-linked device models, conflict detection,
   static tree diagnosis, review-only candidate derivation, source/host planning and
-  conservative build-log diagnosis. TWRP is the only implemented build backend.
+  conservative build-log diagnosis, composite artifact/output graphs, typed flag editing,
+  profiles and pinned dependency acquisition. TWRP is the only implemented build backend.
 - **AI advice:** optional OpenAI, Claude and DeepSeek BYOK transports explain a bounded
   report after preview/hash approval. Models cannot run shell commands or upgrade facts.
 
@@ -103,3 +104,12 @@ Current counts are generated in the [operation catalog](docs/catalog.md) and
 [recipe manual](docs/RECIPES.md). Research includes six pinned representative device
 trees; these are research samples, not a device support list. See the
 [Phase 5 gap gate](docs/research/phase5-gap-matrix.md) for unresolved coverage/licensing.
+
+## Composite recovery engineering (0.6)
+
+Recovery can span recovery, boot, init_boot, vendor_boot and AVB-linked artifacts.
+The [configuration manual](docs/RECOVERY-CONFIGURATION.md) explains independent facts,
+reviewed overrides, multi-output planning, fstab preservation and persistent status.
+The A51 reference tree/prebuilt inputs were acquired and inspected outside Git.
+Actual recovery compilation is **BLOCKED** by host/source/configuration gaps; no generated
+recovery image or hardware qualification is claimed. AI is optional for every core step.

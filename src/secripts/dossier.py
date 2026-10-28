@@ -120,6 +120,15 @@ def laboratory_state():
 
     return {
         "formats": list(FORMATS),
+        "recovery_configuration": {
+            "device_schema": 2,
+            "composite_architecture": "AVAILABLE",
+            "typed_flags": "AVAILABLE",
+            "profiles": "AVAILABLE",
+            "pinned_dependencies": "EXPLICIT_FETCH_REQUIRED",
+            "multi_output_build": "HOST_AND_SOURCE_QUALIFICATION_REQUIRED",
+            "ai_required": False,
+        },
         "model_schemas": {"image": 1, "ramdisk": 1, "dtbo": 1, "avb": 1, "comparison": 1},
         "native_decoders": {
             "lz4": "AVAILABLE",
